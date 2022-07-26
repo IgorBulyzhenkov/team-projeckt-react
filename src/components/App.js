@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import Container from './Container/Container';
-import Test from './test/test';
-// import ReportPage from 'pages/ReportPage';
+// import Container from './Container/Container';
+// import Test from './test/test';
+import ReportPage from 'pages/ReportPage';
 
 export const App = () => {
   return (
     <div>
-      {/* <ReportPage /> */}
+      <ReportPage />
       <Routes>
         <Route></Route>
         <Route></Route>
@@ -14,9 +14,9 @@ export const App = () => {
         <Route></Route>
         <Route></Route>
       </Routes>
-      <Container>
+      {/* <Container>
         <Test />
-      </Container>
+      </Container> */}
     </div>
   );
 };
