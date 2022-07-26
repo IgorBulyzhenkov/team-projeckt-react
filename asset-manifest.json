@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/team-projeckt-react/static/css/main.7acaea2f.css",
+    "main.css": "/team-projeckt-react/static/css/main.25e3eb68.css",
     "main.js": "/team-projeckt-react/static/js/main.e7c7d556.js",
     "index.html": "/team-projeckt-react/index.html",
-    "main.7acaea2f.css.map": "/team-projeckt-react/static/css/main.7acaea2f.css.map",
+    "main.25e3eb68.css.map": "/team-projeckt-react/static/css/main.25e3eb68.css.map",
     "main.e7c7d556.js.map": "/team-projeckt-react/static/js/main.e7c7d556.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
+    "static/css/main.25e3eb68.css",
     "static/js/main.e7c7d556.js"
   ]
 }
