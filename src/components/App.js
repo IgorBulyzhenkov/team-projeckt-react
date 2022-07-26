@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import Container from './Container/Container';
 import Test from './test/test';
 
 export const App = () => {
@@ -11,7 +12,9 @@ export const App = () => {
         <Route></Route>
         <Route></Route>
       </Routes>
-      <Test />
+      <Container>
+        <Test />
+      </Container>
     </div>
   );
 };
