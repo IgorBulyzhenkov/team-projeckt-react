@@ -20,9 +20,12 @@ export default function Test() {
   const [userAuth, setUserAuth] = useState({});
   const [registerUser] = useRegisterUserMutation();
   const [authorizeUser] = useAuthorizeUserMutation();
+  const [logOutUser] = useLogOutUserMutation()
   const [addExpense] = useAddExpenseMutation();
   const [getExpense]= useLazyGetExpenseQuery()
   const [deleteTransaction]= useDeleteTransactionMutation()
+  
+  
   const onRegSubmit = e => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -75,7 +78,8 @@ export default function Test() {
         );
       });
   }, [authorizeUser, dispatch, userAuth]);
-    
+
+
 
    const addTransaction=e=> {
     e.preventDefault()
@@ -123,6 +127,7 @@ const delTransaction =e=>{
           <input type="password" id="authPassword" name="password" />
           <button type="submitt">Submit</button>
         </form>
+        <button type='button' onClick={logOutUser}>logOut</button>
       </div>
           <div>
               <h2>addTransaction</h2>
