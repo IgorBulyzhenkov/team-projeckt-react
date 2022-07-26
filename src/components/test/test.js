@@ -18,9 +18,6 @@ import { getSid } from 'redux/selectors';
 
 export default function Test() {
   const dispatch = useDispatch();
-  const [userReg, setUserReg] = useState({});
-  const [userAuth, setUserAuth] = useState({});
-
 
   const [registerUser] = useRegisterUserMutation();
   const [authorizeUser] = useAuthorizeUserMutation();
@@ -36,7 +33,59 @@ export default function Test() {
   const [getPeriodData] = useLazyGetPeriodDataQuery()
     const sid = useSelector(getSid)
 
-const refreshUserOnClick =()=>{
+
+
+  const onRegSubmit = e => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const userReg ={
+      email,
+      password,
+    };
+    registerUser(userReg)
+        .unwrap()
+        .then(() =>
+          authorizeUser(userReg)
+            .unwrap()
+            .then((data) => {
+              dispatch(
+                setUser({
+                  user: { id: data.userData.id, email: data.userData.email },
+                  token: data.accessToken,
+                  refreshToken: data.refreshToken,
+                  sid: data.sid,
+                })
+              );
+            })
+        );
+  };
+  const onAuthSubmit = e => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const userAuth = {
+      email,
+      password,
+    };
+    authorizeUser(userAuth).then(({ data }) => {
+        dispatch(
+          setUser({
+            user: { id: data.userData.id, email: data.userData.email },
+            token: data.accessToken,
+            refreshToken: data.refreshToken,
+            sid: data.sid,
+          })
+        );
+      });
+  };
+  const googleAuth=()=>{
+    loginGoogle().then(console.log)
+  }
+  const onLogOutUser=()=>{
+    logOutUser().unwrap().then(()=>dispatch(resetUser()))
+  }
+  const refreshUserOnClick =()=>{
     refreshUser(sid).unwrap().then((data ) => {console.log(data)
         dispatch(
           setUser({
@@ -49,68 +98,8 @@ const refreshUserOnClick =()=>{
 
 }
 
-  const onRegSubmit = e => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    setUserReg({
-      email,
-      password,
-    });
-  };
-  const onAuthSubmit = e => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    setUserAuth({
-      email,
-      password,
-    });
-  };
 
-  useEffect(() => {
-    userReg?.email &&
-      registerUser(userReg)
-        .unwrap()
-        .then(() =>
-          authorizeUser(userReg)
-            .unwrap()
-            .then(({ data }) => {
-              dispatch(
-                setUser({
-                  user: { id: data.userData.id, email: data.userData.email },
-                  token: data.accessToken,
-                  refreshToken: data.refreshToken,
-                  sid: data.sid,
-                })
-              );
-            })
-        );
-  }, [authorizeUser, dispatch, registerUser, userReg]);
-
-  useEffect(() => {
-    userAuth?.email &&
-      authorizeUser(userAuth).then(({ data }) => {
-        dispatch(
-          setUser({
-            user: { id: data.userData.id, email: data.userData.email },
-            token: data.accessToken,
-            refreshToken: data.refreshToken,
-            sid: data.sid,
-          })
-        );
-      });
-  }, [authorizeUser, dispatch, userAuth]);
-
-  const googleAuth=()=>{
-    loginGoogle().then(console.log)
-  }
-  const onLogOutUser=()=>{
-    logOutUser().unwrap().then(()=>dispatch(resetUser()))
-  }
-
-
-   const addTransaction = e => {
+   const addExpenseTransaction = e => {
      e.preventDefault();
      const description = e.target.description.value;
      const amount = Number(e.target.amount.value);
@@ -125,7 +114,7 @@ const refreshUserOnClick =()=>{
      };
      addExpense(data).then(console.log);
    };
-   const getTransaction = async () => {
+   const getExpenseTransaction = async () => {
      const data = await getExpense();
      console.log(data);
    };
@@ -164,8 +153,8 @@ const refreshUserOnClick =()=>{
         <button type='button' onClick={refreshUserOnClick}>refreshUser</button>
       </div>
           <div>
-              <h2>addTransaction</h2>
-        <form onSubmit={addTransaction}>
+              <h2>addExpenseTransaction</h2>
+        <form onSubmit={addExpenseTransaction}>
           <label htmlFor="description">description</label>
           <input type="text" id="description" name="description" />
 
@@ -180,7 +169,7 @@ const refreshUserOnClick =()=>{
           <button type="submitt">Submit</button>
         </form>
 
-        <button type='button' onClick={getTransaction}>getTransaction</button>
+        <button type='button' onClick={getExpenseTransaction}>getExpenseTransaction</button>
 
         <form onSubmit={delTransaction}>
           <label htmlFor="id">description</label>
