@@ -12,17 +12,17 @@ export const kapustaApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Transactions', 'Users'],
+  tagTypes: ['Transactions', 'Auth', 'User'],
   endpoints: builder => ({
     registerUser: builder.mutation({
       query(user) {
         return {
-          url: `auth/registration`,
+          url: `auth/register`,
           method: 'POST',
           body: user,
         };
       },
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['Auth'],
     }),
     authorizeUser: builder.mutation({
       query(user) {
@@ -32,7 +32,7 @@ export const kapustaApi = createApi({
           body: user,
         };
       },
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['Auth'],
     }),
     logOutUser: builder.mutation({
       query() {
@@ -41,7 +41,7 @@ export const kapustaApi = createApi({
           method: 'POST',
         };
       },
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['Auth'],
     }),
     refreshUser: builder.mutation({
       query({ sir, refreshToken }) {
@@ -54,7 +54,7 @@ export const kapustaApi = createApi({
           },
         };
       },
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['Auth'],
     }),
     authGoogleUser: builder.query({
       query() {
@@ -62,7 +62,7 @@ export const kapustaApi = createApi({
           url: `auth/google`,
         };
       },
-      providesTags: ['Users'],
+      providesTags: ['Auth'],
     }),
     getIncome: builder.query({
       query: () => ({
@@ -119,6 +119,19 @@ export const kapustaApi = createApi({
       }),
       providesTags: ['Transactions'],
     }),
+    getUserData: builder.query({
+      query: () => ({
+        url: `user`,
+      }),
+      providesTags: ['User'],
+    }),
+    changeBalance: builder.mutation({
+      query: balance => ({
+        url: `user`,
+        body: balance,
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
@@ -126,4 +139,9 @@ export const {
   useAuthorizeUserMutation,
   useRegisterUserMutation,
   useLogOutUserMutation,
+  useRefreshUserMutation,
+  useLazyAuthGoogleUserQuery,
+  useAddExpenseMutation,
+  useLazyGetExpenseQuery,
+  useDeleteTransactionMutation
 } = kapustaApi;

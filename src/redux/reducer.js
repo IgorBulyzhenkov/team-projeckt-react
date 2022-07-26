@@ -4,7 +4,7 @@ const initialState = {
   user: { id: '', email: '' },
   token: null,
   refreshToken: null,
-  sir: null,
+  sid: null,
   wasBalanceChanged: false,
   isLoggedIn: false,
 };

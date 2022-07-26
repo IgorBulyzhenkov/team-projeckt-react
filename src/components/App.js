@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import Test from './test/test';
 
 export const App = () => {
   return (
@@ -10,6 +11,7 @@ export const App = () => {
         <Route></Route>
         <Route></Route>
       </Routes>
+      <Test />
     </div>
   );
 };
