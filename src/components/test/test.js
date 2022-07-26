@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { setUser } from 'redux/reducer';
-import { useDispatch } from 'react-redux';
+import { setUser, resetUser} from 'redux/reducer';
+import { useDispatch,useSelector } from 'react-redux';
 
 import s from './test.module.css';
 import {
@@ -11,21 +11,44 @@ import {
   useLazyAuthGoogleUserQuery,
   useAddExpenseMutation,
   useLazyGetExpenseQuery,
-  useDeleteTransactionMutation
+  useDeleteTransactionMutation,
+  useLazyGetPeriodDataQuery
 } from '../../redux/kapustaAPI';
+import { getSid } from 'redux/selectors';
 
 export default function Test() {
   const dispatch = useDispatch();
   const [userReg, setUserReg] = useState({});
   const [userAuth, setUserAuth] = useState({});
+
+
   const [registerUser] = useRegisterUserMutation();
   const [authorizeUser] = useAuthorizeUserMutation();
   const [logOutUser] = useLogOutUserMutation()
+    const [loginGoogle]= useLazyAuthGoogleUserQuery();
+
+
+
   const [addExpense] = useAddExpenseMutation();
   const [getExpense]= useLazyGetExpenseQuery()
-  const [deleteTransaction]= useDeleteTransactionMutation()
-  
-  
+  const [deleteTransaction]= useDeleteTransactionMutation();
+  const [refreshUser] = useRefreshUserMutation();
+  const [getPeriodData] = useLazyGetPeriodDataQuery()
+    const sid = useSelector(getSid)
+
+const refreshUserOnClick =()=>{
+    refreshUser(sid).unwrap().then((data ) => {console.log(data)
+        dispatch(
+          setUser({
+            token: data.newAccessToken,
+            refreshToken: data.newRefreshToken,
+            sid: data.newSid,
+          })
+        );
+      })
+
+}
+
   const onRegSubmit = e => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -79,33 +102,42 @@ export default function Test() {
       });
   }, [authorizeUser, dispatch, userAuth]);
 
+  const googleAuth=()=>{
+    loginGoogle().then(console.log)
+  }
+  const onLogOutUser=()=>{
+    logOutUser().unwrap().then(()=>dispatch(resetUser()))
+  }
 
 
-   const addTransaction=e=> {
-    e.preventDefault()
-       const description = e.target.description.value;
-       const amount = Number(e.target.amount.value);
-    //    const category = e.target.category.value;
-       const date = e.target.date.value;
-    
-       const data={
-        description,
-        amount,
-        category: "Продукты",
-        date
-       }
-       addExpense(data).then(console.log)
-  }  
-const getTransaction =async()=>{
-    const data = await getExpense();
-    console.log(data)
-} 
-const delTransaction =e=>{
-    e.preventDefault()
-    const id = e.target.id.value;
-    deleteTransaction(id);
-}
-    
+   const addTransaction = e => {
+     e.preventDefault();
+     const description = e.target.description.value;
+     const amount = Number(e.target.amount.value);
+     //    const category = e.target.category.value;
+     const date = e.target.date.value;
+
+     const data = {
+       description,
+       amount,
+       category: 'Продукты',
+       date,
+     };
+     addExpense(data).then(console.log);
+   };
+   const getTransaction = async () => {
+     const data = await getExpense();
+     console.log(data);
+   };
+   const delTransaction = e => {
+     e.preventDefault();
+     const id = e.target.id.value;
+     deleteTransaction(id);
+   };
+   const getTransactionsByData =()=>{
+    const date = '2019-06'
+    getPeriodData(date).then(console.log)
+   } 
     
 
   return (
@@ -127,7 +159,9 @@ const delTransaction =e=>{
           <input type="password" id="authPassword" name="password" />
           <button type="submitt">Submit</button>
         </form>
-        <button type='button' onClick={logOutUser}>logOut</button>
+        <button type='button' onClick={googleAuth}>GoogleAuth</button>
+        <button type='button' onClick={onLogOutUser}>logOut</button>
+        <button type='button' onClick={refreshUserOnClick}>refreshUser</button>
       </div>
           <div>
               <h2>addTransaction</h2>
@@ -145,14 +179,16 @@ const delTransaction =e=>{
           <input type="text" id="category" name="category" />
           <button type="submitt">Submit</button>
         </form>
+
         <button type='button' onClick={getTransaction}>getTransaction</button>
+
         <form onSubmit={delTransaction}>
           <label htmlFor="id">description</label>
           <input type="text" id="id" name="id" />
-
           <button type="submitt">Submit</button>
         </form>
       </div>
+      <button type='button' onClick={getTransactionsByData}>getTransactionsByData</button>
     </div>
   );
 }

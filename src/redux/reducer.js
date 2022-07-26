@@ -5,7 +5,6 @@ const initialState = {
   token: null,
   refreshToken: null,
   sid: null,
-  wasBalanceChanged: false,
   isLoggedIn: false,
 };
 

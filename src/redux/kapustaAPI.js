@@ -1,11 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+
 export const kapustaApi = createApi({
   reducerPath: 'kapusta',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://kapusta-backend.goit.global/',
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().currentUser.token;
+    prepareHeaders: (headers, { getState, endpoint }) => {
+        let token = getState().currentUser.token;
+    if(endpoint==='refreshUser'){
+      token = getState().currentUser.refreshToken;}
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -44,14 +47,11 @@ export const kapustaApi = createApi({
       invalidatesTags: ['Auth'],
     }),
     refreshUser: builder.mutation({
-      query({ sir, refreshToken }) {
+      query(sid) {
         return {
           url: `auth/refresh`,
           method: 'POST',
-          body: sir,
-          headers: {
-            'content-type': refreshToken,
-          },
+          body: {sid},
         };
       },
       invalidatesTags: ['Auth'],
@@ -114,8 +114,8 @@ export const kapustaApi = createApi({
       providesTags: ['Transactions'],
     }),
     getPeriodData: builder.query({
-      query: data => ({
-        url: `transaction/period-data/${data}`,
+      query: date => ({
+        url: `transaction/period-data/?date=${date}`,
       }),
       providesTags: ['Transactions'],
     }),
@@ -143,5 +143,6 @@ export const {
   useLazyAuthGoogleUserQuery,
   useAddExpenseMutation,
   useLazyGetExpenseQuery,
-  useDeleteTransactionMutation
+  useDeleteTransactionMutation,
+  useLazyGetPeriodDataQuery
 } = kapustaApi;
