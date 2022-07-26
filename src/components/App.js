@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-// import Container from './Container/Container';
-// import Test from './test/test';
+import Test from './test/test';
 import ReportPage from 'pages/ReportPage';
 
 export const App = () => {
@@ -14,9 +13,7 @@ export const App = () => {
         <Route></Route>
         <Route></Route>
       </Routes>
-      {/* <Container>
-        <Test />
-      </Container> */}
+      <Test />
     </div>
   );
 };
