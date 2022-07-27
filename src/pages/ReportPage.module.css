@@ -1,156 +1,158 @@
 .test {
-    background-color: #F5F6FB;
-    height: 400px;
-    width: 100wh;
-    padding-top: 22px;
+  background-color: #f5f6fb;
+  background-image: url(../img/kapusta-desk.png);
+  background-repeat: no-repeat;
+  background-position: top 20% center;
+  height: 400px;
+  width: 100wh;
+  padding-top: 22px;
 }
 
 .link {
-    color: rgba(255, 117, 29, 1);
-    width: 18px;
-    height: 12px;
-    margin: 0;
-    padding: 0;
-    margin-left: 3px;
+  color: rgba(255, 117, 29, 1);
+  width: 18px;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+  margin-left: 3px;
 }
 
-
 .container_calendar {
-    text-align: center;
-    margin-top: 22px;
+  text-align: center;
+  margin-top: 22px;
 }
 
 .text {
-    font-family: 'Roboto';
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 1.16;
-    letter-spacing: 0.04em;
-    color: rgba(82, 85, 95, 0.7);
-    margin-bottom: 5px;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.16;
+  letter-spacing: 0.04em;
+  color: rgba(82, 85, 95, 0.7);
+  margin-bottom: 5px;
 }
 
 .calendar {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .calendar_text {
-    font-family: 'Roboto';
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.14;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #000000;
-    font-style: normal;
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #000000;
+  font-style: normal;
 }
 
 .btn {
-    color: rgba(255, 117, 29, 1);
-    background-color: transparent;
+  color: rgba(255, 117, 29, 1);
+  background-color: transparent;
 }
 
 .balance {
-    text-align: center;
-    margin-top: 32px;
+  text-align: center;
+  margin-top: 32px;
 }
 
 .balance_text {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.16;
-    letter-spacing: 0.02em;
-    color: rgba(82, 85, 95, 0.7);
-    margin-bottom: 8px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.16;
+  letter-spacing: 0.02em;
+  color: rgba(82, 85, 95, 0.7);
+  margin-bottom: 8px;
 }
 
 .balance_cash {
-    width: 125px;
-    height: 14px;
-    margin: 0 auto;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 1.16;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    padding: 15px 30px 15px 30px;
-    border: 2px solid #FFFFFF;
-    border-radius: 22px;
-    margin-bottom: 32px;
+  width: 125px;
+  height: 14px;
+  margin: 0 auto;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.16;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 15px 30px 15px 30px;
+  border: 2px solid #ffffff;
+  border-radius: 22px;
+  margin-bottom: 32px;
 }
 
 .cash {
-    width: 280px;
-    height: 85px;
-    margin: 0 auto;
-    background: #FFFFFF;
-    box-shadow: 5px 10px 20px rgba(170, 178, 197, 0.4);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 280px;
+  height: 85px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 5px 10px 20px rgba(170, 178, 197, 0.4);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .expenses {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 120px;
-    margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  margin-right: 10px;
 }
 
 .expenses__text {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.14;
-    color: #52555F;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #52555f;
 }
 
 .expenses__cash {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.14;
-    letter-spacing: 0.04em;
-    color: #E53935;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.04em;
+  color: #e53935;
 }
 
 .span {
-    border: 1px solid #E0E5EB;
-    height: 70px;
+  border: 1px solid #e0e5eb;
+  height: 70px;
 }
 
 .income {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 120px;
-    margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  margin-left: 10px;
 }
 
 .income__text {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.14;
-    color: #52555F;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #52555f;
 }
 
 .income__cash {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.14;
-    letter-spacing: 0.04em;
-    color: #407946;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.04em;
+  color: #407946;
 }

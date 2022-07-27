@@ -4,7 +4,7 @@ import { FiChevronRight } from 'react-icons/fi';
 import s from './ReportList.module.css';
 function ReportList() {
   return (
-    <div>
+    <div className={s.wrap}>
       <div className={s.wrapBtn}>
         <button type="button" className={s.button}>
           <FiChevronLeft size="25" className={s.arrowBtn} />
@@ -21,7 +21,6 @@ function ReportList() {
             <div className={s.itemSpan}>
               <span className={s.span}>{image}</span>
             </div>
-
             <p className={s.text}>{name}</p>
           </li>
         ))}
