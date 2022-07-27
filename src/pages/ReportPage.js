@@ -1,4 +1,5 @@
 import ReportList from 'components/ReportList/ReportList';
+import ReportGraph from 'components/ReportGraph/ReportGraph';
 import Container from 'components/Container/Container';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import { FiChevronLeft } from 'react-icons/fi';
@@ -49,6 +50,7 @@ function ReportPage() {
         </div>
 
         <ReportList />
+        <ReportGraph />
       </Container>
     </section>
   );
