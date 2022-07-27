@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+}
+
+.section {
+  height: 800px;
+  margin: 0 auto;
+
+  background-image: url("../../img/AuthorizationPage/cabbage.png"),
+    url("../../img/AuthorizationPage/cabbage.png"),
+    url("../../img/AuthorizationPage/rectangle-mob.png");
+  background-position: right -34px top 104px, bottom 0px left 35px,
+    top 0px left 0px;
+  background-repeat: no-repeat;
+  background-size: 83px 89px, 83px 89px, 100% 286px;
+}
+
+.container {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 86px;
+  padding-bottom: 102px;
+  margin: 0 auto;
+}
+
+.title {
+  margin-bottom: 50px;
+}
+
+.text {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #52555f;
+  margin-left: 11px;
+}
+
+.titleIcon {
+  display: block;
+}
+
+@media screen and (max-width: 320px) {
+  .section {
+    width: 320px;
+    margin: 0 auto;
+    height: 968px;
+  }
+
+  .container {
+    width: 320px;
+  }
+}
+@media screen and (min-width: 480px) {
+  .section {
+    margin: 0 auto;
+    width: 480px;
+  }
+  
+  .container {
+    width: 480px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .titleIcon {
+    width: 183px;
+    height: 46px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .section {
+    width: 768px;
+    height: 968px;
+    margin: 0 auto;
+    background-image: url("../../img/AuthorizationPage/cabbages-group.png"),
+      url("../../img/AuthorizationPage/cabbage-2dt.png"),
+      url("../../img/AuthorizationPage/rectangle-mob.png");
+    background-position: top 26px left 0px, bottom 56px left 103px,
+      top 0px left 0px;
+    background-repeat: no-repeat;
+    background-size: 1334px 232px, auto, 100% 526px;
+  }
+  
+  .container {
+    width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 80px;
+  }
+  .titleIcon {
+    width: 307px;
+    height: 78px;
+  }
+  .authBox{
+    margin-left: 139px;
+  }
+  .text {
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.18em;
+    margin-left: 55px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .section {
+    height: 794px;
+    width: auto;
+    background-position: top 26px left 0px, bottom 56px left 210px,
+      top 0px left 0px;
+    background-repeat: repeat-x, no-repeat, no-repeat;
+    background-size: 1334px 232px, auto, 100% 526px;
+  }
+  .container {
+    width: 1280px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 117px;
+  }
+
+  .titleIcon {
+    width: 370px;
+    height: 113px;
+  }
+
+  .authBox {
+    display: flex;
+    margin-left: 209px;
+  }
+  .text {
+    margin-left: 80px;
+  }
+  .title{
+    width: 377px;
+    height: 139px;
+    padding-top: 219px;
+    margin-right: 157px;
+  }
+}
