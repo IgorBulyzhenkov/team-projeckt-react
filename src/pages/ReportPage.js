@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 
 function ReportPage() {
   return (
-    <Container>
-      <div className={s.test}>
+    <section className={s.test}>
+      <Container>
         <Link to="" className={s.link}>
           <MdKeyboardBackspace className={s.svg} />
         </Link>
@@ -42,10 +42,10 @@ function ReportPage() {
             <p className={s.income__cash}>+ 45 000.00 грн</p>
           </div>
         </div>
-      </div>
 
-      <ReportList />
-    </Container>
+        <ReportList />
+      </Container>
+    </section>
   );
 }
 
