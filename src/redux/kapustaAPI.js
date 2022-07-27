@@ -151,5 +151,5 @@ export const {
   useLazyGetUserDataQuery,
   useGetIncomeCategoriesQuery,
   useGetExpenseCategoriesQuery,
-  useChangeBalanceMutation
+  useChangeBalanceMutation,
 } = kapustaApi;

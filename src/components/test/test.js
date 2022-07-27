@@ -1,9 +1,6 @@
-
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { setUser, resetUser, setWidth } from 'redux/reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import Calendar from 'react-calendar'
-
 
 import s from './test.module.css';
 import {
@@ -21,7 +18,7 @@ import {
   useLazyGetUserDataQuery,
   useGetIncomeCategoriesQuery,
   useGetExpenseCategoriesQuery,
-  useChangeBalanceMutation
+  useChangeBalanceMutation,
 } from '../../redux/kapustaAPI';
 import { getSid } from 'redux/selectors';
 
@@ -37,42 +34,34 @@ export default function Test() {
 
   const [refreshUser] = useRefreshUserMutation();
   const sid = useSelector(getSid);
-  
+
   const [getUserData] = useLazyGetUserDataQuery();
 
   const [addExpense] = useAddExpenseMutation();
-  const [addIncome] =useAddIncomeMutation();
+  const [addIncome] = useAddIncomeMutation();
   const [getExpense] = useLazyGetExpenseQuery();
   const [getIncome] = useLazyGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
 
-
-  const {data:incomeCategories } = useGetIncomeCategoriesQuery();
-  const {data:expenseCategories } = useGetExpenseCategoriesQuery()
-  
+  const { data: incomeCategories } = useGetIncomeCategoriesQuery();
+  const { data: expenseCategories } = useGetExpenseCategoriesQuery();
 
   const [getPeriodData] = useLazyGetPeriodDataQuery();
 
   const [changeBalance] = useChangeBalanceMutation();
 
-
-  useEffect(()=>{
-    
-    if(window.innerWidth<=768){
-        
-        console.log('mobile')
-        // console.log('resized to: ', window.innerWidth, 'x')
-        dispatch(setWidth({width:'mobile'}))
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      console.log('mobile');
+      // console.log('resized to: ', window.innerWidth, 'x')
+      dispatch(setWidth({ width: 'mobile' }));
     }
-    if(window.innerWidth>768){
-        console.log('tablet')
-        // console.log('resized to: ', window.innerWidth, 'x')
-        dispatch(setWidth({width:'tablet'}))
+    if (window.innerWidth > 768) {
+      console.log('tablet');
+      // console.log('resized to: ', window.innerWidth, 'x')
+      dispatch(setWidth({ width: 'tablet' }));
     }
-  },[dispatch, ])
-
-
-
+  }, [dispatch]);
 
   const onRegSubmit = e => {
     e.preventDefault();
@@ -171,7 +160,7 @@ export default function Test() {
   const addIncomeTransaction = e => {
     e.preventDefault();
     const description = e.target.description.value;
-    const amount = Number(e.target.amount.value); 
+    const amount = Number(e.target.amount.value);
     const date = e.target.date.value;
 
     const data = {
@@ -198,10 +187,9 @@ export default function Test() {
     const date = '2019-06';
     getPeriodData(date).then(console.log);
   };
-  const [value, onChange] = useState(new Date());
   return (
     <div>
-        <UserMenu/>
+      <UserMenu />
       <div>
         <h2>Регистрация</h2>
         <form onSubmit={onRegSubmit}>
@@ -259,12 +247,16 @@ export default function Test() {
       <button type="button" onClick={getTransactionsByData}>
         getTransactionsByData
       </button>
-      <form onSubmit={e=>{e.preventDefault(); changeBalance(Number(e.target.balance.value))}}>
-          <label htmlFor="balance">Balance</label>
-          <input type="number" id="balance" name="balance" />
-          <button type="submitt">Submit</button>
-        </form>
-        <Calendar value={value} defaultView={'month'} next2Label={null} prev2Label={null} onActiveStartDateChange={({ action, activeStartDate, value, view }) => console.log(activeStartDate)} />
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          changeBalance(Number(e.target.balance.value));
+        }}
+      >
+        <label htmlFor="balance">Balance</label>
+        <input type="number" id="balance" name="balance" />
+        <button type="submitt">Submit</button>
+      </form>
     </div>
   );
 }
