@@ -18,7 +18,6 @@ export const App = () => {
       </Routes>
       <Header/>
       <AuthorizationPage/>
-      <Test />
     </div>
   );
 };
