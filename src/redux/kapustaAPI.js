@@ -1,28 +1,31 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+
 export const kapustaApi = createApi({
   reducerPath: 'kapusta',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://kapusta-backend.goit.global/',
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().currentUser.token;
+    prepareHeaders: (headers, { getState, endpoint }) => {
+        let token = getState().currentUser.token;
+    if(endpoint==='refreshUser'){
+      token = getState().currentUser.refreshToken;}
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ['Transactions', 'Users'],
+  tagTypes: ['Transactions', 'Auth', 'User', 'Balance'],
   endpoints: builder => ({
     registerUser: builder.mutation({
       query(user) {
         return {
-          url: `auth/registration`,
+          url: `auth/register`,
           method: 'POST',
           body: user,
         };
       },
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['Auth'],
     }),
     authorizeUser: builder.mutation({
       query(user) {
@@ -32,7 +35,7 @@ export const kapustaApi = createApi({
           body: user,
         };
       },
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['Auth'],
     }),
     logOutUser: builder.mutation({
       query() {
@@ -41,20 +44,17 @@ export const kapustaApi = createApi({
           method: 'POST',
         };
       },
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['Auth'],
     }),
     refreshUser: builder.mutation({
-      query({ sir, refreshToken }) {
+      query(sid) {
         return {
           url: `auth/refresh`,
           method: 'POST',
-          body: sir,
-          headers: {
-            'content-type': refreshToken,
-          },
+          body: {sid},
         };
       },
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['Auth'],
     }),
     authGoogleUser: builder.query({
       query() {
@@ -62,7 +62,7 @@ export const kapustaApi = createApi({
           url: `auth/google`,
         };
       },
-      providesTags: ['Users'],
+      providesTags: ['Auth'],
     }),
     getIncome: builder.query({
       query: () => ({
@@ -114,10 +114,24 @@ export const kapustaApi = createApi({
       providesTags: ['Transactions'],
     }),
     getPeriodData: builder.query({
-      query: data => ({
-        url: `transaction/period-data/${data}`,
+      query: date => ({
+        url: `transaction/period-data/?date=${date}`,
       }),
       providesTags: ['Transactions'],
+    }),
+    getUserData: builder.query({
+      query: () => ({
+        url: `user`,
+      }),
+      providesTags: ['User'],
+    }),
+    changeBalance: builder.mutation({
+      query: balance => ({
+        url: `user/balance`,
+        method: 'PATCH',
+        body: {newBalance:balance},
+      }),
+      invalidatesTags: ['Balance'],
     }),
   }),
 });
@@ -126,4 +140,16 @@ export const {
   useAuthorizeUserMutation,
   useRegisterUserMutation,
   useLogOutUserMutation,
+  useRefreshUserMutation,
+  useLazyAuthGoogleUserQuery,
+  useAddExpenseMutation,
+  useAddIncomeMutation,
+  useLazyGetExpenseQuery,
+  useLazyGetIncomeQuery,
+  useDeleteTransactionMutation,
+  useLazyGetPeriodDataQuery,
+  useLazyGetUserDataQuery,
+  useGetIncomeCategoriesQuery,
+  useGetExpenseCategoriesQuery,
+  useChangeBalanceMutation
 } = kapustaApi;
