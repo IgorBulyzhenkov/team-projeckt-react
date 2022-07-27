@@ -1,16 +1,16 @@
-
-import { useEffect, useState } from 'react';
-import { setUser, resetUser, setWidth } from 'redux/reducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import {  useState } from 'react';
+import { setUser} from 'redux/reducer';
+import { useDispatch} from 'react-redux';
+import { getIsLoggedIn } from 'redux/selectors';
 import Calendar from 'react-calendar'
+import UserMenu from 'components/UserMenu';
 
 
 import s from './test.module.css';
 import {
   useAuthorizeUserMutation,
   useRegisterUserMutation,
-  useLogOutUserMutation,
-  useRefreshUserMutation,
   useLazyAuthGoogleUserQuery,
   useAddExpenseMutation,
   useAddIncomeMutation,
@@ -23,21 +23,19 @@ import {
   useGetExpenseCategoriesQuery,
   useChangeBalanceMutation
 } from '../../redux/kapustaAPI';
-import { getSid } from 'redux/selectors';
 
-import UserMenu from 'components/UserMenu';
+
+
 
 export default function Test() {
   const dispatch = useDispatch();
 
+  const isLoggedIn = useSelector(getIsLoggedIn);
+
   const [registerUser] = useRegisterUserMutation();
   const [authorizeUser] = useAuthorizeUserMutation();
-  const [logOutUser] = useLogOutUserMutation();
   const [loginGoogle] = useLazyAuthGoogleUserQuery();
 
-  const [refreshUser] = useRefreshUserMutation();
-  const sid = useSelector(getSid);
-  
   const [getUserData] = useLazyGetUserDataQuery();
 
   const [addExpense] = useAddExpenseMutation();
@@ -47,8 +45,8 @@ export default function Test() {
   const [deleteTransaction] = useDeleteTransactionMutation();
 
 
-  const {data:incomeCategories } = useGetIncomeCategoriesQuery();
-  const {data:expenseCategories } = useGetExpenseCategoriesQuery()
+//   const {data:incomeCategories } = useGetIncomeCategoriesQuery();
+//   const {data:expenseCategories } = useGetExpenseCategoriesQuery()
   
 
   const [getPeriodData] = useLazyGetPeriodDataQuery();
@@ -56,20 +54,20 @@ export default function Test() {
   const [changeBalance] = useChangeBalanceMutation();
 
 
-  useEffect(()=>{
+//   useEffect(()=>{
     
-    if(window.innerWidth<=768){
+//     if(window.innerWidth<=768){
         
-        console.log('mobile')
-        // console.log('resized to: ', window.innerWidth, 'x')
-        dispatch(setWidth({width:'mobile'}))
-    }
-    if(window.innerWidth>768){
-        console.log('tablet')
-        // console.log('resized to: ', window.innerWidth, 'x')
-        dispatch(setWidth({width:'tablet'}))
-    }
-  },[dispatch, ])
+//         console.log('mobile')
+//         // console.log('resized to: ', window.innerWidth, 'x')
+//         dispatch(setWidth({width:'mobile'}))
+//     }
+//     if(window.innerWidth>768){
+//         console.log('tablet')
+//         // console.log('resized to: ', window.innerWidth, 'x')
+//         dispatch(setWidth({width:'tablet'}))
+//     }
+//   },[dispatch, ])
 
 
 
@@ -97,7 +95,18 @@ export default function Test() {
               })
             );
           })
-      );
+      ).then(() =>
+      getUserData()
+        .unwrap()
+        .then(data =>
+          dispatch(
+            setUser({
+              email: data.email,
+              balance: data.balance
+            })
+          )
+        )
+    );;
   };
   const onAuthSubmit = e => {
     e.preventDefault();
@@ -116,42 +125,24 @@ export default function Test() {
           sid: data.sid,
         })
       );
-    });
+    }).then(() =>
+    getUserData()
+      .unwrap()
+      .then(data =>
+        dispatch(
+          setUser({
+            email: data.email,
+            balance: data.balance
+          })
+        )
+      )
+  );;
   };
   const googleAuth = () => {
     loginGoogle().then(console.log);
   };
 
-  const onLogOutUser = () => {
-    logOutUser()
-      .unwrap()
-      .then(() => dispatch(resetUser()));
-  };
-
-  const refreshUserOnClick = () => {
-    refreshUser(sid)
-      .unwrap()
-      .then(data => {
-        dispatch(
-          setUser({
-            token: data.newAccessToken,
-            refreshToken: data.newRefreshToken,
-            sid: data.newSid,
-          })
-        );
-      })
-      .then(() =>
-        getUserData()
-          .unwrap()
-          .then(data =>
-            dispatch(
-              setUser({
-                email: data.email,
-              })
-            )
-          )
-      );
-  };
+ 
 
   const addExpenseTransaction = e => {
     e.preventDefault();
@@ -198,10 +189,10 @@ export default function Test() {
     const date = '2019-06';
     getPeriodData(date).then(console.log);
   };
-  const [value, onChange] = useState(new Date());
+ 
   return (
     <div>
-        <UserMenu/>
+       {isLoggedIn && <UserMenu/>}
       <div>
         <h2>Регистрация</h2>
         <form onSubmit={onRegSubmit}>
@@ -221,12 +212,6 @@ export default function Test() {
         </form>
         <button type="button" onClick={googleAuth}>
           GoogleAuth
-        </button>
-        <button type="button" onClick={onLogOutUser}>
-          logOut
-        </button>
-        <button type="button" onClick={refreshUserOnClick}>
-          refreshUser
         </button>
       </div>
       <div>
@@ -264,7 +249,7 @@ export default function Test() {
           <input type="number" id="balance" name="balance" />
           <button type="submitt">Submit</button>
         </form>
-        <Calendar value={value} defaultView={'month'} next2Label={null} prev2Label={null} onActiveStartDateChange={({ action, activeStartDate, value, view }) => console.log(activeStartDate)} />
+        <Calendar defaultView={'month'} next2Label={null} prev2Label={null} onActiveStartDateChange={({ action, activeStartDate, value, view }) => console.log(activeStartDate)} />
     </div>
   );
 }
