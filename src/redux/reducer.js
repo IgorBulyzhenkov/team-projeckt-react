@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: { id: '', email: '' },
+  email: '',
   token: null,
   refreshToken: null,
-  sir: null,
-  wasBalanceChanged: false,
+  sid: null,
   isLoggedIn: false,
+  balance: '',
+  width: null,
 };
 
 const userSlice = createSlice({
@@ -19,8 +20,15 @@ const userSlice = createSlice({
     resetUser(state) {
       return { ...state, ...initialState };
     },
+    setBalance: (state, { payload }) => {
+      console.log(payload);
+      return { ...state, ...payload };
+    },
+    setWidth: (state, { payload }) => {
+      return { ...state, ...payload };
+    },
   },
 });
 
-export const { setUser, resetUser } = userSlice.actions;
+export const { setUser, resetUser, setBalance, setWidth } = userSlice.actions;
 export default userSlice;
