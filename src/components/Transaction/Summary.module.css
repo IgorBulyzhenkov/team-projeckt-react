@@ -1,0 +1,38 @@
+.table {
+  width: 230px;
+  border-spacing: 0 0;
+  height: 100%;
+}
+
+.table tr th {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.14;
+
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  height: 38px;
+  border-radius: 20px 20px 0 0;
+  background: #f5f6fb;
+
+  border-bottom: 2px solid #ffffff;
+}
+
+.table tr {
+  background: #f5f6fb;
+}
+
+.table tr td {
+  border-bottom: 2px solid #ffffff;
+
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.14;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #52555f;
+}
+
+.table tr td:nth-child(2) {
+  text-align: center;
+}
