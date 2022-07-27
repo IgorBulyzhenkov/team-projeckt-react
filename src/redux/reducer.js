@@ -6,6 +6,7 @@ const initialState = {
   refreshToken: null,
   sid: null,
   isLoggedIn: false,
+  width: null,
 };
 
 const userSlice = createSlice({
@@ -18,8 +19,11 @@ const userSlice = createSlice({
     resetUser(state) {
       return { ...state, ...initialState };
     },
+    setWidth: (state, { payload }) => {
+      return { ...state, ...payload,};
+    },
   },
 });
 
-export const { setUser, resetUser } = userSlice.actions;
+export const { setUser, resetUser, setWidth } = userSlice.actions;
 export default userSlice;
