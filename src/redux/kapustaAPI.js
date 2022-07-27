@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-
 export const kapustaApi = createApi({
   reducerPath: 'kapusta',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://kapusta-backend.goit.global/',
     prepareHeaders: (headers, { getState, endpoint }) => {
-        let token = getState().currentUser.token;
-    if(endpoint==='refreshUser'){
-      token = getState().currentUser.refreshToken;}
+      let token = getState().currentUser.token;
+      if (endpoint === 'refreshUser') {
+        token = getState().currentUser.refreshToken;
+      }
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -51,7 +51,7 @@ export const kapustaApi = createApi({
         return {
           url: `auth/refresh`,
           method: 'POST',
-          body: {sid},
+          body: { sid },
         };
       },
       invalidatesTags: ['Auth'],
@@ -129,9 +129,9 @@ export const kapustaApi = createApi({
       query: balance => ({
         url: `user/balance`,
         method: 'PATCH',
-        body: {newBalance:balance},
+        body: { newBalance: balance },
       }),
-      invalidatesTags: ['Balance'],
+      invalidatesTags: ['User'],
     }),
   }),
 });
@@ -151,5 +151,6 @@ export const {
   useLazyGetUserDataQuery,
   useGetIncomeCategoriesQuery,
   useGetExpenseCategoriesQuery,
-  useChangeBalanceMutation
+  useChangeBalanceMutation,
+  useGetUserDataQuery,
 } = kapustaApi;

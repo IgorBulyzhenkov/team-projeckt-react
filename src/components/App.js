@@ -1,9 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
+
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRefreshUserMutation, useLazyGetUserDataQuery } from 'redux/kapustaAPI';
 import { getSid, getIsLoggedIn } from 'redux/selectors';
 import { setUser, setWidth } from 'redux/reducer';
+
+import HomePage from 'pages/HomePage';
+
 import Test from './test/test';
 // import ReportPage from 'pages/ReportPage';
 
@@ -56,6 +60,8 @@ export const App = () => {
 
   return (
     <div>
+      <HomePage />
+      <Test />
       {/* <ReportPage /> */}
       <Routes>
         <Route></Route>
@@ -64,7 +70,6 @@ export const App = () => {
         <Route></Route>
         <Route></Route>
       </Routes>
-      <Test />
     </div>
   );
 };
