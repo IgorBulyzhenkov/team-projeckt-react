@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import HomePage from 'pages/HomePage';
 import Test from './test/test';
 import AuthorizationPage from 'pages/AuthorizationPage';
 import Header from './Header';
@@ -8,6 +9,9 @@ import Header from './Header';
 export const App = () => {
   return (
     <div>
+      <HomePage />
+      <ReportPage />
+      <Test />
       {/* <ReportPage /> */}
       <Routes>
         <Route></Route>
@@ -18,7 +22,6 @@ export const App = () => {
       </Routes>
       <Header/>
       <AuthorizationPage/>
-      <Test />
     </div>
   );
 };
