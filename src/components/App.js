@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import HomePage from 'pages/HomePage';
 import Test from './test/test';
 // import ReportPage from 'pages/ReportPage';
 
@@ -6,6 +7,9 @@ import Test from './test/test';
 export const App = () => {
   return (
     <div>
+      <HomePage />
+      <ReportPage />
+      <Test />
       {/* <ReportPage /> */}
       <Routes>
         <Route></Route>
@@ -14,7 +18,6 @@ export const App = () => {
         <Route></Route>
         <Route></Route>
       </Routes>
-      <Test />
     </div>
   );
 };
