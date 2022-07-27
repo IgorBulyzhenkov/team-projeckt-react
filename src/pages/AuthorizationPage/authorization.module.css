@@ -76,7 +76,7 @@
     margin: 0 auto;
     background-image: url("../../img/AuthorizationPage/cabbages-group.png"),
       url("../../img/AuthorizationPage/cabbage-2dt.png"),
-      url("../../img/AuthorizationPage/rectangle-mob.png");
+      url("../../img/AuthorizationPage/rectangle-tab.png");
     background-position: top 26px left 0px, bottom 56px left 103px,
       top 0px left 0px;
     background-repeat: no-repeat;
@@ -107,6 +107,9 @@
   .section {
     height: 794px;
     width: auto;
+    background-image: url("../../img/AuthorizationPage/cabbages-group.png"),
+      url("../../img/AuthorizationPage/cabbage-2dt.png"),
+      url("../../img/AuthorizationPage/rectangle-desktop.png");
     background-position: top 26px left 0px, bottom 56px left 210px,
       top 0px left 0px;
     background-repeat: repeat-x, no-repeat, no-repeat;
