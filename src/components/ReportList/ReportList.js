@@ -15,13 +15,13 @@ function ReportList() {
         </button>
       </div>
       <ul className={s.list}>
-        {ReportSvgSelector.map(({ id, name, image }) => (
+        {ReportSvgSelector.map(({ id, nameEng, image }) => (
           <li key={id} className={s.item}>
             <p className={s.text}>numder</p>
             <div className={s.itemSpan}>
               <span className={s.span}>{image}</span>
             </div>
-            <p className={s.text}>{name}</p>
+            <p className={s.text}>{nameEng}</p>
           </li>
         ))}
       </ul>

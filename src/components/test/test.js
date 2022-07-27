@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
-import { setUser, resetUser, setWidth } from 'redux/reducer';
+import { setUser, setWidth } from 'redux/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 
-import s from './test.module.css';
+// import s from './test.module.css';
 import {
   useAuthorizeUserMutation,
   useRegisterUserMutation,
-  useLogOutUserMutation,
-  useRefreshUserMutation,
   useLazyAuthGoogleUserQuery,
   useAddExpenseMutation,
   useAddIncomeMutation,
@@ -20,16 +18,17 @@ import {
   useGetExpenseCategoriesQuery,
   useChangeBalanceMutation,
 } from '../../redux/kapustaAPI';
-import { getSid } from 'redux/selectors';
 
-import UserMenu from 'components/UserMenu';
+
+
 
 export default function Test() {
   const dispatch = useDispatch();
 
+  const isLoggedIn = useSelector(getIsLoggedIn);
+
   const [registerUser] = useRegisterUserMutation();
   const [authorizeUser] = useAuthorizeUserMutation();
-  const [logOutUser] = useLogOutUserMutation();
   const [loginGoogle] = useLazyAuthGoogleUserQuery();
 
   const [refreshUser] = useRefreshUserMutation();
@@ -86,7 +85,18 @@ export default function Test() {
               })
             );
           })
-      );
+      ).then(() =>
+      getUserData()
+        .unwrap()
+        .then(data =>
+          dispatch(
+            setUser({
+              email: data.email,
+              balance: data.balance
+            })
+          )
+        )
+    );;
   };
   const onAuthSubmit = e => {
     e.preventDefault();
@@ -105,42 +115,24 @@ export default function Test() {
           sid: data.sid,
         })
       );
-    });
+    }).then(() =>
+    getUserData()
+      .unwrap()
+      .then(data =>
+        dispatch(
+          setUser({
+            email: data.email,
+            balance: data.balance
+          })
+        )
+      )
+  );;
   };
   const googleAuth = () => {
     loginGoogle().then(console.log);
   };
 
-  const onLogOutUser = () => {
-    logOutUser()
-      .unwrap()
-      .then(() => dispatch(resetUser()));
-  };
-
-  const refreshUserOnClick = () => {
-    refreshUser(sid)
-      .unwrap()
-      .then(data => {
-        dispatch(
-          setUser({
-            token: data.newAccessToken,
-            refreshToken: data.newRefreshToken,
-            sid: data.newSid,
-          })
-        );
-      })
-      .then(() =>
-        getUserData()
-          .unwrap()
-          .then(data =>
-            dispatch(
-              setUser({
-                email: data.email,
-              })
-            )
-          )
-      );
-  };
+ 
 
   const addExpenseTransaction = e => {
     e.preventDefault();
@@ -209,12 +201,6 @@ export default function Test() {
         </form>
         <button type="button" onClick={googleAuth}>
           GoogleAuth
-        </button>
-        <button type="button" onClick={onLogOutUser}>
-          logOut
-        </button>
-        <button type="button" onClick={refreshUserOnClick}>
-          refreshUser
         </button>
       </div>
       <div>
