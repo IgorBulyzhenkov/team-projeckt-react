@@ -8,7 +8,6 @@ export const App = () => {
   return (
     <div>
       <HomePage />
-      <ReportPage />
       <Test />
       {/* <ReportPage /> */}
       <Routes>
