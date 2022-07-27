@@ -4,7 +4,7 @@ const initialState = {
   email: '',
   token: null,
   refreshToken: null,
-  sid: null,
+  sid: false,
   isLoggedIn: false,
   balance: '',
   width: null,

@@ -7,7 +7,7 @@ import { getSid, getIsLoggedIn } from 'redux/selectors';
 import { setUser, setWidth } from 'redux/reducer';
 
 import HomePage from 'pages/HomePage';
-
+import { ToastContainer } from 'react-toastify';
 import Test from './test/test';
 import AuthorizationPage from 'pages/AuthorizationPage';
 import Header from './Header';
@@ -28,9 +28,10 @@ export const App = () => {
   if(window.innerWidth>768){
       dispatch(setWidth({width:'tablet'}))
   }
+
+  // console.log('1',sid)
   if(sid && !isLoggedIn){
-    // const user = JSON.parse(localStorage.getItem('persist:user'))
-    // console.log(user?.token)
+    // console.log('2',sid)
      refreshUser(sid)
     .unwrap()
     .then(data => {
@@ -62,6 +63,8 @@ export const App = () => {
 
   return (
     <div>
+      <Header/>
+      <AuthorizationPage/>
       <HomePage />
       <Test />
       {/* <ReportPage /> */}
@@ -72,8 +75,18 @@ export const App = () => {
         <Route></Route>
         <Route></Route>
       </Routes>
-      <Header/>
-      <AuthorizationPage/>
+      
+      <ToastContainer
+position="top-right"
+autoClose={3000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover={false}
+/>
     </div>
   );
 };

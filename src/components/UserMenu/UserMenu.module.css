@@ -8,7 +8,7 @@
 }
 .line{
     height: 100%;
-    border-right: 1px solid black;
+    border-right: 1px solid #E0E5EB;
 }
 .exitBtn{
     margin-left: 20px;  
