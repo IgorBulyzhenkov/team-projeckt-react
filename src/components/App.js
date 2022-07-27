@@ -3,7 +3,7 @@ import HomePage from 'pages/HomePage';
 import Test from './test/test';
 import AuthorizationPage from 'pages/AuthorizationPage';
 import Header from './Header';
-// import ReportPage from 'pages/ReportPage';
+import ReportPage from 'pages/ReportPage';
 
 
 export const App = () => {

@@ -6,13 +6,24 @@
   height: 800px;
   margin: 0 auto;
 
-  background-image: url("../../img/AuthorizationPage/cabbage.png"),
-    url("../../img/AuthorizationPage/cabbage.png"),
-    url("../../img/AuthorizationPage/rectangle-mob.png");
+  background-image: url('../../img/AuthorizationPage/cabbage.png'),
+    url('../../img/AuthorizationPage/cabbage.png'),
+    url('../../img/AuthorizationPage/rectangle-mob.png');
   background-position: right -34px top 104px, bottom 0px left 35px,
     top 0px left 0px;
   background-repeat: no-repeat;
   background-size: 83px 89px, 83px 89px, 100% 286px;
+}
+
+@media (min-device-pixel-ratio: 2),
+  (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .section {
+    background-image: url('../../img/AuthorizationPage/2x/cabbage2x.png'),
+      url('../../img/AuthorizationPage/2x/cabbage2x.png'),
+      url('../../img/AuthorizationPage/2x/rectangle2x-mob.png');
+  }
 }
 
 .container {
@@ -28,7 +39,7 @@
 }
 
 .text {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-weight: 700;
   font-size: 13px;
   line-height: 15px;
@@ -59,7 +70,7 @@
     margin: 0 auto;
     width: 480px;
   }
-  
+
   .container {
     width: 480px;
   }
@@ -77,15 +88,26 @@
     width: 768px;
     height: 968px;
     margin: 0 auto;
-    background-image: url("../../img/AuthorizationPage/cabbages-group.png"),
-      url("../../img/AuthorizationPage/cabbage-2dt.png"),
-      url("../../img/AuthorizationPage/rectangle-tab.png");
+    background-image: url('../../img/AuthorizationPage/cabbages-group.png'),
+      url('../../img/AuthorizationPage/cabbage-2dt.png'),
+      url('../../img/AuthorizationPage/rectangle-tab.png');
     background-position: top 26px left 0px, bottom 56px left 103px,
       top 0px left 0px;
     background-repeat: no-repeat;
-    background-size: 1334px 232px, auto, 100% 526px;
+    background-size: 1334px 232px, 183px 142px, 100% 526px;
   }
-  
+
+  @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .section {
+      background-image: url('../../img/AuthorizationPage/2x/cabbages2x-group.png'),
+        url('../../img/AuthorizationPage/2x/cabbage2x-dt.png'),
+        url('../../img/AuthorizationPage/2x/rectangle2x-tab.png');
+    }
+  }
+
   .container {
     width: 768px;
     padding-left: 32px;
@@ -98,7 +120,7 @@
     height: 78px;
   }
 
-  .authBox{
+  .authBox {
     margin-left: 139px;
   }
 
@@ -114,13 +136,24 @@
   .section {
     height: 794px;
     width: auto;
-    background-image: url("../../img/AuthorizationPage/cabbages-group.png"),
-      url("../../img/AuthorizationPage/cabbage-2dt.png"),
-      url("../../img/AuthorizationPage/rectangle-desktop.png");
+    background-image: url('../../img/AuthorizationPage/cabbages-group.png'),
+      url('../../img/AuthorizationPage/cabbage-2dt.png'),
+      url('../../img/AuthorizationPage/rectangle-desktop.png');
     background-position: top 26px left 0px, bottom 56px left 210px,
       top 0px left 0px;
     background-repeat: repeat-x, no-repeat, no-repeat;
-    background-size: 1334px 232px, auto, 100% 526px;
+    background-size: 1334px 232px, 183px 142px, 100% 526px;
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .section {
+      background-image: url('../../img/AuthorizationPage/2x/cabbages2x-group.png'),
+        url('../../img/AuthorizationPage/2x/cabbage2x-dt.png'),
+        url('../../img/AuthorizationPage/2x/rectangle2x-desk.png');
+    }
   }
 
   .container {
@@ -144,7 +177,7 @@
     margin-left: 80px;
   }
 
-  .title{
+  .title {
     width: 377px;
     height: 139px;
     padding-top: 219px;
