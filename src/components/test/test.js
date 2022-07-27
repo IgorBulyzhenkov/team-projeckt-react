@@ -1,8 +1,8 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { setUser, resetUser, setWidth } from 'redux/reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import DesktopDatePicker from '@mui/x-date-pickers-pro/DesktopDatePicker';
+import Calendar from 'react-calendar'
 
 
 import s from './test.module.css';
@@ -198,7 +198,7 @@ export default function Test() {
     const date = '2019-06';
     getPeriodData(date).then(console.log);
   };
-
+  const [value, onChange] = useState(new Date());
   return (
     <div>
         <UserMenu/>
@@ -264,7 +264,7 @@ export default function Test() {
           <input type="number" id="balance" name="balance" />
           <button type="submitt">Submit</button>
         </form>
-        <DesktopDatePicker/>
+        <Calendar value={value} defaultView={'month'} next2Label={null} prev2Label={null} onActiveStartDateChange={({ action, activeStartDate, value, view }) => console.log(activeStartDate)} />
     </div>
   );
 }
