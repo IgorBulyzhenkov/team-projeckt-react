@@ -1,10 +1,8 @@
 import ReportList from 'components/ReportList/ReportList';
 import Container from 'components/Container/Container';
-import {
-  MdKeyboardBackspace,
-  MdKeyboardArrowLeft,
-  MdKeyboardArrowRight,
-} from 'react-icons/md';
+import { MdKeyboardBackspace } from 'react-icons/md';
+import { FiChevronLeft } from 'react-icons/fi';
+import { FiChevronRight } from 'react-icons/fi';
 import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 
@@ -12,24 +10,31 @@ function ReportPage() {
   return (
     <section className={s.test}>
       <Container>
-        <Link to="" className={s.link}>
-          <MdKeyboardBackspace className={s.svg} />
-        </Link>
-        <div className={s.container_calendar}>
-          <p className={s.text}>Current period:</p>
-          <div className={s.calendar}>
-            <button type="button" className={s.btn}>
-              <MdKeyboardArrowLeft />
-            </button>
-            <p className={s.calendar_text}>November 2019</p>
-            <button type="button" className={s.btn}>
-              <MdKeyboardArrowRight />
-            </button>
+        <div className={s.wrap}>
+          <div className={s.wrap_link}>
+            <Link to="" className={s.link}>
+              <MdKeyboardBackspace className={s.svg} />
+            </Link>
+
+            <p className={s.link_text}> Main page</p>
           </div>
-        </div>
-        <div className={s.balance}>
-          <p className={s.balance_text}>Balance:</p>
-          <p className={s.balance_cash}>55 000.00 UAH</p>
+          <div className={s.container_calendar}>
+            <p className={s.text}>Current period:</p>
+            <div className={s.calendar}>
+              <button type="button" className={s.btn}>
+                <FiChevronLeft size="20" className={s.arrowBtn} />
+              </button>
+              <p className={s.calendar_text}>November 2019</p>
+              <button type="button" className={s.btn}>
+                <FiChevronRight size="20" className={s.arrowBtn} />
+              </button>
+            </div>
+          </div>
+
+          <div className={s.balance}>
+            <p className={s.balance_text}>Balance:</p>
+            <p className={s.balance_cash}>55 000.00 UAH</p>
+          </div>
         </div>
         <div className={s.cash}>
           <div className={s.expenses}>

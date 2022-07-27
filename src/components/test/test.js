@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react';
-import { setUser, resetUser } from 'redux/reducer';
+
+import { useEffect, useState } from 'react';
+import { setUser, resetUser, setWidth } from 'redux/reducer';
 import { useDispatch, useSelector } from 'react-redux';
+import Calendar from 'react-calendar'
+
 
 import s from './test.module.css';
 import {
@@ -22,6 +25,8 @@ import {
 } from '../../redux/kapustaAPI';
 import { getSid } from 'redux/selectors';
 
+import UserMenu from 'components/UserMenu';
+
 export default function Test() {
   const dispatch = useDispatch();
 
@@ -32,6 +37,7 @@ export default function Test() {
 
   const [refreshUser] = useRefreshUserMutation();
   const sid = useSelector(getSid);
+  
   const [getUserData] = useLazyGetUserDataQuery();
 
   const [addExpense] = useAddExpenseMutation();
@@ -50,9 +56,20 @@ export default function Test() {
   const [changeBalance] = useChangeBalanceMutation();
 
 
-
-
-  
+  useEffect(()=>{
+    
+    if(window.innerWidth<=768){
+        
+        console.log('mobile')
+        // console.log('resized to: ', window.innerWidth, 'x')
+        dispatch(setWidth({width:'mobile'}))
+    }
+    if(window.innerWidth>768){
+        console.log('tablet')
+        // console.log('resized to: ', window.innerWidth, 'x')
+        dispatch(setWidth({width:'tablet'}))
+    }
+  },[dispatch, ])
 
 
 
@@ -181,9 +198,10 @@ export default function Test() {
     const date = '2019-06';
     getPeriodData(date).then(console.log);
   };
-
+  const [value, onChange] = useState(new Date());
   return (
     <div>
+        <UserMenu/>
       <div>
         <h2>Регистрация</h2>
         <form onSubmit={onRegSubmit}>
@@ -246,6 +264,7 @@ export default function Test() {
           <input type="number" id="balance" name="balance" />
           <button type="submitt">Submit</button>
         </form>
+        <Calendar value={value} defaultView={'month'} next2Label={null} prev2Label={null} onActiveStartDateChange={({ action, activeStartDate, value, view }) => console.log(activeStartDate)} />
     </div>
   );
 }

@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+.userName{
+    margin-left: 16px;
+    margin-right: 20px;
+    
+}
+.exitBtn{
+    margin-left: 20px;
+    display: block;
+    height: 100%;
+    border-left: 1px solid black;
+
+}
