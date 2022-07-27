@@ -3,6 +3,7 @@
          max-width: 320px;
          padding-left: 12px;
          padding-right: 12px;
+        margin: 0 auto;
      }
  }
 
@@ -11,6 +12,7 @@
          width: 768px;
          padding-left: 32px;
          padding-right: 32px;
+    margin: 0 auto;
      }
  }
 
@@ -19,5 +21,6 @@
          width: 1280px;
          padding-left: 16px;
          padding-right: 16px;
+        margin: 0 auto;
      }
  }
