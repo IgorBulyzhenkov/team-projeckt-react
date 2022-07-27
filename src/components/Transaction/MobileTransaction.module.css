@@ -1,0 +1,36 @@
+.description {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.14;
+  letter-spacing: 0.04em;
+  color: #52555f;
+}
+
+.table td {
+  font-size: 8px;
+  line-height: 1.12;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #52555f;
+  border-bottom: 1px solid #f5f6fb;
+  padding: 5px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table .amount {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.16;
+  letter-spacing: 0.04em;
+}
+
+.table .descriptionItem {
+  text-align: left;
+  border: none;
+}
+
+.table .date {
+  text-align: left;
+}
