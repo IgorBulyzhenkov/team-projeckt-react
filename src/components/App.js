@@ -9,9 +9,10 @@ import { setUser, setWidth } from 'redux/reducer';
 import HomePage from 'pages/HomePage';
 import { ToastContainer } from 'react-toastify';
 import Test from './test/test';
+import ReportPage from 'pages/ReportPage';
 import AuthorizationPage from 'pages/AuthorizationPage';
 import Header from './Header';
-// import ReportPage from 'pages/ReportPage';
+
 
 
 export const App = () => {
@@ -65,9 +66,9 @@ export const App = () => {
     <div>
       <Header/>
       <AuthorizationPage/>
+      <ReportPage />
       <HomePage />
       <Test />
-      {/* <ReportPage /> */}
       <Routes>
         <Route></Route>
         <Route></Route>
