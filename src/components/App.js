@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import Balance from './Balance';
-import ReportLink from './ReportLink';
+import HomePage from 'pages/HomePage';
+import Test from './test/test';
 
 export const App = () => {
   return (
     <div>
-      <ReportLink />
-      <Balance />
+      <HomePage />
+      <Test />
       <Routes>
         <Route></Route>
         <Route></Route>

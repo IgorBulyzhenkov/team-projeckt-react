@@ -6,7 +6,7 @@ const initialState = {
   refreshToken: null,
   sid: null,
   isLoggedIn: false,
-  balance: '00.00',
+  balance: '',
 };
 
 const userSlice = createSlice({
