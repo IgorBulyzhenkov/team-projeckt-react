@@ -7,11 +7,11 @@ function ReportList() {
     <div className={s.wrap}>
       <div className={s.wrapBtn}>
         <button type="button" className={s.button}>
-          <FiChevronLeft size="25" className={s.arrowBtn} />
+          <FiChevronLeft size="20" className={s.arrowBtn} />
         </button>
         <p className={s.textBtn}>Expenses</p>
         <button type="button" className={s.button}>
-          <FiChevronRight size="25" className={s.arrowBtn} />
+          <FiChevronRight size="20" className={s.arrowBtn} />
         </button>
       </div>
       <ul className={s.list}>
