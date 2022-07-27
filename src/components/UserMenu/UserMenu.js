@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getEmail,getWidth } from 'redux/selectors'
 import { useLogOutUserMutation } from 'redux/kapustaAPI';
 import { resetUser } from 'redux/reducer';
+import { kapustaApi } from 'redux/kapustaAPI';
 import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 import Avatar from 'components/Avatar'
 import s from './UserMenu.module.css'
@@ -14,7 +15,8 @@ export default function UserMenu() {
   const onLogOutUser = () => {
     logOutUser()
       .unwrap()
-      .then(() => dispatch(resetUser()));
+      .then(() => {dispatch(resetUser())
+        dispatch(kapustaApi.util.resetApiState())});
   };
 
 const width = useSelector(getWidth)
