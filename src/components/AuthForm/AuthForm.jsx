@@ -46,7 +46,7 @@ const AuthForm = () => {
         Or log in using an email and password, after registering:
       </p>
 
-      <label className={s.label} htmlFor="">
+      <label className={s.label} htmlFor="email">
         Email:
       </label>
       <input
@@ -57,7 +57,7 @@ const AuthForm = () => {
         placeholder="your@mail.com"
         type="email"
       />
-      <label className={s.label} htmlFor="">
+      <label className={s.label} htmlFor="password">
         Password:
       </label>
       <input
