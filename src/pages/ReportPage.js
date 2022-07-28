@@ -1,12 +1,10 @@
 import { MdKeyboardBackspace } from 'react-icons/md';
-// import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Calendar from 'react-calendar';
 import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLazyGetPeriodDataQuery } from '../redux/kapustaAPI';
 import ReportList from 'components/ReportList/ReportList';
-import ReportGraph from 'components/ReportGraph/ReportGraph';
 import Container from 'components/Container/Container';
 
 function ReportPage() {
@@ -26,8 +24,6 @@ function ReportPage() {
     const newDate = year + '-' + month;
     return newDate;
   };
-
-  console.log(incomes, expenses);
 
   useEffect(() => {
     getPeriodData(valueDate(value)).then(res => {
@@ -81,8 +77,7 @@ function ReportPage() {
           </div>
         </div>
 
-        <ReportList />
-        <ReportGraph />
+        <ReportList incomes={incomes} expenses={expenses} />
       </Container>
     </section>
   );
