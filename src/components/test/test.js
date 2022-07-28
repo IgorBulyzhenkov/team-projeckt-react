@@ -1,4 +1,3 @@
-
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
@@ -8,35 +7,22 @@ import {
   useLazyGetPeriodDataQuery,
   useChangeBalanceMutation,
   useGetIncomeCategoriesQuery,
-  useGetExpenseCategoriesQuery
-
+  useGetExpenseCategoriesQuery,
 } from '../../redux/kapustaAPI';
 
-
-
-
 export default function Test() {
-
-
-
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [getExpense] = useLazyGetExpenseQuery();
   const [getIncome] = useLazyGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
 
-//   const { data: incomeCategories } = useGetIncomeCategoriesQuery();
-//   const { data: expenseCategories } = useGetExpenseCategoriesQuery();
+  //   const { data: incomeCategories } = useGetIncomeCategoriesQuery();
+  //   const { data: expenseCategories } = useGetExpenseCategoriesQuery();
 
   const [getPeriodData] = useLazyGetPeriodDataQuery();
 
   const [changeBalance] = useChangeBalanceMutation();
-
-  
-
-
-
- 
 
   const addExpenseTransaction = e => {
     e.preventDefault();
@@ -48,7 +34,7 @@ export default function Test() {
     const data = {
       description,
       amount,
-      category: 'Продукты',
+      category: 'Всё для дома',
       date,
     };
     addExpense(data).then(console.log);
@@ -115,12 +101,16 @@ export default function Test() {
       <button type="button" onClick={getTransactionsByData}>
         getTransactionsByData
       </button>
-      <form onSubmit={e=>{e.preventDefault(); changeBalance(Number(e.target.balance.value))}}>
-          <label htmlFor="balance">Balance</label>
-          <input type="number" id="balance" name="balance" />
-          <button type="submitt">Submit</button>
-        </form>
-
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          changeBalance(Number(e.target.balance.value));
+        }}
+      >
+        <label htmlFor="balance">Balance</label>
+        <input type="number" id="balance" name="balance" />
+        <button type="submitt">Submit</button>
+      </form>
     </div>
   );
 }
