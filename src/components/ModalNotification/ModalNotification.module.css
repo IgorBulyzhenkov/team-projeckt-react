@@ -1,0 +1,67 @@
+.modalWrap {
+  display: flex;
+}
+
+.modal {
+  position: relative;
+  width: 280px;
+  height: 152px;
+  background: linear-gradient(117.84deg, #1d346a 2.84%, #031634 67.28%);
+  border-radius: 30px;
+  margin-top: 11px;
+}
+
+.modal::before {
+  content: '';
+  position: absolute; /* Абсолютное позиционирование */
+  left: 90px;
+  top: -26px; /* Положение треугольника */
+  border: 15px solid transparent;
+  border-bottom: 15px solid #142a56; /* Добавляем треугольник */
+}
+
+.textWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 29px;
+}
+
+.startText {
+  width: 230.35px;
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.prompt {
+  width: 230.35px;
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .modalWrap {
+    content: '';
+    position: absolute;
+    left: 50px;
+    top: 44px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .modal {
+    width: 288px;
+    height: 163px;
+  }
+  .textWrap {
+    margin-top: 32px;
+  }
+}
