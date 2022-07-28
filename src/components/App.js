@@ -15,6 +15,7 @@ import Test from './test/test';
 import ReportPage from 'pages/ReportPage';
 import AuthorizationPage from 'pages/AuthorizationPage';
 import Header from './Header';
+// import ActionModal from './ActionModal';
 import s from './App.module.css';
 
 export const App = () => {
@@ -64,6 +65,7 @@ export const App = () => {
 
   return (
     <div>
+      {/* <ActionModal/> */}
       <Header />
       <AuthorizationPage />
       <div className={s.back}>
