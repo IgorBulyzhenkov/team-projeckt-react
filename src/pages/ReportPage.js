@@ -4,7 +4,7 @@ import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLazyGetPeriodDataQuery } from '../redux/kapustaAPI';
-import ReportList from 'components/ReportList/ReportList';
+import ReportList from 'components/Report/ReportList/ReportList';
 import Container from 'components/Container/Container';
 
 function ReportPage() {
@@ -77,7 +77,7 @@ function ReportPage() {
           </div>
         </div>
 
-        <ReportList incomes={incomes} expenses={expenses} />
+        {incomes && <ReportList incomes={incomes} expenses={expenses} />}
       </Container>
     </section>
   );

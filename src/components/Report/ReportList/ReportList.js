@@ -1,5 +1,5 @@
 import ReportSvgSelector from './ReportSvgSelector';
-import ReportGraph from 'components/ReportGraph/ReportGraph';
+import ReportGraph from 'components/Report/ReportGraph/ReportGraph';
 import { useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
