@@ -75,15 +75,11 @@ p {
   border: transparent;
   background-color: #f6f7fb;
   border-radius: 30px;
-  margin-bottom: 40px;
   padding: 17px 19px;
   outline-color: transparent;
   transition: outline-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.input:first-of-type {
-  margin-bottom: 20px;
-}
 
 .input:focus {
   outline-color: #ff751d;
@@ -178,4 +174,21 @@ p {
   .text:first-of-type { 
     margin-bottom: 35px;
   }
+}
+
+.message {
+  font-family: "Roboto";
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.04em;
+  color: #eb5757;
+  margin-top: 4px;
+}
+
+.fieldBox {
+  margin-bottom: 16px;
+}
+
+.fieldBox:last-of-type {
+  margin-bottom: 24px;
 }
