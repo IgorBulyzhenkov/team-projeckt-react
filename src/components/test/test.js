@@ -6,7 +6,9 @@ import {
   useLazyGetIncomeQuery,
   useDeleteTransactionMutation,
   useLazyGetPeriodDataQuery,
-  useChangeBalanceMutation
+  useChangeBalanceMutation,
+  useGetIncomeCategoriesQuery,
+  useGetExpenseCategoriesQuery
 
 } from '../../redux/kapustaAPI';
 
@@ -23,25 +25,14 @@ export default function Test() {
   const [getIncome] = useLazyGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
 
-  const { data: incomeCategories } = useGetIncomeCategoriesQuery();
-  const { data: expenseCategories } = useGetExpenseCategoriesQuery();
+//   const { data: incomeCategories } = useGetIncomeCategoriesQuery();
+//   const { data: expenseCategories } = useGetExpenseCategoriesQuery();
 
   const [getPeriodData] = useLazyGetPeriodDataQuery();
 
   const [changeBalance] = useChangeBalanceMutation();
 
-  useEffect(() => {
-    if (window.innerWidth <= 768) {
-      console.log('mobile');
-      // console.log('resized to: ', window.innerWidth, 'x')
-      dispatch(setWidth({ width: 'mobile' }));
-    }
-    if (window.innerWidth > 768) {
-      console.log('tablet');
-      // console.log('resized to: ', window.innerWidth, 'x')
-      dispatch(setWidth({ width: 'tablet' }));
-    }
-  }, [dispatch]);
+  
 
 
 
