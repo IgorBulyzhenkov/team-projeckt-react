@@ -12,6 +12,7 @@ import Test from './test/test';
 import ReportPage from 'pages/ReportPage';
 import AuthorizationPage from 'pages/AuthorizationPage';
 import Header from './Header';
+import ActionModal from './ActionModal';
 
 
 
@@ -64,7 +65,9 @@ export const App = () => {
 
   return (
     <div>
+
       <Header/>
+      <ActionModal/>
       <AuthorizationPage/>
       <ReportPage />
       <HomePage />
