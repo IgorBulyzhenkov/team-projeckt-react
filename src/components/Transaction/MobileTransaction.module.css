@@ -23,6 +23,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.amount.income {
+  color: #407946;
+}
+
+.amount.expense {
+  color: #e7192e;
+}
 
 .table .amount {
   font-weight: 700;

@@ -9,6 +9,7 @@ export default function TransactionItem({
   amount,
   date,
   id,
+  expenses,
 }) {
   const [deleteTransaction] = useDeleteTransactionMutation();
   return (
@@ -16,7 +17,9 @@ export default function TransactionItem({
       <td>{date}</td>
       <td>{description}</td>
       <td>{category}</td>
-      <td>{amount}.00 грн.</td>
+      <td style={expenses ? { color: '#e7192e' } : { color: '#407946' }}>
+        {amount}.00 грн.
+      </td>
       <td>
         <IconButton
           onClick={() => deleteTransaction(id)}
