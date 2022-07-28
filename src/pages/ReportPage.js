@@ -1,12 +1,13 @@
-import ReportList from 'components/ReportList/ReportList';
-import ReportGraph from 'components/ReportGraph/ReportGraph';
-import Container from 'components/Container/Container';
 import { MdKeyboardBackspace } from 'react-icons/md';
+// import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Calendar from 'react-calendar';
 import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLazyGetPeriodDataQuery } from '../redux/kapustaAPI';
+import ReportList from 'components/ReportList/ReportList';
+import ReportGraph from 'components/ReportGraph/ReportGraph';
+import Container from 'components/Container/Container';
 
 function ReportPage() {
   const [value, setValue] = useState(new Date());
@@ -52,43 +53,31 @@ function ReportPage() {
           </div>
           <div className={s.container_calendar}>
             <p className={s.text}>Current period:</p>
-            <div className={s.calendar}>
-              {/* <button type="button" className={s.btn}>
-                <FiChevronLeft size="20" className={s.arrowBtn} />
-              
-                </button>
-              <p className={s.calendar_text}>November 2019</p>
-              <button type="button" className={s.btn}>
-                <FiChevronRight size="20" className={s.arrowBtn} />
-              </button> */}
-              <Calendar
-                defaultView={'month'}
-                next2Label={null}
-                prev2Label={null}
-                onActiveStartDateChange={({ activeStartDate }) =>
-                  handleClick(activeStartDate)
-                }
-              />
-            </div>
+            <Calendar
+              defaultView={'month'}
+              next2Label={null}
+              prev2Label={null}
+              onActiveStartDateChange={({ activeStartDate }) =>
+                handleClick(activeStartDate)
+              }
+              locale={'en-EN'}
+            />
           </div>
 
           <div className={s.balance}>
             <p className={s.balance_text}>Balance:</p>
-            <p className={s.balance_cash}>{total} UAH</p>
+            <p className={s.balance_cash}>{`${total}.00 UAH`}</p>
           </div>
         </div>
         <div className={s.cash}>
           <div className={s.expenses}>
             <p className={s.expenses__text}>Expenses:</p>
-            <p className={s.expenses__cash}>
-              {' '}
-              - {expenses.expenseTotal}.00 грн
-            </p>
+            <p className={s.expenses__cash}>- {expenses.expenseTotal}.00 UAH</p>
           </div>
           <span className={s.span}></span>
           <div className={s.income}>
             <p className={s.income__text}>Income:</p>
-            <p className={s.income__cash}>+ {incomes.incomeTotal}.00 грн</p>
+            <p className={s.income__cash}>+ {incomes.incomeTotal}.00 UAH</p>
           </div>
         </div>
 
