@@ -1,6 +1,7 @@
 import { DeleteOutline } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useDeleteTransactionMutation } from '../../redux/kapustaAPI';
 
 export default function TransactionItem({
   description,
@@ -9,6 +10,7 @@ export default function TransactionItem({
   date,
   id,
 }) {
+  const [deleteTransaction] = useDeleteTransactionMutation();
   return (
     <tr>
       <td>{date}</td>
@@ -16,7 +18,11 @@ export default function TransactionItem({
       <td>{category}</td>
       <td>{amount} грн.</td>
       <td>
-        <IconButton aria-label="button delete" component="label">
+        <IconButton
+          onClick={() => deleteTransaction(id)}
+          aria-label="button delete"
+          component="label"
+        >
           <DeleteOutline />
         </IconButton>
       </td>

@@ -1,4 +1,3 @@
-
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
@@ -7,36 +6,23 @@ import {
   useDeleteTransactionMutation,
   useLazyGetPeriodDataQuery,
   useChangeBalanceMutation,
-  useGetIncomeCategoriesQuery,
-  useGetExpenseCategoriesQuery
-
+  // useGetIncomeCategoriesQuery,
+  // useGetExpenseCategoriesQuery,
 } from '../../redux/kapustaAPI';
 
-
-
-
 export default function Test() {
-
-
-
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [getExpense] = useLazyGetExpenseQuery();
   const [getIncome] = useLazyGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
 
-//   const { data: incomeCategories } = useGetIncomeCategoriesQuery();
-//   const { data: expenseCategories } = useGetExpenseCategoriesQuery();
+  //   const { data: incomeCategories } = useGetIncomeCategoriesQuery();
+  //   const { data: expenseCategories } = useGetExpenseCategoriesQuery();
 
   const [getPeriodData] = useLazyGetPeriodDataQuery();
 
   const [changeBalance] = useChangeBalanceMutation();
-
-  
-
-
-
- 
 
   const addExpenseTransaction = e => {
     e.preventDefault();
@@ -70,10 +56,10 @@ export default function Test() {
     const data = await getExpense();
     console.log(data);
   };
-  const getIncomeTransaction = async () => {
-    const data = await getIncome();
-    console.log(data);
-  };
+  // const getIncomeTransaction = async () => {
+  //   const data = await getIncome();
+  //   console.log(data);
+  // };
   const delTransaction = e => {
     e.preventDefault();
     const id = e.target.id.value;
@@ -115,12 +101,16 @@ export default function Test() {
       <button type="button" onClick={getTransactionsByData}>
         getTransactionsByData
       </button>
-      <form onSubmit={e=>{e.preventDefault(); changeBalance(Number(e.target.balance.value))}}>
-          <label htmlFor="balance">Balance</label>
-          <input type="number" id="balance" name="balance" />
-          <button type="submitt">Submit</button>
-        </form>
-
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          changeBalance(Number(e.target.balance.value));
+        }}
+      >
+        <label htmlFor="balance">Balance</label>
+        <input type="number" id="balance" name="balance" />
+        <button type="submitt">Submit</button>
+      </form>
     </div>
   );
 }
