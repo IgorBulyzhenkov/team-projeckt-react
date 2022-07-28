@@ -29,3 +29,18 @@
 .icon:hover{
     color: #52555F;
 }
+
+.text {
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #52555f;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 379px) {
+    
+  }
