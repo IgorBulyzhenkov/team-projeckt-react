@@ -41,7 +41,7 @@ function ReportPage() {
       <Container>
         <div className={s.wrap}>
           <div className={s.wrap_link}>
-            <Link to="" className={s.link}>
+            <Link to="/home" className={s.link}>
               <MdKeyboardBackspace className={s.svg} />
             </Link>
 

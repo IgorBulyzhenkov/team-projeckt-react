@@ -5,12 +5,28 @@ import s from './Transactions.module.css';
 import {
   useLazyGetExpenseQuery,
   useLazyGetIncomeQuery,
+  // useGetIncomeQuery,
+  // useGetExpenseQuery,
 } from '../../redux/kapustaAPI';
 
 export default function Transactions() {
   const [expenses, setExpenses] = useState(true);
-  const [transactions, setTransactions] = useState();
-  const [monthStats, setMonthStats] = useState();
+  const [transactions, setTransactions] = useState([]);
+  const [monthStats, setMonthStats] = useState([]);
+  console.log(transactions, '1');
+  // const { data } = useGetExpenseQuery;
+  // const { data } = useGetIncomeQuery;
+  // console.log(data);
+  // useEffect(() => {
+
+  //   if (expenses) {
+  //     setTransactions(expense?.expenses);
+  //     setMonthStats(expense?.monthsStats);
+  //   } else if (income) {
+  //     setTransactions(income?.incomes);
+  //     setMonthStats(income?.monthsStats);
+  //   }
+  // }, [expense, expenses, income]);
 
   const [getExpense] = useLazyGetExpenseQuery();
   const [getIncome] = useLazyGetIncomeQuery();
@@ -20,15 +36,15 @@ export default function Transactions() {
       getExpense()
         .unwrap()
         .then(({ expenses, monthsStats }) => {
-          setTransactions(expenses);
-          setMonthStats(monthsStats);
+          setTransactions([...expenses]);
+          setMonthStats({ ...monthsStats });
         });
     } else {
       getIncome()
         .unwrap()
         .then(({ incomes, monthsStats }) => {
-          setTransactions(incomes);
-          setMonthStats(monthsStats);
+          setTransactions([...incomes]);
+          setMonthStats({ ...monthsStats });
         });
     }
   }, [expenses, getExpense, getIncome]);
