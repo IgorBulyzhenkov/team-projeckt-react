@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import TransactionHistory from './TransactionHistory';
 import MobileTransaction from './MobileTransaction';
 import s from './Transactions.module.css';
+import { getWidth } from '../../redux/selectors';
 import {
   useLazyGetExpenseQuery,
   useLazyGetIncomeQuery,
@@ -11,6 +13,8 @@ export default function Transactions() {
   const [expenses, setExpenses] = useState(true);
   const [transactions, setTransactions] = useState();
   const [monthStats, setMonthStats] = useState();
+
+  const VpWidth = useSelector(getWidth);
 
   const [getExpense] = useLazyGetExpenseQuery();
   const [getIncome] = useLazyGetIncomeQuery();
@@ -35,7 +39,8 @@ export default function Transactions() {
 
   return (
     <div>
-      <MobileTransaction />
+      {VpWidth === 'mobile' && <MobileTransaction />}
+
       <button className={s.btn} type="button" onClick={() => setExpenses(true)}>
         Expenses
       </button>
@@ -47,13 +52,15 @@ export default function Transactions() {
         Income
       </button>
 
-      <div className={s.wrap}>
-        <TransactionHistory
-          expenses={expenses}
-          transactions={transactions}
-          monthStats={monthStats}
-        />
-      </div>
+      {VpWidth !== 'mobile' && (
+        <div className={s.wrap}>
+          <TransactionHistory
+            expenses={expenses}
+            transactions={transactions}
+            monthStats={monthStats}
+          />
+        </div>
+      )}
     </div>
   );
 }
