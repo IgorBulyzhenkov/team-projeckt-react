@@ -131,7 +131,7 @@ export const kapustaApi = createApi({
         method: 'PATCH',
         body: { newBalance: balance },
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ['Balance'],
     }),
   }),
 });
