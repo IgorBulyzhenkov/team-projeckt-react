@@ -4,7 +4,6 @@
 
 .section {
   height: 800px;
-  margin: 0 auto;
 
   background-image: url('../../img/AuthorizationPage/cabbage.png'),
     url('../../img/AuthorizationPage/cabbage.png'),
@@ -55,7 +54,6 @@
 
 @media screen and (max-width: 320px) {
   .section {
-    width: 320px;
     margin: 0 auto;
     height: 968px;
   }
@@ -66,10 +64,6 @@
 }
 
 @media screen and (min-width: 480px) {
-  .section {
-    margin: 0 auto;
-    width: 480px;
-  }
 
   .container {
     width: 480px;
@@ -85,7 +79,6 @@
 
 @media screen and (min-width: 768px) {
   .section {
-    width: 768px;
     height: 968px;
     margin: 0 auto;
     background-image: url('../../img/AuthorizationPage/cabbages-group.png'),
