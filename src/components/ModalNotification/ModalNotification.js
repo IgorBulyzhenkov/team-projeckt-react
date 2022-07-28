@@ -1,19 +1,17 @@
 import s from './ModalNotification.module.css';
 import { useState, useEffect } from 'react';
-// import { Transition } from 'react-transition-group';
+import { useSpring, animated } from 'react-spring';
 
 const ModalNotification = () => {
   const [showModal, setShowModal] = useState(true);
 
-  // const defaultStyle = {
-  //   transition: `opacity 300ms ease-in-out`,
-  //   opacity: 0,
-  // };
+  const props = useSpring({
+    to: { opacity: 0 },
+    from: { opacity: 1 },
+    delay: 10000,
+    config: { duration: 500 },
+  });
 
-  // const transitionStyles = {
-  //   exiting: { opacity: 0 },
-  //   exited: { opacity: 0 },
-  // };
   const toogleModal = () => {
     setShowModal(!showModal);
   };
@@ -24,7 +22,7 @@ const ModalNotification = () => {
     };
     setTimeout(() => {
       handleClose();
-    }, 5000);
+    }, 11000);
 
     document.addEventListener('click', handleClose);
     return () => {
@@ -33,13 +31,8 @@ const ModalNotification = () => {
   }, []);
 
   return (
-    // <Transition
-    //   timeout={300}
-    //   in={showModal}
-    //   styled={{ ...transitionStyles, ...defaultStyle }}
-    // >
     showModal && (
-      <div className={s.modalWrap}>
+      <animated.div className={s.modalWrap} style={props}>
         <div className={s.modal}>
           <div className={s.textWrap}>
             <span className={s.startText}>
@@ -50,9 +43,8 @@ const ModalNotification = () => {
             </span>
           </div>
         </div>
-      </div>
+      </animated.div>
     )
-    // </Transition>
   );
 };
 
