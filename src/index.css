@@ -1,4 +1,5 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
+/* bring in normalize.css styles */
 
 .body {
   font-family: 'Roboto', sans-serif;
@@ -58,7 +59,41 @@ h6 {
   padding: 0;
 }
 
-.react-calendar__viewContainer{
+.react-calendar__viewContainer {
   display: none;
 }
 
+.react-calendar__navigation__label {
+  pointer-events: none;
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000000;
+  font-style: normal;
+}
+
+.react-calendar__navigation__next-button {
+  font-size: 18px;
+  color: #f76002;
+}
+
+.react-calendar__navigation__prev-button {
+  font-size: 18px;
+  color: #f76002;
+}
+
+button.react-calendar__navigation__prev-button:hover,
+button.react-calendar__navigation__prev-button:focus {
+  background-color: transparent;
+  color: #f76002;
+}
+
+button.react-calendar__navigation__next-button:hover,
+button.react-calendar__navigation__next-button:focus {
+  background-color: transparent;
+  color: #f76002;
+}

@@ -88,11 +88,14 @@
 .container_calendar {
   text-align: center;
   margin-top: 22px;
+  width: 195px;
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 768px) {
   .container_calendar {
     margin-top: 0;
+    margin-right: 0;
   }
 }
 
@@ -109,6 +112,7 @@
 .calendar {
   display: flex;
   justify-content: center;
+
 }
 
 .calendar_text {
@@ -146,7 +150,7 @@
 
 .arrowBtn {
   position: absolute;
-  font-family: 25px;
+  font-size: 25px;
   bottom: 0;
   left: 0;
   color: #f76002;
@@ -176,7 +180,7 @@
 }
 
 .balance_cash {
-  width: 125px;
+  max-width: 183px;
   height: 14px;
   margin: 0 auto;
   font-family: 'Roboto';
@@ -190,6 +194,9 @@
   border: 2px solid #ffffff;
   border-radius: 22px;
   margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -200,7 +207,7 @@
 
   .balance_cash {
     padding: 12px 20px;
-    width: 100px;
+    min-width: 125px;
     margin-bottom: 0;
   }
 }
