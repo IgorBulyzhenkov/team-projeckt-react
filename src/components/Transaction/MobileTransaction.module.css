@@ -6,6 +6,11 @@
   color: #52555f;
 }
 
+.table {
+  max-width: 320px;
+  margin-bottom: 12px;
+}
+
 .table td {
   font-size: 8px;
   line-height: 1.12;
@@ -24,6 +29,7 @@
   font-size: 12px;
   line-height: 1.16;
   letter-spacing: 0.04em;
+  padding: 0;
 }
 
 .table .descriptionItem {
