@@ -63,9 +63,9 @@ export const App = () => {
 
   return (
     <div>
-      <ReportPage />
-      <HomePage />
-      <Test />
+      {/* <ReportPage />
+      <HomePage /> */}
+      {/* <Test /> */}
       <Routes>
         <Route></Route>
         <Route></Route>

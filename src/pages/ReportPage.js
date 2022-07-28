@@ -6,8 +6,6 @@ import Calendar from 'react-calendar';
 import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import ReportList from 'components/ReportList/ReportList';
-import Container from 'components/Container/Container';
 import { useLazyGetPeriodDataQuery } from '../redux/kapustaAPI';
 
 function ReportPage() {
