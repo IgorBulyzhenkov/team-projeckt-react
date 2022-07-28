@@ -1,5 +1,5 @@
 import ReportList from 'components/ReportList/ReportList';
-import ReportGraph from 'components/ReportGraph/ReportGraph';
+
 import Container from 'components/Container/Container';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import Calendar from 'react-calendar';
@@ -25,8 +25,6 @@ function ReportPage() {
     const newDate = year + '-' + month;
     return newDate;
   };
-
-  console.log(incomes, expenses);
 
   useEffect(() => {
     getPeriodData(valueDate(value)).then(res => {
@@ -92,8 +90,7 @@ function ReportPage() {
           </div>
         </div>
 
-        <ReportList />
-        <ReportGraph />
+        <ReportList incomes={incomes} expenses={expenses} />
       </Container>
     </section>
   );
