@@ -1,8 +1,4 @@
 .test {
-  background-color: #f5f6fb;
-  background-image: url(../img/kapusta-desk.png);
-  background-repeat: no-repeat;
-  background-position: top 20% center;
   height: 400px;
   width: 100%;
   padding-top: 22px;
@@ -18,7 +14,6 @@
     width: 704px;
     margin: 0 auto;
     margin-bottom: 32px;
-
   }
 
   .link {
@@ -31,7 +26,6 @@
     justify-content: center;
     align-items: center;
     margin-left: 139px;
-
   }
 
   .container_calendar {
@@ -50,7 +44,6 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-
   }
 }
 
@@ -112,7 +105,6 @@
 .calendar {
   display: flex;
   justify-content: center;
-
 }
 
 .calendar_text {
@@ -154,7 +146,6 @@
   bottom: 0;
   left: 0;
   color: #f76002;
-
 }
 
 .balance {
@@ -249,10 +240,8 @@
 @media screen and (min-width: 768px) {
   .expenses {
     flex-direction: row;
-
   }
 }
-
 
 .expenses__text {
   font-family: 'Roboto';
@@ -303,7 +292,6 @@
 @media screen and (min-width: 768px) {
   .income {
     flex-direction: row;
-
   }
 }
 
