@@ -1,8 +1,4 @@
 .test {
-  background-color: #f5f6fb;
-  background-image: url(../img/kapusta-desk.png);
-  background-repeat: no-repeat;
-  background-position: top 20% center;
   height: 400px;
   width: 100%;
   padding-top: 22px;
@@ -18,7 +14,6 @@
     width: 704px;
     margin: 0 auto;
     margin-bottom: 32px;
-
   }
 
   .link {
@@ -31,7 +26,6 @@
     justify-content: center;
     align-items: center;
     margin-left: 139px;
-
   }
 
   .container_calendar {
@@ -50,7 +44,6 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-
   }
 }
 
@@ -88,11 +81,14 @@
 .container_calendar {
   text-align: center;
   margin-top: 22px;
+  width: 195px;
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 768px) {
   .container_calendar {
     margin-top: 0;
+    margin-right: 0;
   }
 }
 
@@ -146,11 +142,10 @@
 
 .arrowBtn {
   position: absolute;
-  font-family: 25px;
+  font-size: 25px;
   bottom: 0;
   left: 0;
   color: #f76002;
-
 }
 
 .balance {
@@ -176,7 +171,7 @@
 }
 
 .balance_cash {
-  width: 125px;
+  max-width: 183px;
   height: 14px;
   margin: 0 auto;
   font-family: 'Roboto';
@@ -190,6 +185,9 @@
   border: 2px solid #ffffff;
   border-radius: 22px;
   margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -200,7 +198,7 @@
 
   .balance_cash {
     padding: 12px 20px;
-    width: 100px;
+    min-width: 125px;
     margin-bottom: 0;
   }
 }
@@ -242,10 +240,8 @@
 @media screen and (min-width: 768px) {
   .expenses {
     flex-direction: row;
-
   }
 }
-
 
 .expenses__text {
   font-family: 'Roboto';
@@ -296,7 +292,6 @@
 @media screen and (min-width: 768px) {
   .income {
     flex-direction: row;
-
   }
 }
 

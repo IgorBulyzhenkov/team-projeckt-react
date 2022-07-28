@@ -1,19 +1,42 @@
 import s from './Balance.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CurrencyInput from 'Utils/CurrencyInput';
 import {
   useChangeBalanceMutation,
   useGetUserDataQuery,
 } from '../../redux/kapustaAPI';
+import ModalNotification from '../ModalNotification';
 
 const Balance = () => {
   const [setBalanceValue] = useChangeBalanceMutation();
   const { data } = useGetUserDataQuery();
-  const [income, setIncome] = useState(data?.balance);
+
+  const hasBalance = !!data?.balance;
+  const hasTransactions = data?.transactions.length > 0;
+  const [income, setIncome] = useState(() => data?.balance);
+
   const handleChange = ev => {
     const query = ev.currentTarget.value;
     setIncome(query);
   };
+
+  const checkBalance = balance => {
+    const arrayBalance = String(balance).split('');
+    if (arrayBalance?.indexOf('.') === -1) {
+      const stringBalance = `${arrayBalance.join('')}.00`;
+      return stringBalance;
+    }
+
+    let decimals = String(balance).split('.')[1];
+    return decimals.length < 2 ? `${balance}0` : balance;
+  };
+
+  useEffect(() => {
+    if (data?.balance) {
+      const balance = checkBalance(data?.balance);
+      setIncome(balance);
+    }
+  }, [data?.balance]);
 
   const resetInput = ev => {
     if ('mousedown' !== ev.type) {
@@ -25,18 +48,7 @@ const Balance = () => {
   const handleSubmit = ev => {
     ev.preventDefault();
     const balance = Number.parseFloat(income.split(' ').join(''));
-
     setBalanceValue(balance);
-
-    const arrayBalance = String(balance).split('');
-
-    if (arrayBalance?.indexOf('.') === -1) {
-      const stringBalance = `${arrayBalance.join('')}.00`;
-      return setIncome(stringBalance);
-    }
-
-    let decimals = String(balance).split('.')[1];
-    return decimals.length < 2 ? setIncome(`${balance}0`) : setIncome(balance);
   };
 
   return (
@@ -49,12 +61,14 @@ const Balance = () => {
           className={s.input}
           onChange={handleChange}
           onClick={resetInput}
-          value={income}
+          value={String(income)}
         />
+
         <button type="submit" className={s.button}>
           CONFIRM
         </button>
       </form>
+      {!hasBalance && !hasTransactions && <ModalNotification />}
     </div>
   );
 };

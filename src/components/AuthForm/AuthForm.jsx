@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import { useDispatch } from "react-redux";
 import { useRegisterUserMutation, useAuthorizeUserMutation, useLazyAuthGoogleUserQuery,useLazyGetUserDataQuery } from "redux/kapustaAPI";
 import { setUser } from "redux/reducer";
@@ -14,8 +14,25 @@ const initialState = {
   password: '',
 };
 
+const dirtyState = {
+  emailDirty: false,
+  passwordDirty: false,
+};
+
+const errorState = {
+  emailError: "This is a required field",
+  passwordError: "This is a required field",
+};
+
 const AuthForm = () => {
   const [user, setUserForm] = useState(initialState);
+  const [error, setError] = useState(errorState);
+  const [dirty, setDirty] = useState(dirtyState);
+
+  const { email, password } = user;
+  const { emailError, passwordError } = error;
+  const { emailDirty, passwordDirty } = dirty;
+
 
   const dispatch = useDispatch();
 
@@ -30,6 +47,7 @@ const AuthForm = () => {
     loginGoogle().then(console.log);
   };
   
+  
 
  
 
@@ -37,10 +55,87 @@ const AuthForm = () => {
     setUserForm((prevState) => {
       return {
         ...prevState,
-        [e.target.id]: e.target.value,
+        [e.target.id]: e.target.value.trim(),
       };
     });
+
+    if (e.target.id === "password") {
+      if (e.target.value.length !== 0 && e.target.value.length < 8) {
+        setError((prevState) => {
+          return {
+            ...prevState,
+            passwordError: "Password must be not less than 8 symbols",
+          };
+        });
+      } else if (!e.target.value) {
+        setError((prevState) => {
+          return {
+            ...prevState,
+            passwordError: "This is a required field",
+          };
+        });
+      } else {
+        setError((prevState) => {
+          return {
+            ...prevState,
+            passwordError: "",
+          };
+        });
+      }
+    }
+
+    if (e.target.id === "email") {
+      const pattern =  /^[^@\s]+@[^@\s]+\.[^@\s]+$/
+
+      if (e.target.value) {if (!pattern.test(String(e.target.value).toLowerCase())) {
+          setError(prevState=> {
+            return {
+              ...prevState,
+              emailError: "Incorrect email format"
+            }
+          })
+      } else {
+        setError(prevState=> {
+          return {
+            ...prevState,
+            emailError: ""
+          }
+        })
+      }} else {
+        setError(prevState=> {
+          return {
+            ...prevState,
+            emailError: "This is a required field"
+          }
+        })
+      }
+    }
   };
+
+  const onBlur = (e) => {
+    switch (e.target.id) {
+      case "email":
+        setDirty((prevState) => {
+          return {
+            ...prevState,
+            emailDirty: true,
+          };
+        });
+        break;
+
+      case "password":
+        setDirty((prevState) => {
+          return {
+            ...prevState,
+            passwordDirty: true,
+          };
+        });
+        break;
+
+        default: return
+    }
+  };
+
 
   const onLogin = () => {
     if(!user?.email && !user?.password){
@@ -108,12 +203,12 @@ const AuthForm = () => {
       toast.error(error.data.message));
   }
 
-  const { email, password } = user;
+  
   return (
     <form className={s.form}>
       <p className={s.text}>You can log in with your Google Account:</p>
       <div className={s.googleBox}>
-        <div className={s.google} onClick={googleAuth}>
+        <div className={s.google}>
           <img className={s.icon} src={googleIcon} alt="" />
           <span className={s.iconText}>Google</span>
         </div>
@@ -126,26 +221,36 @@ const AuthForm = () => {
       <label className={s.label} htmlFor="email">
         Email:
       </label>
-      <input
-        onChange={onInput}
-        value={email}
-        id="email"
-        className={s.input}
-        placeholder="your@mail.com"
-        type="email"
-        
-      />
+      <div className={s.fieldBox}>
+        <input
+          onBlur={onBlur}
+          onChange={onInput}
+          value={email}
+          id="email"
+          className={s.input}
+          placeholder="your@mail.com"
+          type="email"
+        />
+        {emailDirty && emailError && <p className={s.message}>{emailError}</p>}
+      </div>
+
       <label className={s.label} htmlFor="password">
         Password:
       </label>
-      <input
-        onChange={onInput}
-        value={password}
-        id="password"
-        className={s.input}
-        placeholder="password"
-        type="password"
-      />
+      <div className={s.fieldBox}>
+        <input
+          onBlur={onBlur}
+          onChange={onInput}
+          value={password}
+          id="password"
+          className={s.input}
+          placeholder="password"
+          type="password"
+        />
+        {passwordDirty && passwordError && (
+          <p className={s.message}>{passwordError}</p>
+        )}
+      </div>
 
       <button className={s.btn} type="button" onClick={onLogin}>
         log in

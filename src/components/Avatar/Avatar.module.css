@@ -8,5 +8,9 @@
     justify-content: center;
     align-items: center;
     margin-right: 16px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: 0.04em;
 
 }

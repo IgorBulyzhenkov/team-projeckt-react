@@ -6,8 +6,8 @@ import {
   useDeleteTransactionMutation,
   useLazyGetPeriodDataQuery,
   useChangeBalanceMutation,
-  // useGetIncomeCategoriesQuery,
-  // useGetExpenseCategoriesQuery,
+  useGetIncomeCategoriesQuery,
+  useGetExpenseCategoriesQuery,
 } from '../../redux/kapustaAPI';
 
 export default function Test() {
@@ -34,7 +34,7 @@ export default function Test() {
     const data = {
       description,
       amount,
-      category: 'Продукты',
+      category: 'Всё для дома',
       date,
     };
     addExpense(data).then(console.log);

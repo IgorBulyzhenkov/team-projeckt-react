@@ -15,6 +15,8 @@ import Test from './test/test';
 import ReportPage from 'pages/ReportPage';
 import AuthorizationPage from 'pages/AuthorizationPage';
 import Header from './Header';
+// import ActionModal from './ActionModal';
+import s from './App.module.css';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -63,10 +65,15 @@ export const App = () => {
 
   return (
     <div>
+      {/* <ActionModal/> */}
       <Header />
       <AuthorizationPage />
-      <ReportPage />
-      <HomePage />
+      <div className={s.back}>
+        <ReportPage />
+      </div>
+      <div className={s.back}>
+        <HomePage />
+      </div>
       <Test />
       <Routes>
         <Route></Route>

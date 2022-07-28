@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+}
+
+p {
+  margin: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: #fff;
+  width: 380px;
+  height: 194px;
+  box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
+  border-radius: 30px;
+
+  padding-top: 50px;
+  padding-bottom: 60px;
+}
+
+.text {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: #52555f;
+  margin-bottom: 20px;
+}
+
+.btn {
+  width: 125px;
+  height: 44px;
+  background-color: #fff;
+  border-radius: 16px;
+  border: transparent;
+  border: 2px solid #f5f6fb;
+
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:first-of-type {
+  margin-right: 15px;
+  margin-left: 58px;
+}
+
+.btn:hover {
+  background-color: #ff751d;
+  border-color: #ff751d;
+  color: #fff;
+}
+
+.closeBtn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 20px;
+  right: 20px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1)
+}
+
+.closeBtn:hover {
+  background-color: #ff751d;
+}
+
+svg path {
+  transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1)
+}
+
+.closeBtn:hover svg path {
+  stroke: #fff;
+}
+
+@media screen and (max-width: 379px) {
+  .modal {
+    width: 320px;
+    height: 163px;
+  }
+
+  .btn {
+    width: 105px;
+    height: 37px;
+  }
+  .btn:first-of-type {
+    margin-right: 10px;
+    margin-left: 48px;
+  }
+
+  .text {
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+
+
