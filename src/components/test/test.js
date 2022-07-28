@@ -56,10 +56,10 @@ export default function Test() {
     const data = await getExpense();
     console.log(data);
   };
-  const getIncomeTransaction = async () => {
-    const data = await getIncome();
-    console.log(data);
-  };
+  // const getIncomeTransaction = async () => {
+  //   const data = await getIncome();
+  //   console.log(data);
+  // };
   const delTransaction = e => {
     e.preventDefault();
     const id = e.target.id.value;

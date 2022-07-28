@@ -11,27 +11,6 @@ export default function MobileTransaction() {
       date: '2020-12-31',
       _id: '507f1f77bcf86cd799439013',
     },
-    {
-      description: 'description',
-      category: 'Продукты',
-      amount: 0,
-      date: '2020-12-31',
-      _id: '507f1f77bcf86cd799439013',
-    },
-    {
-      description: 'description',
-      category: 'Продукты',
-      amount: 0,
-      date: '2020-12-31',
-      _id: '507f1f77bcf86cd799439013',
-    },
-    {
-      description: 'description',
-      category: 'Продукты',
-      amount: 0,
-      date: '2020-12-31',
-      _id: '507f1f77bcf86cd799439013',
-    },
   ];
   return (
     <table className={s.table}>
