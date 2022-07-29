@@ -48,7 +48,6 @@ button:focus {
   color: #fff;
 }
 
-
 p,
 h1,
 h2,
@@ -60,8 +59,14 @@ h6 {
   padding: 0;
 }
 
-.d-none{
+.d-none {
   display: none;
+}
+
+.react-date-picker__wrapper {
+  flex-direction: row-reverse;
+  outline: none;
+  border: none;
 }
 
 /* .react-calendar__viewContainer {
