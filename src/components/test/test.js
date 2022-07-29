@@ -37,7 +37,7 @@ export default function Test() {
     const data = {
       description,
       amount,
-      category: 'Всё для дома',
+      category: 'Развлечения',
       date,
     };
     addExpense(data)

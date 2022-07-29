@@ -1,16 +1,28 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import TransactionHistory from './TransactionHistory';
 import MobileTransaction from './MobileTransaction';
 import s from './Transactions.module.css';
+
 import { useGetIncomeQuery, useGetExpenseQuery } from '../../redux/kapustaAPI';
+
+import { getWidth } from '../../redux/selectors';
+
+
 
 export default function Transactions() {
   const [isExpense, setIsExpense] = useState(true);
   const [transactions, setTransactions] = useState([]);
   const [monthStats, setMonthStats] = useState([]);
 
+
   const { data: expense } = useGetExpenseQuery();
   const { data: income } = useGetIncomeQuery;
+
+  const VpWidth = useSelector(getWidth);
+
+
+
 
   useEffect(() => {
     if (isExpense) {
@@ -24,12 +36,18 @@ export default function Transactions() {
 
   return (
     <div>
-      <MobileTransaction />
+
+     {VpWidth === 'mobile' && <MobileTransaction />}
       <button
         className={s.btn}
         type="button"
         onClick={() => setIsExpense(true)}
       >
+
+      
+
+      
+
         Expenses
       </button>
       <button
@@ -40,13 +58,19 @@ export default function Transactions() {
         Income
       </button>
 
-      <div className={s.wrap}>
+
+      
+
+      {VpWidth !== 'mobile' && (
+        <div className={s.wrap}>
         <TransactionHistory
           expenses={isExpense}
           transactions={transactions}
           monthStats={monthStats}
         />
       </div>
+      )}
+
     </div>
   );
 }

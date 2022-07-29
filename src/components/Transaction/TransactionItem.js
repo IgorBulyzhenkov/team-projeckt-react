@@ -16,7 +16,7 @@ export default function TransactionItem({
       <td>{date}</td>
       <td>{description}</td>
       <td>{category}</td>
-      <td>{amount} грн.</td>
+      <td>{amount}.00 грн.</td>
       <td>
         <IconButton
           onClick={() => deleteTransaction(id)}
