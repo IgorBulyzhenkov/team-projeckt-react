@@ -1,44 +1,28 @@
 import { MdKeyboardBackspace } from 'react-icons/md';
-import Calendar from 'react-calendar';
 import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLazyGetPeriodDataQuery } from '../redux/kapustaAPI';
 import ReportList from 'components/Report/ReportList/ReportList';
 import Container from 'components/Container/Container';
+import DateSwiper from 'components/DateSwiper';
 
 function ReportPage() {
-  const [value, setValue] = useState(new Date());
+  const [value, setValue] = useState('');
   const [incomes, setIncomes] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [getPeriodData] = useLazyGetPeriodDataQuery();
   const total = incomes.incomeTotal - expenses.expenseTotal;
 
-  const valueDate = value => {
-    const date = new Date(value);
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    if (month < 10) {
-      month = '0' + month;
-    }
-    const newDate = year + '-' + month;
-    return newDate;
-  };
-
   useEffect(() => {
-    const calendar = document.querySelector('.react-calendar__viewContainer');
-    if (!calendar.classList.contains('d-none')) {
-      calendar.classList.add('d-none');
+    if (!value) {
+      return;
     }
-    getPeriodData(valueDate(value)).then(res => {
+    getPeriodData(value).then(res => {
       setExpenses(res.data.expenses);
       setIncomes(res.data.incomes);
     });
   }, [value, getPeriodData]);
-
-  const handleClick = activeStartDate => {
-    setValue(activeStartDate);
-  };
 
   return (
     <section className={s.test}>
@@ -48,25 +32,16 @@ function ReportPage() {
             <Link to="/home" className={s.link}>
               <MdKeyboardBackspace className={s.svg} />
             </Link>
-
             <p className={s.link_text}> Main page</p>
           </div>
-          <div className={s.container_calendar}>
-            <p className={s.text}>Current period:</p>
-            <Calendar
-              defaultView={'month'}
-              next2Label={null}
-              prev2Label={null}
-              onActiveStartDateChange={({ activeStartDate }) =>
-                handleClick(activeStartDate)
-              }
-              locale={'en-EN'}
-            />
-          </div>
-
-          <div className={s.balance}>
-            <p className={s.balance_text}>Balance:</p>
-            <p className={s.balance_cash}>{`${total}.00 UAH`}</p>
+          <div className={s.balanceDateWrap}>
+            <div className={s.dateSwiperContainer}>
+              <DateSwiper changeDate={setValue} />
+            </div>
+            <div className={s.balance}>
+              <p className={s.balance_text}>Balance:</p>
+              <p className={s.balance_cash}>{`${total}.00 UAH`}</p>
+            </div>
           </div>
         </div>
         <div className={s.cash}>
