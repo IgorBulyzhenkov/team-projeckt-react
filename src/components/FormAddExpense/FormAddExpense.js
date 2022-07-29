@@ -8,6 +8,7 @@ import {
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
 import Select from 'react-select';
+import { BsCalculator } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
@@ -35,6 +36,7 @@ const FormAddExpense = ({ expense }) => {
     } else {
       addIncome(transaction);
     }
+    ev.target.reset();
   };
 
   const checkBalance = amount => {
@@ -126,7 +128,7 @@ const FormAddExpense = ({ expense }) => {
             id="description"
             name="description"
             className={s.description}
-            onChange={setDescription}
+            // onChange={setDescription}
             placeholder="Product description"
           />
 
@@ -134,13 +136,12 @@ const FormAddExpense = ({ expense }) => {
             type="text"
             id="category"
             name="category"
-            options={options}
+            options={expense ? optionsExpenses : optionsIncome}
             styles={styles}
             placeholder="Product category"
-            onChange={setCategory}
+            // onChange={setCategory}
             className={s.select}
           />
-
 
           <div className={s.currencyWrapp}>
             <CurrencyInput
@@ -152,7 +153,7 @@ const FormAddExpense = ({ expense }) => {
               onChange={amountSet}
             />
             <div className={s.calculateWrap}>
-              <CalculateOutlinedIcon className={s.calculate} />
+              <BsCalculator className={s.calculate} />
             </div>
           </div>
         </div>

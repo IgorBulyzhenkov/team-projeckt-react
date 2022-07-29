@@ -45,11 +45,13 @@
 }
 
 .inputWrap {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 80px;
   justify-content: center;
   align-items: center;
+  margin-right: 32px;
 }
 
 .input {
@@ -102,11 +104,16 @@
 }
 
 .calculateWrap {
-  width: 60px;
-  height: 44px;
-  border: 2px solid #ffffff;
+position: absolute;
+right: 7px;
+top:10px;
+
+margin: 0;
+  /* width: 60px;
+  height: 44px; */
+  /* border: 2px solid #ffffff;
   border-width: 2px 2px 2px 0;
-  border-radius: 0px 22px 22px 0px;
+  border-radius: 0px 22px 22px 0px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,7 +173,8 @@
     border-radius: 0px 16px 16px 0px;
     background-color: #ffffff;
     color: #c7ccdc;
-    margin-right: 32px;
+    
+    text-align: left;
   }
 
   .input::placeholder {
