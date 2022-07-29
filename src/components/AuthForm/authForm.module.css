@@ -44,6 +44,7 @@ p {
 }
 
 .google {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,6 +55,12 @@ p {
   filter: drop-shadow(1px 2px 3px rgba(170, 178, 197, 0.2));
   margin-bottom: 32px;
   cursor: pointer;
+}
+
+.link::before{
+  position: absolute;
+  content: '';
+  inset: 0;
 }
 
 .icon {
@@ -192,3 +199,4 @@ p {
 .fieldBox:last-of-type {
   margin-bottom: 24px;
 }
+
