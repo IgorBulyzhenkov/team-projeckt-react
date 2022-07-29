@@ -11,7 +11,7 @@ import {
 } from '../../redux/kapustaAPI';
 import { useDispatch } from 'react-redux';
 import { setBalance } from 'redux/reducer';
-import DateSwiper from 'components/DateSwiper';
+
 
 export default function Test() {
   const dispatch = useDispatch();
@@ -56,7 +56,6 @@ export default function Test() {
   };
   return (
     <div>
-      <DateSwiper changeDate={console.log} />
       <div>
         <h2>addExpenseTransaction</h2>
         <form onSubmit={addExpenseTransaction}>

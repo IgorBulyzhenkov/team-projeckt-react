@@ -1,6 +1,6 @@
 import { Routes, Route, useSearchParams, Navigate } from 'react-router-dom';
 
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy, Suspense, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   useRefreshUserMutation,
@@ -9,7 +9,6 @@ import {
 import { getSid, getIsLoggedIn, getWidth } from 'redux/selectors';
 import { setUser, setWidth } from 'redux/reducer';
 import { ToastContainer } from 'react-toastify';
-// import Test from './test/test';
 import PrivateRoute from './Routs/PrivateRoute';
 import PublicRoute from './Routs/PublicRoute';
 // import ActionModal from './ActionModal';
@@ -36,7 +35,30 @@ export const App = () => {
   const sid = useSelector(getSid);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const width = useSelector(getWidth);
-
+  //====================динамически меняет ширину и позволяет ререндер компонентов=========================================
+  function getWindowWidth() {
+    return window.innerWidth;
+  }
+  const [widthPx, setWidthPx] = useState(getWindowWidth());
+  const changeWidthState = (width, currentWidth) => {
+    if (currentWidth <= 768 && width !== 'mobile') {
+      console.log(1);
+      dispatch(setWidth({ width: 'mobile' }));
+    }
+    if (currentWidth > 768 && width !== 'tablet') {
+      console.log(2);
+      dispatch(setWidth({ width: 'tablet' }));
+    }
+  };
+  changeWidthState(width, widthPx);
+  useEffect(() => {
+    function handleResize() {
+      setWidthPx(getWindowWidth());
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [width, widthPx]);
+  //============================================================================
   useEffect(() => {
     if (searchParams.get('accessToken')) {
       const token = searchParams.get('accessToken');
@@ -59,13 +81,6 @@ export const App = () => {
             })
           );
         });
-    }
-    console.log(width);
-    if (window.innerWidth <= 768) {
-      dispatch(setWidth({ width: 'mobile' }));
-    }
-    if (window.innerWidth > 768) {
-      dispatch(setWidth({ width: 'tablet' }));
     }
 
     if (sid && !isLoggedIn) {
@@ -100,6 +115,7 @@ export const App = () => {
     <div>
       <Suspense fallback={<div>...Loading</div>}>
         {/* <ActionModal/> */}
+        {width === 'tablet' && <div>TABLET</div>}
         <Header />
         <Routes>
           <Route

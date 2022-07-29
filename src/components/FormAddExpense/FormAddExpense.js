@@ -14,7 +14,7 @@ const FormAddExpense = ({ expense }) => {
   const [addIncome] = useAddIncomeMutation();
   const [amount, setAmount] = useState(null);
   const [date, setDate] = useState(new Date());
-  console.log(amount);
+  
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -30,7 +30,6 @@ const FormAddExpense = ({ expense }) => {
     if (expense) {
       addExpense(transaction);
     } else {
-      console.log(transaction);
       addIncome(transaction);
     }
   };

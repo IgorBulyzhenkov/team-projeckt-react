@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { getEmail, getWidth } from 'redux/selectors';
+import { getEmail } from 'redux/selectors';
 import { useLogOutUserMutation } from 'redux/kapustaAPI';
 import { resetUser } from 'redux/reducer';
 import { kapustaApi } from 'redux/kapustaAPI';
@@ -27,7 +27,6 @@ export default function UserMenu() {
       });
   };
 
-  const width = useSelector(getWidth);
   const email = useSelector(getEmail);
   const userName = email?.split('@')[0];
 
@@ -35,21 +34,18 @@ export default function UserMenu() {
     <>
       <div className={s.container}>
         <Avatar />
-        {width === 'tablet' ? (
-          <>
-            <p className={s.userName}>{userName}</p>
-            <div className={s.line}></div>
-            <div onClick={toggleModal} className={s.exitBtn} >
-              Exit
-            </div>
-          </>
-        ) : (
-          <LogoutSharpIcon onClick={toggleModal} className={s.icon} />
-        )}
+        <p className={s.userName}>{userName}</p>
+        <div className={s.line}></div>
+        <div onClick={toggleModal} className={s.exitBtn}>
+          Exit
+        </div>
+        <LogoutSharpIcon onClick={toggleModal} className={s.icon} />
       </div>
-      {!isModalOpen && <ActionModal toggleModal={toggleModal} logOut={onLogOutUser}>
-        <p className={s.text}>Do you really want to leave?</p>
-      </ActionModal>}
+      {!isModalOpen && (
+        <ActionModal toggleModal={toggleModal} logOut={onLogOutUser}>
+          <p className={s.text}>Do you really want to leave?</p>
+        </ActionModal>
+      )}
     </>
   );
 }

@@ -32,7 +32,7 @@ export default function Transactions() {
       setTransactions(expense?.expenses);
       setMonthStats(expense?.monthsStats);
     } else {
-      console.log(income);
+
       setTransactions(income?.incomes);
       setMonthStats(income?.monthsStats);
     }
