@@ -1,6 +1,6 @@
 import {
   useAddExpenseMutation,
-  useAddIncomeMutation,
+  // useAddIncomeMutation,
   // useLazyGetExpenseQuery,
   // useLazyGetIncomeQuery,
   useDeleteTransactionMutation,
@@ -16,7 +16,7 @@ import DateSwiper from 'components/DateSwiper';
 export default function Test() {
   const dispatch = useDispatch();
   const [addExpense] = useAddExpenseMutation();
-  const [addIncome] = useAddIncomeMutation();
+  // const [addIncome] = useAddIncomeMutation();
   // const [getExpense] = useLazyGetExpenseQuery();
   // const [getIncome] = useLazyGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
