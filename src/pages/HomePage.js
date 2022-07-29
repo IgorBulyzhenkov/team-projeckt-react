@@ -8,15 +8,22 @@ import { useSelector } from 'react-redux';
 import { getWidth } from '../redux/selectors';
 
 import s from './HomePage.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const HomePage = () => {
-  const [modal, setModal] = useState('false');
+  const [modal, setModal] = useState(false);
   const VpWidth = useSelector(getWidth);
 
   const openModal = ev => {
+    ev.preventDefault();
     setModal(!modal);
   };
+
+  useEffect(() => {
+    if (!modal) {
+      document.body.style.overflow = 'hidden';
+    }
+  }, [modal]);
 
   return (
     <Container>
@@ -31,7 +38,9 @@ const HomePage = () => {
           onClick={openModal}
         />
       </div>
-      {VpWidth === 'mobile' && <ModalAddExpense handleClick={openModal} />}
+      {VpWidth === 'mobile' && modal && (
+        <ModalAddExpense handleClick={openModal} />
+      )}
       <Transactions />
     </Container>
   );
