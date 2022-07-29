@@ -13,7 +13,6 @@ function ReportPage() {
   const [expenses, setExpenses] = useState(0);
   const [getPeriodData] = useLazyGetPeriodDataQuery();
   const total = incomes.incomeTotal - expenses.expenseTotal;
-  console.log(total);
 
   useEffect(() => {
     if (!value) {

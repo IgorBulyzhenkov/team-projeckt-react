@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { getEmail, getWidth } from 'redux/selectors';
+import { getEmail } from 'redux/selectors';
 import { useLogOutUserMutation } from 'redux/kapustaAPI';
 import { resetUser } from 'redux/reducer';
 import { kapustaApi } from 'redux/kapustaAPI';
@@ -27,7 +27,6 @@ export default function UserMenu() {
       });
   };
 
-  const width = useSelector(getWidth);
   const email = useSelector(getEmail);
   const userName = email?.split('@')[0];
 
