@@ -13,7 +13,6 @@ function ReportPage() {
   const [expenses, setExpenses] = useState(0);
   const [getPeriodData] = useLazyGetPeriodDataQuery();
   const total = incomes.incomeTotal - expenses.expenseTotal;
-  console.log(total);
 
   useEffect(() => {
     if (!value) {
@@ -32,17 +31,17 @@ function ReportPage() {
           <div className={s.wrap_link}>
             <Link to="/home" className={s.link}>
               <MdKeyboardBackspace className={s.svg} />
+              <p className={s.link_text}> Main page</p>
             </Link>
-            <p className={s.link_text}> Main page</p>
           </div>
-          <div className={s.balanceDateWrap}>
-            <div className={s.dateSwiperContainer}>
-              <DateSwiper changeDate={setValue} />
-            </div>
-            <div className={s.balance}>
-              <p className={s.balance_text}>Balance:</p>
-              <p className={s.balance_cash}>{`${total}.00 UAH`}</p>
-            </div>
+
+          <div className={s.dateSwiperContainer}>
+            <DateSwiper changeDate={setValue} />
+          </div>
+
+          <div className={s.balance}>
+            <p className={s.balance_text}>Balance:</p>
+            <p className={s.balance_cash}>{`${total}.00 UAH`}</p>
           </div>
         </div>
         <div className={s.cash}>
