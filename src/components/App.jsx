@@ -6,7 +6,7 @@ import {
   useRefreshUserMutation,
   useLazyGetUserDataQuery,
 } from 'redux/kapustaAPI';
-import { getSid, getIsLoggedIn } from 'redux/selectors';
+import { getSid, getIsLoggedIn, getWidth } from 'redux/selectors';
 import { setUser, setWidth } from 'redux/reducer';
 import { ToastContainer } from 'react-toastify';
 // import Test from './test/test';
@@ -35,6 +35,7 @@ export const App = () => {
   const [getUserData] = useLazyGetUserDataQuery();
   const sid = useSelector(getSid);
   const isLoggedIn = useSelector(getIsLoggedIn);
+  const width = useSelector(getWidth);
 
   useEffect(() => {
     if (searchParams.get('accessToken')) {
@@ -59,6 +60,7 @@ export const App = () => {
           );
         });
     }
+    console.log(width);
     if (window.innerWidth <= 768) {
       dispatch(setWidth({ width: 'mobile' }));
     }
