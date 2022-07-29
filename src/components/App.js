@@ -26,11 +26,14 @@ export const App = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
 
   useEffect(() => {
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 767) {
       dispatch(setWidth({ width: 'mobile' }));
     }
-    if (window.innerWidth > 768) {
+    if ( window.innerWidth > 767) {
       dispatch(setWidth({ width: 'tablet' }));
+    }
+    if (window.innerWidth > 1280) {
+      dispatch(setWidth({ width: 'desktop' }));
     }
 
     // console.log('1',sid)
