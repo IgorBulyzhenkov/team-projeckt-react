@@ -60,12 +60,8 @@ h6 {
   padding: 0;
 }
 
-.react-calendar {
-  border: none;
-}
-.react-date-picker__wrapper {
-  border: none;
-  flex-direction: row-reverse;
+.d-none{
+  display: none;
 }
 
 /* .react-calendar__viewContainer {

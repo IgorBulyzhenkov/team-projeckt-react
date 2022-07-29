@@ -26,6 +26,10 @@ function ReportPage() {
   };
 
   useEffect(() => {
+    const calendar = document.querySelector('.react-calendar__viewContainer');
+    if (!calendar.classList.contains('d-none')) {
+      calendar.classList.add('d-none');
+    }
     getPeriodData(valueDate(value)).then(res => {
       setExpenses(res.data.expenses);
       setIncomes(res.data.incomes);
