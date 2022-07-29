@@ -20,9 +20,10 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    if (!modal) {
+    if (modal) {
       document.body.style.overflow = 'hidden';
     }
+    return () => (document.body.style.overflow = 'visible');
   }, [modal]);
 
   return (

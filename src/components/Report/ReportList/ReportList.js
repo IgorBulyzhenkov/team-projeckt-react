@@ -11,7 +11,7 @@ function ReportList({ incomes, expenses }) {
   const [total, setTotal] = useState({});
   const [category, setCategory] = useState('');
 
-  const data = showIcon ? expenses.expensesData : incomes.expensesData;
+  const data = showIcon ? expenses.expensesData : incomes.incomesData;
   const dataLenght = Object.entries(total);
 
   useEffect(() => {
