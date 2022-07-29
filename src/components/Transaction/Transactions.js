@@ -32,14 +32,14 @@ export default function Transactions() {
     <div>
       {VpWidth === 'mobile' && <MobileTransaction />}
       <button
-        className={s.btn}
+        className={`${s.btn} ${isExpense ? s.isActive : ''}`}
         type="button"
         onClick={() => setIsExpense(true)}
       >
         Expenses
       </button>
       <button
-        className={s.btn}
+        className={`${s.btn} ${!isExpense ? s.isActive : ''}`}
         type="button"
         onClick={() => setIsExpense(false)}
       >

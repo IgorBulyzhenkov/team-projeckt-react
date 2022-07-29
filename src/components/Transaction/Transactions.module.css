@@ -6,6 +6,11 @@
   background-color: #fefefe;
 }
 
+.btn.isActive {
+  background-color: #ff751d;
+  color: #fff;
+}
+
 .wrap {
   padding: 24px 40px;
   background-color: #ffffff;
