@@ -8,8 +8,8 @@ import {
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
 import Select from 'react-select';
-import { useSelector } from 'react-redux';
-import { getWidth } from '../../redux/selectors';
+// import { useSelector } from 'react-redux';
+// import { getWidth } from '../../redux/selectors';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
 const FormAddExpense = ({ expense }) => {
@@ -17,7 +17,8 @@ const FormAddExpense = ({ expense }) => {
   const [addIncome] = useAddIncomeMutation();
   const [amount, setAmount] = useState(null);
   const [date, setDate] = useState(new Date());
-  const VpWidth = useSelector(getWidth);
+  // const VpWidth = useSelector(getWidth);
+  console.log(amount);
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -53,24 +54,24 @@ const FormAddExpense = ({ expense }) => {
     setAmount(amountView);
   };
 
-  const optionsExpenses = [
-    { value: 'Транспорт', label: 'Transport' },
-    { value: 'Продукты', label: 'Products' },
-    { value: 'Здоровье', label: 'Health' },
-    { value: 'Алкоголь', label: 'Alcohol' },
-    { value: 'Развлечения', label: 'Entertainment' },
-    { value: 'Всё для дома', label: 'Housing' },
-    { value: 'Техника', label: 'Technique' },
-    { value: 'Коммуналка и связь', label: 'Communal, communication' },
-    { value: 'Спорт и хобби', label: 'Sports, hobbies' },
-    { value: 'Образование', label: 'Education' },
-    { value: 'Прочее', label: 'Other' },
-  ];
+  // const optionsExpenses = [
+  //   { value: 'Транспорт', label: 'Transport' },
+  //   { value: 'Продукты', label: 'Products' },
+  //   { value: 'Здоровье', label: 'Health' },
+  //   { value: 'Алкоголь', label: 'Alcohol' },
+  //   { value: 'Развлечения', label: 'Entertainment' },
+  //   { value: 'Всё для дома', label: 'Housing' },
+  //   { value: 'Техника', label: 'Technique' },
+  //   { value: 'Коммуналка и связь', label: 'Communal, communication' },
+  //   { value: 'Спорт и хобби', label: 'Sports, hobbies' },
+  //   { value: 'Образование', label: 'Education' },
+  //   { value: 'Прочее', label: 'Other' },
+  // ];
 
-  const optionsIncome = [
-    { value: 'З/П', label: 'Salary' },
-    { value: 'Доп. доход', label: 'Extra income' },
-  ];
+  // const optionsIncome = [
+  //   { value: 'З/П', label: 'Salary' },
+  //   { value: 'Доп. доход', label: 'Extra income' },
+  // ];
 
   const styles = {
     option: (provided, state) => ({
@@ -126,7 +127,7 @@ const FormAddExpense = ({ expense }) => {
             id="description"
             name="description"
             className={s.description}
-            onChange={setDescription}
+            // onChange={setDescription}
             placeholder="Product description"
           />
 
@@ -134,13 +135,12 @@ const FormAddExpense = ({ expense }) => {
             type="text"
             id="category"
             name="category"
-            options={options}
+            // options={options}
             styles={styles}
             placeholder="Product category"
-            onChange={setCategory}
+            // onChange={setCategory}
             className={s.select}
           />
-
 
           <div className={s.currencyWrapp}>
             <CurrencyInput
