@@ -21,7 +21,6 @@ const userSlice = createSlice({
       return { ...state, ...initialState };
     },
     setBalance: (state, { payload }) => {
-      console.log(payload);
       return { ...state, ...payload };
     },
     setWidth: (state, { payload }) => {

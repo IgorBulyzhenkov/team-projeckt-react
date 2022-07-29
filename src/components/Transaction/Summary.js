@@ -8,17 +8,16 @@ export default function Summary({ monthStats }) {
         <tr>
           <th colSpan="2">Summary</th>
         </tr>
-        {monthStatsArr.map(([month, sum]) => {
-          if (sum === 'N/A') {
-            // return;
-          }
-          return (
-            <tr key={month}>
-              <td>{month}</td>
-              <td>{sum}</td>
-            </tr>
-          );
-        })}
+        {monthStatsArr
+          .filter(([month, sum]) => sum !== 'N/A')
+          .map(([month, sum]) => {
+            return (
+              <tr key={month}>
+                <td>{month}</td>
+                <td>{sum}</td>
+              </tr>
+            );
+          })}
       </tbody>
     </table>
   );

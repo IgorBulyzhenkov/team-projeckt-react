@@ -3,6 +3,8 @@ import Balance from '../components/Balance';
 import ReportLink from '../components/ReportLink';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ModalAddExpense from 'components/ModalAddExpense';
+import Transactions from '../components/Transaction/Transactions';
+
 import s from './HomePage.module.css';
 import { useState } from 'react';
 
@@ -30,6 +32,7 @@ const HomePage = () => {
         />
       </div>
       <ModalAddExpense />
+      <Transactions />
     </Container>
   );
 };

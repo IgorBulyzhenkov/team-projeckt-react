@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   useRefreshUserMutation,
@@ -8,14 +8,24 @@ import {
 } from 'redux/kapustaAPI';
 import { getSid, getIsLoggedIn } from 'redux/selectors';
 import { setUser, setWidth } from 'redux/reducer';
-
-import HomePage from 'pages/HomePage';
 import { ToastContainer } from 'react-toastify';
 import Test from './test/test';
-import ReportPage from 'pages/ReportPage';
-import AuthorizationPage from 'pages/AuthorizationPage';
-import Header from './Header';
+import PrivateRoute from './Routs/PrivateRoute';
+import PublicRoute from './Routs/PublicRoute';
+// import ActionModal from './ActionModal';
 import s from './App.module.css';
+
+const Header = lazy(() => import('./Header' /* webpackChunkName: "header" */));
+
+const AuthorizationPage = lazy(() =>
+  import('pages/AuthorizationPage' /* webpackChunkName: "authorization" */)
+);
+const HomePage = lazy(() =>
+  import('pages/HomePage' /* webpackChunkName: "home" */)
+);
+const ReportPage = lazy(() =>
+  import('pages/ReportPage' /* webpackChunkName: "report" */)
+);
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -32,9 +42,7 @@ export const App = () => {
       dispatch(setWidth({ width: 'tablet' }));
     }
 
-    // console.log('1',sid)
     if (sid && !isLoggedIn) {
-      // console.log('2',sid)
       refreshUser(sid)
         .unwrap()
         .then(data => {
@@ -64,23 +72,49 @@ export const App = () => {
 
   return (
     <div>
-      <Header />
-      <AuthorizationPage />
-      <div className={s.back}>
-        <ReportPage />
-      </div>
-      <div className={s.back}>
-        <HomePage />
-      </div>
-      <Test />
-      <Routes>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-      </Routes>
-
+      <Suspense fallback={<div>...Loading</div>}>
+        {/* <ActionModal/> */}
+        <Header />
+        <Routes>
+          <Route
+            path="/authorization"
+            element={
+              <PublicRoute>
+                <AuthorizationPage />
+              </PublicRoute>
+            }
+          ></Route>
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <div className={s.back}>
+                  <HomePage />
+                </div>
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/report"
+            element={
+              <PrivateRoute>
+                <div className={s.back}>
+                  <ReportPage />
+                </div>
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="*"
+            element={
+              <PublicRoute>
+                <AuthorizationPage />
+              </PublicRoute>
+            }
+          ></Route>
+        </Routes>
+        <Test />
+      </Suspense>
       <ToastContainer
         position="top-right"
         autoClose={3000}
