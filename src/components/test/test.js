@@ -1,20 +1,23 @@
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
-  useLazyGetExpenseQuery,
-  useLazyGetIncomeQuery,
+  // useLazyGetExpenseQuery,
+  // useLazyGetIncomeQuery,
   useDeleteTransactionMutation,
   useLazyGetPeriodDataQuery,
   useChangeBalanceMutation,
-  useGetIncomeCategoriesQuery,
-  useGetExpenseCategoriesQuery,
+  // useGetIncomeCategoriesQuery,
+  // useGetExpenseCategoriesQuery,
 } from '../../redux/kapustaAPI';
+import { useDispatch } from 'react-redux';
+import { setBalance } from 'redux/reducer';
 
 export default function Test() {
+  const dispatch = useDispatch();
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
-  const [getExpense] = useLazyGetExpenseQuery();
-  const [getIncome] = useLazyGetIncomeQuery();
+  // const [getExpense] = useLazyGetExpenseQuery();
+  // const [getIncome] = useLazyGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
 
   //   const { data: incomeCategories } = useGetIncomeCategoriesQuery();
@@ -37,25 +40,27 @@ export default function Test() {
       category: 'Развлечения',
       date,
     };
-    addExpense(data).then(console.log);
+    addExpense(data)
+      .unwrap()
+      .then(data => dispatch(setBalance(data.newBalance)));
   };
-  const addIncomeTransaction = e => {
-    e.preventDefault();
-    const description = e.target.description.value;
-    const amount = Number(e.target.amount.value);
-    const date = e.target.date.value;
+  // const addIncomeTransaction = e => {
+  //   e.preventDefault();
+  //   const description = e.target.description.value;
+  //   const amount = Number(e.target.amount.value);
+  //   const date = e.target.date.value;
 
-    const data = {
-      description,
-      amount,
-      date,
-    };
-    addIncome(data).then(console.log);
-  };
-  const getExpenseTransaction = async () => {
-    const data = await getExpense();
-    console.log(data);
-  };
+  //   const data = {
+  //     description,
+  //     amount,
+  //     date,
+  //   };
+  //   addIncome(data).then(console.log);
+  // };
+  // const getExpenseTransaction = async () => {
+  //   const data = await getExpense();
+  //   console.log(data);
+  // };
   // const getIncomeTransaction = async () => {
   //   const data = await getIncome();
   //   console.log(data);
@@ -88,9 +93,9 @@ export default function Test() {
           <button type="submitt">Submit</button>
         </form>
 
-        <button type="button" onClick={getExpenseTransaction}>
+        {/* <button type="button" onClick={getExpenseTransaction}>
           getExpenseTransaction
-        </button>
+        </button> */}
 
         <form onSubmit={delTransaction}>
           <label htmlFor="id">TransactionId</label>

@@ -5,7 +5,7 @@ import s from './ReportLink.module.css';
 const ReportLink = () => {
   return (
     <>
-      <Link to="/" className={s.link}>
+      <Link to="/report" className={s.link}>
         <span className={s.span}>Reports</span>
         <EqualizerIcon className={s.icon} />
       </Link>

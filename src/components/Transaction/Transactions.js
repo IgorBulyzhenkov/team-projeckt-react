@@ -3,64 +3,74 @@ import { useSelector } from 'react-redux';
 import TransactionHistory from './TransactionHistory';
 import MobileTransaction from './MobileTransaction';
 import s from './Transactions.module.css';
+
+import { useGetIncomeQuery, useGetExpenseQuery } from '../../redux/kapustaAPI';
+
 import { getWidth } from '../../redux/selectors';
-import {
-  useLazyGetExpenseQuery,
-  useLazyGetIncomeQuery,
-} from '../../redux/kapustaAPI';
+
+
 
 export default function Transactions() {
-  const [expenses, setExpenses] = useState(true);
-  const [transactions, setTransactions] = useState();
-  const [monthStats, setMonthStats] = useState();
+  const [isExpense, setIsExpense] = useState(true);
+  const [transactions, setTransactions] = useState([]);
+  const [monthStats, setMonthStats] = useState([]);
+
+
+  const { data: expense } = useGetExpenseQuery();
+  const { data: income } = useGetIncomeQuery;
 
   const VpWidth = useSelector(getWidth);
 
-  const [getExpense] = useLazyGetExpenseQuery();
-  const [getIncome] = useLazyGetIncomeQuery();
+
+
 
   useEffect(() => {
-    if (expenses) {
-      getExpense()
-        .unwrap()
-        .then(({ expenses, monthsStats }) => {
-          setTransactions(expenses);
-          setMonthStats(monthsStats);
-        });
-    } else {
-      getIncome()
-        .unwrap()
-        .then(({ incomes, monthsStats }) => {
-          setTransactions(incomes);
-          setMonthStats(monthsStats);
-        });
+    if (isExpense) {
+      setTransactions(expense?.expenses);
+      setMonthStats(expense?.monthsStats);
+    } else if (income) {
+      setTransactions(income?.incomes);
+      setMonthStats(income?.monthsStats);
     }
-  }, [expenses, getExpense, getIncome]);
+  }, [expense, isExpense, income]);
 
   return (
     <div>
-      {VpWidth === 'mobile' && <MobileTransaction />}
 
-      <button className={s.btn} type="button" onClick={() => setExpenses(true)}>
+     {VpWidth === 'mobile' && <MobileTransaction />}
+      <button
+        className={s.btn}
+        type="button"
+        onClick={() => setIsExpense(true)}
+      >
+
+      
+
+      
+
         Expenses
       </button>
       <button
         className={s.btn}
         type="button"
-        onClick={() => setExpenses(false)}
+        onClick={() => setIsExpense(false)}
       >
         Income
       </button>
 
+
+      
+
       {VpWidth !== 'mobile' && (
         <div className={s.wrap}>
-          <TransactionHistory
-            expenses={expenses}
-            transactions={transactions}
-            monthStats={monthStats}
-          />
-        </div>
+        <TransactionHistory
+          expenses={isExpense}
+          transactions={transactions}
+          monthStats={monthStats}
+        />
+      </div>
       )}
+
     </div>
   );
 }

@@ -15,7 +15,7 @@ export const kapustaApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Transactions', 'Auth', 'User', 'Balance'],
+  tagTypes: ['Transactions', 'Auth', 'User'],
   endpoints: builder => ({
     registerUser: builder.mutation({
       query(user) {
@@ -131,7 +131,7 @@ export const kapustaApi = createApi({
         method: 'PATCH',
         body: { newBalance: balance },
       }),
-      invalidatesTags: ['Balance'],
+      invalidatesTags: ['User'],
     }),
   }),
 });
@@ -153,4 +153,6 @@ export const {
   useGetExpenseCategoriesQuery,
   useChangeBalanceMutation,
   useGetUserDataQuery,
+  useGetExpenseQuery,
+  useGetIncomeQuery,
 } = kapustaApi;

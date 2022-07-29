@@ -2,6 +2,7 @@ import TransactionList from './TransactionList';
 import Summary from './Summary';
 import s from './TransactionHistory.module.css';
 
+
 export default function TransactionHistory({
   transactions,
   monthStats,
@@ -12,6 +13,7 @@ export default function TransactionHistory({
       {transactions && (
         <TransactionList transactions={transactions} expenses={expenses} />
       )}
+
       {monthStats && <Summary monthStats={monthStats} />}
     </div>
   );

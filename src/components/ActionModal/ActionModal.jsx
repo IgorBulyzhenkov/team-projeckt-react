@@ -4,15 +4,12 @@ import { createPortal } from 'react-dom';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const ActionModal = () => {
-  const onClose = () => {
-    console.log('');
-  };
+const ActionModal = ({children, toggleModal, logOut}) => {
 
   return createPortal(
     <div className={s.overlay}>
       <div className={s.modal}>
-        <span onClick={onClose} className={s.closeBtn}>
+        <span onClick={toggleModal} className={s.closeBtn}>
           <svg 
             width="14"
             height="14"
@@ -25,11 +22,11 @@ const ActionModal = () => {
           </svg>
         </span>
         {/* /Тут можно вставить необходимый текст через проп Чилдрен на своей странице/ */}
-        <p className={s.text}>Do you really want to leave?</p>  
-        <button className={s.btn} type="button">
+         {children}
+        <button onClick={logOut} className={s.btn} type="button">
           Yes
         </button>
-        <button className={s.btn} type="button">
+        <button onClick={toggleModal} className={s.btn} type="button">
           No
         </button>
       </div>
