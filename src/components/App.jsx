@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useSearchParams, Navigate } from 'react-router-dom';
 
 import { useEffect, lazy, Suspense } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,6 +28,8 @@ const ReportPage = lazy(() =>
 );
 
 export const App = () => {
+  const [searchParams] = useSearchParams();
+
   const dispatch = useDispatch();
   const [refreshUser] = useRefreshUserMutation();
   const [getUserData] = useLazyGetUserDataQuery();
@@ -35,6 +37,30 @@ export const App = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
 
   useEffect(() => {
+    if (searchParams.get('accessToken')) {
+      const token = searchParams.get('accessToken');
+      const refreshToken = searchParams.get('refreshToken');
+      const sid = searchParams.get('sid');
+      dispatch(
+        setUser({
+          // email: email,
+          // balance: balance,
+          token,
+          refreshToken,
+          sid,
+        })
+      );
+      getUserData()
+        .unwrap()
+        .then(data => {
+          dispatch(
+            setUser({
+              email: data.email,
+              balance: data.balance,
+            })
+          );
+        });
+    }
     if (window.innerWidth <= 768) {
       dispatch(setWidth({ width: 'mobile' }));
     }
@@ -104,14 +130,7 @@ export const App = () => {
               </PrivateRoute>
             }
           ></Route>
-          <Route
-            path="*"
-            element={
-              <PublicRoute>
-                <AuthorizationPage />
-              </PublicRoute>
-            }
-          ></Route>
+          <Route path="*" element={<Navigate to="/authorization" />}></Route>
         </Routes>
         <Test />
       </Suspense>

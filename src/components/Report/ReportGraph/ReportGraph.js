@@ -5,74 +5,163 @@ import {
   LinearScale,
   CategoryScale,
 } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
+import { getWidth } from '../../../redux/selectors';
 
-ChartJS.register(BarElement, LinearScale, CategoryScale);
+ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 
 function ReportGraph({ data, category }) {
-  console.log(Boolean(data));
+  const screen = useSelector(getWidth);
+
   const newData = data[category];
   const value = Object.values(newData).slice(1);
-  console.log(value);
   const keys = Object.keys(newData).slice(1);
-  console.log(keys);
 
   const dataChart = {
+    type: 'bar',
     labels: keys,
+    plugins: [ChartDataLabels],
     datasets: [
       {
-        label: 'My First Dataset',
         data: value,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 117, 29, 1)',
+          ' rgba(255, 218, 192, 1)',
+          ' rgba(255, 218, 192, 1)',
         ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        borderWidth: 1,
+        borderRadius: [10],
+        maxBarThickness: [38],
       },
     ],
+    // labels: ['a', 'b', 'c', 'd'],
+    // datasets: [
+    //   {
+    //     data: [500, 400, 300, 200],
+    //   },
+    // ],
+    // options: {
+    //   indexAxis: 'y',
+    //   layout: {
+    //     padding: {
+    //       right: 60,
+    //     },
+    //   },
+    //   plugins: {
+    //     title: {
+    //       display: true,
+    //       text: 'Graph',
+    //     },
+    //     legend: {
+    //       display: false,
+    //     },
+    //     datalabels: {
+    //       color: 'blue',
+    //       anchor: 'end',
+    //       align: 'right',
+    //       labels: {
+    //         title: {
+    //           font: {
+    //             weight: 'bold',
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    //   scales: {
+    //     y: {
+    //       grid: {
+    //         display: false,
+    //       },
+    //     },
+    //     x: {
+    //       grid: {
+    //         display: false,
+    //       },
+    //     },
+    //   },
+    // },
   };
 
-  const config = {
-    type: 'bar',
-    data: dataChart,
-    options: {
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-      legend: {
-        labels: {
-          fontSize: 26,
-        },
-      },
-    },
+  const heightScreen = () => {
+    switch (screen) {
+      case 'mobile':
+        return 600;
+      default:
+        break;
+    }
+  };
+
+  const heightMobileScreen = () => {
+    switch (screen) {
+      case 'tablet':
+        return 'x';
+
+      case 'mobile':
+        return 'y';
+      default:
+        break;
+    }
   };
 
   return (
     <div className={s.wrap}>
       <div className={s.container}>
-        {data ? (
-          <Bar
-            data={dataChart}
-            height={212}
-            config={config}
-            className={s.bar}
-          />
-        ) : null}
+        <Bar
+          data={dataChart}
+          height={heightScreen()}
+          // style={{"height":"100%"}}
+          options={{
+            indexAxis: heightMobileScreen(),
+            plugins: {
+              datalabels: {
+                color: '#52555F',
+                anchor: 'end',
+                align: 'top',
+                fontSize: '40',
+              },
+            },
+            // plugins: {
+            //   datalabels: {
+            //     color: 'blue',
+            //     anchor: 'end',
+            //     align: 'top',
+            //     labels: {
+            //       title: {
+            //         font: {
+            //           weight: 'bold',
+            //         },
+            //       },
+            //     },
+            //   },
+            // },
+            scales: {
+              x: {
+                ticks: {
+                  display: true,
+                },
+                grid: {
+                  display: false,
+                  offset: true,
+                },
+                weight: 5,
+              },
+              y: {
+                ticks: {
+                  display: false,
+                },
+                grid: {
+                  display: true,
+                  tickColor: 'transparent',
+                  borderColor: 'transparent',
+                  offset: true,
+                },
+              },
+            },
+          }}
+          className={s.bar}
+        />
       </div>
     </div>
   );

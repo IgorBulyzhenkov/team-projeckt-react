@@ -81,7 +81,7 @@ function ReportPage() {
           </div>
         </div>
 
-        {incomes && <ReportList incomes={incomes} expenses={expenses} />}
+        {Boolean(total) && <ReportList incomes={incomes} expenses={expenses} />}
       </Container>
     </section>
   );
