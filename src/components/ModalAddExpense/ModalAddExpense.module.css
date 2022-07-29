@@ -3,6 +3,29 @@
   height: 100vh;
   background-color: #ffff;
   position: fixed;
+
   top: 56px;
   left: 0;
+  height: 800px;
+  background-image: url('../../img/AuthorizationPage/rectangle-mob.png');
+  background-position: top 0px left 0px;
+  background-repeat: no-repeat;
+  background-size: 100% 286px;
+}
+
+@media (min-device-pixel-ratio: 2),
+  (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .form {
+    background-image: url('../../img/AuthorizationPage/2x/rectangle2x-mob.png');
+  }
+}
+
+.arrow {
+  width: 24px !important;
+  height: 24px !important;
+  color: #ff751d;
+  margin-left: 20px;
+  margin-top: 16px;
 }
