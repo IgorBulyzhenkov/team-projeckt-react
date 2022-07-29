@@ -7,7 +7,7 @@ const modalRoot = document.querySelector('#modal-root');
 const ModalAddExpense = ({ handleClick }) => {
   return createPortal(
     <div className={s.modal}>
-      <MdKeyboardBackspace onClick={e => handleClick(e)} />
+      <MdKeyboardBackspace className={s.arrow} onClick={e => handleClick(e)} />
       <FormAddExpense />
     </div>,
     modalRoot

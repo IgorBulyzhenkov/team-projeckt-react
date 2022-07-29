@@ -2,12 +2,15 @@ import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
 import CurrencyInput from 'Utils/CurrencyInput';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
 import Select from 'react-select';
+import { useSelector } from 'react-redux';
+import { getWidth } from '../../redux/selectors';
+import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
 const FormAddExpense = ({ expense }) => {
   const [addExpense] = useAddExpenseMutation();
@@ -16,6 +19,7 @@ const FormAddExpense = ({ expense }) => {
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState(null);
   const [date, setDate] = useState(new Date());
+  const VpWidth = useSelector(getWidth);
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -76,10 +80,18 @@ const FormAddExpense = ({ expense }) => {
       ...provided,
       color: state.isSelected ? '#52555F' : '#C7CCDC',
       backgroundColor: state.isSelected ? '#C7CCDC' : '#FFFFFF',
+      fontWeight: '400',
+      fontSize: '12px',
+      lineHeight: '14px',
+      letterSpacing: '0.02em',
     }),
     singleValue: (provided, state) => ({
       ...provided,
-      color: '#52555F',
+      fontWeight: '400',
+      fontSize: '12px',
+      lineHeight: '14px',
+      letterSpacing: '0.02em',
+      color: '#c7ccdc',
     }),
     control: (provided, state) => ({
       ...provided,
@@ -95,46 +107,58 @@ const FormAddExpense = ({ expense }) => {
   };
 
   return (
-    <div>
+    <div className={s.formWrap}>
       <form className={s.form} onSubmit={handleSubmit}>
-        <DatePicker
-          value={date}
-          calendarIcon={<CalendarMonthIcon />}
-          clearIcon={null}
-          prevLabel={null}
-          prev2Label={null}
-          nextLabel={null}
-          next2Label={null}
-          className={s.calendar}
-          name="date"
-          onChange={setDate}
-        />
-        <input
-          type="text"
-          id="description"
-          name="description"
-          className={s.description}
-          onChange={setDescription}
-        />
+        <div className={s.inputWrap}>
+          <DatePicker
+            value={date}
+            calendarIcon={<CalendarMonthIcon />}
+            clearIcon={null}
+            prevLabel={null}
+            prev2Label={null}
+            nextLabel={null}
+            next2Label={null}
+            className={s.calendar}
+            calendarClassName={s.calendar}
+            name="date"
+            onChange={setDate}
+            format={'dd.MM.y'}
+          />
+          <input
+            type="text"
+            id="description"
+            name="description"
+            className={s.description}
+            onChange={setDescription}
+            placeholder="Product description"
+          />
 
-        <Select
-          type="text"
-          id="category"
-          name="category"
-          options={options}
-          styles={styles}
-          placeholder="Product category"
-          onChange={setCategory}
-        />
+          <Select
+            type="text"
+            id="category"
+            name="category"
+            options={options}
+            styles={styles}
+            placeholder="Product category"
+            onChange={setCategory}
+            className={s.select}
+          />
 
-        <CurrencyInput
-          placeholder="00.00 UAH"
-          type="text"
-          id="amount"
-          name="amount"
-          className={s.input}
-          onChange={amountSet}
-        />
+          <div className={s.currencyWrapp}>
+            {' '}
+            <CurrencyInput
+              placeholder="00.00 UAH"
+              type="text"
+              id="amount"
+              name="amount"
+              className={s.input}
+              onChange={amountSet}
+            />
+            <div className={s.calculateWrap}>
+              <CalculateOutlinedIcon className={s.calculate} />
+            </div>
+          </div>
+        </div>
 
         <div className={s.buttonWrap}>
           <button type="submit" className={s.buttonInput}>
@@ -150,5 +174,3 @@ const FormAddExpense = ({ expense }) => {
 };
 
 export default FormAddExpense;
-
-// onSubmit = { addExpenseTransaction };
