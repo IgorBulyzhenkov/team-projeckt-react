@@ -2,7 +2,7 @@ import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
 import CurrencyInput from 'Utils/CurrencyInput';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
@@ -12,8 +12,6 @@ import Select from 'react-select';
 const FormAddExpense = ({ expense }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
   const [amount, setAmount] = useState(null);
   const [date, setDate] = useState(new Date());
 
@@ -27,18 +25,13 @@ const FormAddExpense = ({ expense }) => {
       date: date.value,
       category: category.value,
     };
+
     if (expense) {
       addExpense(transaction);
+    } else {
+      console.log(transaction);
+      addIncome(transaction);
     }
-    const income = {
-      description: description.value,
-      amount: amountViewAPI,
-      date: date.value,
-    };
-
-    addIncome(income);
-
-    console.log(income);
   };
 
   const checkBalance = amount => {
@@ -57,7 +50,7 @@ const FormAddExpense = ({ expense }) => {
     setAmount(amountView);
   };
 
-  const options = [
+  const optionsExpenses = [
     { value: 'Транспорт', label: 'Transport' },
     { value: 'Продукты', label: 'Products' },
     { value: 'Здоровье', label: 'Health' },
@@ -69,6 +62,11 @@ const FormAddExpense = ({ expense }) => {
     { value: 'Спорт и хобби', label: 'Sports, hobbies' },
     { value: 'Образование', label: 'Education' },
     { value: 'Прочее', label: 'Other' },
+  ];
+
+  const optionsIncome = [
+    { value: 'З/П', label: 'Salary' },
+    { value: 'Доп. доход', label: 'Extra income' },
   ];
 
   const styles = {
@@ -114,17 +112,15 @@ const FormAddExpense = ({ expense }) => {
           id="description"
           name="description"
           className={s.description}
-          onChange={setDescription}
         />
 
         <Select
           type="text"
           id="category"
           name="category"
-          options={options}
+          options={expense ? optionsExpenses : optionsIncome}
           styles={styles}
           placeholder="Product category"
-          onChange={setCategory}
         />
 
         <CurrencyInput
