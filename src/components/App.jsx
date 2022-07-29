@@ -11,6 +11,8 @@ import { setUser, setWidth } from 'redux/reducer';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './Routs/PrivateRoute';
 import PublicRoute from './Routs/PublicRoute';
+import SkeletonReport from './Skeleton/SkeletonReport';
+import SkeletonHeader from './Skeleton/SkeletonHeader';
 // import ActionModal from './ActionModal';
 import s from './App.module.css';
 
@@ -42,11 +44,9 @@ export const App = () => {
   const [widthPx, setWidthPx] = useState(getWindowWidth());
   const changeWidthState = (width, currentWidth) => {
     if (currentWidth <= 768 && width !== 'mobile') {
-      console.log(1);
       dispatch(setWidth({ width: 'mobile' }));
     }
     if (currentWidth > 768 && width !== 'tablet') {
-      console.log(2);
       dispatch(setWidth({ width: 'tablet' }));
     }
   };
@@ -109,14 +109,23 @@ export const App = () => {
         );
       return;
     }
-  }, [dispatch, getUserData, isLoggedIn, refreshUser, sid, searchParams,width]);
+  }, [
+    dispatch,
+    getUserData,
+    isLoggedIn,
+    refreshUser,
+    sid,
+    searchParams,
+    width,
+  ]);
 
   return (
     <div>
-      <Suspense fallback={<div>...Loading</div>}>
+      <Suspense fallback={<>...loading</>}>
         {/* <ActionModal/> */}
-        {width === 'tablet' && <div>TABLET</div>}
-        <Header />
+        <Suspense fallback={<SkeletonHeader />}>
+          <Header />
+        </Suspense>
         <Routes>
           <Route
             path="/authorization"
@@ -129,13 +138,16 @@ export const App = () => {
           <Route
             path="/home"
             element={
-              <PrivateRoute>
-                <div className={s.back}>
-                  <HomePage />
-                </div>
-              </PrivateRoute>
+              <Suspense fallback={<SkeletonReport />}>
+                <PrivateRoute>
+                  <div className={s.back}>
+                    <HomePage />
+                  </div>
+                </PrivateRoute>
+              </Suspense>
             }
           ></Route>
+
           <Route
             path="/report"
             element={

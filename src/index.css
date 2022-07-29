@@ -107,3 +107,9 @@ button.react-calendar__navigation__next-button:focus {
   background-color: transparent;
   color: #f76002;
 } */
+
+
+.MuiSkeleton-rectangular{
+  border-radius: 4px;
+  
+}
