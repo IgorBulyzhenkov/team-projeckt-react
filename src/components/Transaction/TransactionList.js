@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import TransactionItem from './TransactionItem';
 import s from './TransactionList.module.css';
 
-export default function TransactionList({ transactions, expenses }) {
+export default function TransactionList({ transactions, expenses, handleClick }) {
   return (
     <div className={s.table}>
       <table>
@@ -29,6 +29,7 @@ export default function TransactionList({ transactions, expenses }) {
                   date={date}
                   id={_id}
                   expenses={expenses}
+                  handleClick={handleClick}
                 />
               )
             )}
