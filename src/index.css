@@ -59,11 +59,19 @@ h6 {
   padding: 0;
 }
 
-.react-calendar__viewContainer {
-  display: none;
+.react-calendar {
+  border: none;
+}
+.react-date-picker__wrapper {
+  border: none;
+  flex-direction: row-reverse;
 }
 
-.react-calendar__navigation__label {
+/* .react-calendar__viewContainer {
+  display: none;
+} */
+
+/* .react-calendar__navigation__label {
   pointer-events: none;
   font-family: 'Roboto';
   font-weight: 700;
@@ -74,14 +82,14 @@ h6 {
   text-align: center;
   color: #000000;
   font-style: normal;
-}
+}  */
 
-.react-calendar__navigation__next-button {
+/* .react-calendar__navigation__next-button {
   font-size: 18px;
   color: #f76002;
-}
+} */
 
-.react-calendar__navigation__prev-button {
+/* .react-calendar__navigation__prev-button {
   font-size: 18px;
   color: #f76002;
 }
@@ -96,4 +104,4 @@ button.react-calendar__navigation__next-button:hover,
 button.react-calendar__navigation__next-button:focus {
   background-color: transparent;
   color: #f76002;
-}
+} */

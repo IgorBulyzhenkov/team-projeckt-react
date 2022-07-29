@@ -7,7 +7,7 @@ const ReportLink = () => {
     <>
       <Link to="/" className={s.link}>
         <span className={s.span}>Reports</span>
-        <EqualizerIcon className={s.icon} />
+        <EqualizerIcon />
       </Link>
     </>
   );

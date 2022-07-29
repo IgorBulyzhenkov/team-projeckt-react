@@ -1,19 +1,18 @@
 import s from './ModalNotification.module.css';
 import { useState, useEffect } from 'react';
-import { useSpring, animated } from 'react-spring';
+import { useTransition, animated } from 'react-spring';
 
 const ModalNotification = () => {
   const [showModal, setShowModal] = useState(true);
 
-  const props = useSpring({
-    to: { opacity: 0 },
+  const transition = useTransition(showModal, {
     from: { opacity: 1 },
-    delay: 10000,
-    config: { duration: 500 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
   });
 
   const toogleModal = () => {
-    setShowModal(!showModal);
+    setShowModal(showModal => !showModal);
   };
 
   useEffect(() => {
@@ -30,9 +29,9 @@ const ModalNotification = () => {
     };
   }, []);
 
-  return (
-    showModal && (
-      <animated.div className={s.modalWrap} style={props}>
+  return transition((style, item) =>
+    item ? (
+      <animated.div className={s.modalWrap} style={style}>
         <div className={s.modal}>
           <div className={s.textWrap}>
             <span className={s.startText}>
@@ -44,6 +43,8 @@ const ModalNotification = () => {
           </div>
         </div>
       </animated.div>
+    ) : (
+      ''
     )
   );
 };
