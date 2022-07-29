@@ -21,13 +21,14 @@
 .input {
   padding: 10px 16px 10px 19px;
   border-radius: 22px 0 0 22px;
-  border: 2px solid black;
-  max-width: 105px;
+  border: 2px solid #ffffff;
+  width: 120px;
   outline: none;
   text-align: right;
   height: 20px;
   font-size: 12px;
   font-weight: bold;
+  height: 44px;
 }
 
 .input::placeholder {
@@ -45,7 +46,7 @@
   padding: 12px 22px 12px 18px;
   font-size: 12px;
   font-weight: normal;
-  border: 2px solid black;
+  border: 2px solid #ffffff;
   border-width: 2px 2px 2px 0;
   height: 44px;
 }
