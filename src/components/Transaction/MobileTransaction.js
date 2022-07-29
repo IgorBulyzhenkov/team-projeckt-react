@@ -17,15 +17,15 @@ export default function MobileTransaction() {
   useEffect(() => {
     data && setTransactions(data.transactions);
   }, [data]);
-  // const transactions = [
-  //   {
-  //     description: 'description',
-  //     category: 'Продукты',
-  //     amount: 0,
-  //     date: '2020-12-31',
-  //     _id: '507f1f77bcf86cd799439013',
-  //   },
-  // ];
+
+  const categoryIncomeCheck = category => {
+    if (category === 'З/П' || category === 'Доп. доход') {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <table className={s.table}>
       {transactions?.map(({ description, category, amount, date, _id }) => {
@@ -35,7 +35,12 @@ export default function MobileTransaction() {
               <td colSpan="2" className={s.descriptionItem}>
                 <span className={s.description}>{description}</span>
               </td>
-              <td rowSpan="2" className={s.amount}>
+              <td
+                rowSpan="2"
+                className={`${s.amount} ${
+                  categoryIncomeCheck(category) ? s.income : s.expense
+                }`}
+              >
                 {amount}.00 грн
               </td>
               <td rowSpan="2">
