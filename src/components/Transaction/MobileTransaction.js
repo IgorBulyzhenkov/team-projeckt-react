@@ -1,18 +1,15 @@
 import { DeleteOutline } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { useEffect, useState } from 'react';
-import {
-  useGetUserDataQuery,
-  useDeleteTransactionMutation,
-} from '../../redux/kapustaAPI';
+
+import { useGetUserDataQuery } from '../../redux/kapustaAPI';
 
 import s from './MobileTransaction.module.css';
 
-export default function MobileTransaction() {
+export default function MobileTransaction({ handleClick }) {
   const [transactions, setTransactions] = useState();
 
   const { data } = useGetUserDataQuery();
-  const [deleteTransaction] = useDeleteTransactionMutation();
 
   useEffect(() => {
     data && setTransactions(data.transactions);
@@ -21,8 +18,6 @@ export default function MobileTransaction() {
   const categoryIncomeCheck = category => {
     if (category === 'З/П' || category === 'Доп. доход') {
       return true;
-    } else {
-      return false;
     }
   };
 
@@ -45,9 +40,10 @@ export default function MobileTransaction() {
               </td>
               <td rowSpan="2">
                 <IconButton
-                  onClick={() => deleteTransaction(_id)}
+                  onClick={e => handleClick(e)}
                   aria-label="button delete"
                   component="label"
+                  id={_id}
                 >
                   <DeleteOutline />
                 </IconButton>
