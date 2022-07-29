@@ -59,7 +59,8 @@ h6 {
   padding: 0;
 }
 
-.react-calendar__viewContainer {
+
+.d-none{
   display: none;
 }
 

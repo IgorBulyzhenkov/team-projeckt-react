@@ -9,6 +9,7 @@ import {
   // useGetIncomeCategoriesQuery,
   // useGetExpenseCategoriesQuery,
 } from '../../redux/kapustaAPI';
+import Calendar from 'react-calendar';
 import { useDispatch } from 'react-redux';
 import { setBalance } from 'redux/reducer';
 
@@ -44,27 +45,6 @@ export default function Test() {
       .unwrap()
       .then(data => dispatch(setBalance(data.newBalance)));
   };
-  // const addIncomeTransaction = e => {
-  //   e.preventDefault();
-  //   const description = e.target.description.value;
-  //   const amount = Number(e.target.amount.value);
-  //   const date = e.target.date.value;
-
-  //   const data = {
-  //     description,
-  //     amount,
-  //     date,
-  //   };
-  //   addIncome(data).then(console.log);
-  // };
-  // const getExpenseTransaction = async () => {
-  //   const data = await getExpense();
-  //   console.log(data);
-  // };
-  // const getIncomeTransaction = async () => {
-  //   const data = await getIncome();
-  //   console.log(data);
-  // };
   const delTransaction = e => {
     e.preventDefault();
     const id = e.target.id.value;
@@ -76,6 +56,12 @@ export default function Test() {
   };
   return (
     <div>
+      <Calendar
+        defaultView={'month'}
+        next2Label={null}
+        prev2Label={null}
+        locale={'en-EN'}
+      />
       <div>
         <h2>addExpenseTransaction</h2>
         <form onSubmit={addExpenseTransaction}>
