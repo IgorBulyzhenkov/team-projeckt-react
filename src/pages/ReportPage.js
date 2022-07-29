@@ -35,29 +35,47 @@ function ReportPage() {
             </Link>
             <p className={s.link_text}> Main page</p>
           </div>
-          <div className={s.balanceDateWrap}>
-            <div className={s.dateSwiperContainer}>
-              <DateSwiper changeDate={setValue} />
-            </div>
-            <div className={s.balance}>
-              <p className={s.balance_text}>Balance:</p>
-              <p className={s.balance_cash}>{`${total}.00 UAH`}</p>
-            </div>
+          <div className={s.container_calendar}>
+            <p className={s.text}>Current period:</p>
           </div>
-        </div>
-        <div className={s.cash}>
-          <div className={s.expenses}>
-            <p className={s.expenses__text}>Expenses:</p>
-            <p className={s.expenses__cash}>- {expenses.expenseTotal}.00 UAH</p>
-          </div>
-          <span className={s.span}></span>
-          <div className={s.income}>
-            <p className={s.income__text}>Income:</p>
-            <p className={s.income__cash}>+ {incomes.incomeTotal}.00 UAH</p>
-          </div>
-        </div>
 
-        <ReportList incomes={incomes} expenses={expenses} />
+          <div className={s.balance}>
+            <p className={s.balance_text}>Balance:</p>
+            <p className={s.balance_cash}>
+              {total ? `${total}.00 UAH` : '0.00 UAH`'}
+            </p>
+            <div className={s.balanceDateWrap}>
+              <div className={s.dateSwiperContainer}>
+                <DateSwiper changeDate={setValue} />
+              </div>
+              <div className={s.balance}>
+                <p className={s.balance_text}>Balance:</p>
+                <p className={s.balance_cash}>{`${total}.00 UAH`}</p>
+              </div>
+            </div>
+          </div>
+          <div className={s.cash}>
+            <div className={s.expenses}>
+              <p className={s.expenses__text}>Expenses:</p>
+              <p className={s.expenses__cash}>
+                {' '}
+                {expenses.expenseTotal
+                  ? ` -${expenses.expenseTotal}.00 UAH`
+                  : '0.00 UAH'}
+              </p>
+            </div>
+            <span className={s.span}></span>
+            <div className={s.income}>
+              <p className={s.income__text}>Income:</p>
+              <p className={s.income__cash}>
+                {expenses.expenseTotal
+                  ? `+ ${incomes.incomeTotal}.00 UAH`
+                  : '0.00 UAH'}
+              </p>
+            </div>
+          </div>
+          <ReportList incomes={incomes} expenses={expenses} />
+        </div>
       </Container>
     </section>
   );
