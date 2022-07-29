@@ -9,7 +9,6 @@ import {
   // useGetIncomeCategoriesQuery,
   // useGetExpenseCategoriesQuery,
 } from '../../redux/kapustaAPI';
-import Calendar from 'react-calendar';
 import { useDispatch } from 'react-redux';
 import { setBalance } from 'redux/reducer';
 import DateSwiper from 'components/DateSwiper';

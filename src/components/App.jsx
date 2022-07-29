@@ -9,7 +9,7 @@ import {
 import { getSid, getIsLoggedIn } from 'redux/selectors';
 import { setUser, setWidth } from 'redux/reducer';
 import { ToastContainer } from 'react-toastify';
-import Test from './test/test';
+// import Test from './test/test';
 import PrivateRoute from './Routs/PrivateRoute';
 import PublicRoute from './Routs/PublicRoute';
 // import ActionModal from './ActionModal';
@@ -43,8 +43,6 @@ export const App = () => {
       const sid = searchParams.get('sid');
       dispatch(
         setUser({
-          // email: email,
-          // balance: balance,
           token,
           refreshToken,
           sid,
@@ -94,7 +92,7 @@ export const App = () => {
         );
       return;
     }
-  }, [dispatch, getUserData, isLoggedIn, refreshUser, sid]);
+  }, [dispatch, getUserData, isLoggedIn, refreshUser, sid, searchParams]);
 
   return (
     <div>
@@ -132,7 +130,6 @@ export const App = () => {
           ></Route>
           <Route path="*" element={<Navigate to="/authorization" />}></Route>
         </Routes>
-        <Test />
       </Suspense>
       <ToastContainer
         position="top-right"

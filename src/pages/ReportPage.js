@@ -1,5 +1,4 @@
 import { MdKeyboardBackspace } from 'react-icons/md';
-import Calendar from 'react-calendar';
 import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
