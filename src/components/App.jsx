@@ -94,7 +94,7 @@ export const App = () => {
         );
       return;
     }
-  }, [dispatch, getUserData, isLoggedIn, refreshUser, sid, searchParams]);
+  }, [dispatch, getUserData, isLoggedIn, refreshUser, sid, searchParams,width]);
 
   return (
     <div>

@@ -41,18 +41,28 @@ function ReportPage() {
 
           <div className={s.balance}>
             <p className={s.balance_text}>Balance:</p>
-            <p className={s.balance_cash}>{`${total}.00 UAH`}</p>
+            <p className={s.balance_cash}>
+              {total ? `${total}.00 UAH` : '0.00 UAH`'}
+            </p>
           </div>
         </div>
         <div className={s.cash}>
           <div className={s.expenses}>
             <p className={s.expenses__text}>Expenses:</p>
-            <p className={s.expenses__cash}>- {expenses.expenseTotal}.00 UAH</p>
+            <p className={s.expenses__cash}>
+              {expenses.expenseTotal
+                ? ` -${expenses.expenseTotal}.00 UAH`
+                : '0.00 UAH'}
+            </p>
           </div>
           <span className={s.span}></span>
           <div className={s.income}>
             <p className={s.income__text}>Income:</p>
-            <p className={s.income__cash}>+ {incomes.incomeTotal}.00 UAH</p>
+            <p className={s.income__cash}>
+              {incomes.incomeTotal
+                ? `+ ${incomes.incomeTotal}.00 UAH`
+                : '0.00 UAH'}
+            </p>
           </div>
         </div>
 
