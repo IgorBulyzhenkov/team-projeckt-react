@@ -1,0 +1,38 @@
+.container{
+    width: fit-content
+}
+.wrap{
+    display: flex;
+    justify-content: center;
+}
+.currentPeriod {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.16;
+    letter-spacing: 0.04em;
+    color: rgba(82, 85, 95, 0.7);
+    margin-bottom: 5px;
+    text-align: center;
+}
+.date {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.14;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000000;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+}
+
+.arrow:hover,
+.arrow:focus {
+    background-color: transparent;
+    color: #f9680e;
+}

@@ -16,7 +16,23 @@ export default function TransactionItem({
       <td>{date}</td>
       <td>{description}</td>
       <td>{category}</td>
-      <td style={expenses ? { color: '#e7192e' } : { color: '#407946' }}>
+      <td
+        style={
+          expenses
+            ? {
+                color: '#e7192e',
+                fontWeight: '700',
+                fontSize: '12px',
+                lineHeight: '14px',
+              }
+            : {
+                color: '#407946',
+                fontWeight: '700',
+                fontSize: '12px',
+                lineHeight: '14px',
+              }
+        }
+      >
         {amount}.00 грн.
       </td>
       <td>

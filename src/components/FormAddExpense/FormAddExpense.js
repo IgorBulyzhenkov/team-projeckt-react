@@ -15,8 +15,6 @@ import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 const FormAddExpense = ({ expense }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
   const [amount, setAmount] = useState(null);
   const [date, setDate] = useState(new Date());
   const VpWidth = useSelector(getWidth);
@@ -31,18 +29,12 @@ const FormAddExpense = ({ expense }) => {
       date: date.value,
       category: category.value,
     };
+
     if (expense) {
       addExpense(transaction);
+    } else {
+      addIncome(transaction);
     }
-    const income = {
-      description: description.value,
-      amount: amountViewAPI,
-      date: date.value,
-    };
-
-    addIncome(income);
-
-    console.log(income);
   };
 
   const checkBalance = amount => {
@@ -61,7 +53,7 @@ const FormAddExpense = ({ expense }) => {
     setAmount(amountView);
   };
 
-  const options = [
+  const optionsExpenses = [
     { value: 'Транспорт', label: 'Transport' },
     { value: 'Продукты', label: 'Products' },
     { value: 'Здоровье', label: 'Health' },
@@ -73,6 +65,11 @@ const FormAddExpense = ({ expense }) => {
     { value: 'Спорт и хобби', label: 'Sports, hobbies' },
     { value: 'Образование', label: 'Education' },
     { value: 'Прочее', label: 'Other' },
+  ];
+
+  const optionsIncome = [
+    { value: 'З/П', label: 'Salary' },
+    { value: 'Доп. доход', label: 'Extra income' },
   ];
 
   const styles = {
@@ -144,8 +141,8 @@ const FormAddExpense = ({ expense }) => {
             className={s.select}
           />
 
+
           <div className={s.currencyWrapp}>
-            {' '}
             <CurrencyInput
               placeholder="00.00 UAH"
               type="text"

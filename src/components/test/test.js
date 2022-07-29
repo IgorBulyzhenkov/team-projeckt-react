@@ -1,6 +1,6 @@
 import {
   useAddExpenseMutation,
-  useAddIncomeMutation,
+  // useAddIncomeMutation,
   // useLazyGetExpenseQuery,
   // useLazyGetIncomeQuery,
   useDeleteTransactionMutation,
@@ -9,14 +9,14 @@ import {
   // useGetIncomeCategoriesQuery,
   // useGetExpenseCategoriesQuery,
 } from '../../redux/kapustaAPI';
-import Calendar from 'react-calendar';
 import { useDispatch } from 'react-redux';
 import { setBalance } from 'redux/reducer';
+
 
 export default function Test() {
   const dispatch = useDispatch();
   const [addExpense] = useAddExpenseMutation();
-  const [addIncome] = useAddIncomeMutation();
+  // const [addIncome] = useAddIncomeMutation();
   // const [getExpense] = useLazyGetExpenseQuery();
   // const [getIncome] = useLazyGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
@@ -56,12 +56,6 @@ export default function Test() {
   };
   return (
     <div>
-      <Calendar
-        defaultView={'month'}
-        next2Label={null}
-        prev2Label={null}
-        locale={'en-EN'}
-      />
       <div>
         <h2>addExpenseTransaction</h2>
         <form onSubmit={addExpenseTransaction}>
