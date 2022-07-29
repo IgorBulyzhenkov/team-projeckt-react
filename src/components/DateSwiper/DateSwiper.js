@@ -20,9 +20,7 @@ export default function DateSwiper({ changeDate }) {
   ];
   const currentDate = new Date();
   const [date, setDate] = useState(() => {
-    return `${
-      monthNames[currentDate.getMonth() + 1]
-    } ${currentDate.getFullYear()}`;
+    return `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
   });
 
   const onDecr = async () => {
@@ -66,13 +64,14 @@ export default function DateSwiper({ changeDate }) {
         <ArrowBackIosIcon
           onClick={onDecr}
           className={s.arrow}
-          sx={{
-            width: 8,
-            height: 20,
-          }}
+          fontSize={'inherit'}
         />
         <div className={s.date}>{date}</div>
-        <ArrowForwardIosIcon onClick={onIncr} className={s.arrow} />
+        <ArrowForwardIosIcon
+          onClick={onIncr}
+          className={s.arrow}
+          fontSize={'inherit'}
+        />
       </div>
     </div>
   );

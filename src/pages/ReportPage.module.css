@@ -33,11 +33,7 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
-  .wrap {
-    width: 1034px;
-  }
-}
+
 
 @media screen and (min-width: 768px) {
   .wrap_link {
@@ -78,17 +74,24 @@
   }
 }
 
-.container_calendar {
+.dateSwiperContainer {
   text-align: center;
   margin-top: 22px;
-  width: 195px;
+  width: fit-content;
   margin: 0 auto;
 }
 
 @media screen and (min-width: 768px) {
-  .container_calendar {
+  .dateSwiperContainer {
     margin-top: 0;
     margin-right: 0;
+  }
+  .balanceDateWrap{
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .balance{
+    margin-right: 100px;
   }
 }
 
@@ -318,4 +321,14 @@
   line-height: 1.14;
   letter-spacing: 0.04em;
   color: #407946;
+}
+
+@media screen and (min-width: 1280px) {
+  .wrap {
+    width: 1034px;
+  }
+
+  .balance {
+    margin-right: 210px;
+  }
 }
