@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import TransactionHistory from './TransactionHistory';
 import MobileTransaction from './MobileTransaction';
 import ActionModal from '../ActionModal/ActionModal';
+import FormAddExpense from 'components/FormAddExpense';
 import s from './Transactions.module.css';
 
 import {
@@ -31,6 +32,7 @@ export default function Transactions() {
       setTransactions(expense?.expenses);
       setMonthStats(expense?.monthsStats);
     } else {
+      console.log(income);
       setTransactions(income?.incomes);
       setMonthStats(income?.monthsStats);
     }
@@ -67,6 +69,7 @@ export default function Transactions() {
 
       {VpWidth !== 'mobile' && (
         <div className={s.wrap}>
+          <FormAddExpense expense={isExpense} />
           <TransactionHistory
             handleClick={handleClick}
             expenses={isExpense}
