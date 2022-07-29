@@ -84,6 +84,14 @@ function ReportGraph({ data, category }) {
     // },
   };
 
+  // display: function (context) {
+  //             const dataTrue = data.find(
+  //               (_, index) => index === context.dataIndex
+  //             );
+
+  //             return dataTrue > 500;
+  //           },
+
   const heightScreen = () => {
     switch (screen) {
       case 'mobile':
@@ -114,6 +122,12 @@ function ReportGraph({ data, category }) {
           // style={{"height":"100%"}}
           options={{
             indexAxis: heightMobileScreen(),
+            layout: {
+              padding: {
+                top: 30,
+                right: 30,
+              },
+            },
             plugins: {
               datalabels: {
                 color: '#52555F',
@@ -121,35 +135,27 @@ function ReportGraph({ data, category }) {
                 align: 'top',
                 fontSize: '40',
               },
+              title: {
+                position: 'top',
+              },
             },
-            // plugins: {
-            //   datalabels: {
-            //     color: 'blue',
-            //     anchor: 'end',
-            //     align: 'top',
-            //     labels: {
-            //       title: {
-            //         font: {
-            //           weight: 'bold',
-            //         },
-            //       },
-            //     },
-            //   },
-            // },
             scales: {
               x: {
                 ticks: {
-                  display: true,
+                  display: false,
+                },
+                title: {
+                  align: 'top',
                 },
                 grid: {
                   display: false,
-                  offset: true,
+                  offset: 5,
                 },
                 weight: 5,
               },
               y: {
                 ticks: {
-                  display: false,
+                  display: true,
                 },
                 grid: {
                   display: true,
