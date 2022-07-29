@@ -2,11 +2,62 @@ import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
 import CurrencyInput from 'Utils/CurrencyInput';
+import { useState, useEffect } from 'react';
+import {
+  useAddExpenseMutation,
+  useAddIncomeMutation,
+} from '../../redux/kapustaAPI';
 import Select from 'react-select';
 
-const FormAddExpense = () => {
+const FormAddExpense = ({ expense }) => {
+  const [addExpense] = useAddExpenseMutation();
+  const [addIncome] = useAddIncomeMutation();
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState(null);
+  const [date, setDate] = useState(new Date());
+
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    const { amount, description, category, date } = ev.currentTarget;
+    const amountViewAPI = Number.parseFloat(amount.value.split(' ').join(''));
+    const transaction = {
+      description: description.value,
+      amount: amountViewAPI,
+      date: date.value,
+      category: category.value,
+    };
+    if (expense) {
+      addExpense(transaction);
+    }
+    const income = {
+      description: description.value,
+      amount: amountViewAPI,
+      date: date.value,
+    };
+
+    addIncome(income);
+
+    console.log(income);
+  };
+
+  const checkBalance = amount => {
+    const arrayBalance = String(amount).split('');
+    if (arrayBalance?.indexOf('.') === -1) {
+      const stringBalance = `${arrayBalance.join('')}.00`;
+      return stringBalance;
+    }
+
+    let decimals = String(amount).split('.')[1];
+    return decimals.length < 2 ? `${amount}0` : amount;
+  };
+
+  const amountSet = amount => {
+    const amountView = checkBalance(amount);
+    setAmount(amountView);
+  };
+
   const options = [
-    //    <option disabled>Product category</option>
     { value: 'Транспорт', label: 'Transport' },
     { value: 'Продукты', label: 'Products' },
     { value: 'Здоровье', label: 'Health' },
@@ -45,9 +96,9 @@ const FormAddExpense = () => {
 
   return (
     <div>
-      <form className={s.form}>
+      <form className={s.form} onSubmit={handleSubmit}>
         <DatePicker
-          value={new Date()}
+          value={date}
           calendarIcon={<CalendarMonthIcon />}
           clearIcon={null}
           prevLabel={null}
@@ -55,12 +106,15 @@ const FormAddExpense = () => {
           nextLabel={null}
           next2Label={null}
           className={s.calendar}
+          name="date"
+          onChange={setDate}
         />
         <input
           type="text"
           id="description"
           name="description"
           className={s.description}
+          onChange={setDescription}
         />
 
         <Select
@@ -70,6 +124,7 @@ const FormAddExpense = () => {
           options={options}
           styles={styles}
           placeholder="Product category"
+          onChange={setCategory}
         />
 
         <CurrencyInput
@@ -78,7 +133,7 @@ const FormAddExpense = () => {
           id="amount"
           name="amount"
           className={s.input}
-          //   value={String(income)}
+          onChange={amountSet}
         />
 
         <div className={s.buttonWrap}>

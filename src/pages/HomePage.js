@@ -4,18 +4,18 @@ import ReportLink from 'components/Report/ReportLink';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ModalAddExpense from 'components/ModalAddExpense';
 import Transactions from '../components/Transaction/Transactions';
+import { useSelector } from 'react-redux';
+import { getWidth } from '../redux/selectors';
 
 import s from './HomePage.module.css';
 import { useState } from 'react';
 
 const HomePage = () => {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState('false');
+  const VpWidth = useSelector(getWidth);
 
-  const toogleModal = () => {
-    setModal(modal => !modal);
-  };
   const openModal = ev => {
-    console.log(ev);
+    setModal(!modal);
   };
 
   return (
@@ -31,7 +31,7 @@ const HomePage = () => {
           onClick={openModal}
         />
       </div>
-      <ModalAddExpense />
+      {VpWidth === 'mobile' && <ModalAddExpense handleClick={openModal} />}
       <Transactions />
     </Container>
   );
