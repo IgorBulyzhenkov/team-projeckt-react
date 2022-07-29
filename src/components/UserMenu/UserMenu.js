@@ -35,21 +35,18 @@ export default function UserMenu() {
     <>
       <div className={s.container}>
         <Avatar />
-        {width === 'tablet' ? (
-          <>
-            <p className={s.userName}>{userName}</p>
-            <div className={s.line}></div>
-            <div onClick={toggleModal} className={s.exitBtn} >
-              Exit
-            </div>
-          </>
-        ) : (
-          <LogoutSharpIcon onClick={toggleModal} className={s.icon} />
-        )}
+        <p className={s.userName}>{userName}</p>
+        <div className={s.line}></div>
+        <div onClick={toggleModal} className={s.exitBtn}>
+          Exit
+        </div>
+        <LogoutSharpIcon onClick={toggleModal} className={s.icon} />
       </div>
-      {!isModalOpen && <ActionModal toggleModal={toggleModal} logOut={onLogOutUser}>
-        <p className={s.text}>Do you really want to leave?</p>
-      </ActionModal>}
+      {!isModalOpen && (
+        <ActionModal toggleModal={toggleModal} logOut={onLogOutUser}>
+          <p className={s.text}>Do you really want to leave?</p>
+        </ActionModal>
+      )}
     </>
   );
 }
