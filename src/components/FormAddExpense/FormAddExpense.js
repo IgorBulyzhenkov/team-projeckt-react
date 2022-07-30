@@ -2,18 +2,18 @@ import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
 import { useState } from 'react';
+// import React from 'react';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { ReactComponent as Calculator } from '../../img/Calculator.svg';
+
 import Select from 'react-select';
-// import { BsCalculator } from 'react-icons/bs';
+
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
 import NumberFormat from 'react-number-format';
-import { IconButton } from '@mui/material';
-// import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
@@ -93,15 +93,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
   return (
     <div className={s.formWrap}>
-      <IconButton
-        color="warning"
-        onClick={handleClick}
-        aria-label="button close"
-        component="button"
-      >
-        <KeyboardBackspaceIcon />
-      </IconButton>
-
       <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrap}>
           <DatePicker
@@ -156,9 +147,9 @@ const FormAddExpense = ({ expense, handleClick }) => {
               // }}
             />
 
-            {/* <div className={s.calculateWrap}>
-              <BsCalculator className={s.calculate} />
-            </div> */}
+            <div className={s.calculateWrap}>
+              <Calculator width="20" height="20" />
+            </div>
           </div>
         </div>
 
