@@ -42,7 +42,7 @@ function ReportPage() {
           <div className={s.balance}>
             <p className={s.balance_text}>Balance:</p>
             <p className={s.balance_cash}>
-              {total ? `${total}.00 UAH` : '0.00 UAH`'}
+              {total ? `${total}.00 UAH` : '0.00 UAH'}
             </p>
           </div>
         </div>

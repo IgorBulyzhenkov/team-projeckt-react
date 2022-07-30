@@ -30,7 +30,8 @@ function ReportList({ incomes, expenses }) {
     }, {});
 
     setTotal(nuwData);
-  }, [data]);
+    return () => dispatch(setCategory(''));
+  }, [data, dispatch]);
 
   const toggleIcon = () => {
     setShowIcon(!showIcon);

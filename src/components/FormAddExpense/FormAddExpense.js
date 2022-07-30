@@ -11,6 +11,8 @@ import { ReactComponent as Calculator } from '../../img/Calculator.svg';
 
 import Select from 'react-select';
 
+import { BsCalculator } from 'react-icons/bs';
+
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
 import NumberFormat from 'react-number-format';
@@ -24,8 +26,17 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    const { amount, description, category, date } = ev.currentTarget;
-    const amountViewAPI = Number.parseFloat(amount.value.split(' ').join(''));
+    const { amount, amountTablet, description, category, date } =
+      ev.currentTarget;
+    let amountViewAPI = '';
+    console.log(amount);
+    console.log(amountTablet);
+    amount.value
+      ? (amountViewAPI = Number.parseFloat(amount.value.split(' ').join('')))
+      : (amountViewAPI = Number.parseFloat(
+          amountTablet.value.split(' ').join('')
+        ));
+    // const amountViewAPI = Number.parseFloat(amount.value.split(' ').join(''));
     const transaction = {
       description: description.value,
       amount: amountViewAPI,
@@ -93,6 +104,19 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
   return (
     <div className={s.formWrap}>
+
+      <div className={s.exitBtn}>
+        <IconButton
+          color="warning"
+          onClick={handleClick}
+          aria-label="button close"
+          component="button"
+        >
+          <KeyboardBackspaceIcon />
+        </IconButton>
+      </div>
+
+
       <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrap}>
           <DatePicker
@@ -139,16 +163,22 @@ const FormAddExpense = ({ expense, handleClick }) => {
               className={s.input}
               id="amount"
               name="amount"
-
-              // value={value}
-              // onValueChange={(values, sourceInfo) => {
-              //   console.log(values, sourceInfo);
-              //   setValue(values.floatValue?.toFixed(2));
-              // }}
+            />
+            <NumberFormat
+              decimalScale={2}
+              inputMode="numeric"
+              placeholder="0.00"
+              thousandSeparator={' '}
+              fixedDecimalScale={true}
+              className={s.inputTablet}
+              id="amountTablet"
+              name="amountTablet"
             />
 
             <div className={s.calculateWrap}>
+
               <Calculator width="20" height="20" />
+
             </div>
           </div>
         </div>
