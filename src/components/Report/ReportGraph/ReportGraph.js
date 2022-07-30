@@ -18,8 +18,11 @@ function ReportGraph({ data }) {
 
   const newData = data[category];
 
-  const value = Object.values(newData).slice(1);
-  const keys = Object.keys(newData).slice(1);
+  const sortData = Object.entries(newData);
+  const testSort = sortData.sort((a, b) => b[1] - a[1]);
+
+  const value = testSort.map(el => el[1]).slice(1);
+  const keys = testSort.map(el => el[0]).slice(1);
 
   const widthBar = () => {
     switch (screen) {
@@ -32,32 +35,6 @@ function ReportGraph({ data }) {
         break;
     }
   };
-
-  const dataChart = {
-    type: 'bar',
-    labels: keys,
-    plugins: [ChartDataLabels],
-    datasets: [
-      {
-        data: value,
-        backgroundColor: [
-          'rgba(255, 117, 29, 1)',
-          ' rgba(255, 218, 192, 1)',
-          ' rgba(255, 218, 192, 1)',
-        ],
-        borderRadius: [10],
-        maxBarThickness: [widthBar()],
-      },
-    ],
-  };
-
-  // display: function (context) {
-  //             const dataTrue = data.find(
-  //               (_, index) => index === context.dataIndex
-  //             );
-
-  //             return dataTrue > 500;
-  //           },
 
   const borderColor = () => {
     switch (screen) {
@@ -122,7 +99,49 @@ function ReportGraph({ data }) {
         return 0;
 
       case 'mobile':
-        return 30;
+        return 80;
+      default:
+        break;
+    }
+  };
+
+  const fontSizeText = () => {
+    switch (screen) {
+      case 'tablet':
+        return '12';
+
+      case 'mobile':
+        return '10';
+      default:
+        break;
+    }
+  };
+
+  const dataChart = {
+    type: 'bar',
+    labels: keys,
+    plugins: [ChartDataLabels],
+    datasets: [
+      {
+        data: value,
+        backgroundColor: [
+          'rgba(255, 117, 29, 1)',
+          ' rgba(255, 218, 192, 1)',
+          ' rgba(255, 218, 192, 1)',
+        ],
+        borderRadius: [10],
+        maxBarThickness: [widthBar()],
+      },
+    ],
+  };
+
+  const positionText = () => {
+    switch (screen) {
+      case 'tablet':
+        return 'top';
+
+      case 'mobile':
+        return 'right';
       default:
         break;
     }
@@ -147,8 +166,9 @@ function ReportGraph({ data }) {
               datalabels: {
                 color: '#52555F',
                 anchor: 'end',
-                align: 'top',
-                fontSize: '40',
+                align: positionText(),
+                font: { size: fontSizeText(), weight: '400', family: 'Roboto' },
+                formatter: value => `${value} UAH`,
               },
             },
             scales: {
@@ -169,7 +189,7 @@ function ReportGraph({ data }) {
                   display: gridLineY(),
                   tickColor: 'transparent',
                   borderColor: 'transparent',
-                  // offset: true,
+                  offset: true,
                 },
               },
             },
