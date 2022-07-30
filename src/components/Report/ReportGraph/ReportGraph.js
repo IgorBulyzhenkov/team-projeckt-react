@@ -10,6 +10,7 @@ import { Bar } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../../redux/selectors';
 
+
 ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 
 function ReportGraph({ data, category }) {
