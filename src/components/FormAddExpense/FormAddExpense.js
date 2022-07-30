@@ -1,24 +1,25 @@
 import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
-import CurrencyInput from 'Utils/CurrencyInput';
 import { useState } from 'react';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
-import Select from 'react-select';
-// import { useSelector } from 'react-redux';
-// import { getWidth } from '../../redux/selectors';
-import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
-const FormAddExpense = ({ expense }) => {
+import { useSelector } from 'react-redux';
+import { MenuItem, TextField } from '@mui/material';
+import { getWidth } from '../../redux/selectors';
+
+const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
-  const [amount, setAmount] = useState(null);
+
   const [date, setDate] = useState(new Date());
-  // const VpWidth = useSelector(getWidth);
-  console.log(amount);
+
+  const [categories, setCategories] = useState('');
+
+  const VpWidth = useSelector(getWidth);
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -36,124 +37,100 @@ const FormAddExpense = ({ expense }) => {
     } else {
       addIncome(transaction);
     }
-  };
 
-  const checkBalance = amount => {
-    const arrayBalance = String(amount).split('');
-    if (arrayBalance?.indexOf('.') === -1) {
-      const stringBalance = `${arrayBalance.join('')}.00`;
-      return stringBalance;
+    if (VpWidth === 'mobile') {
+      handleClick();
     }
-
-    let decimals = String(amount).split('.')[1];
-    return decimals.length < 2 ? `${amount}0` : amount;
   };
 
-  const amountSet = amount => {
-    const amountView = checkBalance(amount);
-    setAmount(amountView);
+  const optionsExpenses = [
+    { value: 'Транспорт', label: 'Transport' },
+    { value: 'Продукты', label: 'Products' },
+    { value: 'Здоровье', label: 'Health' },
+    { value: 'Алкоголь', label: 'Alcohol' },
+    { value: 'Развлечения', label: 'Entertainment' },
+    { value: 'Всё для дома', label: 'Housing' },
+    { value: 'Техника', label: 'Technique' },
+    { value: 'Коммуналка и связь', label: 'Communal, communication' },
+    { value: 'Спорт и хобби', label: 'Sports, hobbies' },
+    { value: 'Образование', label: 'Education' },
+    { value: 'Прочее', label: 'Other' },
+  ];
+
+  const optionsIncome = [
+    { value: 'З/П', label: 'Salary' },
+    { value: 'Доп. доход', label: 'Extra income' },
+  ];
+
+  const handleChange = e => {
+    setCategories(e.target.value);
   };
 
-  // const optionsExpenses = [
-  //   { value: 'Транспорт', label: 'Transport' },
-  //   { value: 'Продукты', label: 'Products' },
-  //   { value: 'Здоровье', label: 'Health' },
-  //   { value: 'Алкоголь', label: 'Alcohol' },
-  //   { value: 'Развлечения', label: 'Entertainment' },
-  //   { value: 'Всё для дома', label: 'Housing' },
-  //   { value: 'Техника', label: 'Technique' },
-  //   { value: 'Коммуналка и связь', label: 'Communal, communication' },
-  //   { value: 'Спорт и хобби', label: 'Sports, hobbies' },
-  //   { value: 'Образование', label: 'Education' },
-  //   { value: 'Прочее', label: 'Other' },
-  // ];
-
-  // const optionsIncome = [
-  //   { value: 'З/П', label: 'Salary' },
-  //   { value: 'Доп. доход', label: 'Extra income' },
-  // ];
-
-  const styles = {
-    option: (provided, state) => ({
-      ...provided,
-      color: state.isSelected ? '#52555F' : '#C7CCDC',
-      backgroundColor: state.isSelected ? '#C7CCDC' : '#FFFFFF',
-      fontWeight: '400',
-      fontSize: '12px',
-      lineHeight: '14px',
-      letterSpacing: '0.02em',
-    }),
-    singleValue: (provided, state) => ({
-      ...provided,
-      fontWeight: '400',
-      fontSize: '12px',
-      lineHeight: '14px',
-      letterSpacing: '0.02em',
-      color: '#c7ccdc',
-    }),
-    control: (provided, state) => ({
-      ...provided,
-      border: '2px solid #ffffff',
-      borderRadius: '0 0 20px 0',
-      height: '44px',
-      width: '280px',
-    }),
-    indicatorSeparator: (provided, state) => ({
-      ...provided,
-      display: 'none',
-    }),
-  };
+  const categoriesType = expense ? optionsExpenses : optionsIncome;
 
   return (
     <div className={s.formWrap}>
       <form className={s.form} onSubmit={handleSubmit}>
-        <div className={s.inputWrap}>
-          <DatePicker
-            value={date}
-            calendarIcon={<CalendarMonthIcon />}
-            clearIcon={null}
-            prevLabel={null}
-            prev2Label={null}
-            nextLabel={null}
-            next2Label={null}
-            className={s.calendar}
-            calendarClassName={s.calendar}
-            name="date"
-            onChange={setDate}
-            format={'dd.MM.y'}
-          />
-          <input
-            type="text"
-            id="description"
-            name="description"
-            className={s.description}
-            // onChange={setDescription}
-            placeholder="Product description"
-          />
-
-          <Select
-            type="text"
-            id="category"
-            name="category"
-            // options={options}
-            styles={styles}
-            placeholder="Product category"
-            // onChange={setCategory}
-            className={s.select}
-          />
-
-          <div className={s.currencyWrapp}>
-            <CurrencyInput
-              placeholder="00.00 UAH"
+        <div className={s.inputsWrap}>
+          <div className={s.calendar}>
+            <DatePicker
+              value={date}
+              calendarIcon={<CalendarMonthIcon />}
+              clearIcon={null}
+              prevLabel={null}
+              prev2Label={null}
+              nextLabel={null}
+              next2Label={null}
+              name="date"
+              onChange={setDate}
+            />
+          </div>
+          <div className={s.inputsText}>
+            <TextField
+              id="description"
+              name="description"
+              label="description"
+              variant="outlined"
               type="text"
+              helperText="spent on"
+              sx={{ mb: 1, width: '100%' }}
+              color="warning"
+              size="small"
+            />
+          </div>
+          <div className={s.inputsText}>
+            <TextField
+              id="category"
+              name="category"
+              select
+              value={categories}
+              onChange={handleChange}
+              sx={{ mb: 1, width: '100%' }}
+              color="warning"
+              size="small"
+              label="category"
+              helperText="make your choice"
+            >
+              {categoriesType.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+          <div className={s.inputsNumber}>
+            <TextField
               id="amount"
               name="amount"
-              className={s.input}
-              onChange={amountSet}
+              type="number"
+              sx={{ mb: 1, width: '100%' }}
+              color="warning"
+              label="Amount"
+              variant="outlined"
+              size="small"
+              helperText="enter amount"
+              placeholder="00.00 грн."
             />
-            <div className={s.calculateWrap}>
-              <CalculateOutlinedIcon className={s.calculate} />
-            </div>
           </div>
         </div>
 
