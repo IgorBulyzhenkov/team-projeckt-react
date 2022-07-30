@@ -41,10 +41,10 @@ export const App = () => {
   }
   const [widthPx, setWidthPx] = useState(getWindowWidth());
   const changeWidthState = (width, currentWidth) => {
-    if (currentWidth <= 768 && width !== 'mobile') {
+    if (currentWidth < 768 && width !== 'mobile') {
       dispatch(setWidth({ width: 'mobile' }));
     }
-    if (currentWidth > 768 && width !== 'tablet') {
+    if (currentWidth >= 768 && width !== 'tablet') {
       dispatch(setWidth({ width: 'tablet' }));
     }
   };

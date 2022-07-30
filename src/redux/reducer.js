@@ -8,6 +8,7 @@ const initialState = {
   isLoggedIn: false,
   balance: '',
   width: null,
+  category: '',
 };
 
 const userSlice = createSlice({
@@ -26,8 +27,12 @@ const userSlice = createSlice({
     setWidth: (state, { payload }) => {
       return { ...state, ...payload };
     },
+    setCategory: (state, { payload }) => {
+      return { ...state, ...{ category: payload } };
+    },
   },
 });
 
-export const { setUser, resetUser, setBalance, setWidth } = userSlice.actions;
+export const { setUser, resetUser, setBalance, setWidth, setCategory } =
+  userSlice.actions;
 export default userSlice;

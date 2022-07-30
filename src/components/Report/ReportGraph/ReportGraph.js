@@ -14,7 +14,7 @@ ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 
 function ReportGraph({ data, category }) {
   const screen = useSelector(getWidth);
-
+  console.log(data, category);
   const newData = data[category];
   const value = Object.values(newData).slice(1);
   const keys = Object.keys(newData).slice(1);
@@ -112,7 +112,7 @@ function ReportGraph({ data, category }) {
         break;
     }
   };
-
+  console.log('2', category);
   return (
     <div className={s.wrap}>
       <div className={s.container}>

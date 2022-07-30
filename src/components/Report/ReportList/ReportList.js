@@ -1,16 +1,20 @@
 import ReportSvgSelector from './ReportSvgSelector';
 import ReportGraph from 'components/Report/ReportGraph/ReportGraph';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCategory } from 'redux/selectors';
+import { setCategory } from 'redux/reducer';
+import { useState, useEffect } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
 import s from './ReportList.module.css';
-import { useEffect } from 'react';
+
 function ReportList({ incomes, expenses }) {
   const [showIcon, setShowIcon] = useState(false);
   const [expenseEl, setExpenseEl] = useState([]);
   const [total, setTotal] = useState({});
-  const [category, setCategory] = useState('');
 
+  const dispatch = useDispatch();
+  const category = useSelector(getCategory);
   const data = showIcon ? expenses.expensesData : incomes.incomesData;
   const dataLenght = Object.entries(total);
 
@@ -30,8 +34,9 @@ function ReportList({ incomes, expenses }) {
 
   const toggleIcon = () => {
     setShowIcon(!showIcon);
-    setCategory('');
+    !category && dispatch(setCategory(''));
   };
+
   return (
     <>
       <div className={s.wrap}>
@@ -72,7 +77,7 @@ function ReportList({ incomes, expenses }) {
                   <div
                     id={name}
                     className={s.itemSpan}
-                    onClick={e => setCategory(e.currentTarget.id)}
+                    onClick={e => dispatch(setCategory(e.currentTarget.id))}
                   >
                     <span className={s.span}>{image}</span>
                   </div>
