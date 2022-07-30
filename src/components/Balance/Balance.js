@@ -4,6 +4,7 @@ import {
   useChangeBalanceMutation,
   useGetUserDataQuery,
 } from '../../redux/kapustaAPI';
+import Tooltip from '@mui/material/Tooltip';
 import ModalNotification from '../ModalNotification';
 import NumberFormat from 'react-number-format';
 
@@ -70,14 +71,27 @@ const Balance = () => {
           isNumericString={true}
           disabled={!(!hasBalance && !hasTransactions)}
         />
-
-        <button
-          type="submit"
-          className={`${s.button} ballance-btn`}
-          disabled={!(!hasBalance && !hasTransactions)}
-        >
-          CONFIRM
-        </button>
+        {!!(!hasBalance && !hasTransactions) ? (
+          <button
+            type="submit"
+            className={`${s.button} ballance-btn`}
+            disabled={false}
+          >
+            CONFIRM
+          </button>
+        ) : (
+          <Tooltip title="You have already entered the balance">
+            <span>
+              <button
+                type="submit"
+                className={`${s.button} ballance-btn`}
+                disabled={true}
+              >
+                CONFIRM
+              </button>
+            </span>
+          </Tooltip>
+        )}
       </form>
       {!hasBalance && !hasTransactions && <ModalNotification />}
     </div>

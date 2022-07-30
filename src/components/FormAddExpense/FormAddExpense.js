@@ -1,17 +1,17 @@
 import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import Popover from '@mui/material/Popover';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
 import { ReactComponent as Calculator } from '../../img/Calculator.svg';
-
+import { toast } from 'react-toastify';
 import Select from 'react-select';
-
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
 import NumberFormat from 'react-number-format';
@@ -22,38 +22,94 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const [date, setDate] = useState(new Date());
   const [amount, setAmount] = useState('');
   const [select, setSelect] = useState(null);
+  const [description, setDescription] = useState('');
+
+  const [openSelect, setOpenSelect] = useState(false);
+  const [openInput, setOpenInput] = useState(false);
+  const [openDescription, setOpenDescription] = useState(false);
 
   const VpWidth = useSelector(getWidth);
 
-  const handleSubmit = ev => {
-    ev.preventDefault();
-
-    const { amount, amountTablet, description, category, date } =
-      ev.currentTarget;
-    let amountViewAPI = '';
-    amount.value
-      ? (amountViewAPI = Number.parseFloat(amount.value.split(' ').join('')))
-      : (amountViewAPI = Number.parseFloat(
-          amountTablet.value.split(' ').join('')
-        ));
-    const transaction = {
-      description: description.value,
-      amount: amountViewAPI,
-      date: date.value,
-      category: category.value,
-    };
-
-    if (expense) {
-      addExpense(transaction);
-    } else {
-      addIncome(transaction);
-    }
-    ev.target.reset();
+  const descriptionElement = document.querySelector('.descriptionElement');
+  const inputElement = document.querySelector('.inputElement');
+  const selectElement = document.querySelector('.selectElement ');
+  console.log(selectElement);
+  const formReset = () => {
     setAmount('');
     setSelect(null);
+    setDescription('');
+  };
 
-    if (VpWidth === 'mobile') {
-      handleClick();
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    const { date } = ev.currentTarget;
+
+    const isDescriptionCorrect = () => {
+      if (!description) {
+        setOpenDescription(true);
+        setTimeout(() => {
+          setOpenDescription(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
+    };
+    const isSelectorCorrect = () => {
+      if (!select?.value) {
+        setOpenSelect(true);
+        setTimeout(() => {
+          setOpenSelect(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
+    };
+
+    const isAmountCorrect = () => {
+      if (!amount) {
+        setOpenInput(true);
+        setTimeout(() => {
+          setOpenInput(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
+    };
+
+    const isFormValid =
+      isSelectorCorrect() + isDescriptionCorrect() + isAmountCorrect() === 0;
+
+    if (isFormValid) {
+      const transaction = {
+        description,
+        amount: amount,
+        date: date?.value,
+        category: select?.value,
+      };
+
+      if (expense) {
+        addExpense(transaction)
+          .unwrap()
+          .then(data => {
+            toast.success('Transaction added');
+            formReset();
+            if (VpWidth === 'mobile') {
+              handleClick();
+            }
+          })
+          .catch(error => toast.error(error.data.message));
+      } else {
+        addIncome(transaction)
+          .unwrap()
+          .then(data => {
+            toast.success('Transaction added');
+            formReset();
+            if (VpWidth === 'mobile') {
+              handleClick();
+            }
+          })
+          .catch(error => toast.error(error.data.message));
+      }
     }
   };
 
@@ -128,12 +184,16 @@ const FormAddExpense = ({ expense, handleClick }) => {
             onChange={setDate}
             format={'dd.MM.y'}
           />
+
           <input
             type="text"
             id="description"
             name="description"
-            className={s.description}
+            className={`${s.description} descriptionElement`}
             placeholder="Product description"
+            value={description}
+            onChange={ev => setDescription(ev.target.value)}
+            aria-describedby="description"
           />
 
           <Select
@@ -143,42 +203,30 @@ const FormAddExpense = ({ expense, handleClick }) => {
             options={expense ? optionsExpenses : optionsIncome}
             styles={styles}
             placeholder="Product category"
-            className={s.select}
+            className={`${s.select} selectElement`}
             value={select}
-            onChange={setSelect}
+            onChange={data => setSelect(data)}
+            aria-describedby="select"
           />
 
           <div className={s.currencyWrapp}>
             <NumberFormat
-              suffix={' UAH'}
+              aria-describedby="input"
+              suffix={VpWidth === 'mobile' ? ' UAH' : ''}
               decimalScale={2}
               inputMode="numeric"
-              placeholder="00.00 UAH"
+              placeholder={VpWidth === 'mobile' ? '00.00 UAH' : '0.00'}
               thousandSeparator={' '}
               fixedDecimalScale={true}
-              className={s.input}
+              className={`${s.input} inputElement`}
               id="amount"
               name="amount"
               value={amount}
-              maxLength={17}
+              maxLength={VpWidth === 'mobile' ? 17 : 13}
               onValueChange={(values, sourceInfo) =>
                 setAmount(values.floatValue)
               }
             />
-            <NumberFormat
-              decimalScale={2}
-              inputMode="numeric"
-              placeholder="0.00"
-              thousandSeparator={' '}
-              fixedDecimalScale={true}
-              className={s.inputTablet}
-              id="amountTablet"
-              name="amountTablet"
-              maxLength={13}
-              value={amount}
-              onValueChange={values => setAmount(values.floatValue)}
-            />
-
             <div className={s.calculateWrap}>
               <Calculator width="20" height="20" />
             </div>
@@ -189,18 +237,59 @@ const FormAddExpense = ({ expense, handleClick }) => {
           <button type="submit" className={s.buttonInput}>
             Input
           </button>
-          <button
-            type="reset"
-            className={s.buttonClear}
-            onClick={() => {
-              setAmount('');
-              setSelect(null);
-            }}
-          >
+          <button type="reset" className={s.buttonClear} onClick={formReset}>
             Clear
           </button>
         </div>
       </form>
+      <Popover
+        id={'description'}
+        open={openDescription}
+        anchorEl={descriptionElement}
+        onClick={() => setOpenDescription(false)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'center',
+        }}
+      >
+        <div className={s.popover}>Please enter description</div>
+      </Popover>
+      <Popover
+        id={'select'}
+        open={openSelect}
+        anchorEl={selectElement}
+        onClick={() => setOpenSelect(false)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'center',
+        }}
+      >
+        <div className={s.popover}>Please choose category</div>
+      </Popover>
+      <Popover
+        id={'input'}
+        open={openInput}
+        anchorEl={inputElement}
+        onClick={() => setOpenInput(false)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'center',
+        }}
+      >
+        <div className={s.popover}>Please enter amount</div>
+      </Popover>
     </div>
   );
 };
