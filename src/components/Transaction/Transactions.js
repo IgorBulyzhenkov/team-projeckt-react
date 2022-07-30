@@ -34,6 +34,7 @@ export default function Transactions() {
       setTransactions(expense?.expenses);
       setMonthStats(expense?.monthsStats);
     } else {
+
       setTransactions(income?.incomes);
       setMonthStats(income?.monthsStats);
     }

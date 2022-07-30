@@ -14,6 +14,7 @@
   max-width: calc(200vw - 48px);
   max-height: calc(200vh - 24px);
   background-color: #ffff;
+
   padding: 15px;
   border-radius: 15px;
 }

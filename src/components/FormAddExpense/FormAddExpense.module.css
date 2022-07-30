@@ -3,6 +3,7 @@
   flex-direction: column;
 }
 
+
 @media screen and (min-width: 768px) {
   .inputsWrap {
     display: flex;
@@ -30,7 +31,9 @@
     align-items: flex-start;
     justify-content: space-between;
   }
-}
+
+
+
 
 @media screen and (max-width: 677px) {
   .calendar {
@@ -38,11 +41,15 @@
   }
 }
 
+
+
 .buttonWrap {
   display: flex;
   flex-direction: row;
   justify-content: center;
+
   align-items: center;
+
 }
 
 .buttonInput {
@@ -62,3 +69,6 @@
   background-color: #f5f6fb;
   box-shadow: 1px 2px 5px rgba(170, 178, 197, 0.4);
 }
+
+
+

@@ -8,6 +8,7 @@ const mobileModalRoot = document.querySelector('#mobileModal-root');
 
 const ModalAddExpense = ({ handleClick, expense }) => {
   return createPortal(
+
     <div className={s.overlay} id="backDrop">
       <div className={s.modal}>
         <IconButton
@@ -21,6 +22,7 @@ const ModalAddExpense = ({ handleClick, expense }) => {
         </IconButton>
         <FormAddExpense expense={expense} handleClick={handleClick} />
       </div>
+
     </div>,
     mobileModalRoot
   );
