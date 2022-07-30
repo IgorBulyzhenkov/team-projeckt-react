@@ -21,7 +21,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
   const VpWidth = useSelector(getWidth);
 
-
   const handleSubmit = ev => {
     ev.preventDefault();
     const { amount, description, category, date } = ev.currentTarget;
@@ -44,25 +43,24 @@ const FormAddExpense = ({ expense, handleClick }) => {
     }
   };
 
-  // const optionsExpenses = [
-  //   { value: 'Транспорт', label: 'Transport' },
-  //   { value: 'Продукты', label: 'Products' },
-  //   { value: 'Здоровье', label: 'Health' },
-  //   { value: 'Алкоголь', label: 'Alcohol' },
-  //   { value: 'Развлечения', label: 'Entertainment' },
-  //   { value: 'Всё для дома', label: 'Housing' },
-  //   { value: 'Техника', label: 'Technique' },
-  //   { value: 'Коммуналка и связь', label: 'Communal, communication' },
-  //   { value: 'Спорт и хобби', label: 'Sports, hobbies' },
-  //   { value: 'Образование', label: 'Education' },
-  //   { value: 'Прочее', label: 'Other' },
-  // ];
+  const optionsExpenses = [
+    { value: 'Транспорт', label: 'Transport' },
+    { value: 'Продукты', label: 'Products' },
+    { value: 'Здоровье', label: 'Health' },
+    { value: 'Алкоголь', label: 'Alcohol' },
+    { value: 'Развлечения', label: 'Entertainment' },
+    { value: 'Всё для дома', label: 'Housing' },
+    { value: 'Техника', label: 'Technique' },
+    { value: 'Коммуналка и связь', label: 'Communal, communication' },
+    { value: 'Спорт и хобби', label: 'Sports, hobbies' },
+    { value: 'Образование', label: 'Education' },
+    { value: 'Прочее', label: 'Other' },
+  ];
 
-  // const optionsIncome = [
-  //   { value: 'З/П', label: 'Salary' },
-  //   { value: 'Доп. доход', label: 'Extra income' },
-  // ];
-
+  const optionsIncome = [
+    { value: 'З/П', label: 'Salary' },
+    { value: 'Доп. доход', label: 'Extra income' },
+  ];
 
   const handleChange = e => {
     setCategories(e.target.value);
@@ -73,7 +71,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
   return (
     <div className={s.formWrap}>
       <form className={s.form} onSubmit={handleSubmit}>
-
         <div className={s.inputsWrap}>
           <div className={s.calendar}>
             <DatePicker
@@ -134,7 +131,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
               helperText="enter amount"
               placeholder="00.00 грн."
             />
-
           </div>
         </div>
 
