@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCategory } from 'redux/reducer';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import s from './DateSwiper.module.css';
 
 export default function DateSwiper({ changeDate }) {
+  const dispatch = useDispatch();
   const monthNames = [
     'January',
     'February',
@@ -23,18 +26,20 @@ export default function DateSwiper({ changeDate }) {
     return `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
   });
 
-  const onDecr = async () => {
+  const onDecr = () => {
     setDate(date => {
       const newDate = new Date(date);
+      dispatch(setCategory(''));
       if (!monthNames[newDate.getMonth() - 1]) {
         return `${monthNames[11]} ${newDate.getFullYear() - 1}`;
       }
       return `${monthNames[newDate.getMonth() - 1]} ${newDate.getFullYear()}`;
     });
   };
-  const onIncr = async () => {
+  const onIncr = () => {
     setDate(date => {
       const newDate = new Date(date);
+      dispatch(setCategory(''));
       if (!monthNames[newDate.getMonth() + 1]) {
         return `${monthNames[0]} ${newDate.getFullYear() + 1}`;
       }
