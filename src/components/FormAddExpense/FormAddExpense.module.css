@@ -105,18 +105,8 @@
 
 .calculateWrap {
   position: absolute;
-  right: 7px;
-  top: 10px;
-
-  margin: 0;
-  /* width: 60px;
-  height: 44px; */
-  /* border: 2px solid #ffffff;
-  border-width: 2px 2px 2px 0;
-  border-radius: 0px 22px 22px 0px; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: 12px;
+  right: 10px;
 }
 
 .calculate {
@@ -125,6 +115,7 @@
 }
 
 .currencyWrapp {
+  position: relative;
   display: flex;
   flex-direction: row;
 }
@@ -135,12 +126,30 @@
   
 }
 @media screen and (min-width: 768px) {
+
     .exitBtn {
         display: none;
       }
   .input {
       display: none;
     }
+
+  .calculateWrap {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    /* margin: 0;
+  width: 60px;
+  height: 44px;
+  border: 2px solid #f5f6fb;
+  border-width: 2px 2px 2px 0;
+  border-radius: 0px 22px 22px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+  }
+
+
   .form {
     margin-bottom: 60px;
   }
@@ -224,5 +233,29 @@
 
   .description {
     margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .description {
+    width: 280px;
+    margin-top: 20px;
+    margin-left: 30px;
+  }
+
+  .select {
+    width: 250px;
+  }
+  .calculateWrap {
+    position: static;
+
+    margin: 0;
+    width: 60px;
+    height: 44px;
+
+    border-radius: 0px 22px 22px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
