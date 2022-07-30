@@ -1,16 +1,28 @@
 import s from './ModalAddExpense.module.css';
 import FormAddExpense from '../FormAddExpense';
-import { MdKeyboardBackspace } from 'react-icons/md';
+import { IconButton } from '@mui/material';
 import { createPortal } from 'react-dom';
-const modalRoot = document.querySelector('#modal-root');
+import { Clear } from '@mui/icons-material';
 
-const ModalAddExpense = ({ handleClick }) => {
+const mobileModalRoot = document.querySelector('#mobileModal-root');
+
+const ModalAddExpense = ({ handleClick, expense }) => {
   return createPortal(
-    <div className={s.modal}>
-      <MdKeyboardBackspace onClick={e => handleClick(e)} />
-      <FormAddExpense />
+    <div className={s.overlay} id="backDrop">
+      <div className={s.modal}>
+        <IconButton
+          sx={{ mb: 2 }}
+          color="warning"
+          onClick={handleClick}
+          aria-label="button close"
+          component="button"
+        >
+          <Clear />
+        </IconButton>
+        <FormAddExpense expense={expense} handleClick={handleClick} />
+      </div>
     </div>,
-    modalRoot
+    mobileModalRoot
   );
 };
 

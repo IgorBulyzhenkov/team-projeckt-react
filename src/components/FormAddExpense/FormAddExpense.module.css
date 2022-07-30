@@ -3,48 +3,46 @@
   flex-direction: column;
 }
 
-.calendar {
-  width: 30px;
+@media screen and (min-width: 768px) {
+  .inputsWrap {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .inputsText {
+    width: 180px;
+  }
+
+  .inputsNumber {
+    width: 120px;
+  }
 }
 
-.description {
-  border: 2px solid #ffffff;
-  border-width: 2px 2px 0 2px;
-  border-radius: 20px 20px 0 0;
-  height: 44px;
-  width: 280px;
+@media screen and (min-width: 1280px) {
+  .inputsWrap {
+    width: 706px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
 }
 
-
-
-.arrow {
-  color: #c7ccdc;
-}
-
-.input {
-  padding: 10px 16px 10px 19px;
-  border-radius: 22px 0 0 22px;
-  border: 2px solid #ffffff;
-  width: 120px;
-  outline: none;
-  text-align: right;
-  height: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  height: 44px;
-}
-
-.input::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: black;
-  opacity: 1; /* Firefox */
-  font-weight: bold;
-  font-size: 12px;
+@media screen and (max-width: 677px) {
+  .calendar {
+    margin-bottom: 12px;
+  }
 }
 
 .buttonWrap {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttonInput {
