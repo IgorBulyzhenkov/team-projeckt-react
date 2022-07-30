@@ -128,8 +128,19 @@
   display: flex;
   flex-direction: row;
 }
-
+@media screen and (max-width: 767px) {
+  .inputTablet {
+    display: none;
+  }
+  
+}
 @media screen and (min-width: 768px) {
+    .exitBtn {
+        display: none;
+      }
+  .input {
+      display: none;
+    }
   .form {
     margin-bottom: 60px;
   }
@@ -145,7 +156,7 @@
     border: 2px solid #f5f6fb;
     border-width: 2px 0 2px 2px;
     border-radius: 20px 0 0 0;
-    margin-left: 110px;
+    /* margin-left: 110px; */
     width: 288px;
     padding-left: 20px;
     color: #c7ccdc !important;
@@ -161,7 +172,7 @@
     outline: none;
   }
 
-  .input {
+  .inputTablet {
     padding: 10px 16px 10px 19px;
     width: 119px;
     outline: none;
@@ -174,10 +185,10 @@
     background-color: #ffffff;
     color: #c7ccdc;
 
-    text-align: left;
+    text-align: center;
   }
 
-  .input::placeholder {
+  .inputTablet::placeholder {
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;

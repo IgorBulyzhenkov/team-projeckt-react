@@ -22,10 +22,9 @@
   padding: 10px 16px 10px 19px;
   border-radius: 22px 0 0 22px;
   border: 2px solid #ffffff;
-  width: 120px;
+  min-width: 120px;
   outline: none;
   text-align: right;
-  height: 20px;
   font-size: 12px;
   font-weight: bold;
   height: 44px;
@@ -54,6 +53,11 @@
 .button:hover {
   border: none;
 }
+.button:disabled:hover {
+  color: #52555f;
+  background: #f5f6fb;
+  border: 2px solid #ffffff;
+}
 
 @media screen and (min-width: 768px) {
   .wrap {
@@ -65,9 +69,10 @@
   }
 
   .input {
+    
     border-radius: 22px;
     margin-right: 15px;
-    min-width: 90px;
+    min-width: 120px;
   }
   .button {
     min-width: 125px;
