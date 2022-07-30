@@ -55,6 +55,9 @@ p {
   filter: drop-shadow(1px 2px 3px rgba(170, 178, 197, 0.2));
   margin-bottom: 32px;
   cursor: pointer;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.156);
+    background: linear-gradient(0deg, #ddd, #fff);
+    transition: .5s;
 }
 
 .link::before{
@@ -130,6 +133,7 @@ p {
   text-transform: uppercase;
   color: #52555f;
   cursor: pointer;
+  position: relative;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
   color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -137,11 +141,62 @@ p {
 .btn:first-of-type {
   margin-right: 8px
 }
-
-.btn:hover {
+ .btn:hover {
   color: #fff;
   background-color: #ff751d;
   filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
+} 
+.btn::before {
+  position: absolute;
+  content: "";
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  left: -2px;
+  top: -2px;
+  background: linear-gradient(124deg,
+      #ff2400,
+      #e81d1d94,
+      #e8b71d,
+      #e3e81d,
+      #a18902e4,
+      #df00f395);
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  animation: move 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn::after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+background:#ff751d;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
 }
 
 @media screen and (min-width: 768px) {
