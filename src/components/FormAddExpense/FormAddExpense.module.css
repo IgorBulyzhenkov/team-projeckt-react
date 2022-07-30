@@ -3,46 +3,16 @@
   flex-direction: column;
 }
 
-.calendar {
-  width: 30px;
-}
+@media screen and (min-width: 768px) {
+  .inputsWrap {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.description {
-  border: 2px solid #ffffff;
-  border-width: 2px 2px 0 2px;
-  border-radius: 20px 20px 0 0;
-  height: 44px;
-  width: 280px;
-  outline: none;
-  color: #c7ccdc !important;
-  padding-left: 10px;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: 0.02em;
-}
+  .inputsText {
+    width: 180px;
+  }
 
-.description:-webkit-autofill {
-  -webkit-box-shadow: inset 0 0 0 50px #f5f6fb !important; /* Цвет фона */
-  -webkit-text-fill-color: #c7ccdc !important; /* цвет текста */
-  color: #c7ccdc !important; /* цвет текста */
-}
-
-.input:-webkit-autofill {
-  -webkit-box-shadow: inset 0 0 0 50px #f5f6fb !important; /* Цвет фона */
-}
-
-.description::placeholder {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: 0.02em;
-  color: #c7ccdc !important;
-}
-
-.arrow {
-  color: #c7ccdc;
-}
 
 .inputWrap {
   position: relative;
@@ -52,37 +22,35 @@
   justify-content: center;
   align-items: center;
   margin-right: 32px;
+
 }
 
-.input {
-  padding: 10px 16px 10px 19px;
-  border-radius: 22px 0 0 22px;
-  border: 2px solid #ffffff;
-  width: 120px;
-  outline: none;
-  text-align: right;
-  height: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  height: 44px;
+@media screen and (min-width: 1280px) {
+  .inputsWrap {
+    width: 706px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
 }
 
-.input::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: black;
-  opacity: 1; /* Firefox */
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.select {
-  margin-bottom: 32px;
+@media screen and (max-width: 677px) {
+  .calendar {
+    margin-bottom: 12px;
+  }
 }
 
 .buttonWrap {
   display: flex;
   flex-direction: row;
   justify-content: center;
+
+  align-items: center;
 }
 
 .buttonInput {
@@ -102,6 +70,7 @@
   background-color: #f5f6fb;
   box-shadow: 1px 2px 5px rgba(170, 178, 197, 0.4);
 }
+
 
 .calculateWrap {
 position: absolute;
@@ -215,3 +184,4 @@ margin: 0;
     margin-left: 0;
   }
 }
+

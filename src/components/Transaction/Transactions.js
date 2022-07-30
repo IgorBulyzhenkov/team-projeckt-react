@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import ModalAddExpense from '../ModalAddExpense/ModalAddExpense';
 import TransactionHistory from './TransactionHistory';
 import MobileTransaction from './MobileTransaction';
 import ActionModal from '../ActionModal/ActionModal';
@@ -16,6 +17,7 @@ import { getWidth } from '../../redux/selectors';
 
 export default function Transactions() {
   const [isModalOpen, setModal] = useState('false');
+  const [isMobileModalOpen, setMobileModal] = useState('false');
   const [transactionsId, setTransactionsId] = useState(null);
   const [isExpense, setIsExpense] = useState(true);
   const [transactions, setTransactions] = useState([]);
@@ -49,35 +51,59 @@ export default function Transactions() {
     setModal(!isModalOpen);
   };
 
+  const handleExpBtnClick = () => {
+    setIsExpense(true);
+    if (VpWidth === 'mobile') {
+      setMobileModal(!isMobileModalOpen);
+    }
+  };
+
+  const handleIncBtnClick = () => {
+    setIsExpense(false);
+    if (VpWidth === 'mobile') {
+      setMobileModal(!isMobileModalOpen);
+    }
+  };
+
   return (
     <div>
-      {VpWidth === 'mobile' && <MobileTransaction handleClick={handleClick} />}
       <button
         className={`${s.btn} ${isExpense ? s.isActive : ''}`}
         type="button"
-        onClick={() => setIsExpense(true)}
+        onClick={handleExpBtnClick}
       >
+        {VpWidth === 'mobile' && 'Add '}
         Expenses
       </button>
       <button
         className={`${s.btn} ${!isExpense ? s.isActive : ''}`}
         type="button"
-        onClick={() => setIsExpense(false)}
+        onClick={handleIncBtnClick}
       >
+        {VpWidth === 'mobile' && 'Add '}
         Income
       </button>
 
-      {VpWidth !== 'mobile' && (
-        <div className={s.wrap}>
-          <FormAddExpense expense={isExpense} />
-          <TransactionHistory
-            handleClick={handleClick}
-            expenses={isExpense}
-            transactions={transactions}
-            monthStats={monthStats}
-          />
-        </div>
+      <div className={s.mobileWrap}>
+        <MobileTransaction handleClick={handleClick} />
+      </div>
+
+      <div className={s.deskWrap}>
+        <FormAddExpense expense={isExpense} />
+        <TransactionHistory
+          handleClick={handleClick}
+          expenses={isExpense}
+          transactions={transactions}
+          monthStats={monthStats}
+        />
+      </div>
+      {!isMobileModalOpen && (
+        <ModalAddExpense
+          handleClick={() => setMobileModal(!isMobileModalOpen)}
+          expense={isExpense}
+        />
       )}
+
       {!isModalOpen && (
         <ActionModal
           toggleModal={() => setModal(!isModalOpen)}

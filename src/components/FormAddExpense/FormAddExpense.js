@@ -6,19 +6,29 @@ import {
   useAddExpenseMutation,
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
+
 import Select from 'react-select';
 import { BsCalculator } from 'react-icons/bs';
+
 import { useSelector } from 'react-redux';
+import { MenuItem, TextField } from '@mui/material';
 import { getWidth } from '../../redux/selectors';
+
 import NumberFormat from 'react-number-format';
 // import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
-const FormAddExpense = ({ expense }) => {
+
+const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
+
   const [amount, setAmount] = useState(null);
   const [value, setValue] = useState('');
+
   const [date, setDate] = useState(new Date());
+
+  const [categories, setCategories] = useState('');
+
   const VpWidth = useSelector(getWidth);
   console.log(value);
   const handleSubmit = ev => {
@@ -40,20 +50,10 @@ const FormAddExpense = ({ expense }) => {
     ev.target.reset();
   };
 
-  const checkBalance = amount => {
-    const arrayBalance = String(amount).split('');
-    if (arrayBalance?.indexOf('.') === -1) {
-      const stringBalance = `${arrayBalance.join('')}.00`;
-      return stringBalance;
+
+    if (VpWidth === 'mobile') {
+      handleClick();
     }
-
-    let decimals = String(amount).split('.')[1];
-    return decimals.length < 2 ? `${amount}0` : amount;
-  };
-
-  const amountSet = amount => {
-    const amountView = checkBalance(amount);
-    setAmount(amountView);
   };
 
   const optionsExpenses = [
@@ -75,40 +75,16 @@ const FormAddExpense = ({ expense }) => {
     { value: 'Доп. доход', label: 'Extra income' },
   ];
 
-  const styles = {
-    option: (provided, state) => ({
-      ...provided,
-      color: state.isSelected ? '#52555F' : '#C7CCDC',
-      backgroundColor: state.isSelected ? '#C7CCDC' : '#FFFFFF',
-      fontWeight: '400',
-      fontSize: '12px',
-      lineHeight: '14px',
-      letterSpacing: '0.02em',
-    }),
-    singleValue: (provided, state) => ({
-      ...provided,
-      fontWeight: '400',
-      fontSize: '12px',
-      lineHeight: '14px',
-      letterSpacing: '0.02em',
-      color: '#c7ccdc',
-    }),
-    control: (provided, state) => ({
-      ...provided,
-      border: '2px solid #ffffff',
-      borderRadius: '0 0 20px 0',
-      height: '44px',
-      width: '280px',
-    }),
-    indicatorSeparator: (provided, state) => ({
-      ...provided,
-      display: 'none',
-    }),
+  const handleChange = e => {
+    setCategories(e.target.value);
   };
+
+  const categoriesType = expense ? optionsExpenses : optionsIncome;
 
   return (
     <div className={s.formWrap}>
       <form className={s.form} onSubmit={handleSubmit}>
+
         <div className={s.inputWrap}>
           <DatePicker
             value={date}
@@ -167,6 +143,7 @@ const FormAddExpense = ({ expense }) => {
             {/* <div className={s.calculateWrap}>
               <BsCalculator className={s.calculate} />
             </div> */}
+
           </div>
         </div>
 

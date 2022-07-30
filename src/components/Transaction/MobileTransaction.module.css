@@ -6,12 +6,19 @@
   color: #52555f;
 }
 
-.table {
+.mobTable {
   max-width: 320px;
   margin-bottom: 12px;
+  margin-top: 20px;
 }
 
-.table td {
+@media screen and (min-width: 768px) {
+  .mobTable {
+    display: none;
+  }
+}
+
+.mobTable td {
   font-size: 8px;
   line-height: 1.12;
   letter-spacing: 0.04em;
@@ -31,7 +38,7 @@
   color: #e7192e;
 }
 
-.table .amount {
+.mobTable .amount {
   font-weight: 700;
   font-size: 12px;
   line-height: 1.16;
@@ -39,11 +46,11 @@
   padding: 0;
 }
 
-.table .descriptionItem {
+.mobTable .descriptionItem {
   text-align: left;
   border: none;
 }
 
-.table .date {
+.mobTable .date {
   text-align: left;
 }
