@@ -1,7 +1,6 @@
 import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
-import CurrencyInput from 'Utils/CurrencyInput';
 import { useState } from 'react';
 import {
   useAddExpenseMutation,
@@ -11,15 +10,17 @@ import Select from 'react-select';
 import { BsCalculator } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
-import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+import NumberFormat from 'react-number-format';
+// import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
 const FormAddExpense = ({ expense }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [amount, setAmount] = useState(null);
+  const [value, setValue] = useState('');
   const [date, setDate] = useState(new Date());
   const VpWidth = useSelector(getWidth);
-
+  console.log(value);
   const handleSubmit = ev => {
     ev.preventDefault();
     const { amount, description, category, date } = ev.currentTarget;
@@ -144,17 +145,28 @@ const FormAddExpense = ({ expense }) => {
           />
 
           <div className={s.currencyWrapp}>
-            <CurrencyInput
+            <NumberFormat
+              suffix={' UAH'}
+              decimalScale={2}
+              // defaultValue={'00.00'}
+              inputMode="numeric"
               placeholder="00.00 UAH"
-              type="text"
+              thousandSeparator={' '}
+              fixedDecimalScale={true}
+              className={s.input}
               id="amount"
               name="amount"
-              className={s.input}
-              onChange={amountSet}
+
+              // value={value}
+              // onValueChange={(values, sourceInfo) => {
+              //   console.log(values, sourceInfo);
+              //   setValue(values.floatValue?.toFixed(2));
+              // }}
             />
-            <div className={s.calculateWrap}>
+
+            {/* <div className={s.calculateWrap}>
               <BsCalculator className={s.calculate} />
-            </div>
+            </div> */}
           </div>
         </div>
 
