@@ -34,7 +34,7 @@ function ReportList({ incomes, expenses }) {
 
   const toggleIcon = () => {
     setShowIcon(!showIcon);
-    !category && dispatch(setCategory(''));
+    category && dispatch(setCategory(''));
   };
 
   return (

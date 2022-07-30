@@ -8,13 +8,13 @@ import {
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
-import { getWidth } from '../../../redux/selectors';
-
+import { getWidth, getCategory } from '../../../redux/selectors';
 
 ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 
-function ReportGraph({ data, category }) {
+function ReportGraph({ data }) {
   const screen = useSelector(getWidth);
+  const category = useSelector(getCategory);
 
   const newData = data[category];
 
@@ -80,7 +80,6 @@ function ReportGraph({ data, category }) {
     }
   };
 
-
   const lineY = () => {
     switch (screen) {
       case 'tablet':
@@ -128,7 +127,6 @@ function ReportGraph({ data, category }) {
         break;
     }
   };
-
 
   return (
     <div className={s.wrap}>
