@@ -66,6 +66,7 @@ h6 {
 .react-date-picker {
   display: flex !important;
   justify-content: flex-end !important;
+  width: fit-content !important;
 }
 
 .react-date-picker__wrapper {

@@ -7,20 +7,30 @@ import {
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
 
+import Select from 'react-select';
+import { BsCalculator } from 'react-icons/bs';
+
 import { useSelector } from 'react-redux';
 import { MenuItem, TextField } from '@mui/material';
 import { getWidth } from '../../redux/selectors';
 
+import NumberFormat from 'react-number-format';
+// import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+
+
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
+
+  const [amount, setAmount] = useState(null);
+  const [value, setValue] = useState('');
 
   const [date, setDate] = useState(new Date());
 
   const [categories, setCategories] = useState('');
 
   const VpWidth = useSelector(getWidth);
-
+  console.log(value);
   const handleSubmit = ev => {
     ev.preventDefault();
     const { amount, description, category, date } = ev.currentTarget;
@@ -37,6 +47,9 @@ const FormAddExpense = ({ expense, handleClick }) => {
     } else {
       addIncome(transaction);
     }
+    ev.target.reset();
+  };
+
 
     if (VpWidth === 'mobile') {
       handleClick();
@@ -71,66 +84,66 @@ const FormAddExpense = ({ expense, handleClick }) => {
   return (
     <div className={s.formWrap}>
       <form className={s.form} onSubmit={handleSubmit}>
-        <div className={s.inputsWrap}>
-          <div className={s.calendar}>
-            <DatePicker
-              value={date}
-              calendarIcon={<CalendarMonthIcon />}
-              clearIcon={null}
-              prevLabel={null}
-              prev2Label={null}
-              nextLabel={null}
-              next2Label={null}
-              name="date"
-              onChange={setDate}
-            />
-          </div>
-          <div className={s.inputsText}>
-            <TextField
-              id="description"
-              name="description"
-              label="description"
-              variant="outlined"
-              type="text"
-              helperText="spent on"
-              sx={{ mb: 1, width: '100%' }}
-              color="warning"
-              size="small"
-            />
-          </div>
-          <div className={s.inputsText}>
-            <TextField
-              id="category"
-              name="category"
-              select
-              value={categories}
-              onChange={handleChange}
-              sx={{ mb: 1, width: '100%' }}
-              color="warning"
-              size="small"
-              label="category"
-              helperText="make your choice"
-            >
-              {categoriesType.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </div>
-          <div className={s.inputsNumber}>
-            <TextField
+
+        <div className={s.inputWrap}>
+          <DatePicker
+            value={date}
+            calendarIcon={<CalendarMonthIcon />}
+            clearIcon={null}
+            prevLabel={null}
+            prev2Label={null}
+            nextLabel={null}
+            next2Label={null}
+            className={s.calendar}
+            calendarClassName={s.calendar}
+            name="date"
+            onChange={setDate}
+            format={'dd.MM.y'}
+          />
+          <input
+            type="text"
+            id="description"
+            name="description"
+            className={s.description}
+            // onChange={setDescription}
+            placeholder="Product description"
+          />
+
+          <Select
+            type="text"
+            id="category"
+            name="category"
+            options={expense ? optionsExpenses : optionsIncome}
+            styles={styles}
+            placeholder="Product category"
+            // onChange={setCategory}
+            className={s.select}
+          />
+
+          <div className={s.currencyWrapp}>
+            <NumberFormat
+              suffix={' UAH'}
+              decimalScale={2}
+              // defaultValue={'00.00'}
+              inputMode="numeric"
+              placeholder="00.00 UAH"
+              thousandSeparator={' '}
+              fixedDecimalScale={true}
+              className={s.input}
               id="amount"
               name="amount"
-              type="number"
-              sx={{ mb: 1, width: '100%' }}
-              color="warning"
-              label="Amount"
-              variant="outlined"
-              size="small"
-              helperText="enter amount"
-              placeholder="00.00 грн."
+
+              // value={value}
+              // onValueChange={(values, sourceInfo) => {
+              //   console.log(values, sourceInfo);
+              //   setValue(values.floatValue?.toFixed(2));
+              // }}
             />
+
+            {/* <div className={s.calculateWrap}>
+              <BsCalculator className={s.calculate} />
+            </div> */}
+
           </div>
         </div>
 
