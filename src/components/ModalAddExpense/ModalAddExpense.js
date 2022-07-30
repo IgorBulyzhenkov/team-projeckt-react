@@ -9,14 +9,6 @@ const ModalAddExpense = ({ handleClick, expense }) => {
   return createPortal(
     <div className={s.overlay} id="backDrop">
       <div className={s.modal}>
-        <IconButton
-          color="warning"
-          onClick={handleClick}
-          aria-label="button close"
-          component="button"
-        >
-          <KeyboardBackspaceIcon />
-        </IconButton>
         <FormAddExpense expense={expense} handleClick={handleClick} />
       </div>
     </div>,

@@ -52,7 +52,6 @@ export const App = () => {
   useEffect(() => {
     function handleResize() {
       const windowWidth = getWindowWidth();
-      console.log(windowWidth);
       windowWidth && setWidthPx(windowWidth);
     }
     window.addEventListener('resize', handleResize);

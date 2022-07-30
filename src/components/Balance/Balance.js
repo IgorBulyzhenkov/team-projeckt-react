@@ -16,7 +16,6 @@ const Balance = () => {
   const [income, setIncome] = useState(() => data?.balance);
 
   const handleChange = ev => {
-    console.log(ev);
     const query = ev.floatValue;
     setIncome(query);
   };
@@ -51,19 +50,10 @@ const Balance = () => {
     setBalanceValue(income);
   };
 
-  console.log();
   return (
     <div className={s.wrap}>
       <span className={s.span}>Balance:</span>
       <form onSubmit={handleSubmit} className={s.form}>
-        {/* <CurrencyInput
-          placeholder="00.00 UAH"
-          type="text"
-          className={s.input}
-          onChange={handleChange}
-          onClick={resetInput}
-          value={String(income)}
-        /> */}
         <NumberFormat
           suffix={' UAH'}
           decimalScale={2}

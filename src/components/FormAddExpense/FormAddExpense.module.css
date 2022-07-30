@@ -58,7 +58,7 @@
   padding: 10px 16px 10px 19px;
   border-radius: 22px 0 0 22px;
   border: 2px solid #ffffff;
-  width: 120px;
+  width: 150px;
   outline: none;
   text-align: right;
   height: 20px;
@@ -138,15 +138,6 @@
     position: absolute;
     top: 12px;
     right: 10px;
-    /* margin: 0;
-  width: 60px;
-  height: 44px;
-  border: 2px solid #f5f6fb;
-  border-width: 2px 2px 2px 0;
-  border-radius: 0px 22px 22px 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
   }
 
 
@@ -182,7 +173,7 @@
   }
 
   .inputTablet {
-    padding: 10px 16px 10px 19px;
+    padding: 10px 30px 10px 10px;
     width: 119px;
     outline: none;
     text-align: right;
@@ -194,7 +185,7 @@
     background-color: #ffffff;
     color: #c7ccdc;
 
-    text-align: center;
+    padding-right: 30px;
   }
 
   .inputTablet::placeholder {

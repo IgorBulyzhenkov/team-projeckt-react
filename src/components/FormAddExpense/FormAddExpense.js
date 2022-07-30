@@ -20,22 +20,22 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [date, setDate] = useState(new Date());
+  const [amount, setAmount] = useState('');
+  const [select, setSelect] = useState(null);
 
   const VpWidth = useSelector(getWidth);
 
   const handleSubmit = ev => {
     ev.preventDefault();
+
     const { amount, amountTablet, description, category, date } =
       ev.currentTarget;
     let amountViewAPI = '';
-    console.log(amount);
-    console.log(amountTablet);
     amount.value
       ? (amountViewAPI = Number.parseFloat(amount.value.split(' ').join('')))
       : (amountViewAPI = Number.parseFloat(
           amountTablet.value.split(' ').join('')
         ));
-    // const amountViewAPI = Number.parseFloat(amount.value.split(' ').join(''));
     const transaction = {
       description: description.value,
       amount: amountViewAPI,
@@ -49,6 +49,8 @@ const FormAddExpense = ({ expense, handleClick }) => {
       addIncome(transaction);
     }
     ev.target.reset();
+    setAmount('');
+    setSelect(null);
 
     if (VpWidth === 'mobile') {
       handleClick();
@@ -97,10 +99,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
     }),
   };
 
-  // const handleChange = e => {
-  //   setCategories(e.target.value);
-  // };
-
   return (
     <div className={s.formWrap}>
       <div className={s.exitBtn}>
@@ -146,6 +144,8 @@ const FormAddExpense = ({ expense, handleClick }) => {
             styles={styles}
             placeholder="Product category"
             className={s.select}
+            value={select}
+            onChange={setSelect}
           />
 
           <div className={s.currencyWrapp}>
@@ -159,6 +159,11 @@ const FormAddExpense = ({ expense, handleClick }) => {
               className={s.input}
               id="amount"
               name="amount"
+              value={amount}
+              maxLength={17}
+              onValueChange={(values, sourceInfo) =>
+                setAmount(values.floatValue)
+              }
             />
             <NumberFormat
               decimalScale={2}
@@ -169,6 +174,9 @@ const FormAddExpense = ({ expense, handleClick }) => {
               className={s.inputTablet}
               id="amountTablet"
               name="amountTablet"
+              maxLength={13}
+              value={amount}
+              onValueChange={values => setAmount(values.floatValue)}
             />
 
             <div className={s.calculateWrap}>
@@ -181,7 +189,14 @@ const FormAddExpense = ({ expense, handleClick }) => {
           <button type="submit" className={s.buttonInput}>
             Input
           </button>
-          <button type="reset" className={s.buttonClear}>
+          <button
+            type="reset"
+            className={s.buttonClear}
+            onClick={() => {
+              setAmount('');
+              setSelect(null);
+            }}
+          >
             Clear
           </button>
         </div>
