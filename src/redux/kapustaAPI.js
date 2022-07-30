@@ -123,7 +123,7 @@ export const kapustaApi = createApi({
       query: () => ({
         url: `user`,
       }),
-      providesTags: ['User'],
+      providesTags: ['User', 'Transactions'],
     }),
     changeBalance: builder.mutation({
       query: balance => ({
