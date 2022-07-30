@@ -87,6 +87,12 @@ canvas {
   }
 }
 
+@media screen and (min-width: 1280px) {
+  canvas {
+    width: 758px !important;
+  }
+}
+
 /* .react-calendar__viewContainer {
   display: none;
 } */
