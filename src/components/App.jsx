@@ -11,8 +11,6 @@ import { setUser, setWidth } from 'redux/reducer';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './Routs/PrivateRoute';
 import PublicRoute from './Routs/PublicRoute';
-import SkeletonReport from './Skeleton/SkeletonReport';
-import SkeletonHeader from './Skeleton/SkeletonHeader';
 // import ActionModal from './ActionModal';
 import s from './App.module.css';
 
@@ -123,9 +121,8 @@ export const App = () => {
     <div>
       <Suspense fallback={<>...loading</>}>
         {/* <ActionModal/> */}
-        <Suspense fallback={<SkeletonHeader />}>
-          <Header />
-        </Suspense>
+        <Header />
+
         <Routes>
           <Route
             path="/authorization"
@@ -138,13 +135,11 @@ export const App = () => {
           <Route
             path="/home"
             element={
-              <Suspense fallback={<SkeletonReport />}>
-                <PrivateRoute>
-                  <div className={s.back}>
-                    <HomePage />
-                  </div>
-                </PrivateRoute>
-              </Suspense>
+              <PrivateRoute>
+                <div className={s.back}>
+                  <HomePage />
+                </div>
+              </PrivateRoute>
             }
           ></Route>
 
