@@ -1,17 +1,13 @@
 .btn {
-  border-radius: 0;
-  width: 158px;
+  width: 144px;
   min-height: 53px;
-  padding: 7px 32px;
+  border-radius: 30px;
   background-color: #fefefe;
+  margin: 2px;
+  border: 2px solid rgba(255, 117, 29, 0.2);
 }
 
-.btn.isActive {
-  background-color: #ff751d;
-  color: #fff;
-}
-
-.wrap {
+.deskWrap {
   padding: 24px 40px;
   background-color: #ffffff;
   box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
@@ -29,10 +25,19 @@
   margin-bottom: 20px;
 }
 
+.mobileWrap {
+}
+
 @media screen and (max-width: 379px) {
   .text {
     font-size: 12px;
     line-height: 14px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .deskWrap {
+    display: none;
   }
 }
 
@@ -41,11 +46,22 @@
     min-width: 138px;
     padding: 14px;
     border-radius: 16px 16px 0 0;
+    margin: 0;
+    border: none;
+  }
+
+  .btn.isActive {
+    background-color: #ff751d;
+    color: #fff;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .wrap {
     padding: 32px;
+  }
+
+  .mobileWrap {
+    display: none;
   }
 }

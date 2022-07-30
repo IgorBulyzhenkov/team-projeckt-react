@@ -22,7 +22,7 @@ export default function MobileTransaction({ handleClick }) {
   };
 
   return (
-    <table className={s.table}>
+    <table className={s.mobTable}>
       {transactions?.map(({ description, category, amount, date, _id }) => {
         return (
           <tbody key={_id}>

@@ -1,20 +1,26 @@
 import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
-import CurrencyInput from 'Utils/CurrencyInput';
 import { useState } from 'react';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Select from 'react-select';
+// import { BsCalculator } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import { getWidth } from '../../redux/selectors';
+import NumberFormat from 'react-number-format';
+import { IconButton } from '@mui/material';
+// import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
-const FormAddExpense = ({ expense }) => {
+const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
-  const [amount, setAmount] = useState(null);
   const [date, setDate] = useState(new Date());
-  
+
+  const VpWidth = useSelector(getWidth);
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -32,22 +38,11 @@ const FormAddExpense = ({ expense }) => {
     } else {
       addIncome(transaction);
     }
-  };
+    ev.target.reset();
 
-  const checkBalance = amount => {
-    const arrayBalance = String(amount).split('');
-    if (arrayBalance?.indexOf('.') === -1) {
-      const stringBalance = `${arrayBalance.join('')}.00`;
-      return stringBalance;
+    if (VpWidth === 'mobile') {
+      handleClick();
     }
-
-    let decimals = String(amount).split('.')[1];
-    return decimals.length < 2 ? `${amount}0` : amount;
-  };
-
-  const amountSet = amount => {
-    const amountView = checkBalance(amount);
-    setAmount(amountView);
   };
 
   const optionsExpenses = [
@@ -92,45 +87,80 @@ const FormAddExpense = ({ expense }) => {
     }),
   };
 
+  // const handleChange = e => {
+  //   setCategories(e.target.value);
+  // };
+
   return (
-    <div>
+    <div className={s.formWrap}>
+      <IconButton
+        color="warning"
+        onClick={handleClick}
+        aria-label="button close"
+        component="button"
+      >
+        <KeyboardBackspaceIcon />
+      </IconButton>
+
       <form className={s.form} onSubmit={handleSubmit}>
-        <DatePicker
-          value={date}
-          calendarIcon={<CalendarMonthIcon />}
-          clearIcon={null}
-          prevLabel={null}
-          prev2Label={null}
-          nextLabel={null}
-          next2Label={null}
-          className={s.calendar}
-          name="date"
-          onChange={setDate}
-        />
-        <input
-          type="text"
-          id="description"
-          name="description"
-          className={s.description}
-        />
+        <div className={s.inputWrap}>
+          <DatePicker
+            value={date}
+            calendarIcon={<CalendarMonthIcon />}
+            clearIcon={null}
+            prevLabel={null}
+            prev2Label={null}
+            nextLabel={null}
+            next2Label={null}
+            className={s.calendar}
+            calendarClassName={s.calendar}
+            name="date"
+            onChange={setDate}
+            format={'dd.MM.y'}
+          />
+          <input
+            type="text"
+            id="description"
+            name="description"
+            className={s.description}
+            placeholder="Product description"
+          />
 
-        <Select
-          type="text"
-          id="category"
-          name="category"
-          options={expense ? optionsExpenses : optionsIncome}
-          styles={styles}
-          placeholder="Product category"
-        />
+          <Select
+            type="text"
+            id="category"
+            name="category"
+            options={expense ? optionsExpenses : optionsIncome}
+            styles={styles}
+            placeholder="Product category"
+            className={s.select}
+          />
 
-        <CurrencyInput
-          placeholder="00.00 UAH"
-          type="text"
-          id="amount"
-          name="amount"
-          className={s.input}
-          onChange={amountSet}
-        />
+          <div className={s.currencyWrapp}>
+            <NumberFormat
+              suffix={' UAH'}
+              decimalScale={2}
+              // defaultValue={'00.00'}
+              inputMode="numeric"
+              placeholder="00.00 UAH"
+              thousandSeparator={' '}
+              fixedDecimalScale={true}
+              className={s.input}
+              id="amount"
+              name="amount"
+
+              // value={value}
+              // onValueChange={(values, sourceInfo) => {
+              //   console.log(values, sourceInfo);
+              //   setValue(values.floatValue?.toFixed(2));
+              // }}
+            />
+
+            {/* <div className={s.calculateWrap}>
+              <BsCalculator className={s.calculate} />
+            </div> */}
+          </div>
+        </div>
 
         <div className={s.buttonWrap}>
           <button type="submit" className={s.buttonInput}>
@@ -146,5 +176,3 @@ const FormAddExpense = ({ expense }) => {
 };
 
 export default FormAddExpense;
-
-// onSubmit = { addExpenseTransaction };

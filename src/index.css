@@ -63,10 +63,16 @@ h6 {
   display: none;
 }
 
+.react-date-picker {
+  display: flex !important;
+  justify-content: flex-end !important;
+  width: fit-content !important;
+}
+
 .react-date-picker__wrapper {
   flex-direction: row-reverse;
-  outline: none;
-  border: none;
+  border: none !important;
+  margin-bottom: 10px !important;
 }
 
 canvas {
@@ -82,6 +88,73 @@ canvas {
 /* .react-calendar__viewContainer {
   display: none;
 } */
+
+.react-date-picker__inputGroup__input,
+.react-date-picker__inputGroup__leadingZero {
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: #52555f !important;
+}
+
+.react-date-picker__button svg {
+  size: 20px !important;
+}
+
+.react-date-picker__calendar .react-calendar {
+  border: none !important;
+}
+
+.css-ewfg62-control {
+  border-color: #f5f6fb !important;
+}
+
+.css-14el2xx-placeholder {
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  letter-spacing: 0.02em !important;
+  color: #c7ccdc !important;
+}
+
+.css-ewfg62-control {
+  background-color: #f5f6fb !important;
+  border: 2px solid #ffffff !important;
+}
+
+.css-l9stgq-control {
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+  background-color: #f5f6fb !important;
+}
+.css-l9stgq-control:hover {
+  border-color: #ffffff !important;
+}
+
+@media screen and (min-width: 768px) {
+  .css-ewfg62-control {
+    border: 2px solid #f5f6fb !important;
+    border-radius: 0px !important;
+    width: 169px !important;
+    height: 44px !important;
+    border-width: 2px 0 2px 2px !important;
+    background-color: #ffff !important;
+  }
+
+  .css-l9stgq-control {
+    width: 169px !important;
+    height: 44px !important;
+    border-radius: 0 !important;
+    border-width: 2px 0 2px 2px !important;
+  }
+
+  .css-l9stgq-control:hover {
+    border-width: 2px 0 2px 2px !important;
+  }
+}
+
 
 /* .react-calendar__navigation__label {
   pointer-events: none;
@@ -117,3 +190,5 @@ button.react-calendar__navigation__next-button:focus {
   background-color: transparent;
   color: #f76002;
 } */
+
+

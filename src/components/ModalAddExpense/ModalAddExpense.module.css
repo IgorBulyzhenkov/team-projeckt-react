@@ -1,8 +1,26 @@
-.modal {
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+  max-width: calc(200vw - 48px);
+  max-height: calc(200vh - 24px);
   background-color: #ffff;
-  position: fixed;
-  top: 56px;
-  left: 0;
+
+  padding: 15px;
+  border-radius: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .overlay {
+    display: none;
+  }
 }

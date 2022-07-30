@@ -42,11 +42,9 @@ export const App = () => {
   const [widthPx, setWidthPx] = useState(getWindowWidth());
   const changeWidthState = (width, currentWidth) => {
     if (currentWidth <= 768 && width !== 'mobile') {
-      console.log(1);
       dispatch(setWidth({ width: 'mobile' }));
     }
     if (currentWidth > 768 && width !== 'tablet') {
-      console.log(2);
       dispatch(setWidth({ width: 'tablet' }));
     }
   };
@@ -109,14 +107,22 @@ export const App = () => {
         );
       return;
     }
-  }, [dispatch, getUserData, isLoggedIn, refreshUser, sid, searchParams,width]);
+  }, [
+    dispatch,
+    getUserData,
+    isLoggedIn,
+    refreshUser,
+    sid,
+    searchParams,
+    width,
+  ]);
 
   return (
     <div>
-      <Suspense fallback={<div>...Loading</div>}>
+      <Suspense fallback={<>...loading</>}>
         {/* <ActionModal/> */}
-        {width === 'tablet' && <div>TABLET</div>}
         <Header />
+
         <Routes>
           <Route
             path="/authorization"
@@ -136,6 +142,7 @@ export const App = () => {
               </PrivateRoute>
             }
           ></Route>
+
           <Route
             path="/report"
             element={
