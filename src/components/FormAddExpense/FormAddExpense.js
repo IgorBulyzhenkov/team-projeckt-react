@@ -2,7 +2,8 @@ import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
 import { useState } from 'react';
-// import React from 'react';
+import { IconButton } from '@mui/material';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
@@ -10,8 +11,6 @@ import {
 import { ReactComponent as Calculator } from '../../img/Calculator.svg';
 
 import Select from 'react-select';
-
-import { BsCalculator } from 'react-icons/bs';
 
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
@@ -104,7 +103,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
   return (
     <div className={s.formWrap}>
-
       <div className={s.exitBtn}>
         <IconButton
           color="warning"
@@ -115,7 +113,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
           <KeyboardBackspaceIcon />
         </IconButton>
       </div>
-
 
       <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrap}>
@@ -155,7 +152,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
             <NumberFormat
               suffix={' UAH'}
               decimalScale={2}
-              // defaultValue={'00.00'}
               inputMode="numeric"
               placeholder="00.00 UAH"
               thousandSeparator={' '}
@@ -176,9 +172,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
             />
 
             <div className={s.calculateWrap}>
-
               <Calculator width="20" height="20" />
-
             </div>
           </div>
         </div>

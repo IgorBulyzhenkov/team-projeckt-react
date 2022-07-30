@@ -11,7 +11,6 @@ import { setUser, setWidth } from 'redux/reducer';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './Routs/PrivateRoute';
 import PublicRoute from './Routs/PublicRoute';
-// import ActionModal from './ActionModal';
 import s from './App.module.css';
 
 const Header = lazy(() => import('./Header' /* webpackChunkName: "header" */));
@@ -36,26 +35,29 @@ export const App = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const width = useSelector(getWidth);
   //====================динамически меняет ширину и позволяет ререндер компонентов=========================================
-  function getWindowWidth() {
-    return window.innerWidth;
-  }
+  const getWindowWidth = () => window.innerWidth;
+
   const [widthPx, setWidthPx] = useState(getWindowWidth());
   const changeWidthState = (width, currentWidth) => {
     if (currentWidth < 768 && width !== 'mobile') {
       dispatch(setWidth({ width: 'mobile' }));
+      return;
     }
     if (currentWidth >= 768 && width !== 'tablet') {
       dispatch(setWidth({ width: 'tablet' }));
+      return;
     }
   };
   changeWidthState(width, widthPx);
   useEffect(() => {
     function handleResize() {
-      setWidthPx(getWindowWidth());
+      const windowWidth = getWindowWidth();
+      console.log(windowWidth);
+      windowWidth && setWidthPx(windowWidth);
     }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [width, widthPx]);
+  }, []);
   //============================================================================
   useEffect(() => {
     if (searchParams.get('accessToken')) {
@@ -107,15 +109,7 @@ export const App = () => {
         );
       return;
     }
-  }, [
-    dispatch,
-    getUserData,
-    isLoggedIn,
-    refreshUser,
-    sid,
-    searchParams,
-    width,
-  ]);
+  }, [dispatch, getUserData, isLoggedIn, refreshUser, sid, searchParams]);
 
   return (
     <div>
