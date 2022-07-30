@@ -15,9 +15,23 @@ ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 function ReportGraph({ data, category }) {
   const screen = useSelector(getWidth);
 
+
   const newData = data[category];
+
   const value = Object.values(newData).slice(1);
   const keys = Object.keys(newData).slice(1);
+
+  const widthBar = () => {
+    switch (screen) {
+      case 'tablet':
+        return 38;
+
+      case 'mobile':
+        return 15;
+      default:
+        break;
+    }
+  };
 
   const dataChart = {
     type: 'bar',
@@ -32,56 +46,9 @@ function ReportGraph({ data, category }) {
           ' rgba(255, 218, 192, 1)',
         ],
         borderRadius: [10],
-        maxBarThickness: [38],
+        maxBarThickness: [widthBar()],
       },
     ],
-    // labels: ['a', 'b', 'c', 'd'],
-    // datasets: [
-    //   {
-    //     data: [500, 400, 300, 200],
-    //   },
-    // ],
-    // options: {
-    //   indexAxis: 'y',
-    //   layout: {
-    //     padding: {
-    //       right: 60,
-    //     },
-    //   },
-    //   plugins: {
-    //     title: {
-    //       display: true,
-    //       text: 'Graph',
-    //     },
-    //     legend: {
-    //       display: false,
-    //     },
-    //     datalabels: {
-    //       color: 'blue',
-    //       anchor: 'end',
-    //       align: 'right',
-    //       labels: {
-    //         title: {
-    //           font: {
-    //             weight: 'bold',
-    //           },
-    //         },
-    //       },
-    //     },
-    //   },
-    //   scales: {
-    //     y: {
-    //       grid: {
-    //         display: false,
-    //       },
-    //     },
-    //     x: {
-    //       grid: {
-    //         display: false,
-    //       },
-    //     },
-    //   },
-    // },
   };
 
   // display: function (context) {
@@ -92,10 +59,10 @@ function ReportGraph({ data, category }) {
   //             return dataTrue > 500;
   //           },
 
-  const heightScreen = () => {
+  const borderColor = () => {
     switch (screen) {
       case 'mobile':
-        return 600;
+        return 'transparent';
       default:
         break;
     }
@@ -113,19 +80,67 @@ function ReportGraph({ data, category }) {
     }
   };
 
+  const lineY = () => {
+    switch (screen) {
+      case 'tablet':
+        return false;
+
+      case 'mobile':
+        return true;
+      default:
+        break;
+    }
+  };
+
+  const lineX = () => {
+    switch (screen) {
+      case 'tablet':
+        return true;
+
+      case 'mobile':
+        return false;
+      default:
+        break;
+    }
+  };
+
+  const gridLineY = () => {
+    switch (screen) {
+      case 'tablet':
+        return true;
+
+      case 'mobile':
+        return false;
+      default:
+        break;
+    }
+  };
+
+  const paddingScreenRight = () => {
+    switch (screen) {
+      case 'tablet':
+        return 0;
+
+      case 'mobile':
+        return 30;
+      default:
+        break;
+    }
+  };
+
+
   return (
     <div className={s.wrap}>
       <div className={s.container}>
         <Bar
           data={dataChart}
-          height={heightScreen()}
-          // style={{"height":"100%"}}
+          // height={heightScreen()}
           options={{
             indexAxis: heightMobileScreen(),
             layout: {
               padding: {
                 top: 30,
-                right: 30,
+                right: paddingScreenRight(),
               },
             },
             plugins: {
@@ -135,30 +150,23 @@ function ReportGraph({ data, category }) {
                 align: 'top',
                 fontSize: '40',
               },
-              title: {
-                position: 'top',
-              },
             },
             scales: {
               x: {
                 ticks: {
-                  display: false,
-                },
-                title: {
-                  align: 'top',
+                  display: lineX(),
                 },
                 grid: {
                   display: false,
-                  offset: 5,
+                  borderColor: borderColor(),
                 },
-                weight: 5,
               },
               y: {
                 ticks: {
-                  display: true,
+                  display: lineY(),
                 },
                 grid: {
-                  display: true,
+                  display: gridLineY(),
                   tickColor: 'transparent',
                   borderColor: 'transparent',
                   offset: true,

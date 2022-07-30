@@ -69,6 +69,16 @@ h6 {
   border: none;
 }
 
+canvas {
+  min-height: 100px !important;
+}
+
+@media screen and (min-width: 768px) {
+  canvas {
+    min-height: 383px !important;
+  }
+}
+
 /* .react-calendar__viewContainer {
   display: none;
 } */
