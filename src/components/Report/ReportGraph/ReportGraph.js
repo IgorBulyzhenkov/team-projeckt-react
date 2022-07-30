@@ -133,8 +133,9 @@ function ReportGraph({ data }) {
       <div className={s.container}>
         <Bar
           data={dataChart}
-          // height={heightScreen()}
           options={{
+            maintainAspectRatio: false,
+            responsive: true,
             indexAxis: heightMobileScreen(),
             layout: {
               padding: {
@@ -168,7 +169,7 @@ function ReportGraph({ data }) {
                   display: gridLineY(),
                   tickColor: 'transparent',
                   borderColor: 'transparent',
-                  offset: true,
+                  // offset: true,
                 },
               },
             },

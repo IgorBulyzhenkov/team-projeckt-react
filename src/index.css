@@ -76,12 +76,14 @@ h6 {
 }
 
 canvas {
-  min-height: 100px !important;
+  min-height: 430px !important;
+  min-width: 300px !important;
 }
 
 @media screen and (min-width: 768px) {
   canvas {
     min-height: 383px !important;
+    width: 635px !important;
   }
 }
 
@@ -129,6 +131,7 @@ canvas {
   box-shadow: none !important;
   background-color: #f5f6fb !important;
 }
+
 .css-l9stgq-control:hover {
   border-color: #ffffff !important;
 }
@@ -190,5 +193,3 @@ button.react-calendar__navigation__next-button:focus {
   background-color: transparent;
   color: #f76002;
 } */
-
-
