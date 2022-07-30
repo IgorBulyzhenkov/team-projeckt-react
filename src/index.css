@@ -75,6 +75,20 @@ h6 {
   margin-bottom: 10px !important;
 }
 
+canvas {
+  min-height: 100px !important;
+}
+
+@media screen and (min-width: 768px) {
+  canvas {
+    min-height: 383px !important;
+  }
+}
+
+/* .react-calendar__viewContainer {
+  display: none;
+} */
+
 .react-date-picker__inputGroup__input,
 .react-date-picker__inputGroup__leadingZero {
   font-weight: 900 !important;
@@ -141,6 +155,7 @@ h6 {
   }
 }
 
+
 /* .react-calendar__navigation__label {
   pointer-events: none;
   font-family: 'Roboto';
@@ -174,6 +189,6 @@ button.react-calendar__navigation__next-button:hover,
 button.react-calendar__navigation__next-button:focus {
   background-color: transparent;
   color: #f76002;
+} */
 
-} */ 
 

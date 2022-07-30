@@ -26,6 +26,7 @@ function ReportPage() {
       setExpenses(res.data.expenses);
       setIncomes(res.data.incomes);
     });
+    
   }, [value, getPeriodData]);
 
   const handleChange = date => {
