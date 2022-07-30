@@ -15,7 +15,6 @@ ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 function ReportGraph({ data, category }) {
   const screen = useSelector(getWidth);
 
-
   const newData = data[category];
 
   const value = Object.values(newData).slice(1);
@@ -79,6 +78,7 @@ function ReportGraph({ data, category }) {
         break;
     }
   };
+
 
   const lineY = () => {
     switch (screen) {
