@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/team-project-react/static/css/main.17cbad7c.css",
-    "main.js": "/team-project-react/static/js/main.3d66f584.js",
+    "main.css": "/team-project-react/static/css/main.73a5c6c3.css",
+    "main.js": "/team-project-react/static/js/main.523a96e5.js",
     "header.css": "/team-project-react/static/css/header.08dfd584.chunk.css",
     "header.js": "/team-project-react/static/js/header.48763eeb.chunk.js",
     "authorization.css": "/team-project-react/static/css/authorization.dc9714cf.chunk.css",
@@ -19,8 +19,8 @@
     "static/media/kapusta.svg": "/team-project-react/static/media/kapusta.1bb80c24b251605c4e8bc52f08c90c02.svg",
     "static/media/google-symbol.svg": "/team-project-react/static/media/google-symbol.45390fe8c864f6ba12f2fcaab8463918.svg",
     "index.html": "/team-project-react/index.html",
-    "main.17cbad7c.css.map": "/team-project-react/static/css/main.17cbad7c.css.map",
-    "main.3d66f584.js.map": "/team-project-react/static/js/main.3d66f584.js.map",
+    "main.73a5c6c3.css.map": "/team-project-react/static/css/main.73a5c6c3.css.map",
+    "main.523a96e5.js.map": "/team-project-react/static/js/main.523a96e5.js.map",
     "header.08dfd584.chunk.css.map": "/team-project-react/static/css/header.08dfd584.chunk.css.map",
     "header.48763eeb.chunk.js.map": "/team-project-react/static/js/header.48763eeb.chunk.js.map",
     "authorization.dc9714cf.chunk.css.map": "/team-project-react/static/css/authorization.dc9714cf.chunk.css.map",
@@ -34,7 +34,7 @@
     "200.1cf5c24c.chunk.js.map": "/team-project-react/static/js/200.1cf5c24c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.17cbad7c.css",
-    "static/js/main.3d66f584.js"
+    "static/css/main.73a5c6c3.css",
+    "static/js/main.523a96e5.js"
   ]
 }
