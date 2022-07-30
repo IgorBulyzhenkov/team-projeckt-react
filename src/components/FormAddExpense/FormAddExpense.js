@@ -2,7 +2,8 @@ import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
 import { useState } from 'react';
-// import React from 'react';
+import { IconButton } from '@mui/material';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
@@ -153,7 +154,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
             <NumberFormat
               suffix={' UAH'}
               decimalScale={2}
-              // defaultValue={'00.00'}
               inputMode="numeric"
               placeholder="00.00 UAH"
               thousandSeparator={' '}

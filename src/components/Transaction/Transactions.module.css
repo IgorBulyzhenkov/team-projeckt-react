@@ -1,3 +1,9 @@
+@media screen and (max-width: 767px) {
+.transactionContainer{
+  margin: 0 auto;
+  width: fit-content;
+}
+}
 .btn {
   width: 144px;
   min-height: 53px;

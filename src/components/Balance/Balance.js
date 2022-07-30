@@ -67,8 +67,7 @@ const Balance = () => {
         <NumberFormat
           suffix={' UAH'}
           decimalScale={2}
-          // defaultValue={'00.00'}
-          inputMode="numeric"
+          // inputMode="numeric"
           placeholder="00.00 UAH"
           thousandSeparator={' '}
           fixedDecimalScale={true}

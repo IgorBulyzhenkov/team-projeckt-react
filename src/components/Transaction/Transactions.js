@@ -5,6 +5,7 @@ import TransactionHistory from './TransactionHistory';
 import MobileTransaction from './MobileTransaction';
 import ActionModal from '../ActionModal/ActionModal';
 import FormAddExpense from 'components/FormAddExpense';
+
 import s from './Transactions.module.css';
 
 import {
@@ -34,7 +35,6 @@ export default function Transactions() {
       setTransactions(expense?.expenses);
       setMonthStats(expense?.monthsStats);
     } else {
-
       setTransactions(income?.incomes);
       setMonthStats(income?.monthsStats);
     }
@@ -66,7 +66,7 @@ export default function Transactions() {
   };
 
   return (
-    <div>
+    <div className={s.transactionContainer}>
       <button
         className={`${s.btn} ${isExpense ? s.isActive : ''}`}
         type="button"
