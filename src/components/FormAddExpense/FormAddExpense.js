@@ -6,31 +6,22 @@ import {
   useAddExpenseMutation,
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
-
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Select from 'react-select';
-import { BsCalculator } from 'react-icons/bs';
-
+// import { BsCalculator } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
-import { MenuItem, TextField } from '@mui/material';
 import { getWidth } from '../../redux/selectors';
-
 import NumberFormat from 'react-number-format';
+import { IconButton } from '@mui/material';
 // import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
-
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
-
-  const [amount, setAmount] = useState(null);
-  const [value, setValue] = useState('');
-
   const [date, setDate] = useState(new Date());
 
-  const [categories, setCategories] = useState('');
-
   const VpWidth = useSelector(getWidth);
-  console.log(value);
+
   const handleSubmit = ev => {
     ev.preventDefault();
     const { amount, description, category, date } = ev.currentTarget;
@@ -48,8 +39,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
       addIncome(transaction);
     }
     ev.target.reset();
-  };
-
 
     if (VpWidth === 'mobile') {
       handleClick();
@@ -75,16 +64,45 @@ const FormAddExpense = ({ expense, handleClick }) => {
     { value: 'Доп. доход', label: 'Extra income' },
   ];
 
-  const handleChange = e => {
-    setCategories(e.target.value);
+  const styles = {
+    option: (provided, state) => ({
+      ...provided,
+      color: state.isSelected ? '#52555F' : '#C7CCDC',
+      backgroundColor: state.isSelected ? '#C7CCDC' : '#FFFFFF',
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: '#52555F',
+    }),
+    control: (provided, state) => ({
+      ...provided,
+      border: '2px solid #ffffff',
+      borderRadius: '0 0 20px 0',
+      height: '44px',
+      width: '280px',
+    }),
+    indicatorSeparator: (provided, state) => ({
+      ...provided,
+      display: 'none',
+    }),
   };
 
-  const categoriesType = expense ? optionsExpenses : optionsIncome;
+  // const handleChange = e => {
+  //   setCategories(e.target.value);
+  // };
 
   return (
     <div className={s.formWrap}>
-      <form className={s.form} onSubmit={handleSubmit}>
+      <IconButton
+        color="warning"
+        onClick={handleClick}
+        aria-label="button close"
+        component="button"
+      >
+        <KeyboardBackspaceIcon />
+      </IconButton>
 
+      <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrap}>
           <DatePicker
             value={date}
@@ -105,7 +123,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
             id="description"
             name="description"
             className={s.description}
-            // onChange={setDescription}
             placeholder="Product description"
           />
 
@@ -116,7 +133,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
             options={expense ? optionsExpenses : optionsIncome}
             styles={styles}
             placeholder="Product category"
-            // onChange={setCategory}
             className={s.select}
           />
 
@@ -143,7 +159,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
             {/* <div className={s.calculateWrap}>
               <BsCalculator className={s.calculate} />
             </div> */}
-
           </div>
         </div>
 
