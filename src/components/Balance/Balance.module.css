@@ -22,7 +22,7 @@
   padding: 10px 16px 10px 19px;
   border-radius: 22px 0 0 22px;
   border: 2px solid #ffffff;
-  min-width: 120px !important;
+ width: 150px ;
   outline: none;
   text-align: right;
   font-size: 12px;
