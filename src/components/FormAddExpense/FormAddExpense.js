@@ -8,8 +8,6 @@ import {
   useAddExpenseMutation,
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
-import { IconButton } from '@mui/material';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { ReactComponent as Calculator } from '../../img/Calculator.svg';
 
 import Select from 'react-select';
