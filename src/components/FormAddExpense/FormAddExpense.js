@@ -149,11 +149,16 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const caledarEl = document.querySelectorAll(
     '.react-date-picker__inputGroup__input'
   );
+  const calendarZero = document.querySelector(
+    '.react-date-picker__inputGroup__leadingZero'
+  );
 
   if (themeColor === 'dark') {
-    caledarEl.forEach(el => el.classList.add('whiteColor'));
+    caledarEl?.forEach(el => el.classList.add('whiteColor'));
+    calendarZero?.classList.add('whiteColor');
   } else {
-    caledarEl.forEach(el => el.classList.remove('whiteColor'));
+    caledarEl?.forEach(el => el.classList.remove('whiteColor'));
+    calendarZero?.classList.remove('whiteColor');
   }
 
   const styles = {
@@ -212,13 +217,10 @@ const FormAddExpense = ({ expense, handleClick }) => {
             prev2Label={null}
             nextLabel={null}
             next2Label={null}
-            wrapperClassName={s.calendar}
             name="date"
             onChange={setDate}
             format={'dd.MM.y'}
-            style={{ color: 'red' }}
           />
-          {/* </div> */}
           <div className={s.notificationWraps}>
             <input
               type="text"

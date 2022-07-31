@@ -107,11 +107,9 @@ canvas {
   border:none !important;
   
 }
-.react-date-picker__inputGroup__input{
-  color:white;
-}
-.react-date-picker__inputGroup__leadingZero {
-  color: white;
+
+.whiteColor{
+  color: white !important;
 }
 
 
