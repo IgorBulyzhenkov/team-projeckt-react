@@ -4,6 +4,7 @@
   align-items: center;
   flex-direction: column;
   position: relative;
+  margin-bottom: 20px;
 }
 
 .span {
@@ -22,7 +23,7 @@
   padding: 10px 16px 10px 19px;
   border-radius: 22px 0 0 22px;
   border: 2px solid #ffffff;
- width: 150px ;
+  width: 150px;
   outline: none;
   text-align: right;
   font-size: 12px;
@@ -33,7 +34,8 @@
 .input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: black;
-  opacity: 1; /* Firefox */
+  opacity: 1;
+  /* Firefox */
   font-weight: bold;
   font-size: 12px;
 }
@@ -66,17 +68,18 @@
   color: #52555f;
   background: #f5f6fb;
   border: 2px solid #ffffff;
-    border-width: 2px 2px 2px 0;
+  border-width: 2px 2px 2px 0;
 
-  
+
 }
 
 .button:hover {
   border: none;
 }
+
 @media screen and (max-width: 767px) {
   .wrap {
-    margin-bottom: 200px;
+    margin-bottom: 20px;
   }
 }
 
@@ -84,6 +87,7 @@
   .wrap {
     flex-direction: row;
   }
+
   .span {
     margin-right: 21px;
     margin-bottom: 0;
@@ -94,6 +98,7 @@
     margin-right: 15px;
     min-width: 120px;
   }
+
   .button {
     min-width: 125px;
     border-radius: 22px;
