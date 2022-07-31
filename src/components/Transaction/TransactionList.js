@@ -104,7 +104,7 @@ export default function TransactionList({
         </thead>
       </table>
       <div className={s.tableBody}>
-        {transactions.length === 0 ? (
+        {transactions?.length === 0 ? (
           <p style={themeStyle2} className={s.plugText}>
             No transaction history! Please fill out the form above...
           </p>
