@@ -64,15 +64,6 @@ const Balance = () => {
         Balance:
       </span>
       <form onSubmit={handleSubmit} className={s.form}>
-        <CurrencyInput
-          themestyle={themeStyle}
-          placeholder="00.00 UAH"
-          type="text"
-          className={s.input}
-          onChange={handleChange}
-          onClick={resetInput}
-          value={String(income)}
-        />
         <NumberFormat
           suffix={' UAH'}
           decimalScale={2}
