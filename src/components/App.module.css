@@ -1,9 +1,14 @@
 * {
   box-sizing: border-box;
 }
+.appContainer{
+  background-color: black;
+  height: 100vh;
+  width: 100%;
 
+}
 .back {
-  height: 100%;
+height: 100vh;
 
   background-image: url('../img/AuthorizationPage/rectangle-mob.png');
   background-position: top 0px left 0px;

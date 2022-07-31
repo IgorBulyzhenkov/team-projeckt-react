@@ -95,11 +95,9 @@
   height: 44px;
   border-radius: 16px;
   /* box-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35); */
-
+  border: none;
   color: #ff751d;
   margin-right: 20px;
-  border: 2px solid #f5f6fb;
-
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
   background: linear-gradient(0deg, #ddd, #fff);
   transition: 0.5s;
@@ -121,7 +119,7 @@
   height: 44px;
   border-radius: 16px;
   background-color: #f5f6fb;
-  border: 2px solid #f5f6fb;
+  border: none;
   /* box-shadow: 1px 2px 5px rgba(170, 178, 197, 0.4); */
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
   background: linear-gradient(0deg, #ddd, #fff);
