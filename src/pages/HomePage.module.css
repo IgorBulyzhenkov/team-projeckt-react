@@ -14,7 +14,16 @@
   align-items: center;
 }
 
+.home_page {
+  min-height: 600px;
+}
+
 @media screen and (min-width: 768px) {
+
+  .home_page {
+    min-height: 1234px;
+  }
+
   .wrap {
     display: flex;
     flex-direction: row-reverse;
@@ -30,9 +39,15 @@
 }
 
 @media screen and (min-width: 1280px) {
+
+  .home_page {
+    min-height: 850px;
+  }
+
   .wrap {
     justify-content: flex-start;
   }
+
   .iconWrap {
     display: none;
   }

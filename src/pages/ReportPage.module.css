@@ -3,7 +3,8 @@
     width: 320px;
     padding-top: 22px;
     margin: 0 auto;
-    height: 100vh;
+    min-height: 1590px;
+    /* height: 100vh; */
   }
 
   .wrap_link {
@@ -229,7 +230,7 @@
   width: 320px;
   padding-top: 22px;
   margin: 0 auto;
-  height: 100vh;
+  min-height: 1590px;
 }
 
 .wrap_link {
@@ -450,7 +451,7 @@
     display: flex;
     justify-content: center;
     width: 704px;
-
+    min-height: 920px;
   }
 
   .wrap {
@@ -538,6 +539,7 @@
 @media screen and (min-width: 1280px) {
   .test {
     width: 1034px;
+    min-height: 915px;
   }
 
   .wrap {

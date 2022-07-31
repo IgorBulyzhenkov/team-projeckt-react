@@ -8,12 +8,14 @@ import s from './HomePage.module.css';
 const HomePage = () => {
   return (
     <Container>
-      <div className={s.wrap}>
-        <ReportLink />
-        <Balance />
-      </div>
+      <div className={s.home_page}>
+        <div className={s.wrap}>
+          <ReportLink />
+          <Balance />
+        </div>
 
-      <Transactions />
+        <Transactions />
+      </div>
     </Container>
   );
 };
