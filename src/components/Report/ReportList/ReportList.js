@@ -8,7 +8,6 @@ import { FiChevronLeft } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
-import { darkThemeStyles } from 'services/theme-styles';
 import s from './ReportList.module.css';
 
 function ReportList({ incomes, expenses }) {
