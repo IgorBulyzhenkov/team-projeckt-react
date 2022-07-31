@@ -11,11 +11,11 @@ export default function TransactionList({
   expenses,
   handleClick,
 }) {
-  console.log(data);
+  // console.log(data);
   const [transactions, setTransactions] = useState(
     [...data].sort((a, b) => b['_id'].localeCompare(a['_id']))
   );
-  console.log(transactions);
+  // console.log(transactions);
 
   useEffect(() => {
     setTransactions([...data].sort((a, b) => b['_id'].localeCompare(a['_id'])));
