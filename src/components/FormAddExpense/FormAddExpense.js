@@ -165,9 +165,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
       ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
       : {};
   const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : null;
-  // const handleChange = e => {
-  //   setCategories(e.target.value);
-  // };
 
   return (
     <div className={s.formWrap}>
@@ -184,23 +181,25 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
       <form className={s.form} onSubmit={handleSubmit}>
         <div style={themeStyle}>
-          <DatePicker
-            value={date}
-            calendarIcon={<CalendarMonthIcon />}
-            clearIcon={null}
-            prevLabel={null}
-            prev2Label={null}
-            nextLabel={null}
-            next2Label={null}
-            className={s.calendar}
-            calendarClassName={s.calendar}
-            name="date"
-            onChange={setDate}
-            format={'dd.MM.y'}
+
+          <div className={s.inputWrap}>
+            <DatePicker
+              value={date}
+              calendarIcon={<CalendarMonthIcon />}
+              clearIcon={null}
+              prevLabel={null}
+              prev2Label={null}
+              nextLabel={null}
+              next2Label={null}
+              className={s.calendar}
+              calendarClassName={s.calendar}
+              name="date"
+              onChange={setDate}
+              format={'dd.MM.y'}
             style={themeStyle2}
           />
         </div>
-        <div className={s.inputWrap}>
+        
           <div className={s.notificationWraps}>
             <input
               type="text"
@@ -227,40 +226,73 @@ const FormAddExpense = ({ expense, handleClick }) => {
               placeholder="Product category"
               className={s.select}
               value={select}
-              onChange={data => setSelect(data)}
+              onChange={data => setSelect(data)
             />
-            {openSelect && (
-              <div className={s.errorNotification}>"Please enter amount"</div>
-            )}
-          </div>
 
-          <div className={s.currencyWrapp}>
             <div className={s.notificationWraps}>
-              <NumberFormat
-                style={themeStyle2}
-                allowNegative={false}
-                suffix={VpWidth === 'mobile' ? ' UAH' : ''}
-                decimalScale={2}
-                inputMode="numeric"
-                placeholder={VpWidth === 'mobile' ? '00.00 UAH' : '0.00'}
-                thousandSeparator={' '}
-                fixedDecimalScale={true}
-                className={s.input}
-                id="amount"
-                name="amount"
-                value={amount}
-                maxLength={VpWidth === 'mobile' ? 16 : 12}
-                onValueChange={(values, sourceInfo) =>
-                  setAmount(values.floatValue)
-                }
+
+              <input
+                type="text"
+                id="description"
+                name="description"
+                className={s.description}
+                placeholder="Product description"
+                value={description}
+                onChange={ev => setDescription(ev.target.value)}
+
               />
-              {openInput && (
-                <div className={s.errorNotification}>"Please enter amount"</div>
+              {openDescription && (
+                <div className={s.errorNotification}>
+                  Please enter description
+                </div>
+              )}
+            </div>
+            <div className={s.notificationWraps}>
+              <Select
+                type="text"
+                id="category"
+                name="category"
+                options={expense ? optionsExpenses : optionsIncome}
+                styles={styles}
+                placeholder="Product category"
+                className={s.select}
+                value={select}
+                onChange={data => setSelect(data)}
+              />
+              {openSelect && (
+                <div className={s.errorNotification}>
+                  Please choose category
+                </div>
               )}
             </div>
 
-            <div className={s.calculateWrap}>
-              <Calculator width="20" height="20" />
+            <div className={s.currencyWrapp}>
+              <div className={s.notificationWraps}>
+                <NumberFormat
+                  allowNegative={false}
+                  suffix={VpWidth === 'mobile' ? ' UAH' : ''}
+                  decimalScale={2}
+                  inputMode="numeric"
+                  placeholder={VpWidth === 'mobile' ? '00.00 UAH' : '0.00'}
+                  thousandSeparator={' '}
+                  fixedDecimalScale={true}
+                  className={s.input}
+                  id="amount"
+                  name="amount"
+                  value={amount}
+                  maxLength={VpWidth === 'mobile' ? 16 : 12}
+                  onValueChange={(values, sourceInfo) =>
+                    setAmount(values.floatValue)
+                  }
+                />
+                {openInput && (
+                  <div className={s.errorNotification}>Please enter amount</div>
+                )}
+              </div>
+
+              <div className={s.calculateWrap}>
+                <Calculator width="20" height="20" />
+              </div>
             </div>
           </div>
         </div>
