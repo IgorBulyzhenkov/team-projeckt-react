@@ -15,6 +15,12 @@ import Select from 'react-select';
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
 import NumberFormat from 'react-number-format';
+import { IconButton } from '@mui/material';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
+// import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
@@ -42,6 +48,8 @@ const FormAddExpense = ({ expense, handleClick }) => {
       date: date.value,
       category: category.value,
     };
+
+    
 
     if (expense) {
       addExpense(transaction);
@@ -74,12 +82,18 @@ const FormAddExpense = ({ expense, handleClick }) => {
     { value: 'Доп. доход', label: 'Extra income' },
   ];
 
+  const themeColor = useContext(ThemeContext)
+
+  const backColor = themeColor === "dark" ? `${darkThemeStyles.backgroundColor}` : "#C7CCDC"
+  
+
   const styles = {
     option: (provided, state) => ({
       ...provided,
-      color: state.isSelected ? '#52555F' : '#C7CCDC',
-      backgroundColor: state.isSelected ? '#C7CCDC' : '#FFFFFF',
+      color: state.isSelected ? '#52555F' : "#C7CCDC",
+      backgroundColor: state.isSelected ? '#C7CCDC' : `${backColor}`
     }),
+    
     singleValue: (provided, state) => ({
       ...provided,
       color: '#52555F',
@@ -90,13 +104,16 @@ const FormAddExpense = ({ expense, handleClick }) => {
       borderRadius: '0 0 20px 0',
       height: '44px',
       width: '280px',
+      
     }),
     indicatorSeparator: (provided, state) => ({
       ...provided,
       display: 'none',
     }),
   };
-
+  
+    const themeStyle = themeColor === "dark" ? {background: 'white', marginRight: '5px', borderRadius: '16px'}: {}
+    const themeStyle2 = themeColor === "dark" ? darkThemeStyles.basic : null;
   // const handleChange = e => {
   //   setCategories(e.target.value);
   // };
@@ -116,21 +133,26 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
       <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrap}>
+          <div style={themeStyle}>
           <DatePicker
-            value={date}
-            calendarIcon={<CalendarMonthIcon />}
-            clearIcon={null}
-            prevLabel={null}
-            prev2Label={null}
-            nextLabel={null}
-            next2Label={null}
-            className={s.calendar}
-            calendarClassName={s.calendar}
-            name="date"
-            onChange={setDate}
-            format={'dd.MM.y'}
-          />
+             
+             value={date}
+             calendarIcon={<CalendarMonthIcon />}
+             clearIcon={null}
+             prevLabel={null}
+             prev2Label={null}
+             nextLabel={null}
+             next2Label={null}
+             className={s.calendar}
+             calendarClassName={s.calendar}
+             name="date"
+             onChange={setDate}
+             format={'dd.MM.y'}
+           />
+          </div>
+          
           <input
+            style={themeStyle2}
             type="text"
             id="description"
             name="description"
@@ -139,6 +161,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           />
 
           <Select
+            style={themeStyle}
             type="text"
             id="category"
             name="category"
@@ -148,8 +171,9 @@ const FormAddExpense = ({ expense, handleClick }) => {
             className={s.select}
           />
 
-          <div className={s.currencyWrapp}>
+          <div className={s.currencyWrapp} >
             <NumberFormat
+            style={themeStyle2}
               suffix={' UAH'}
               decimalScale={2}
               inputMode="numeric"

@@ -1,20 +1,27 @@
 import s from './Summary.module.css';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
 
 export default function Summary({ monthStats }) {
   const monthStatsArr = Object.entries(monthStats);
+
+  const themeColor = useContext(ThemeContext)
+  const themeStyle = themeColor === "dark" ? darkThemeStyles.basic : null
+
   return (
-    <table className={s.table}>
+    <table className={s.table} >
       <tbody>
         <tr>
-          <th colSpan="2">Summary</th>
+          <th colSpan="2" style={themeStyle}>Summary</th>
         </tr>
         {monthStatsArr
           .filter(([month, sum]) => sum !== 'N/A')
           .map(([month, sum]) => {
             return (
-              <tr key={month}>
-                <td>{month}</td>
-                <td>{sum}</td>
+              <tr style={themeStyle} key={month}>
+                <td style={themeStyle}>{month}</td>
+                <td style={themeStyle}>{sum}</td>
               </tr>
             );
           })}

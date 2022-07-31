@@ -15,6 +15,9 @@ import {
 } from '../../redux/kapustaAPI';
 
 import { getWidth } from '../../redux/selectors';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
 
 export default function Transactions() {
   const [isModalOpen, setModal] = useState('false');
@@ -27,6 +30,10 @@ export default function Transactions() {
   const { data: expense } = useGetExpenseQuery();
   const { data: income } = useGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
+
+  const themeColor = useContext(ThemeContext)
+  const themeStyle = themeColor === "dark" ? darkThemeStyles.elements : null;
+  const fontColor = themeColor === "dark" ? {color: darkThemeStyles.textColor} : null;
 
   const VpWidth = useSelector(getWidth);
 
@@ -68,6 +75,7 @@ export default function Transactions() {
   return (
     <div className={s.transactionContainer}>
       <button
+        style={!isExpense ? themeStyle : null}
         className={`${s.btn} ${isExpense ? s.isActive : ''}`}
         type="button"
         onClick={handleExpBtnClick}
@@ -76,6 +84,7 @@ export default function Transactions() {
         Expenses
       </button>
       <button
+      style={isExpense ? themeStyle : null}
         className={`${s.btn} ${!isExpense ? s.isActive : ''}`}
         type="button"
         onClick={handleIncBtnClick}
@@ -88,7 +97,7 @@ export default function Transactions() {
         <MobileTransaction handleClick={handleClick} />
       </div>
 
-      <div className={s.deskWrap}>
+      <div className={s.deskWrap} style={themeStyle}>
         <FormAddExpense expense={isExpense} />
         <TransactionHistory
           handleClick={handleClick}
@@ -109,7 +118,7 @@ export default function Transactions() {
           toggleModal={() => setModal(!isModalOpen)}
           logOut={() => delTransaction(transactionsId)}
         >
-          <p className={s.text}>Are you sure?</p>
+          <p className={s.text} style={fontColor}>Are you sure?</p>
         </ActionModal>
       )}
     </div>

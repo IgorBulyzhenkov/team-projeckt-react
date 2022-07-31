@@ -8,7 +8,11 @@ import {
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
 import { getWidth, getCategory } from '../../../redux/selectors';
+
 
 ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 
@@ -23,6 +27,10 @@ function ReportGraph({ data }) {
 
   const value = testSort.map(el => el[1]).slice(1);
   const keys = testSort.map(el => el[0]).slice(1);
+
+  const themeColor = useContext(ThemeContext)
+  const themeStyle = themeColor === "dark" ? darkThemeStyles.elements: null;
+  const textColor = themeColor === "dark" ? darkThemeStyles.textColor : '#52555F' ;
 
   const widthBar = () => {
     switch (screen) {
@@ -148,8 +156,8 @@ function ReportGraph({ data }) {
   };
 
   return (
-    <div className={s.wrap}>
-      <div className={s.container}>
+    <div className={s.wrap} style={themeStyle}>
+      <div className={s.container} style={themeStyle}>
         <Bar
           data={dataChart}
           options={{
@@ -164,7 +172,7 @@ function ReportGraph({ data }) {
             },
             plugins: {
               datalabels: {
-                color: '#52555F',
+                color: `${textColor}`,
                 anchor: 'end',
                 align: positionText(),
                 font: { size: fontSizeText(), weight: '400', family: 'Roboto' },

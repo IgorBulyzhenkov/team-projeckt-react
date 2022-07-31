@@ -10,12 +10,13 @@ export default function TransactionItem({
   id,
   expenses,
   handleClick,
+  themeStyle,
 }) {
   return (
-    <tr>
-      <td>{date}</td>
-      <td>{description}</td>
-      <td>{category}</td>
+    <tr >
+      <td style={themeStyle}>{date}</td>
+      <td style={themeStyle}>{description}</td>
+      <td style={themeStyle}>{category}</td>
       <td
         style={
           expenses
@@ -35,7 +36,7 @@ export default function TransactionItem({
       >
         {amount}.00 грн.
       </td>
-      <td>
+      <td style={themeStyle}>
         <IconButton
           onClick={e => handleClick(e)}
           aria-label="button delete"
