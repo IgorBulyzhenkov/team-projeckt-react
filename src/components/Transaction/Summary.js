@@ -13,7 +13,6 @@ export default function Summary({ monthStats }) {
 
   const themeColor = useContext(ThemeContext);
 
-
   const themeStyle = themeColor === 'dark' ? darkThemeStyles.basic : null;
 
   return (
@@ -36,6 +35,5 @@ export default function Summary({ monthStats }) {
           })}
       </tbody>
     </table>
-
   );
 }

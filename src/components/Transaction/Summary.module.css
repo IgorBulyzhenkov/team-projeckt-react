@@ -38,3 +38,16 @@
 .tbodyWrap {
   margin-top: 5px;
 }
+
+@media screen and (min-width: 768px) {
+  .table {
+    box-shadow: 5px 10px 20px rgb(170 178 197 / 40%);
+    border-radius: 20px 20px 0 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .table {
+    box-shadow: none;
+  }
+}

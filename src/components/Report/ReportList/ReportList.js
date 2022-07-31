@@ -45,7 +45,7 @@ function ReportList({ incomes, expenses }) {
 
   const MobileTheme =
     themeColor === 'dark' && screen === 'tablet'
-      ? { backgroundColor: 'rgb(63, 78, 79)', color: 'rgb(255, 255, 255)', heigth: '100vh' }
+      ? { backgroundColor: 'rgb(63, 78, 79)', color: 'rgb(255, 255, 255)' }
       : {};
 
   const mobileTextTheme =
