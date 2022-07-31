@@ -5,7 +5,6 @@ import {
   useGetUserDataQuery,
 } from '../../redux/kapustaAPI';
 import ModalNotification from '../ModalNotification';
-import CurrencyInput from 'Utils/CurrencyInput';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
