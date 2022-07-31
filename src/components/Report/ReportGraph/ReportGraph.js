@@ -31,6 +31,8 @@ function ReportGraph({ data }) {
   const themeColor = useContext(ThemeContext)
   const themeStyle = themeColor === "dark" ? darkThemeStyles.elements: null;
   const textColor = themeColor === "dark" ? darkThemeStyles.textColor : '#52555F' ;
+  const border = themeColor === "dark" ? '#777777' : 'rgba(245, 246, 251, 1)' 
+  ;
 
   const widthBar = () => {
     switch (screen) {
@@ -183,6 +185,7 @@ function ReportGraph({ data }) {
               x: {
                 ticks: {
                   display: lineX(),
+                  color: textColor,
                 },
                 grid: {
                   display: false,
@@ -192,12 +195,14 @@ function ReportGraph({ data }) {
               y: {
                 ticks: {
                   display: lineY(),
+                  color: textColor,
                 },
                 grid: {
                   display: gridLineY(),
                   tickColor: 'transparent',
                   borderColor: 'transparent',
                   offset: true,
+                  color: border,
                 },
               },
             },

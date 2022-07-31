@@ -21,7 +21,7 @@ import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
 // import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
-const FormAddExpense = ({ expense, handleClick}) => {
+const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [date, setDate] = useState(new Date());
@@ -162,7 +162,6 @@ const FormAddExpense = ({ expense, handleClick}) => {
     }),
   };
 
-
   const themeStyle =
     themeColor === 'dark'
       ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
@@ -187,7 +186,6 @@ const FormAddExpense = ({ expense, handleClick}) => {
 
       <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrap}>
-
           <div className={s.notificationWraps}>
             <input
               type="text"
@@ -197,7 +195,8 @@ const FormAddExpense = ({ expense, handleClick}) => {
               placeholder="Product description"
               value={description}
               onChange={ev => setDescription(ev.target.value)}
-          <div style={themeStyle}>
+              style={themeStyle}
+            />
             <DatePicker
               value={date}
               calendarIcon={<CalendarMonthIcon />}
@@ -214,8 +213,9 @@ const FormAddExpense = ({ expense, handleClick}) => {
             />
           </div>
 
-  <div className={s.notificationWraps}>
+          <div className={s.notificationWraps}>
             <input
+              style={themeStyle2}
               type="text"
               id="description"
               name="description"
@@ -230,6 +230,7 @@ const FormAddExpense = ({ expense, handleClick}) => {
           </div>
           <div className={s.notificationWraps}>
             <Select
+              style={themeStyle2}
               type="text"
               id="category"
               name="category"
@@ -248,6 +249,7 @@ const FormAddExpense = ({ expense, handleClick}) => {
           <div className={s.currencyWrapp}>
             <div className={s.notificationWraps}>
               <NumberFormat
+                style={themeStyle2}
                 allowNegative={false}
                 suffix={VpWidth === 'mobile' ? ' UAH' : ''}
                 decimalScale={2}
