@@ -12,29 +12,34 @@ export default function TransactionItem({
   id,
   expenses,
   handleClick,
+  themeStyle,
 }) {
   return (
+
     <>
-      <tr>
-        <td>{date}</td>
-        <td>{description}</td>
-        <td>{category}</td>
-        <td
-          style={
-            expenses
-              ? {
-                  color: '#e7192e',
-                  fontWeight: '700',
-                  fontSize: '12px',
-                  lineHeight: '14px',
-                }
-              : {
-                  color: '#407946',
-                  fontWeight: '700',
-                  fontSize: '12px',
-                  lineHeight: '14px',
-                }
-          }
+    
+
+    <tr >
+      <td style={themeStyle}>{date}</td>
+      <td style={themeStyle}>{description}</td>
+      <td style={themeStyle}>{category}</td>
+      <td
+        style={
+          expenses
+            ? {
+                color: '#e7192e',
+                fontWeight: '700',
+                fontSize: '12px',
+                lineHeight: '14px',
+              }
+            : {
+                color: '#407946',
+                fontWeight: '700',
+                fontSize: '12px',
+                lineHeight: '14px',
+              }
+        }
+     
         >
           {amount}.00 грн.
         </td>

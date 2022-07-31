@@ -17,6 +17,18 @@
   justify-content: space-between;
 }
 
+.theme {
+  display: flex;
+  align-items: center;
+}
+
+.themeText {
+  font-family: 'Roboto';
+  color: #52555f;
+  margin-right: 7px;
+  font-weight: 700;
+}
+
 .logo {
   width: 90px;
   height: 31px;

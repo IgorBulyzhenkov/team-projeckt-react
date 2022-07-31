@@ -5,8 +5,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import s from './DateSwiper.module.css';
 
-export default function DateSwiper({ changeDate }) {
+export default function DateSwiper({ changeDate, themeStyle }) {
   const dispatch = useDispatch();
+
   const monthNames = [
     'January',
     'February',
@@ -64,7 +65,9 @@ export default function DateSwiper({ changeDate }) {
 
   return (
     <div className={s.container}>
-      <p className={s.currentPeriod}>Current period:</p>
+      <p className={s.currentPeriod} style={themeStyle}>
+        Current period:
+      </p>
       <div className={s.wrap}>
         <ArrowBackIosIcon
           onClick={onDecr}
