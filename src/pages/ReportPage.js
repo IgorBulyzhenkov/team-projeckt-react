@@ -2,9 +2,6 @@ import { MdKeyboardBackspace } from 'react-icons/md';
 import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCategory } from 'redux/reducer';
-import { getCategory } from 'redux/selectors';
 import { useLazyGetPeriodDataQuery } from '../redux/kapustaAPI';
 import ReportList from 'components/Report/ReportList/ReportList';
 import Container from 'components/Container/Container';
@@ -20,12 +17,14 @@ function ReportPage() {
   const [expenses, setExpenses] = useState(0);
   const [getPeriodData] = useLazyGetPeriodDataQuery();
   const total = incomes.incomeTotal - expenses.expenseTotal;
+
   const category = useSelector(getCategory);
   const dispatch = useDispatch();
 
   const themeColor = useContext(ThemeContext)
   const themeStyle = themeColor === "dark" ? darkThemeStyles.elements: {}
   const themeStyle2 = themeColor === "dark" ? darkThemeStyles.basic : {}
+
 
   useEffect(() => {
     if (!value) {
@@ -35,13 +34,7 @@ function ReportPage() {
       setExpenses(res.data.expenses);
       setIncomes(res.data.incomes);
     });
-    
   }, [value, getPeriodData]);
-
-  const handleChange = date => {
-    setValue(date);
-    !category && dispatch(setCategory(''));
-  };
 
   return (
     <section className={s.test}>
@@ -55,13 +48,15 @@ function ReportPage() {
           </div>
 
           <div className={s.dateSwiperContainer}>
-            <DateSwiper changeDate={handleChange} themeStyle={themeStyle2}/>
+
+            <DateSwiper changeDate={setValue} themeStyle={themeStyle2}/>
           </div>
 
-          <div  className={s.balance}>
-            <p className={s.balance_text} style={themeStyle2}>Balance:</p>
+          <div className={s.balance}>
+            <p className={s.balance_text} style={themeStyle2}>Current balance:</p>
+
             <p className={s.balance_cash}>
-              {total ? `${total}.00 UAH` : '0.00 UAH`'}
+              {total ? `${total}.00 UAH` : '0.00 UAH'}
             </p>
           </div>
         </div>

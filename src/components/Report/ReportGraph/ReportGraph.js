@@ -8,20 +8,25 @@ import {
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
-import { getWidth } from '../../../redux/selectors';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
+import { getWidth, getCategory } from '../../../redux/selectors';
+
 
 ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 
-function ReportGraph({ data, category }) {
+function ReportGraph({ data }) {
   const screen = useSelector(getWidth);
+  const category = useSelector(getCategory);
 
   const newData = data[category];
 
-  const value = Object.values(newData).slice(1);
-  const keys = Object.keys(newData).slice(1);
+  const sortData = Object.entries(newData);
+  const testSort = sortData.sort((a, b) => b[1] - a[1]);
+
+  const value = testSort.map(el => el[1]).slice(1);
+  const keys = testSort.map(el => el[0]).slice(1);
 
   const themeColor = useContext(ThemeContext)
   const themeStyle = themeColor === "dark" ? darkThemeStyles.elements: null;
@@ -38,32 +43,6 @@ function ReportGraph({ data, category }) {
         break;
     }
   };
-
-  const dataChart = {
-    type: 'bar',
-    labels: keys,
-    plugins: [ChartDataLabels],
-    datasets: [
-      {
-        data: value,
-        backgroundColor: [
-          'rgba(255, 117, 29, 1)',
-          ' rgba(255, 218, 192, 1)',
-          ' rgba(255, 218, 192, 1)',
-        ],
-        borderRadius: [10],
-        maxBarThickness: [widthBar()],
-      },
-    ],
-  };
-
-  // display: function (context) {
-  //             const dataTrue = data.find(
-  //               (_, index) => index === context.dataIndex
-  //             );
-
-  //             return dataTrue > 500;
-  //           },
 
   const borderColor = () => {
     switch (screen) {
@@ -85,7 +64,6 @@ function ReportGraph({ data, category }) {
         break;
     }
   };
-
 
   const lineY = () => {
     switch (screen) {
@@ -129,20 +107,62 @@ function ReportGraph({ data, category }) {
         return 0;
 
       case 'mobile':
-        return 30;
+        return 80;
       default:
         break;
     }
   };
 
+  const fontSizeText = () => {
+    switch (screen) {
+      case 'tablet':
+        return '12';
+
+      case 'mobile':
+        return '10';
+      default:
+        break;
+    }
+  };
+
+  const dataChart = {
+    type: 'bar',
+    labels: keys,
+    plugins: [ChartDataLabels],
+    datasets: [
+      {
+        data: value,
+        backgroundColor: [
+          'rgba(255, 117, 29, 1)',
+          ' rgba(255, 218, 192, 1)',
+          ' rgba(255, 218, 192, 1)',
+        ],
+        borderRadius: [10],
+        maxBarThickness: [widthBar()],
+      },
+    ],
+  };
+
+  const positionText = () => {
+    switch (screen) {
+      case 'tablet':
+        return 'top';
+
+      case 'mobile':
+        return 'right';
+      default:
+        break;
+    }
+  };
 
   return (
     <div className={s.wrap} style={themeStyle}>
       <div className={s.container} style={themeStyle}>
         <Bar
           data={dataChart}
-          // height={heightScreen()}
           options={{
+            maintainAspectRatio: false,
+            responsive: true,
             indexAxis: heightMobileScreen(),
             layout: {
               padding: {
@@ -154,8 +174,9 @@ function ReportGraph({ data, category }) {
               datalabels: {
                 color: `${textColor}`,
                 anchor: 'end',
-                align: 'top',
-                fontSize: '40',
+                align: positionText(),
+                font: { size: fontSizeText(), weight: '400', family: 'Roboto' },
+                formatter: value => `${value} UAH`,
               },
             },
             scales: {

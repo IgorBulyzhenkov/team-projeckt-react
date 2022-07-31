@@ -2,13 +2,16 @@ import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
 import { useState } from 'react';
+import { IconButton } from '@mui/material';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { ReactComponent as Calculator } from '../../img/Calculator.svg';
+
 import Select from 'react-select';
-// import { BsCalculator } from 'react-icons/bs';
+
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
 import NumberFormat from 'react-number-format';
@@ -17,6 +20,7 @@ import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
 // import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
@@ -27,8 +31,17 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    const { amount, description, category, date } = ev.currentTarget;
-    const amountViewAPI = Number.parseFloat(amount.value.split(' ').join(''));
+    const { amount, amountTablet, description, category, date } =
+      ev.currentTarget;
+    let amountViewAPI = '';
+    console.log(amount);
+    console.log(amountTablet);
+    amount.value
+      ? (amountViewAPI = Number.parseFloat(amount.value.split(' ').join('')))
+      : (amountViewAPI = Number.parseFloat(
+          amountTablet.value.split(' ').join('')
+        ));
+    // const amountViewAPI = Number.parseFloat(amount.value.split(' ').join(''));
     const transaction = {
       description: description.value,
       amount: amountViewAPI,
@@ -107,14 +120,16 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
   return (
     <div className={s.formWrap}>
-      <IconButton
-        color="warning"
-        onClick={handleClick}
-        aria-label="button close"
-        component="button"
-      >
-        <KeyboardBackspaceIcon />
-      </IconButton>
+      <div className={s.exitBtn}>
+        <IconButton
+          color="warning"
+          onClick={handleClick}
+          aria-label="button close"
+          component="button"
+        >
+          <KeyboardBackspaceIcon />
+        </IconButton>
+      </div>
 
       <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrap}>
@@ -161,7 +176,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
             style={themeStyle2}
               suffix={' UAH'}
               decimalScale={2}
-              // defaultValue={'00.00'}
               inputMode="numeric"
               placeholder="00.00 UAH"
               thousandSeparator={' '}
@@ -169,17 +183,21 @@ const FormAddExpense = ({ expense, handleClick }) => {
               className={s.input}
               id="amount"
               name="amount"
-
-              // value={value}
-              // onValueChange={(values, sourceInfo) => {
-              //   console.log(values, sourceInfo);
-              //   setValue(values.floatValue?.toFixed(2));
-              // }}
+            />
+            <NumberFormat
+              decimalScale={2}
+              inputMode="numeric"
+              placeholder="0.00"
+              thousandSeparator={' '}
+              fixedDecimalScale={true}
+              className={s.inputTablet}
+              id="amountTablet"
+              name="amountTablet"
             />
 
-            {/* <div className={s.calculateWrap}>
-              <BsCalculator className={s.calculate} />
-            </div> */}
+            <div className={s.calculateWrap}>
+              <Calculator width="20" height="20" />
+            </div>
           </div>
         </div>
 
