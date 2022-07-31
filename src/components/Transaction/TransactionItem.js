@@ -1,6 +1,8 @@
 import { DeleteOutline } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
+import s from './TransactionItem.module.css';
+import { ReactComponent as DeleteIcon } from '../../img/DeleteIcon.svg';
 
 export default function TransactionItem({
   description,
@@ -13,6 +15,10 @@ export default function TransactionItem({
   themeStyle,
 }) {
   return (
+
+    <>
+    
+
     <tr >
       <td style={themeStyle}>{date}</td>
       <td style={themeStyle}>{description}</td>
@@ -33,20 +39,30 @@ export default function TransactionItem({
                 lineHeight: '14px',
               }
         }
-      >
-        {amount}.00 грн.
-      </td>
-      <td style={themeStyle}>
-        <IconButton
-          onClick={e => handleClick(e)}
-          aria-label="button delete"
-          component="label"
-          id={id}
+     
         >
-          <DeleteOutline />
-        </IconButton>
-      </td>
-    </tr>
+          {amount}.00 грн.
+        </td>
+        <td>
+          <IconButton
+            onClick={e => handleClick(e)}
+            aria-label="button delete"
+            component="label"
+            id={id}
+          >
+            <DeleteOutline />
+          </IconButton>
+          <div className={s.deleteBox} id={`delete${id}`}>
+            <DeleteIcon
+              className={s.deleteIcon}
+              width="50"
+              height="100%"
+              fill="#FF751D"
+            />
+          </div>
+        </td>
+      </tr>
+    </>
   );
 }
 
