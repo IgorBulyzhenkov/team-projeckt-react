@@ -1,6 +1,9 @@
 import { DeleteOutline } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
 
 import { useGetUserDataQuery } from '../../redux/kapustaAPI';
 
@@ -10,6 +13,9 @@ export default function MobileTransaction({ handleClick }) {
   const [transactions, setTransactions] = useState();
 
   const { data } = useGetUserDataQuery();
+
+  const themeColor = useContext(ThemeContext);
+  const themeStyle = themeColor === 'dark' ? darkThemeStyles.basic : null;
 
   useEffect(() => {
     data && setTransactions(data.transactions);
@@ -28,7 +34,9 @@ export default function MobileTransaction({ handleClick }) {
           <tbody key={_id}>
             <tr>
               <td colSpan="2" className={s.descriptionItem}>
-                <span className={s.description}>{description}</span>
+                <span style={themeStyle} className={s.description}>
+                  {description}
+                </span>
               </td>
               <td
                 rowSpan="2"
@@ -40,6 +48,7 @@ export default function MobileTransaction({ handleClick }) {
               </td>
               <td rowSpan="2">
                 <IconButton
+                  style={themeStyle}
                   sx={{ ml: 3 }}
                   onClick={e => handleClick(e)}
                   aria-label="button delete"
@@ -51,8 +60,10 @@ export default function MobileTransaction({ handleClick }) {
               </td>
             </tr>
             <tr>
-              <td className={s.date}>{date}</td>
-              <td>{category}</td>
+              <td style={themeStyle} className={s.date}>
+                {date}
+              </td>
+              <td style={themeStyle}>{category}</td>
             </tr>
           </tbody>
         );
