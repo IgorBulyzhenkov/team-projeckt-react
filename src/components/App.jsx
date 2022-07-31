@@ -2,6 +2,7 @@ import { Routes, Route, useSearchParams, Navigate } from 'react-router-dom';
 import { createContext } from 'react';
 import { useEffect, lazy, Suspense, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import RingLoader from "react-spinners/RingLoader"
 import {
   useRefreshUserMutation,
   useLazyGetUserDataQuery,
@@ -144,7 +145,7 @@ const themeStyle = theme === "dark" ? darkThemeStyles.basic : {}
   return (
     <ThemeContext.Provider value={theme}>
     <div>
-      <Suspense fallback={<>...loading</>}>
+      <Suspense fallback={<RingLoader color="#ff511d" size={100}/>}>
         {/* <ActionModal/> */}
         <Header toggleTheme={toggleTheme}/>
 
