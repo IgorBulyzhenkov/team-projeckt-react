@@ -181,7 +181,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
       <form className={s.form} onSubmit={handleSubmit}>
         <div style={themeStyle}>
-
           <div className={s.inputWrap}>
             <DatePicker
               value={date}
@@ -196,41 +195,11 @@ const FormAddExpense = ({ expense, handleClick }) => {
               name="date"
               onChange={setDate}
               format={'dd.MM.y'}
-            style={themeStyle2}
-          />
-        </div>
-        
-          <div className={s.notificationWraps}>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              className={s.description}
-              placeholder="Product description"
-              value={description}
-              onChange={ev => setDescription(ev.target.value)}
-              style={themeStyle}
-            />
-            {openDescription && (
-              <div className={s.errorNotification}>"Please enter amount"</div>
-            )}
-          </div>
-          <div className={s.notificationWraps}>
-            <Select
               style={themeStyle2}
-              type="text"
-              id="category"
-              name="category"
-              options={expense ? optionsExpenses : optionsIncome}
-              styles={styles}
-              placeholder="Product category"
-              className={s.select}
-              value={select}
-              onChange={data => setSelect(data)
             />
+            {/* </div> */}
 
             <div className={s.notificationWraps}>
-
               <input
                 type="text"
                 id="description"
@@ -239,16 +208,15 @@ const FormAddExpense = ({ expense, handleClick }) => {
                 placeholder="Product description"
                 value={description}
                 onChange={ev => setDescription(ev.target.value)}
-
+                style={themeStyle}
               />
               {openDescription && (
-                <div className={s.errorNotification}>
-                  Please enter description
-                </div>
+                <div className={s.errorNotification}>"Please enter amount"</div>
               )}
             </div>
             <div className={s.notificationWraps}>
               <Select
+                style={themeStyle2}
                 type="text"
                 id="category"
                 name="category"
