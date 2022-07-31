@@ -1,8 +1,7 @@
 import s from './ModalAddExpense.module.css';
 import FormAddExpense from '../FormAddExpense';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { createPortal } from 'react-dom';
-import { IconButton } from '@mui/material';
+
 const mobileModalRoot = document.querySelector('#mobileModal-root');
 
 const ModalAddExpense = ({ handleClick, expense }) => {
