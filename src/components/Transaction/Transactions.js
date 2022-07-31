@@ -47,7 +47,12 @@ export default function Transactions() {
   };
 
   const delTransaction = id => {
-    deleteTransaction(id);
+    const cabbage = document.querySelector(`#delete${id}`);
+    cabbage.classList.add('deleteTransaction');
+    setTimeout(() => {
+      deleteTransaction(id);
+    }, 700);
+
     setModal(!isModalOpen);
   };
 
@@ -67,6 +72,7 @@ export default function Transactions() {
 
   return (
     <div className={s.transactionContainer}>
+      <div className={s.btnWrap}></div>
       <button
         className={`${s.btn} ${isExpense ? s.isActive : ''}`}
         type="button"

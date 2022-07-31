@@ -158,6 +158,9 @@ canvas {
   }
 }
 
+.deleteTransaction {
+  transform: translate(0) !important;
+}
 
 /* .react-calendar__navigation__label {
   pointer-events: none;

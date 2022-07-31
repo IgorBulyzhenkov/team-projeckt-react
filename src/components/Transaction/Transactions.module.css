@@ -1,9 +1,3 @@
-@media screen and (max-width: 767px) {
-.transactionContainer{
-  margin: 0 auto;
-  width: fit-content;
-}
-}
 .btn {
   width: 144px;
   min-height: 53px;
@@ -29,9 +23,6 @@
   text-align: center;
   color: #52555f;
   margin-bottom: 20px;
-}
-
-.mobileWrap {
 }
 
 @media screen and (max-width: 379px) {
@@ -69,5 +60,12 @@
 
   .mobileWrap {
     display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .transactionContainer {
+    margin: 0 auto;
+    width: fit-content;
   }
 }

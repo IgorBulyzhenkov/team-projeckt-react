@@ -1,6 +1,8 @@
 import { DeleteOutline } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
+import s from './TransactionItem.module.css';
+import { ReactComponent as DeleteIcon } from '../../img/DeleteIcon.svg';
 
 export default function TransactionItem({
   description,
@@ -12,40 +14,50 @@ export default function TransactionItem({
   handleClick,
 }) {
   return (
-    <tr>
-      <td>{date}</td>
-      <td>{description}</td>
-      <td>{category}</td>
-      <td
-        style={
-          expenses
-            ? {
-                color: '#e7192e',
-                fontWeight: '700',
-                fontSize: '12px',
-                lineHeight: '14px',
-              }
-            : {
-                color: '#407946',
-                fontWeight: '700',
-                fontSize: '12px',
-                lineHeight: '14px',
-              }
-        }
-      >
-        {amount}.00 грн.
-      </td>
-      <td>
-        <IconButton
-          onClick={e => handleClick(e)}
-          aria-label="button delete"
-          component="label"
-          id={id}
+    <>
+      <tr>
+        <td>{date}</td>
+        <td>{description}</td>
+        <td>{category}</td>
+        <td
+          style={
+            expenses
+              ? {
+                  color: '#e7192e',
+                  fontWeight: '700',
+                  fontSize: '12px',
+                  lineHeight: '14px',
+                }
+              : {
+                  color: '#407946',
+                  fontWeight: '700',
+                  fontSize: '12px',
+                  lineHeight: '14px',
+                }
+          }
         >
-          <DeleteOutline />
-        </IconButton>
-      </td>
-    </tr>
+          {amount}.00 грн.
+        </td>
+        <td>
+          <IconButton
+            onClick={e => handleClick(e)}
+            aria-label="button delete"
+            component="label"
+            id={id}
+          >
+            <DeleteOutline />
+          </IconButton>
+          <div className={s.icon} id={`delete${id}`}>
+            <DeleteIcon
+              className={s.img}
+              width="50"
+              height="100%"
+              fill="#FF751D"
+            />
+          </div>
+        </td>
+      </tr>
+    </>
   );
 }
 
