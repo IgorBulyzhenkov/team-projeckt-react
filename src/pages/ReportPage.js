@@ -2,6 +2,7 @@ import { MdKeyboardBackspace } from 'react-icons/md';
 import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import RingLoader from 'react-spinners/RingLoader';
 import { useLazyGetPeriodDataQuery } from '../redux/kapustaAPI';
 import ReportList from 'components/Report/ReportList/ReportList';
 import Container from 'components/Container/Container';
@@ -16,19 +17,19 @@ function ReportPage() {
   const [expenses, setExpenses] = useState(0);
   const [getPeriodData] = useLazyGetPeriodDataQuery();
   const total = incomes.incomeTotal - expenses.expenseTotal;
-
-  // const category = useSelector(getCategory);
-  // const dispatch = useDispatch();
-
+  const [isLoader, setIsLoader] = useState(true);
   const themeColor = useContext(ThemeContext);
   const themeStyle = themeColor === 'dark' ? darkThemeStyles.elements : {};
   const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : {};
 
   useEffect(() => {
+    setIsLoader(true);
     if (!value) {
       return;
     }
+
     getPeriodData(value).then(res => {
+      setIsLoader(false);
       setExpenses(res.data.expenses);
       setIncomes(res.data.incomes);
     });
@@ -93,7 +94,11 @@ function ReportPage() {
             </p>
           </div>
         </div>
-
+        {isLoader ? (
+          <div className={s.isLoader}>
+            <RingLoader color="#ff511d" size={100} />
+          </div>
+        ) : null}
         <ReportList incomes={incomes} expenses={expenses} />
       </Container>
     </section>
