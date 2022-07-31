@@ -29,7 +29,7 @@ export default function MobileTransaction({ handleClick }) {
 
   return (
     <>
-      {transactions.length === 0 ? (
+      {transactions?.length === 0 ? (
         <p style={themeStyle} className={s.plugText}>
           No transaction history!
           <br /> Please fill out the form above...

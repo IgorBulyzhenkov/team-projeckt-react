@@ -67,6 +67,7 @@ table {
   text-align: center;
   color: #52555f;
   margin-top: 40px;
+  padding: 8px;
 }
 
 ::-webkit-scrollbar {
