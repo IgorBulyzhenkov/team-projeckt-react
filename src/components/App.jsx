@@ -2,6 +2,7 @@ import { Routes, Route, useSearchParams, Navigate } from 'react-router-dom';
 import { createContext } from 'react';
 import { useEffect, lazy, Suspense, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import RingLoader from "react-spinners/RingLoader"
 import {
   useRefreshUserMutation,
   useLazyGetUserDataQuery,
@@ -12,7 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './Routs/PrivateRoute';
 import PublicRoute from './Routs/PublicRoute';
 
-import { useRef } from 'react';
+// import { useRef } from 'react';
 
 import { darkThemeStyles } from 'services/theme-styles';
 // import ActionModal from './ActionModal';
@@ -144,7 +145,7 @@ const themeStyle = theme === "dark" ? darkThemeStyles.basic : {}
   return (
     <ThemeContext.Provider value={theme}>
     <div>
-      <Suspense fallback={<>...loading</>}>
+      <Suspense fallback={<RingLoader color="#ff511d" size={100}/>}>
         {/* <ActionModal/> */}
         <Header toggleTheme={toggleTheme}/>
 

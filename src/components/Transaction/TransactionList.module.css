@@ -4,7 +4,7 @@
   margin-bottom: 20px;
   white-space: nowrap;
   border-bottom: 2px solid #f5f6fb;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 
@@ -34,6 +34,10 @@ table {
   text-transform: uppercase;
   border: none;
   background: #f5f6fb;
+}
+
+.table tr {
+  position: relative;
 }
 
 .table thead tr th:first-child {
@@ -66,4 +70,11 @@ table {
 ::-webkit-scrollbar-thumb {
   background: #ff751d;
   border-radius: 2px;
+}
+
+.listHeader{
+  cursor: pointer;
+}
+.listHeader:hover{
+  color: #ff751d;
 }

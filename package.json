@@ -27,7 +27,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
-    "react-spinners": "^0.13.3",
+    "react-spinners": "^0.13.4",
     "react-spring": "^9.5.2",
     "react-switch": "^7.0.0",
     "react-text-mask": "^5.4.3",

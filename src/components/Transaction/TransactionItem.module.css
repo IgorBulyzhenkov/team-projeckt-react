@@ -1,0 +1,17 @@
+.deleteBox {
+  width: 110%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(101%);
+  background-color: #fff;
+  transition: transform 1s cubic-bezier(0.4, 1.44, 0.59, -0.3);
+}
+
+.deleteIcon {
+  display: block;
+  height: 100%;
+  width: 50px;
+  margin-right: auto;
+}

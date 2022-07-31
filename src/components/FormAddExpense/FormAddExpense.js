@@ -9,6 +9,7 @@ import {
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
 import { ReactComponent as Calculator } from '../../img/Calculator.svg';
+import { toast } from 'react-toastify';
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
@@ -22,47 +23,105 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [date, setDate] = useState(new Date());
-  const [calculator, setCalculator] = useState(false);
-
+  const [ calculator, setCalculator ] = useState(false);
+  const [amount, setAmount] = useState('');
+  const [select, setSelect] = useState(null);
+  const [description, setDescription] = useState('');
+  const [openSelect, setOpenSelect] = useState(false);
+  const [openInput, setOpenInput] = useState(false);
+  const [openDescription, setOpenDescription] = useState(false);
   const VpWidth = useSelector(getWidth);
 
-  const toggleModal = ev => {
+
+  const toggleModal = () => {
     setCalculator(!calculator);
   };
 
-  const closeModal = () => {
-    if (calculator) {
+  const closeModal = () =>
+  {
+    if (calculator)
+    {
       setCalculator(false);
     }
+  }
+
+
+  const formReset = () => {
+    setAmount('');
+    setSelect(null);
+    setDescription('');
   };
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    const { amount, amountTablet, description, category, date } =
-      ev.currentTarget;
-    let amountViewAPI = '';
-    amount.value
-      ? (amountViewAPI = Number.parseFloat(amount.value.split(' ').join('')))
-      : (amountViewAPI = Number.parseFloat(
-          amountTablet.value.split(' ').join('')
-        ));
-    // const amountViewAPI = Number.parseFloat(amount.value.split(' ').join(''));
-    const transaction = {
-      description: description.value,
-      amount: amountViewAPI,
-      date: date.value,
-      category: category.value,
+    const { date } = ev.currentTarget;
+
+    const isDescriptionCorrect = () => {
+      if (!description) {
+        setOpenDescription(true);
+        setTimeout(() => {
+          setOpenDescription(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
+    };
+    const isSelectorCorrect = () => {
+      if (!select?.value) {
+        setOpenSelect(true);
+        setTimeout(() => {
+          setOpenSelect(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
     };
 
-    if (expense) {
-      addExpense(transaction);
-    } else {
-      addIncome(transaction);
-    }
-    ev.target.reset();
+    const isAmountCorrect = () => {
+      if (!amount) {
+        setOpenInput(true);
+        setTimeout(() => {
+          setOpenInput(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
+    };
 
-    if (VpWidth === 'mobile') {
-      handleClick();
+    const isFormValid =
+      isSelectorCorrect() + isDescriptionCorrect() + isAmountCorrect() === 0;
+
+    if (isFormValid) {
+      const transaction = {
+        description,
+        amount: amount,
+        date: date?.value,
+        category: select?.value,
+      };
+
+      if (expense) {
+        addExpense(transaction)
+          .unwrap()
+          .then(data => {
+            toast.success('Transaction added');
+            formReset();
+            if (VpWidth === 'mobile') {
+              handleClick();
+            }
+          })
+          .catch(error => toast.error(error.data.message));
+      } else {
+        addIncome(transaction)
+          .unwrap()
+          .then(data => {
+            toast.success('Transaction added');
+            formReset();
+            if (VpWidth === 'mobile') {
+              handleClick();
+            }
+          })
+          .catch(error => toast.error(error.data.message));
+      }
     }
   };
 
@@ -121,106 +180,110 @@ const FormAddExpense = ({ expense, handleClick }) => {
       ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
       : {};
   const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : null;
-  // const handleChange = e => {
-  //   setCategories(e.target.value);
-  // };
 
-  return (
-    <div className={s.formWrap}>
-      <div className={s.exitBtn}>
-        <IconButton
-          color="warning"
-          onClick={handleClick}
-          aria-label="button close"
-          component="button"
-        >
-          <KeyboardBackspaceIcon />
-        </IconButton>
-      </div>
-
-      <form className={s.form} onSubmit={handleSubmit}>
-        <div className={s.inputWrap}>
-          <div style={themeStyle}>
-            <DatePicker
-              value={date}
-              calendarIcon={<CalendarMonthIcon />}
-              clearIcon={null}
-              prevLabel={null}
-              prev2Label={null}
-              nextLabel={null}
-              next2Label={null}
-              className={s.calendar}
-              calendarClassName={s.calendar}
-              name="date"
-              onChange={setDate}
-              format={'dd.MM.y'}
-            />
-          </div>
-
-          <input
-            style={themeStyle2}
-            type="text"
-            id="description"
-            name="description"
-            className={s.description}
-            placeholder="Product description"
-          />
-
-          <Select
-            style={themeStyle}
-            type="text"
-            id="category"
-            name="category"
-            options={expense ? optionsExpenses : optionsIncome}
-            styles={styles}
-            placeholder="Product category"
-            className={s.select}
-          />
-
-          <div className={s.currencyWrapp}>
-            <NumberFormat
-              style={themeStyle2}
-              suffix={' UAH'}
-              decimalScale={2}
-              inputMode="numeric"
-              placeholder="00.00 UAH"
-              thousandSeparator={' '}
-              fixedDecimalScale={true}
-              className={s.input}
-              id="amount"
-              name="amount"
-              onClick={closeModal}
-            />
-            <NumberFormat
-              decimalScale={2}
-              inputMode="numeric"
-              placeholder="0.00"
-              thousandSeparator={' '}
-              fixedDecimalScale={true}
-              className={s.inputTablet}
-              id="amountTablet"
-              name="amountTablet"
-              onClick={closeModal}
-            />
-
-            <div className={s.calculateWrap}>
-              <Calculator width="20" height="20" onClick={toggleModal} />
-              {calculator && <CalculatorDisplay />}
-            </div>
-          </div>
-        </div>
-
-        <div className={s.buttonWrap}>
-          <button type="submit" className={s.buttonInput}>
-            Input
-          </button>
-          <button type="reset" className={s.buttonClear}>
-            Clear
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+ return (
+   <div className={s.formWrap}>
+     <div className={s.exitBtn}>
+       <IconButton
+         color="warning"
+         onClick={handleClick}
+         aria-label="button close"
+         component="button"
+       >
+         <KeyboardBackspaceIcon />
+       </IconButton>
+     </div>
+     <form className={s.form} onSubmit={handleSubmit}>
+       <div style={themeStyle}>
+         <div className={s.inputWrap}>
+           <DatePicker
+             value={date}
+             calendarIcon={<CalendarMonthIcon />}
+             clearIcon={null}
+             prevLabel={null}
+             prev2Label={null}
+             nextLabel={null}
+             next2Label={null}
+             className={s.calendar}
+             calendarClassName={s.calendar}
+             name="date"
+             onChange={setDate}
+             format={'dd.MM.y'}
+             style={themeStyle2}
+           />
+           {/* </div> */}
+           <div className={s.notificationWraps}>
+             <input
+               type="text"
+               id="description"
+               name="description"
+               className={s.description}
+               placeholder="Product description"
+               value={description}
+               onChange={ev => setDescription(ev.target.value)}
+               style={themeStyle}
+             />
+             {openDescription && (
+               <div className={s.errorNotification}>"Please enter amount"</div>
+             )}
+           </div>
+           <div className={s.notificationWraps}>
+             <Select
+               style={themeStyle2}
+               type="text"
+               id="category"
+               name="category"
+               options={expense ? optionsExpenses : optionsIncome}
+               styles={styles}
+               placeholder="Product category"
+               className={s.select}
+               value={select}
+               onChange={data => setSelect(data)}
+             />
+             {openSelect && (
+               <div className={s.errorNotification}>Please choose category</div>
+             )}
+           </div>
+           <div className={s.currencyWrapp}>
+             <div className={s.notificationWraps}>
+               <NumberFormat
+                 allowNegative={false}
+                 suffix={VpWidth === 'mobile' ? ' UAH' : ''}
+                 decimalScale={2}
+                 inputMode="numeric"
+                 placeholder={VpWidth === 'mobile' ? '00.00 UAH' : '0.00'}
+                 thousandSeparator={' '}
+                 fixedDecimalScale={true}
+                 className={s.input}
+                 id="amount"
+                 name="amount"
+                 value={amount}
+                 maxLength={VpWidth === 'mobile' ? 16 : 12}
+                 onValueChange={(values, sourceInfo) =>
+                   setAmount(values.floatValue)
+                 }
+               />
+               {openInput && (
+                 <div className={s.errorNotification}>Please enter amount</div>
+               )}
+             </div>
+             <div className={s.calculateWrap}>
+               <Calculator width="20" height="20" />
+             </div>
+           </div>
+         </div>
+       </div>
+       <div className={s.buttonWrap}>
+         <button type="submit" className={s.buttonInput}>
+           Input
+         </button>
+         <button type="reset" className={s.buttonClear} onClick={formReset}>
+           Clear
+         </button>
+       </div>
+     </form>
+   </div>
+ );
 };
 
 export default FormAddExpense;

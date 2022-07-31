@@ -56,9 +56,9 @@ function ReportList({ incomes, expenses }) {
             <FiChevronLeft size="20" className={s.arrowBtn} />
           </button>
           {showIcon ? (
-            <p className={s.textBtn}>Expenses</p>
+            <p  style={themeStyle} className={s.textBtn}>Expenses</p>
           ) : (
-            <p className={s.textBtn}>Incomes</p>
+            <p style={themeStyle}  className={s.textBtn}>Incomes</p>
           )}
           <button
             type="button"
@@ -69,7 +69,7 @@ function ReportList({ incomes, expenses }) {
           </button>
         </div>
         {!data || dataLenght.length === 0 ? (
-          <p className={s.textBtn}> data not found for the current month</p>
+          <p className={s.textBtn} style={themeStyle}> data not found for the current month</p>
         ) : (
           <ul className={s.list}>
             {ReportSvgSelector.filter(({ name }) => expenseEl.includes(name))

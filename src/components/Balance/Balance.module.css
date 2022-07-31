@@ -22,7 +22,7 @@
   padding: 10px 16px 10px 19px;
   border-radius: 22px 0 0 22px;
   border: 2px solid #ffffff;
-  min-width: 120px !important;
+ width: 150px ;
   outline: none;
   text-align: right;
   font-size: 12px;
@@ -39,6 +39,7 @@
 }
 
 .button {
+  display: block;
   color: #52555f;
   border-radius: 0 22px 22px 0;
   outline: none;
@@ -50,13 +51,28 @@
   height: 44px;
 }
 
-.button:hover {
-  border: none;
+.button:disabled {
+  display: block;
+  color: #52555f;
+  background: #f5f6fb;
+  border: 2px solid #ffffff;
+  border-width: 2px 2px 2px 0;
+  pointer-events: none;
+
 }
+
+
 .button:disabled:hover {
   color: #52555f;
   background: #f5f6fb;
   border: 2px solid #ffffff;
+    border-width: 2px 2px 2px 0;
+
+  
+}
+
+.button:hover {
+  border: none;
 }
 @media screen and (max-width: 767px) {
   .wrap {
@@ -87,7 +103,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .button {
+  .wrap {
     margin-right: 298px;
   }
 }

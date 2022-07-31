@@ -72,7 +72,6 @@ h6 {
 .react-date-picker__wrapper {
   flex-direction: row-reverse;
   border: none !important;
-  margin-bottom: 10px !important;
 }
 
 canvas {
@@ -164,6 +163,9 @@ canvas {
   }
 }
 
+.deleteTransaction {
+  transform: translate(0) !important;
+}
 
 /* .react-calendar__navigation__label {
   pointer-events: none;
