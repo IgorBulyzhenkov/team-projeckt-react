@@ -166,7 +166,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
     themeColor === 'dark'
       ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
       : {};
-  const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : null;
+ 
   // const handleChange = e => {
   //   setCategories(e.target.value);
   // };

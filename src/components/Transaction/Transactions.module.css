@@ -37,6 +37,10 @@
   .deskWrap {
     display: none;
   }
+  .btn {
+    background-color: #fff !important;
+    color:#52555f !important;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -74,3 +78,4 @@
     width: fit-content;
   }
 }
+
