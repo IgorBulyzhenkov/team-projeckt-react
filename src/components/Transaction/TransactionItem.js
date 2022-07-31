@@ -20,24 +20,26 @@ export default function TransactionItem({
         <td style={themeStyle}>{date}</td>
         <td style={themeStyle}>{description}</td>
         <td style={themeStyle}>{category}</td>
-        <td
-          style={
-            expenses
-              ? {
-                  color: '#e7192e',
-                  fontWeight: '700',
-                  fontSize: '12px',
-                  lineHeight: '14px',
-                }
-              : {
-                  color: '#407946',
-                  fontWeight: '700',
-                  fontSize: '12px',
-                  lineHeight: '14px',
-                }
-          }
-        >
-          {amount}.00 грн.
+        <td style={themeStyle}>
+          <span
+            style={
+              expenses
+                ? {
+                    color: '#FF751D',
+                    fontWeight: '700',
+                    fontSize: '12px',
+                    lineHeight: '14px',
+                  }
+                : {
+                    color: '#407946',
+                    fontWeight: '700',
+                    fontSize: '12px',
+                    lineHeight: '14px',
+                  }
+            }
+          >
+            {amount}.00 грн.
+          </span>
         </td>
         <td style={themeStyle}>
           <IconButton
@@ -49,7 +51,7 @@ export default function TransactionItem({
           >
             <DeleteOutline />
           </IconButton>
-          <div className={s.deleteBox} id={`delete${id}`}>
+          <div style={themeStyle} className={s.deleteBox} id={`delete${id}`}>
             <DeleteIcon
               className={s.deleteIcon}
               width="50"
