@@ -3,7 +3,28 @@
   flex-direction: column;
  
 }
+.calculatorWrap{
+  position: absolute;
+  z-index: 5;
 
+  
+}
+.calculator{
+width: 200px;
+  height: auto;
+}
+.closeCalcIcon{
+  width: 30px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: 0;
+  position: absolute;
+  right: -25px;
+  top: -25px;
+}
+.closeCalcIcon:hover{
+  color:#ff751d;
+}
 
 
 .description {
