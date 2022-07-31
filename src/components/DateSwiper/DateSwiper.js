@@ -70,19 +70,10 @@ export default function DateSwiper({ changeDate, themeStyle }) {
       </p>
       <div className={s.wrap}>
         <FiChevronLeft onClick={onDecr} className={s.arrow} size="20" />
-        <div className={s.date}>{date}</div>
+        <div className={s.date} style={themeStyle}>
+          {date}
+        </div>
         <FiChevronRight onClick={onIncr} className={s.arrow} size="20" />
-        <ArrowBackIosIcon
-          onClick={onDecr}
-          className={s.arrow}
-          fontSize={'inherit'}
-        />
-        <div className={s.date} style={themeStyle}>{date}</div>
-        <ArrowForwardIosIcon
-          onClick={onIncr}
-          className={s.arrow}
-          fontSize={'inherit'}
-        />
       </div>
     </div>
   );
