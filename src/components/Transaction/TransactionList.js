@@ -12,7 +12,7 @@ export default function TransactionList({ transactions, expenses, handleClick })
 
   const themeColor = useContext(ThemeContext)
     const themeStyle = themeColor === "dark" ? {...darkThemeStyles.inputsElements, borderRadius: '16px'} : null
-    const fontColor = themeColor === "dark" ? {color: darkThemeStyles.textColor} : null
+    // const fontColor = themeColor === "dark" ? {color: darkThemeStyles.textColor} : null
     const themeStyle2 = themeColor === "dark" ? darkThemeStyles.basic : null
     const tableBorderColor = themeColor === "dark" ? {borderRightColor: darkThemeStyles.elementsColor, borderBottomColor: darkThemeStyles.elementsColor } : null
   return (
