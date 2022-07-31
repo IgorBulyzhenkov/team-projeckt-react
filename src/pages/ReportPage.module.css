@@ -19,14 +19,28 @@
 transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
 }
 
-.link:hover {
-  transform: translatey(1px);
-    box-shadow: none;
-  color: #ff751d;
-}
+
 
 .link_text {
   visibility: hidden;
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.04em;
+      color: #52555f;
+      margin-left: 8px;
+      box-shadow: 5px 10px 20px rgba(175, 180, 191, 0.201);
+    
+    }
+ 
+.link:hover {
+  transform: translatey(1px);
+  color: #ff751d;
+}
+.link_text:hover{
+  color: #ff751d;
 }
 
 .dateSwiperContainer {
@@ -221,24 +235,9 @@ transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
   }
 
   .link_text {
-    position: relative;
-    visibility: inherit;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    letter-spacing: 0.04em;
-    color: #52555f;
-    margin-left: 8px;
-    box-shadow: 5px 10px 20px rgba(175, 180, 191, 0.201);
-transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-  }
-
-.link_text:hover {
- 
-  color: #ff751d;
-}
+  
+    visibility: inherit;}
+   
 
  
 
