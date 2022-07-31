@@ -4,8 +4,6 @@ import DatePicker from 'react-date-picker';
 import { useState } from 'react';
 import { IconButton } from '@mui/material';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
 import {
   useAddExpenseMutation,
   useAddIncomeMutation,
@@ -17,34 +15,18 @@ import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
 import NumberFormat from 'react-number-format';
 
-const FormAddExpense = ({ expense, handleClick }) => {
+const FormAddExpense = ({ expense, handleClick}) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [date, setDate] = useState(new Date());
   const [amount, setAmount] = useState('');
   const [select, setSelect] = useState(null);
   const [description, setDescription] = useState('');
-  console.log(description);
-
   const [openSelect, setOpenSelect] = useState(false);
   const [openInput, setOpenInput] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
 
   const VpWidth = useSelector(getWidth);
-
-  const LightTooltip = styled(({ className, ...props }) => (
-    <Tooltip {...props} classes={{ popper: className }} />
-  ))(({ theme }) => ({
-    [`& .${tooltipClasses.arrow}`]: {
-      color: theme.palette.common.white,
-    },
-    [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: theme.palette.common.white,
-      color: 'red',
-      boxShadow: theme.shadows[1],
-      fontSize: 11,
-    },
-  }));
 
   const formReset = () => {
     setAmount('');
@@ -153,6 +135,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
     singleValue: (provided, state) => ({
       ...provided,
       color: '#52555F',
+      fontSize: '12px',
     }),
     control: (provided, state) => ({
       ...provided,
@@ -196,74 +179,61 @@ const FormAddExpense = ({ expense, handleClick }) => {
             onChange={setDate}
             format={'dd.MM.y'}
           />
-          <LightTooltip
-            open={openDescription}
-            title="Please enter description"
-            arrow={true}
-            disableHoverListener={true}
-            disableInteractive={true}
-            disableFocusListener={true}
-            disableTouchListener={true}
-            describeChild
-          >
+          <div className={s.notificationWraps}>
             <input
               type="text"
               id="description"
               name="description"
-              className={`${s.description} descriptionElement`}
+              className={s.description}
               placeholder="Product description"
               value={description}
               onChange={ev => setDescription(ev.target.value)}
-              aria-describedby="description"
             />
-          </LightTooltip>
-          <LightTooltip
-            open={openSelect}
-            title="Please choose category"
-            arrow={true}
-          >
-            <span>
-              <Select
-                type="text"
-                id="category"
-                name="category"
-                options={expense ? optionsExpenses : optionsIncome}
-                styles={styles}
-                placeholder="Product category"
-                className={`${s.select} selectElement`}
-                value={select}
-                onChange={data => setSelect(data)}
-                aria-describedby="select"
-              />
-            </span>
-          </LightTooltip>
+            {openDescription && (
+              <div className={s.errorNotification}>"Please enter amount"</div>
+            )}
+          </div>
+          <div className={s.notificationWraps}>
+            <Select
+              type="text"
+              id="category"
+              name="category"
+              options={expense ? optionsExpenses : optionsIncome}
+              styles={styles}
+              placeholder="Product category"
+              className={s.select}
+              value={select}
+              onChange={data => setSelect(data)}
+            />
+            {openSelect && (
+              <div className={s.errorNotification}>"Please enter amount"</div>
+            )}
+          </div>
 
           <div className={s.currencyWrapp}>
-            <LightTooltip
-              open={openInput}
-              title="Please enter amount"
-              arrow={true}
-            >
-              <span>
-                <NumberFormat
-                  aria-describedby="input"
-                  suffix={VpWidth === 'mobile' ? ' UAH' : ''}
-                  decimalScale={2}
-                  inputMode="numeric"
-                  placeholder={VpWidth === 'mobile' ? '00.00 UAH' : '0.00'}
-                  thousandSeparator={' '}
-                  fixedDecimalScale={true}
-                  className={`${s.input} inputElement`}
-                  id="amount"
-                  name="amount"
-                  value={amount}
-                  maxLength={VpWidth === 'mobile' ? 17 : 13}
-                  onValueChange={(values, sourceInfo) =>
-                    setAmount(values.floatValue)
-                  }
-                />
-              </span>
-            </LightTooltip>
+            <div className={s.notificationWraps}>
+              <NumberFormat
+                allowNegative={false}
+                suffix={VpWidth === 'mobile' ? ' UAH' : ''}
+                decimalScale={2}
+                inputMode="numeric"
+                placeholder={VpWidth === 'mobile' ? '00.00 UAH' : '0.00'}
+                thousandSeparator={' '}
+                fixedDecimalScale={true}
+                className={s.input}
+                id="amount"
+                name="amount"
+                value={amount}
+                maxLength={VpWidth === 'mobile' ? 16 : 12}
+                onValueChange={(values, sourceInfo) =>
+                  setAmount(values.floatValue)
+                }
+              />
+              {openInput && (
+                <div className={s.errorNotification}>"Please enter amount"</div>
+              )}
+            </div>
+
             <div className={s.calculateWrap}>
               <Calculator width="20" height="20" />
             </div>
