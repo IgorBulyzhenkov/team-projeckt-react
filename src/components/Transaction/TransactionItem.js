@@ -47,9 +47,9 @@ export default function TransactionItem({
           >
             <DeleteOutline />
           </IconButton>
-          <div className={s.icon} id={`delete${id}`}>
+          <div className={s.deleteBox} id={`delete${id}`}>
             <DeleteIcon
-              className={s.img}
+              className={s.deleteIcon}
               width="50"
               height="100%"
               fill="#FF751D"

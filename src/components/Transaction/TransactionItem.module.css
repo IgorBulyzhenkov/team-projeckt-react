@@ -1,4 +1,4 @@
-.icon {
+.deleteBox {
   width: 110%;
   height: 100%;
   position: absolute;
@@ -9,7 +9,7 @@
   transition: transform 1s cubic-bezier(0.4, 1.44, 0.59, -0.3);
 }
 
-.img {
+.deleteIcon {
   display: block;
   height: 100%;
   width: 50px;
