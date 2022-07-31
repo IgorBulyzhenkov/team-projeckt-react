@@ -7,6 +7,8 @@ import { darkThemeStyles } from 'services/theme-styles';
 
 import { useGetUserDataQuery } from '../../redux/kapustaAPI';
 
+
+
 import s from './MobileTransaction.module.css';
 
 export default function MobileTransaction({ handleClick }) {
@@ -26,6 +28,8 @@ export default function MobileTransaction({ handleClick }) {
       return true;
     }
   };
+
+  
 
   return (
     <table className={s.mobTable}>

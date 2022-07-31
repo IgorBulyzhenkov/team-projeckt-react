@@ -17,7 +17,7 @@ import NumberFormat from 'react-number-format';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
-import CalculatorDisplay from '../Calculator/Calculator';
+// import CalculatorDisplay from '../Calculator/Calculator';
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
@@ -187,10 +187,10 @@ const FormAddExpense = ({ expense, handleClick }) => {
     }),
   };
 
-  const themeStyle =
-    themeColor === 'dark'
-      ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
-      : {};
+  // const themeStyle =
+  //   themeColor === 'dark'
+  //     ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
+  //     : {};
   const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : null;
   const calendarColor =
     themeColor === 'dark' ? { color: 'white' } : { color: '#52555f' };
