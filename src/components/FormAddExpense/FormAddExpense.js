@@ -21,7 +21,7 @@ import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
 // import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
-const FormAddExpense = ({ expense, handleClick}) => {
+const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [date, setDate] = useState(new Date());
@@ -162,7 +162,6 @@ const FormAddExpense = ({ expense, handleClick}) => {
     }),
   };
 
-
   const themeStyle =
     themeColor === 'dark'
       ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
@@ -186,35 +185,24 @@ const FormAddExpense = ({ expense, handleClick}) => {
       </div>
 
       <form className={s.form} onSubmit={handleSubmit}>
+        <div style={themeStyle}>
+          <DatePicker
+            value={date}
+            calendarIcon={<CalendarMonthIcon />}
+            clearIcon={null}
+            prevLabel={null}
+            prev2Label={null}
+            nextLabel={null}
+            next2Label={null}
+            className={s.calendar}
+            calendarClassName={s.calendar}
+            name="date"
+            onChange={setDate}
+            format={'dd.MM.y'}
+          />
+        </div>
         <div className={s.inputWrap}>
-
           <div className={s.notificationWraps}>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              className={s.description}
-              placeholder="Product description"
-              value={description}
-              onChange={ev => setDescription(ev.target.value)}
-          <div style={themeStyle}>
-            <DatePicker
-              value={date}
-              calendarIcon={<CalendarMonthIcon />}
-              clearIcon={null}
-              prevLabel={null}
-              prev2Label={null}
-              nextLabel={null}
-              next2Label={null}
-              className={s.calendar}
-              calendarClassName={s.calendar}
-              name="date"
-              onChange={setDate}
-              format={'dd.MM.y'}
-            />
-          </div>
-
-  <div className={s.notificationWraps}>
             <input
               type="text"
               id="description"
