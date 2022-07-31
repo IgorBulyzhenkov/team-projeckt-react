@@ -9,6 +9,7 @@
   background: linear-gradient(117.84deg, #1d346a 2.84%, #031634 67.28%);
   border-radius: 30px;
   margin-top: 11px;
+  z-index: 99;
 }
 
 .modal::before {

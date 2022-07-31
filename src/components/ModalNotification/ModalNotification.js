@@ -11,13 +11,9 @@ const ModalNotification = () => {
     leave: { opacity: 0 },
   });
 
-  const toogleModal = () => {
-    setShowModal(showModal => !showModal);
-  };
-
   useEffect(() => {
     const handleClose = ev => {
-      toogleModal();
+      setShowModal(false);
     };
     setTimeout(() => {
       handleClose();
