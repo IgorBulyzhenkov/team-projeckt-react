@@ -9,9 +9,7 @@ import {
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
 import { ReactComponent as Calculator } from '../../img/Calculator.svg';
-
 import { toast } from 'react-toastify';
-
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
