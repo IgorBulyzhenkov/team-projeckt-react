@@ -6,6 +6,9 @@ import {
   useGetUserDataQuery,
 } from '../../redux/kapustaAPI';
 import ModalNotification from '../ModalNotification';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
 
 const Balance = () => {
   const [setBalanceValue] = useChangeBalanceMutation();
@@ -14,6 +17,9 @@ const Balance = () => {
   const hasBalance = !!data?.balance;
   const hasTransactions = data?.transactions.length > 0;
   const [income, setIncome] = useState(() => data?.balance);
+
+  const themeColor = useContext(ThemeContext)
+  const themeStyle = themeColor === "dark" ? darkThemeStyles.basic: null
 
   const handleChange = ev => {
     const query = ev.currentTarget.value;
@@ -52,10 +58,11 @@ const Balance = () => {
   };
 
   return (
-    <div className={s.wrap}>
-      <span className={s.span}>Balance:</span>
-      <form onSubmit={handleSubmit} className={s.form}>
+    <div className={s.wrap} style={themeStyle}>
+      <span className={s.span} style={themeStyle}>Balance:</span>
+      <form onSubmit={handleSubmit} className={s.form} >
         <CurrencyInput
+          themestyle={themeStyle}
           placeholder="00.00 UAH"
           type="text"
           className={s.input}

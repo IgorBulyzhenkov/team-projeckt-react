@@ -6,6 +6,9 @@ import { setCategory } from 'redux/reducer';
 import { useState, useEffect } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
 import s from './ReportList.module.css';
 
 function ReportList({ incomes, expenses }) {
@@ -17,6 +20,9 @@ function ReportList({ incomes, expenses }) {
   const category = useSelector(getCategory);
   const data = showIcon ? expenses.expensesData : incomes.incomesData;
   const dataLenght = Object.entries(total);
+
+  const themeColor = useContext(ThemeContext)
+  const themeStyle = themeColor === "dark" ? darkThemeStyles.elements: {}
 
   useEffect(() => {
     if (!data) {
@@ -39,7 +45,7 @@ function ReportList({ incomes, expenses }) {
 
   return (
     <>
-      <div className={s.wrap}>
+      <div className={s.wrap} style={themeStyle}>
         <div className={s.wrapBtn}>
           <button
             type="button"
@@ -73,7 +79,7 @@ function ReportList({ incomes, expenses }) {
               })
               .map(({ id, nameEng, image, value, name }) => (
                 <li key={id} className={s.item}>
-                  <p className={s.text}>{value}.00</p>
+                  <p className={s.text} style={themeStyle}>{value}.00</p>
                   <div
                     id={name}
                     className={s.itemSpan}
@@ -81,7 +87,7 @@ function ReportList({ incomes, expenses }) {
                   >
                     <span className={s.span}>{image}</span>
                   </div>
-                  <p className={s.text}>{nameEng}</p>
+                  <p className={s.text} style={themeStyle}>{nameEng}</p>
                 </li>
               ))}
           </ul>

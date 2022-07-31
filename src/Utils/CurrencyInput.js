@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
+
+
 const defaultMaskOptions = {
   prefix: '',
   suffix: ' UAH',
@@ -17,13 +19,13 @@ const defaultMaskOptions = {
   allowLeadingZeroes: false,
 };
 
-const CurrencyInput = ({ maskOptions, ...inputProps }) => {
+const CurrencyInput = ({ maskOptions,  ...inputProps }) => {
   const currencyMask = createNumberMask({
     ...defaultMaskOptions,
     ...maskOptions,
   });
 
-  return <MaskedInput mask={currencyMask} {...inputProps} />;
+  return <MaskedInput mask={currencyMask} {...inputProps} style={inputProps.themestyle} />;
 };
 
 CurrencyInput.defaultProps = {

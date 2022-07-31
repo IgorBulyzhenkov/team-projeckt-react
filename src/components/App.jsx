@@ -1,5 +1,5 @@
 import { Routes, Route, useSearchParams, Navigate } from 'react-router-dom';
-
+import { createContext } from 'react';
 import { useEffect, lazy, Suspense, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -11,8 +11,14 @@ import { setUser, setWidth } from 'redux/reducer';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './Routs/PrivateRoute';
 import PublicRoute from './Routs/PublicRoute';
+import { useRef } from 'react';
+
+import { darkThemeStyles } from 'services/theme-styles';
 // import ActionModal from './ActionModal';
 import s from './App.module.css';
+
+export const ThemeContext = createContext(null)
+
 
 const Header = lazy(() => import('./Header' /* webpackChunkName: "header" */));
 
@@ -27,6 +33,7 @@ const ReportPage = lazy(() =>
 );
 
 export const App = () => {
+ const firstRender = useRef(true)
   const [searchParams] = useSearchParams();
 
   const dispatch = useDispatch();
@@ -35,6 +42,18 @@ export const App = () => {
   const sid = useSelector(getSid);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const width = useSelector(getWidth);
+
+const [theme, setTheme] = useState('light')  
+
+const toggleTheme = () => {
+  setTheme(theme === "dark" ? "light" : "dark")
+  localStorage.setItem('theme', JSON.stringify(theme))  
+}
+
+
+const themeStyle = theme === "dark" ? darkThemeStyles.basic : {}
+
+
   //====================динамически меняет ширину и позволяет ререндер компонентов=========================================
   function getWindowWidth() {
     return window.innerWidth;
@@ -57,6 +76,15 @@ export const App = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [width, widthPx]);
   //============================================================================
+
+  useEffect(()=> {
+    const storedTheme = JSON.parse(localStorage.getItem('theme'))
+    if (storedTheme === "light")
+    {setTheme("dark")} else {setTheme('light')}
+  })
+
+  
+
   useEffect(() => {
     if (searchParams.get('accessToken')) {
       const token = searchParams.get('accessToken');
@@ -118,10 +146,11 @@ export const App = () => {
   ]);
 
   return (
+    <ThemeContext.Provider value={theme}>
     <div>
       <Suspense fallback={<>...loading</>}>
         {/* <ActionModal/> */}
-        <Header />
+        <Header toggleTheme={toggleTheme}/>
 
         <Routes>
           <Route
@@ -136,7 +165,7 @@ export const App = () => {
             path="/home"
             element={
               <PrivateRoute>
-                <div className={s.back}>
+                <div className={s.back} style={themeStyle}>
                   <HomePage />
                 </div>
               </PrivateRoute>
@@ -147,7 +176,7 @@ export const App = () => {
             path="/report"
             element={
               <PrivateRoute>
-                <div className={s.back}>
+                <div className={s.back} style={themeStyle}>
                   <ReportPage />
                 </div>
               </PrivateRoute>
@@ -168,5 +197,6 @@ export const App = () => {
         pauseOnHover={false}
       />
     </div>
+    </ThemeContext.Provider>
   );
 };

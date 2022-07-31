@@ -8,11 +8,21 @@ import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 import Avatar from 'components/Avatar';
 import s from './UserMenu.module.css';
 import ActionModal from 'components/ActionModal';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
+
 
 export default function UserMenu() {
   const dispatch = useDispatch();
   const [logOutUser] = useLogOutUserMutation();
   const [isModalOpen, setModal] = useState('false');
+
+  const themeColor = useContext(ThemeContext)
+  const themeStyle = themeColor === "dark" ? darkThemeStyles.basic : null;
+  const fontColor = themeColor === "dark" ? {color: darkThemeStyles.textColor} : null;
+ 
+  
 
   const toggleModal = () => {
     setModal(!isModalOpen);
@@ -32,7 +42,7 @@ export default function UserMenu() {
 
   return (
     <>
-      <div className={s.container}>
+      <div className={s.container} style={themeStyle}>
         <Avatar />
         <p className={s.userName}>{userName}</p>
         <div className={s.line}></div>
@@ -43,7 +53,7 @@ export default function UserMenu() {
       </div>
       {!isModalOpen && (
         <ActionModal toggleModal={toggleModal} logOut={onLogOutUser}>
-          <p className={s.text}>Do you really want to leave?</p>
+          <p className={s.text} style={fontColor}>Do you really want to leave?</p>
         </ActionModal>
       )}
     </>
