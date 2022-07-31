@@ -5,13 +5,11 @@ import {
   useGetUserDataQuery,
 } from '../../redux/kapustaAPI';
 import ModalNotification from '../ModalNotification';
-
+import CurrencyInput from 'Utils/CurrencyInput';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
-
 import NumberFormat from 'react-number-format';
-
 
 const Balance = () => {
   const [setBalanceValue] = useChangeBalanceMutation();
@@ -21,8 +19,8 @@ const Balance = () => {
   const hasTransactions = data?.transactions.length > 0;
   const [income, setIncome] = useState(() => data?.balance);
 
-  const themeColor = useContext(ThemeContext)
-  const themeStyle = themeColor === "dark" ? darkThemeStyles.basic: null
+  const themeColor = useContext(ThemeContext);
+  const themeStyle = themeColor === 'dark' ? darkThemeStyles.basic : null;
 
   const handleChange = ev => {
     console.log(ev);
@@ -60,12 +58,12 @@ const Balance = () => {
     setBalanceValue(income);
   };
 
-  console.log();
   return (
-
     <div className={s.wrap} style={themeStyle}>
-      <span className={s.span} style={themeStyle}>Balance:</span>
-      <form onSubmit={handleSubmit} className={s.form} >
+      <span className={s.span} style={themeStyle}>
+        Balance:
+      </span>
+      <form onSubmit={handleSubmit} className={s.form}>
         <CurrencyInput
           themestyle={themeStyle}
           placeholder="00.00 UAH"
@@ -74,7 +72,7 @@ const Balance = () => {
           onChange={handleChange}
           onClick={resetInput}
           value={String(income)}
-        /> */}
+        />
         <NumberFormat
           suffix={' UAH'}
           decimalScale={2}

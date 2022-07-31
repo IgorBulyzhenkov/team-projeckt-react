@@ -5,7 +5,7 @@ import s from './header.module.css';
 import logo from '../../img/Header/logo.svg';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
-import ReactSwitch from 'react-switch'
+import ReactSwitch from "react-switch";
 import { darkThemeStyles } from 'services/theme-styles';
 
 

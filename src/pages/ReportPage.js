@@ -18,8 +18,8 @@ function ReportPage() {
   const [getPeriodData] = useLazyGetPeriodDataQuery();
   const total = incomes.incomeTotal - expenses.expenseTotal;
 
-  const category = useSelector(getCategory);
-  const dispatch = useDispatch();
+  // const category = useSelector(getCategory);
+  // const dispatch = useDispatch();
 
   const themeColor = useContext(ThemeContext)
   const themeStyle = themeColor === "dark" ? darkThemeStyles.elements: {}

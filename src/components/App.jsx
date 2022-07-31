@@ -35,7 +35,7 @@ const ReportPage = lazy(() =>
 );
 
 export const App = () => {
- const firstRender = useRef(true)
+//  const firstRender = useRef(true)
   const [searchParams] = useSearchParams();
 
   const dispatch = useDispatch();
@@ -85,7 +85,7 @@ const themeStyle = theme === "dark" ? darkThemeStyles.basic : {}
     const storedTheme = JSON.parse(localStorage.getItem('theme'))
     if (storedTheme === "light")
     {setTheme("dark")} else {setTheme('light')}
-  })
+  },[])
 
   
 
