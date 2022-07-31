@@ -31,8 +31,7 @@
     min-width: 120px;
 }
 
-.arrow:hover,
-.arrow:focus {
-    background-color: transparent;
+.arrow {
     color: #f9680e;
+    cursor: pointer;
 }

@@ -9,6 +9,9 @@ import {
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
 import { ReactComponent as Calculator } from '../../img/Calculator.svg';
+
+import { toast } from 'react-toastify';
+
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
@@ -18,42 +21,95 @@ import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
 // import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
-const FormAddExpense = ({ expense, handleClick }) => {
+const FormAddExpense = ({ expense, handleClick}) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [date, setDate] = useState(new Date());
+  const [amount, setAmount] = useState('');
+  const [select, setSelect] = useState(null);
+  const [description, setDescription] = useState('');
+  const [openSelect, setOpenSelect] = useState(false);
+  const [openInput, setOpenInput] = useState(false);
+  const [openDescription, setOpenDescription] = useState(false);
 
   const VpWidth = useSelector(getWidth);
 
+  const formReset = () => {
+    setAmount('');
+    setSelect(null);
+    setDescription('');
+  };
+
   const handleSubmit = ev => {
     ev.preventDefault();
-    const { amount, amountTablet, description, category, date } =
-      ev.currentTarget;
-    let amountViewAPI = '';
-    console.log(amount);
-    console.log(amountTablet);
-    amount.value
-      ? (amountViewAPI = Number.parseFloat(amount.value.split(' ').join('')))
-      : (amountViewAPI = Number.parseFloat(
-          amountTablet.value.split(' ').join('')
-        ));
-    // const amountViewAPI = Number.parseFloat(amount.value.split(' ').join(''));
-    const transaction = {
-      description: description.value,
-      amount: amountViewAPI,
-      date: date.value,
-      category: category.value,
+    const { date } = ev.currentTarget;
+
+    const isDescriptionCorrect = () => {
+      if (!description) {
+        setOpenDescription(true);
+        setTimeout(() => {
+          setOpenDescription(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
+    };
+    const isSelectorCorrect = () => {
+      if (!select?.value) {
+        setOpenSelect(true);
+        setTimeout(() => {
+          setOpenSelect(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
     };
 
-    if (expense) {
-      addExpense(transaction);
-    } else {
-      addIncome(transaction);
-    }
-    ev.target.reset();
+    const isAmountCorrect = () => {
+      if (!amount) {
+        setOpenInput(true);
+        setTimeout(() => {
+          setOpenInput(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
+    };
 
-    if (VpWidth === 'mobile') {
-      handleClick();
+    const isFormValid =
+      isSelectorCorrect() + isDescriptionCorrect() + isAmountCorrect() === 0;
+
+    if (isFormValid) {
+      const transaction = {
+        description,
+        amount: amount,
+        date: date?.value,
+        category: select?.value,
+      };
+
+      if (expense) {
+        addExpense(transaction)
+          .unwrap()
+          .then(data => {
+            toast.success('Transaction added');
+            formReset();
+            if (VpWidth === 'mobile') {
+              handleClick();
+            }
+          })
+          .catch(error => toast.error(error.data.message));
+      } else {
+        addIncome(transaction)
+          .unwrap()
+          .then(data => {
+            toast.success('Transaction added');
+            formReset();
+            if (VpWidth === 'mobile') {
+              handleClick();
+            }
+          })
+          .catch(error => toast.error(error.data.message));
+      }
     }
   };
 
@@ -91,6 +147,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
     singleValue: (provided, state) => ({
       ...provided,
       color: '#52555F',
+      fontSize: '12px',
     }),
     control: (provided, state) => ({
       ...provided,
@@ -104,6 +161,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
       display: 'none',
     }),
   };
+
 
   const themeStyle =
     themeColor === 'dark'
@@ -129,6 +187,16 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
       <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrap}>
+
+          <div className={s.notificationWraps}>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              className={s.description}
+              placeholder="Product description"
+              value={description}
+              onChange={ev => setDescription(ev.target.value)}
           <div style={themeStyle}>
             <DatePicker
               value={date}
@@ -146,49 +214,60 @@ const FormAddExpense = ({ expense, handleClick }) => {
             />
           </div>
 
-          <input
-            style={themeStyle2}
-            type="text"
-            id="description"
-            name="description"
-            className={s.description}
-            placeholder="Product description"
-          />
-
-          <Select
-            style={themeStyle}
-            type="text"
-            id="category"
-            name="category"
-            options={expense ? optionsExpenses : optionsIncome}
-            styles={styles}
-            placeholder="Product category"
-            className={s.select}
-          />
+  <div className={s.notificationWraps}>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              className={s.description}
+              placeholder="Product description"
+              value={description}
+              onChange={ev => setDescription(ev.target.value)}
+            />
+            {openDescription && (
+              <div className={s.errorNotification}>"Please enter amount"</div>
+            )}
+          </div>
+          <div className={s.notificationWraps}>
+            <Select
+              type="text"
+              id="category"
+              name="category"
+              options={expense ? optionsExpenses : optionsIncome}
+              styles={styles}
+              placeholder="Product category"
+              className={s.select}
+              value={select}
+              onChange={data => setSelect(data)}
+            />
+            {openSelect && (
+              <div className={s.errorNotification}>"Please enter amount"</div>
+            )}
+          </div>
 
           <div className={s.currencyWrapp}>
-            <NumberFormat
-              style={themeStyle2}
-              suffix={' UAH'}
-              decimalScale={2}
-              inputMode="numeric"
-              placeholder="00.00 UAH"
-              thousandSeparator={' '}
-              fixedDecimalScale={true}
-              className={s.input}
-              id="amount"
-              name="amount"
-            />
-            <NumberFormat
-              decimalScale={2}
-              inputMode="numeric"
-              placeholder="0.00"
-              thousandSeparator={' '}
-              fixedDecimalScale={true}
-              className={s.inputTablet}
-              id="amountTablet"
-              name="amountTablet"
-            />
+            <div className={s.notificationWraps}>
+              <NumberFormat
+                allowNegative={false}
+                suffix={VpWidth === 'mobile' ? ' UAH' : ''}
+                decimalScale={2}
+                inputMode="numeric"
+                placeholder={VpWidth === 'mobile' ? '00.00 UAH' : '0.00'}
+                thousandSeparator={' '}
+                fixedDecimalScale={true}
+                className={s.input}
+                id="amount"
+                name="amount"
+                value={amount}
+                maxLength={VpWidth === 'mobile' ? 16 : 12}
+                onValueChange={(values, sourceInfo) =>
+                  setAmount(values.floatValue)
+                }
+              />
+              {openInput && (
+                <div className={s.errorNotification}>"Please enter amount"</div>
+              )}
+            </div>
 
             <div className={s.calculateWrap}>
               <Calculator width="20" height="20" />
@@ -200,7 +279,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           <button type="submit" className={s.buttonInput}>
             Input
           </button>
-          <button type="reset" className={s.buttonClear}>
+          <button type="reset" className={s.buttonClear} onClick={formReset}>
             Clear
           </button>
         </div>

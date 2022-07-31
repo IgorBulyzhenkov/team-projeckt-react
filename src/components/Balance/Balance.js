@@ -4,6 +4,7 @@ import {
   useChangeBalanceMutation,
   useGetUserDataQuery,
 } from '../../redux/kapustaAPI';
+import Tooltip from '@mui/material/Tooltip';
 import ModalNotification from '../ModalNotification';
 import CurrencyInput from 'Utils/CurrencyInput';
 import { useContext } from 'react';
@@ -23,7 +24,6 @@ const Balance = () => {
   const themeStyle = themeColor === 'dark' ? darkThemeStyles.basic : null;
 
   const handleChange = ev => {
-    console.log(ev);
     const query = ev.floatValue;
     setIncome(query);
   };
@@ -64,15 +64,6 @@ const Balance = () => {
         Balance:
       </span>
       <form onSubmit={handleSubmit} className={s.form}>
-        <CurrencyInput
-          themestyle={themeStyle}
-          placeholder="00.00 UAH"
-          type="text"
-          className={s.input}
-          onChange={handleChange}
-          onClick={resetInput}
-          value={String(income)}
-        />
         <NumberFormat
           suffix={' UAH'}
           decimalScale={2}
@@ -89,14 +80,27 @@ const Balance = () => {
           isNumericString={true}
           disabled={!(!hasBalance && !hasTransactions)}
         />
-
-        <button
-          type="submit"
-          className={`${s.button} ballance-btn`}
-          disabled={!(!hasBalance && !hasTransactions)}
-        >
-          CONFIRM
-        </button>
+        {!!(!hasBalance && !hasTransactions) ? (
+          <button
+            type="submit"
+            className={`${s.button} ballance-btn`}
+            disabled={false}
+          >
+            CONFIRM
+          </button>
+        ) : (
+          <Tooltip title="You have already entered the balance">
+            <span>
+              <button
+                type="submit"
+                className={`${s.button} ballance-btn`}
+                disabled={true}
+              >
+                CONFIRM
+              </button>
+            </span>
+          </Tooltip>
+        )}
       </form>
       {!hasBalance && !hasTransactions && <ModalNotification />}
     </div>
