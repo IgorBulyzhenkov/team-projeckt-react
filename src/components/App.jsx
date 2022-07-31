@@ -144,7 +144,7 @@ const themeStyle = theme === "dark" ? darkThemeStyles.basic : {}
 
   return (
     <ThemeContext.Provider value={theme}>
-    <div>
+    <div className={s.app_container}>
       <Suspense fallback={<RingLoader color="#ff511d" size={100}/>}>
         {/* <ActionModal/> */}
         <Header toggleTheme={toggleTheme}/>
