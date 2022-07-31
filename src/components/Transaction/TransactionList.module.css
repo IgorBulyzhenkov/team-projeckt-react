@@ -5,8 +5,7 @@
   white-space: nowrap;
   border-bottom: 1px solid #f5f6fb;
   overflow-x: hidden;
-  overflow-y: scroll;
-  /* min-height: 344px; */
+  overflow-y: auto;
 }
 
 .table {
@@ -61,8 +60,13 @@ table {
   border-bottom: 2px solid #f5f6fb;
 }
 
-.table tbody td:nth-child(1) {
-  border-left: 2px solid #f5f6fb;
+.plugText {
+  font-size: 16px;
+  line-height: 1.14;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: #52555f;
+  margin-top: 40px;
 }
 
 ::-webkit-scrollbar {
