@@ -16,22 +16,31 @@ import NumberFormat from 'react-number-format';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
-// import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+import CalculatorDisplay from '../Calculator/Calculator';
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [date, setDate] = useState(new Date());
+  const [calculator, setCalculator] = useState(false);
 
   const VpWidth = useSelector(getWidth);
+
+  const toggleModal = ev => {
+    setCalculator(!calculator);
+  };
+
+  const closeModal = () => {
+    if (calculator) {
+      setCalculator(false);
+    }
+  };
 
   const handleSubmit = ev => {
     ev.preventDefault();
     const { amount, amountTablet, description, category, date } =
       ev.currentTarget;
     let amountViewAPI = '';
-    console.log(amount);
-    console.log(amountTablet);
     amount.value
       ? (amountViewAPI = Number.parseFloat(amount.value.split(' ').join('')))
       : (amountViewAPI = Number.parseFloat(
@@ -79,18 +88,20 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const themeColor = useContext(ThemeContext);
 
   const backColor =
-    themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#C7CCDC';
+    themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#FFFFFF';
 
   const styles = {
     option: (provided, state) => ({
       ...provided,
       color: state.isSelected ? '#52555F' : '#C7CCDC',
+      fontSize: '12px',
       backgroundColor: state.isSelected ? '#C7CCDC' : `${backColor}`,
     }),
 
     singleValue: (provided, state) => ({
       ...provided,
-      color: '#52555F',
+      color: '#C7CCDC',
+      fontSize: '12px',
     }),
     control: (provided, state) => ({
       ...provided,
@@ -178,6 +189,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
               className={s.input}
               id="amount"
               name="amount"
+              onClick={closeModal}
             />
             <NumberFormat
               decimalScale={2}
@@ -188,10 +200,12 @@ const FormAddExpense = ({ expense, handleClick }) => {
               className={s.inputTablet}
               id="amountTablet"
               name="amountTablet"
+              onClick={closeModal}
             />
 
             <div className={s.calculateWrap}>
-              <Calculator width="20" height="20" />
+              <Calculator width="20" height="20" onClick={toggleModal} />
+              {calculator && <CalculatorDisplay />}
             </div>
           </div>
         </div>

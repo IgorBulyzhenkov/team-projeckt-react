@@ -123,16 +123,14 @@
   .inputTablet {
     display: none;
   }
-  
 }
 @media screen and (min-width: 768px) {
-
-    .exitBtn {
-        display: none;
-      }
+  .exitBtn {
+    display: none;
+  }
   .input {
-      display: none;
-    }
+    display: none;
+  }
 
   .calculateWrap {
     position: absolute;
@@ -148,7 +146,6 @@
   justify-content: center;
   align-items: center; */
   }
-
 
   .form {
     margin-bottom: 60px;
@@ -257,5 +254,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f6f7fb;
+    border: 2px solid #ffffff;
+    border-width: 2px 2px 2px 0;
   }
 }
