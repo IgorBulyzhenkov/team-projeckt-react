@@ -15,6 +15,7 @@ export default function TransactionList({
     [...data].sort((a, b) => b['_id'].localeCompare(a['_id']))
   );
 
+
   useEffect(() => {
     setTransactions([...data].sort((a, b) => b['_id'].localeCompare(a['_id'])));
   }, [data]);
@@ -39,12 +40,14 @@ export default function TransactionList({
       const newDateB = new Date(b.date);
       return newDateB - newDateA;
     });
+
     setTransactions(filterdTransactions);
   };
   const sortByDescription = () => {
     const filterdTransactions = [...transactions].sort((a, b) =>
       a.description.localeCompare(b.description)
     );
+
     setTransactions(arr => filterdTransactions);
   };
 
@@ -52,6 +55,7 @@ export default function TransactionList({
     const filterdTransactions = [...transactions].sort((a, b) =>
       a.category.localeCompare(b.category)
     );
+
     setTransactions(arr => filterdTransactions);
   };
 
@@ -59,6 +63,7 @@ export default function TransactionList({
     const filterdTransactions = [...transactions].sort(
       (a, b) => b.amount - a.amount
     );
+
     setTransactions(arr => filterdTransactions);
   };
 

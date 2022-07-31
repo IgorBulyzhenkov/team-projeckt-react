@@ -6,7 +6,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
- 
+
+  height: 100vh;
+
 }
 
 code {
@@ -103,6 +105,7 @@ canvas {
   line-height: 14px !important;
   letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
+
   color: #52555f;
   border:none !important;
   
@@ -115,13 +118,16 @@ canvas {
 
 .react-date-picker__inputGroup__year{
 width: 40px !important;
-padding: 1px!important;
+
 };
 :focus-visible{
+  color: #52555f !important;
+  border: none !important;
   outline: none !important;
 }
-.react-date-picker__inputGroup{
-  width: 100px!important;
+
+.react-date-picker__inputGroup {
+  width: 100px !important;
 }
 
 .react-date-picker__button svg {

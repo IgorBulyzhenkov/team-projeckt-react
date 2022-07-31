@@ -13,26 +13,25 @@ import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
 import { getWidth, getCategory } from '../../../redux/selectors';
 
-
 ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 
 function ReportGraph({ data }) {
   const screen = useSelector(getWidth);
   const category = useSelector(getCategory);
-
   const newData = data[category];
-
   const sortData = Object.entries(newData);
   const testSort = sortData.sort((a, b) => b[1] - a[1]);
-
   const value = testSort.map(el => el[1]).slice(1);
   const keys = testSort.map(el => el[0]).slice(1);
+  const themeColor = useContext(ThemeContext);
+  const textColor =
+    themeColor === 'dark' ? darkThemeStyles.textColor : '#52555F';
+  const border = themeColor === 'dark' ? '#777777' : 'rgba(245, 246, 251, 1)';
 
-  const themeColor = useContext(ThemeContext)
-  const themeStyle = themeColor === "dark" ? darkThemeStyles.elements: null;
-  const textColor = themeColor === "dark" ? darkThemeStyles.textColor : '#52555F' ;
-  const border = themeColor === "dark" ? '#777777' : 'rgba(245, 246, 251, 1)' 
-  ;
+  const MobileTheme =
+    themeColor === 'dark' && screen === 'tablet'
+      ? { backgroundColor: 'rgb(63, 78, 79)', color: 'rgb(255, 255, 255)' }
+      : {};
 
   const widthBar = () => {
     switch (screen) {
@@ -158,8 +157,8 @@ function ReportGraph({ data }) {
   };
 
   return (
-    <div className={s.wrap} style={themeStyle}>
-      <div className={s.container} style={themeStyle}>
+    <div className={s.wrap} style={MobileTheme}>
+      <div className={s.container}>
         <Bar
           data={dataChart}
           options={{

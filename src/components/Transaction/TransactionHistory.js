@@ -2,7 +2,6 @@ import TransactionList from './TransactionList';
 import Summary from './Summary';
 import s from './TransactionHistory.module.css';
 
-
 export default function TransactionHistory({
   transactions,
   monthStats,
@@ -10,16 +9,20 @@ export default function TransactionHistory({
   handleClick,
 }) {
   return (
-    <div className={s.wrap}>
-      {transactions && (
-        <TransactionList
-          transactions={transactions}
-          expenses={expenses}
-          handleClick={handleClick}
-        />
-      )}
+    <>
+      <div className={s.wrap}>
+        {transactions && (
+          <TransactionList
+            transactions={transactions}
+            expenses={expenses}
+            handleClick={handleClick}
+          />
+        )}
 
-      {monthStats && <Summary monthStats={monthStats} />}
-    </div>
+        <div className={s.summaryDesk}>
+          {monthStats && <Summary monthStats={monthStats} />}
+        </div>
+      </div>
+    </>
   );
 }
