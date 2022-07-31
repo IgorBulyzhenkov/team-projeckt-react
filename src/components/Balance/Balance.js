@@ -6,6 +6,10 @@ import {
 } from '../../redux/kapustaAPI';
 import Tooltip from '@mui/material/Tooltip';
 import ModalNotification from '../ModalNotification';
+import CurrencyInput from 'Utils/CurrencyInput';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
 import NumberFormat from 'react-number-format';
 
 const Balance = () => {
@@ -15,6 +19,9 @@ const Balance = () => {
   const hasBalance = !!data?.balance;
   const hasTransactions = data?.transactions.length > 0;
   const [income, setIncome] = useState(() => data?.balance);
+
+  const themeColor = useContext(ThemeContext);
+  const themeStyle = themeColor === 'dark' ? darkThemeStyles.basic : null;
 
   const handleChange = ev => {
     const query = ev.floatValue;
@@ -52,8 +59,10 @@ const Balance = () => {
   };
 
   return (
-    <div className={s.wrap}>
-      <span className={s.span}>Balance:</span>
+    <div className={s.wrap} style={themeStyle}>
+      <span className={s.span} style={themeStyle}>
+        Balance:
+      </span>
       <form onSubmit={handleSubmit} className={s.form}>
         <NumberFormat
           suffix={' UAH'}

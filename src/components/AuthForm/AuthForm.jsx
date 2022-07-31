@@ -1,4 +1,6 @@
 import { useDispatch } from 'react-redux';
+import { useContext, useEffect } from 'react';
+import { ThemeContext } from 'components/App';
 import {
   useRegisterUserMutation,
   useAuthorizeUserMutation,
@@ -8,6 +10,7 @@ import { setUser } from 'redux/reducer';
 import s from './authForm.module.css';
 import googleIcon from '../../img/AuthForm/google-symbol.svg';
 import { toast } from 'react-toastify';
+import { darkThemeStyles } from 'services/theme-styles';
 
 import { useState } from 'react';
 
@@ -30,12 +33,16 @@ const AuthForm = () => {
   const [user, setUserForm] = useState(initialState);
   const [error, setError] = useState(errorState);
   const [dirty, setDirty] = useState(dirtyState);
+  const [formValidity, setFormValidity] = useState('true');
 
   const { email, password } = user;
   const { emailError, passwordError } = error;
   const { emailDirty, passwordDirty } = dirty;
 
   const dispatch = useDispatch();
+  const themeColor = useContext(ThemeContext);
+  const themeStyle = themeColor === 'dark' ? darkThemeStyles.elements : {};
+  const inputStyle = themeColor === 'dark' ? darkThemeStyles.basic : {};
 
   const [registerUser] = useRegisterUserMutation();
   const [authorizeUser] = useAuthorizeUserMutation();
@@ -129,9 +136,17 @@ const AuthForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (emailError || passwordError) {
+      setFormValidity(false);
+    } else {
+      setFormValidity(true);
+    }
+  }, [emailError, passwordError]);
+
   const onLogin = () => {
     if (!user?.email && !user?.password) {
-      toast.warn('Please eneter your email and password');
+      toast.warn('Please enter your email and password');
       return;
     }
     authorizeUser(user)
@@ -153,7 +168,7 @@ const AuthForm = () => {
 
   const onRegister = () => {
     if (!user?.email && !user?.password) {
-      toast.warn('Please eneter email and password for reistration');
+      toast.warn('Please enter email and password for registration');
       return;
     }
     registerUser(user)
@@ -181,10 +196,12 @@ const AuthForm = () => {
   };
 
   return (
-    <form className={s.form}>
-      <p className={s.text}>You can log in with your Google Account:</p>
+    <form className={s.form} style={themeStyle}>
+      <p className={s.text} style={themeStyle}>
+        You can log in with your Google Account:
+      </p>
       <div className={s.googleBox}>
-        <div className={s.google}>
+        <div className={s.google} style={inputStyle}>
           <img className={s.icon} src={googleIcon} alt="" />
           <span className={s.iconText}>Google</span>
           <a
@@ -197,7 +214,7 @@ const AuthForm = () => {
         </div>
       </div>
 
-      <p className={s.text}>
+      <p className={s.text} style={themeStyle}>
         Or log in using an email and password, after registering:
       </p>
 
@@ -206,6 +223,7 @@ const AuthForm = () => {
       </label>
       <div className={s.fieldBox}>
         <input
+          style={inputStyle}
           onBlur={onBlur}
           onChange={onInput}
           value={email}
@@ -222,6 +240,7 @@ const AuthForm = () => {
       </label>
       <div className={s.fieldBox}>
         <input
+          style={inputStyle}
           onBlur={onBlur}
           onChange={onInput}
           value={password}
@@ -235,10 +254,20 @@ const AuthForm = () => {
         )}
       </div>
 
-      <button className={s.btn} type="button" onClick={onLogin}>
+      <button
+        className={s.btn}
+        type="button"
+        onClick={onLogin}
+        disabled={!formValidity}
+      >
         log in
       </button>
-      <button className={s.btn} type="button" onClick={onRegister}>
+      <button
+        className={s.btn}
+        type="button"
+        onClick={onRegister}
+        disabled={!formValidity}
+      >
         registration
       </button>
     </form>
