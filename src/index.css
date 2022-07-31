@@ -10,7 +10,10 @@
   height: 100vh;
 
 }
-
+body.modal-open {
+  overflow: hidden;
+}
+/* document.querySelector('body').classList.add('modal-open'); */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -98,17 +101,25 @@ canvas {
   display: none;
 } */
 
-.react-date-picker__inputGroup__input,
+.react-date-picker__inputGroup__input{
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: #52555f;
+  border:none !important;
+  
+}
+
 .react-date-picker__inputGroup__leadingZero {
   font-weight: 900 !important;
   font-size: 12px !important;
   line-height: 14px !important;
   letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
+  border: none !important;
 
-  color: #52555f;
-  border:none !important;
-  
 }
 
 .whiteColor{
@@ -223,3 +234,44 @@ button.react-calendar__navigation__next-button:focus {
   background-color: transparent;
   color: #f76002;
 } */
+
+/* ==========калькулятор=============== */
+.calculator{
+  width: 160px!important;
+  height: 235px!important;
+  border-radius: 4px 4px 4px 4px;
+}
+.calculator .operator-keys {
+  
+  border-radius: 0 0 4px 0;
+}
+
+.calculator-display{
+font-size: 3em !important;
+line-height: 65px !important;
+border-radius: 4px 4px 0 0;
+}
+.calculator-keypad{
+height: 175px !important;
+border-radius: 0 0 4px 4px ;
+}
+.calculator-keypad .input-keys{
+  width: 120px !important;
+}
+.calculator-keypad .digit-keys {
+border-radius: 0 0 0 4px;
+}
+
+.calculator-key{
+  width: 40px!important;
+  height:35px!important;
+  line-height: 35px !important;
+  font-size: 1em !important;
+}
+.calculator-key:last-child{
+  padding-top: 0!important;
+}
+ .calculator .digit-keys .key-0{
+  padding-left: 0!important;
+  text-align: center!important;
+ }

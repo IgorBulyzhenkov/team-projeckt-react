@@ -1,7 +1,7 @@
 import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
@@ -17,7 +17,9 @@ import NumberFormat from 'react-number-format';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
-// import CalculatorDisplay from '../Calculator/Calculator';
+import Draggable from 'react-draggable'; // The default
+import { Calculator as CalculatorNew } from 'react-mac-calculator';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
@@ -32,11 +34,12 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const [openDescription, setOpenDescription] = useState(false);
   const VpWidth = useSelector(getWidth);
 
-  const toggleModal = () => {
-    setCalculator(!calculator);
+  const openCalculator = () => {
+    console.log(calculator);
+    setCalculator(true);
   };
 
-  const closeModal = () => {
+  const closeCalculator = () => {
     if (calculator) {
       setCalculator(false);
     }
@@ -146,20 +149,26 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const backColor =
     themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#FFFFFF';
 
-  const caledarEl = document.querySelectorAll(
+  const calendarEl = document.querySelectorAll(
     '.react-date-picker__inputGroup__input'
-  );
-  const calendarZero = document.querySelector(
-    '.react-date-picker__inputGroup__leadingZero'
   );
 
   if (themeColor === 'dark') {
-    caledarEl?.forEach(el => el.classList.add('whiteColor'));
-    calendarZero?.classList.add('whiteColor');
+    calendarEl?.forEach(el => el.classList.add('whiteColor'));
   } else {
-    caledarEl?.forEach(el => el.classList.remove('whiteColor'));
-    calendarZero?.classList.remove('whiteColor');
+    calendarEl?.forEach(el => el.classList.remove('whiteColor'));
   }
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (themeColor === 'dark') {
+  //       calendarEl?.forEach(el => el.classList.add('whiteColor'));
+  //     } else {
+  //       calendarEl?.forEach(el => el.classList.remove('whiteColor'));
+  //     }
+  //   }, 500);
+  //   console.log(calendarEl);
+  // });
 
   const styles = {
     option: (provided, state) => ({
@@ -220,6 +229,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
             name="date"
             onChange={setDate}
             format={'dd.MM.y'}
+            style={calendarColor}
           />
           <div className={s.notificationWraps}>
             <input
@@ -276,9 +286,20 @@ const FormAddExpense = ({ expense, handleClick }) => {
               )}
             </div>
             <div className={s.calculateWrap}>
-              <Calculator width="20" height="20" />
+              <Calculator width="20" height="20" onClick={openCalculator} />
             </div>
           </div>
+          {calculator && (
+            <Draggable>
+              <div className={s.calculatorWrap}>
+                <AiOutlineCloseCircle
+                  onClick={closeCalculator}
+                  className={s.closeCalcIcon}
+                />
+                <CalculatorNew className={s.calculator} />
+              </div>
+            </Draggable>
+          )}
         </div>
 
         <div className={s.buttonWrap}>
