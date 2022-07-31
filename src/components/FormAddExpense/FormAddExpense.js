@@ -146,6 +146,16 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const backColor =
     themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#FFFFFF';
 
+  const caledarEl = document.querySelectorAll(
+    '.react-date-picker__inputGroup__input'
+  );
+
+  if (themeColor === 'dark') {
+    caledarEl.forEach(el => el.classList.add('whiteColor'));
+  } else {
+    caledarEl.forEach(el => el.classList.remove('whiteColor'));
+  }
+
   const styles = {
     option: (provided, state) => ({
       ...provided,
@@ -177,6 +187,8 @@ const FormAddExpense = ({ expense, handleClick }) => {
       ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
       : {};
   const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : null;
+  const calendarColor =
+    themeColor === 'dark' ? { color: 'white' } : { color: '#52555f' };
 
   return (
     <div className={s.formWrap}>
@@ -194,18 +206,17 @@ const FormAddExpense = ({ expense, handleClick }) => {
         <div className={s.inputWrap}>
           <DatePicker
             value={date}
-            calendarIcon={<CalendarMonthIcon />}
+            calendarIcon={<CalendarMonthIcon style={calendarColor} />}
             clearIcon={null}
             prevLabel={null}
             prev2Label={null}
             nextLabel={null}
             next2Label={null}
-            className={s.calendar}
-            calendarClassName={s.calendar}
+            wrapperClassName={s.calendar}
             name="date"
             onChange={setDate}
             format={'dd.MM.y'}
-            style={themeStyle2}
+            style={{ color: 'red' }}
           />
           {/* </div> */}
           <div className={s.notificationWraps}>

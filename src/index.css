@@ -6,6 +6,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
+ 
 }
 
 code {
@@ -102,9 +103,22 @@ canvas {
   line-height: 14px !important;
   letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
-  color: #52555f !important;
+  color: #52555f;
   border:none !important;
+  
 }
+.react-date-picker__inputGroup__input{
+  color:white;
+}
+.react-date-picker__inputGroup__leadingZero {
+  color: white;
+}
+
+
+.react-date-picker__inputGroup__year{
+width: 40px !important;
+padding: 1px!important;
+};
 :focus-visible{
   outline: none !important;
 }

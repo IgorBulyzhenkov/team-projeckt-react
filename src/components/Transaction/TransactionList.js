@@ -11,11 +11,9 @@ export default function TransactionList({
   expenses,
   handleClick,
 }) {
-  console.log(data);
   const [transactions, setTransactions] = useState(
     [...data].sort((a, b) => b['_id'].localeCompare(a['_id']))
   );
-  console.log(transactions);
 
   useEffect(() => {
     setTransactions([...data].sort((a, b) => b['_id'].localeCompare(a['_id'])));
@@ -41,14 +39,12 @@ export default function TransactionList({
       const newDateB = new Date(b.date);
       return newDateB - newDateA;
     });
-    console.log('date', filterdTransactions);
     setTransactions(filterdTransactions);
   };
   const sortByDescription = () => {
     const filterdTransactions = [...transactions].sort((a, b) =>
       a.description.localeCompare(b.description)
     );
-    console.log('des', filterdTransactions);
     setTransactions(arr => filterdTransactions);
   };
 
@@ -56,7 +52,6 @@ export default function TransactionList({
     const filterdTransactions = [...transactions].sort((a, b) =>
       a.category.localeCompare(b.category)
     );
-    console.log('category', filterdTransactions);
     setTransactions(arr => filterdTransactions);
   };
 
@@ -64,7 +59,6 @@ export default function TransactionList({
     const filterdTransactions = [...transactions].sort(
       (a, b) => b.amount - a.amount
     );
-    console.log('sum', filterdTransactions);
     setTransactions(arr => filterdTransactions);
   };
 
