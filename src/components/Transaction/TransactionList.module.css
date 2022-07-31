@@ -1,6 +1,6 @@
 .tableBody {
   max-height: 344px;
-  margin-top: 5px;
+
   margin-bottom: 20px;
   white-space: nowrap;
   border-bottom: 1px solid #f5f6fb;
@@ -35,6 +35,7 @@ table {
   text-transform: uppercase;
   border: none;
   background: #f5f6fb;
+  border-bottom: 2px solid #f5f6fb;
 }
 
 .table tr {
