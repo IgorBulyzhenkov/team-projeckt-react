@@ -1,11 +1,10 @@
 .form {
   display: flex;
   flex-direction: column;
+ 
 }
 
-.calendar {
-  width: 30px;
-}
+
 
 .description {
   border: 2px solid #ffffff;
