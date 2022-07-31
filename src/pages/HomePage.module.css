@@ -41,7 +41,7 @@
 @media screen and (min-width: 1280px) {
 
   .home_page {
-    min-height: 850px;
+    min-height: 100vh;
   }
 
   .wrap {
