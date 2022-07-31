@@ -16,7 +16,7 @@ const ModalAddExpense = ({ handleClick, expense }) => {
 
   return createPortal(
     <div className={s.overlay} id="backDrop">
-      <div className={s.modal} style={themeStyle}>
+      <div className={s.modal} style={themeStyle} >
         <FormAddExpense expense={expense} handleClick={handleClick} />
       </div>
     </div>,

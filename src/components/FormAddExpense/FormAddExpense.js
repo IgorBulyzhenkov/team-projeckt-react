@@ -80,12 +80,15 @@ const FormAddExpense = ({ expense, handleClick }) => {
 
   const backColor =
     themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#C7CCDC';
+     
+    
 
   const styles = {
     option: (provided, state) => ({
       ...provided,
       color: state.isSelected ? '#52555F' : '#C7CCDC',
       backgroundColor: state.isSelected ? '#C7CCDC' : `${backColor}`,
+      
     }),
 
     singleValue: (provided, state) => ({
@@ -98,6 +101,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
       borderRadius: '0 0 20px 0',
       height: '44px',
       width: '280px',
+      
     }),
     indicatorSeparator: (provided, state) => ({
       ...provided,
@@ -115,7 +119,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
   // };
 
   return (
-    <div className={s.formWrap}>
+    <div className={s.formWrap}  >
       <div className={s.exitBtn}>
         <IconButton
           color="warning"
@@ -127,7 +131,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
         </IconButton>
       </div>
 
-      <form className={s.form} onSubmit={handleSubmit}>
+      <form className={s.form} onSubmit={handleSubmit}  >
         <div className={s.inputWrap}>
           <div style={themeStyle}>
             <DatePicker
@@ -156,7 +160,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           />
 
           <Select
-            style={themeStyle}
+           
             type="text"
             id="category"
             name="category"
@@ -180,6 +184,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
               name="amount"
             />
             <NumberFormat
+             style={themeStyle2}
               decimalScale={2}
               inputMode="numeric"
               placeholder="0.00"
@@ -190,8 +195,8 @@ const FormAddExpense = ({ expense, handleClick }) => {
               name="amountTablet"
             />
 
-            <div className={s.calculateWrap}>
-              <Calculator width="20" height="20" />
+            <div className={s.calculateWrap} >
+              <Calculator width="20" height="20"  />
             </div>
           </div>
         </div>

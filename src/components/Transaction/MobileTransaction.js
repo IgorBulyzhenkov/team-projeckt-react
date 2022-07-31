@@ -1,6 +1,9 @@
 import { DeleteOutline } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/App';
+import { darkThemeStyles } from 'services/theme-styles';
 
 import { useGetUserDataQuery } from '../../redux/kapustaAPI';
 
@@ -11,6 +14,9 @@ export default function MobileTransaction({ handleClick }) {
 
   const { data } = useGetUserDataQuery();
 
+  const themeColor = useContext(ThemeContext)
+  const themeStyle = themeColor === "dark" ? darkThemeStyles.basic : null;
+ 
   useEffect(() => {
     data && setTransactions(data.transactions);
   }, [data]);
@@ -25,12 +31,13 @@ export default function MobileTransaction({ handleClick }) {
     <table className={s.mobTable}>
       {transactions?.map(({ description, category, amount, date, _id }) => {
         return (
-          <tbody key={_id}>
-            <tr>
+          <tbody key={_id} >
+            <tr >
               <td colSpan="2" className={s.descriptionItem}>
-                <span className={s.description}>{description}</span>
+                <span style={themeStyle} className={s.description}>{description}</span>
               </td>
               <td
+              
                 rowSpan="2"
                 className={`${s.amount} ${
                   categoryIncomeCheck(category) ? s.income : s.expense
@@ -39,19 +46,19 @@ export default function MobileTransaction({ handleClick }) {
                 {amount}.00 грн
               </td>
               <td rowSpan="2">
-                <IconButton
+                <IconButton style={themeStyle}
                   onClick={e => handleClick(e)}
                   aria-label="button delete"
                   component="label"
                   id={_id}
                 >
                   <DeleteOutline />
-                </IconButton>
+                </IconButton >
               </td>
             </tr>
             <tr>
-              <td className={s.date}>{date}</td>
-              <td>{category}</td>
+              <td style={themeStyle} className={s.date}>{date}</td>
+              <td style={themeStyle}>{category}</td>
             </tr>
           </tbody>
         );

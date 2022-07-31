@@ -38,6 +38,7 @@ export default function TransactionItem({
       </td>
       <td style={themeStyle}>
         <IconButton
+        style={themeStyle}
           onClick={e => handleClick(e)}
           aria-label="button delete"
           component="label"
