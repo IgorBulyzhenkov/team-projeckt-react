@@ -71,3 +71,10 @@ table {
   background: #ff751d;
   border-radius: 2px;
 }
+
+.listHeader{
+  cursor: pointer;
+}
+.listHeader:hover{
+  color: #ff751d;
+}
