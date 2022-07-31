@@ -62,7 +62,7 @@ export default function TransactionList({
 
   const sortBySum = () => {
     const filterdTransactions = [...transactions].sort(
-      (a, b) => a.amount - b.amount
+      (a, b) => b.amount - a.amount
     );
     console.log('sum', filterdTransactions);
     setTransactions(arr => filterdTransactions);
