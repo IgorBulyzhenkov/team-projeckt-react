@@ -18,6 +18,7 @@ import { getWidth } from '../../redux/selectors';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
+import Summary from './Summary';
 
 export default function Transactions() {
   const [isModalOpen, setModal] = useState('false');
@@ -31,9 +32,10 @@ export default function Transactions() {
   const { data: income } = useGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
 
-  const themeColor = useContext(ThemeContext)
-  const themeStyle = themeColor === "dark" ? darkThemeStyles.elements : null;
-  const fontColor = themeColor === "dark" ? {color: darkThemeStyles.textColor} : null;
+  const themeColor = useContext(ThemeContext);
+  const themeStyle = themeColor === 'dark' ? darkThemeStyles.elements : null;
+  const fontColor =
+    themeColor === 'dark' ? { color: darkThemeStyles.textColor } : null;
 
   const VpWidth = useSelector(getWidth);
 
@@ -79,25 +81,26 @@ export default function Transactions() {
 
   return (
     <div className={s.transactionContainer}>
-      <div className={s.btnWrap}></div>
-      <button
-        style={!isExpense ? themeStyle : null}
-        className={`${s.btn} ${isExpense ? s.isActive : ''}`}
-        type="button"
-        onClick={handleExpBtnClick}
-      >
-        {VpWidth === 'mobile' && 'Add '}
-        Expenses
-      </button>
-      <button
-      style={isExpense ? themeStyle : null}
-        className={`${s.btn} ${!isExpense ? s.isActive : ''}`}
-        type="button"
-        onClick={handleIncBtnClick}
-      >
-        {VpWidth === 'mobile' && 'Add '}
-        Income
-      </button>
+      <div className={s.btnWrap}>
+        <button
+          style={!isExpense ? themeStyle : null}
+          className={`${s.btn} ${isExpense ? s.isActive : ''}`}
+          type="button"
+          onClick={handleExpBtnClick}
+        >
+          {VpWidth === 'mobile' && 'Add '}
+          Expenses
+        </button>
+        <button
+          style={isExpense ? themeStyle : null}
+          className={`${s.btn} ${!isExpense ? s.isActive : ''}`}
+          type="button"
+          onClick={handleIncBtnClick}
+        >
+          {VpWidth === 'mobile' && 'Add '}
+          Income
+        </button>
+      </div>
 
       <div className={s.mobileWrap}>
         <MobileTransaction handleClick={handleClick} />
@@ -112,6 +115,9 @@ export default function Transactions() {
           monthStats={monthStats}
         />
       </div>
+      <div className={s.summaryTab}>
+        {monthStats && <Summary monthStats={monthStats} />}
+      </div>
       {!isMobileModalOpen && (
         <ModalAddExpense
           handleClick={() => setMobileModal(!isMobileModalOpen)}
@@ -124,7 +130,9 @@ export default function Transactions() {
           toggleModal={() => setModal(!isModalOpen)}
           logOut={() => delTransaction(transactionsId)}
         >
-          <p className={s.text} style={fontColor}>Are you sure?</p>
+          <p className={s.text} style={fontColor}>
+            Are you sure?
+          </p>
         </ActionModal>
       )}
     </div>

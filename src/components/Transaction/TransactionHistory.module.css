@@ -11,3 +11,9 @@
     margin-top: 38px;
   }
 }
+
+@media screen and (max-width: 1279px) {
+  .summaryDesk {
+    display: none;
+  }
+}

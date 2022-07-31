@@ -15,7 +15,7 @@
   max-height: calc(100vh - 24px);
   background-color: #ffff;
 
-  padding: 15px;
+  padding: 15px 15px 25px 15px;
   border-radius: 15px;
 }
 
