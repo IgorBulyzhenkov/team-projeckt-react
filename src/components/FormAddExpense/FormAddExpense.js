@@ -17,20 +17,34 @@ import NumberFormat from 'react-number-format';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
-// import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+import CalculatorDisplay from '../Calculator/Calculator';
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [date, setDate] = useState(new Date());
+  const [ calculator, setCalculator ] = useState(false);
   const [amount, setAmount] = useState('');
   const [select, setSelect] = useState(null);
   const [description, setDescription] = useState('');
   const [openSelect, setOpenSelect] = useState(false);
   const [openInput, setOpenInput] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
-
   const VpWidth = useSelector(getWidth);
+
+
+  const toggleModal = () => {
+    setCalculator(!calculator);
+  };
+
+  const closeModal = () =>
+  {
+    if (calculator)
+    {
+      setCalculator(false);
+    }
+  }
+
 
   const formReset = () => {
     setAmount('');
@@ -133,18 +147,19 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const themeColor = useContext(ThemeContext);
 
   const backColor =
-    themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#C7CCDC';
+    themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#FFFFFF';
 
   const styles = {
     option: (provided, state) => ({
       ...provided,
       color: state.isSelected ? '#52555F' : '#C7CCDC',
+      fontSize: '12px',
       backgroundColor: state.isSelected ? '#C7CCDC' : `${backColor}`,
     }),
 
     singleValue: (provided, state) => ({
       ...provided,
-      color: '#52555F',
+      color: '#C7CCDC',
       fontSize: '12px',
     }),
     control: (provided, state) => ({
@@ -166,116 +181,109 @@ const FormAddExpense = ({ expense, handleClick }) => {
       : {};
   const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : null;
 
-  return (
-    <div className={s.formWrap}>
-      <div className={s.exitBtn}>
-        <IconButton
-          color="warning"
-          onClick={handleClick}
-          aria-label="button close"
-          component="button"
-        >
-          <KeyboardBackspaceIcon />
-        </IconButton>
-      </div>
-
-      <form className={s.form} onSubmit={handleSubmit}>
-        <div style={themeStyle}>
-          <div className={s.inputWrap}>
-            <DatePicker
-              value={date}
-              calendarIcon={<CalendarMonthIcon />}
-              clearIcon={null}
-              prevLabel={null}
-              prev2Label={null}
-              nextLabel={null}
-              next2Label={null}
-              className={s.calendar}
-              calendarClassName={s.calendar}
-              name="date"
-              onChange={setDate}
-              format={'dd.MM.y'}
-              style={themeStyle2}
-            />
-            {/* </div> */}
-
-            <div className={s.notificationWraps}>
-              <input
-                type="text"
-                id="description"
-                name="description"
-                className={s.description}
-                placeholder="Product description"
-                value={description}
-                onChange={ev => setDescription(ev.target.value)}
-                style={themeStyle}
-              />
-              {openDescription && (
-                <div className={s.errorNotification}>"Please enter amount"</div>
-              )}
-            </div>
-            <div className={s.notificationWraps}>
-              <Select
-                style={themeStyle2}
-                type="text"
-                id="category"
-                name="category"
-                options={expense ? optionsExpenses : optionsIncome}
-                styles={styles}
-                placeholder="Product category"
-                className={s.select}
-                value={select}
-                onChange={data => setSelect(data)}
-              />
-              {openSelect && (
-                <div className={s.errorNotification}>
-                  Please choose category
-                </div>
-              )}
-            </div>
-
-            <div className={s.currencyWrapp}>
-              <div className={s.notificationWraps}>
-                <NumberFormat
-                  allowNegative={false}
-                  suffix={VpWidth === 'mobile' ? ' UAH' : ''}
-                  decimalScale={2}
-                  inputMode="numeric"
-                  placeholder={VpWidth === 'mobile' ? '00.00 UAH' : '0.00'}
-                  thousandSeparator={' '}
-                  fixedDecimalScale={true}
-                  className={s.input}
-                  id="amount"
-                  name="amount"
-                  value={amount}
-                  maxLength={VpWidth === 'mobile' ? 16 : 12}
-                  onValueChange={(values, sourceInfo) =>
-                    setAmount(values.floatValue)
-                  }
-                />
-                {openInput && (
-                  <div className={s.errorNotification}>Please enter amount</div>
-                )}
-              </div>
-
-              <div className={s.calculateWrap}>
-                <Calculator width="20" height="20" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className={s.buttonWrap}>
-          <button type="submit" className={s.buttonInput}>
-            Input
-          </button>
-          <button type="reset" className={s.buttonClear} onClick={formReset}>
-            Clear
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+ return (
+   <div className={s.formWrap}>
+     <div className={s.exitBtn}>
+       <IconButton
+         color="warning"
+         onClick={handleClick}
+         aria-label="button close"
+         component="button"
+       >
+         <KeyboardBackspaceIcon />
+       </IconButton>
+     </div>
+     <form className={s.form} onSubmit={handleSubmit}>
+       <div style={themeStyle}>
+         <div className={s.inputWrap}>
+           <DatePicker
+             value={date}
+             calendarIcon={<CalendarMonthIcon />}
+             clearIcon={null}
+             prevLabel={null}
+             prev2Label={null}
+             nextLabel={null}
+             next2Label={null}
+             className={s.calendar}
+             calendarClassName={s.calendar}
+             name="date"
+             onChange={setDate}
+             format={'dd.MM.y'}
+             style={themeStyle2}
+           />
+           {/* </div> */}
+           <div className={s.notificationWraps}>
+             <input
+               type="text"
+               id="description"
+               name="description"
+               className={s.description}
+               placeholder="Product description"
+               value={description}
+               onChange={ev => setDescription(ev.target.value)}
+               style={themeStyle}
+             />
+             {openDescription && (
+               <div className={s.errorNotification}>"Please enter amount"</div>
+             )}
+           </div>
+           <div className={s.notificationWraps}>
+             <Select
+               style={themeStyle2}
+               type="text"
+               id="category"
+               name="category"
+               options={expense ? optionsExpenses : optionsIncome}
+               styles={styles}
+               placeholder="Product category"
+               className={s.select}
+               value={select}
+               onChange={data => setSelect(data)}
+             />
+             {openSelect && (
+               <div className={s.errorNotification}>Please choose category</div>
+             )}
+           </div>
+           <div className={s.currencyWrapp}>
+             <div className={s.notificationWraps}>
+               <NumberFormat
+                 allowNegative={false}
+                 suffix={VpWidth === 'mobile' ? ' UAH' : ''}
+                 decimalScale={2}
+                 inputMode="numeric"
+                 placeholder={VpWidth === 'mobile' ? '00.00 UAH' : '0.00'}
+                 thousandSeparator={' '}
+                 fixedDecimalScale={true}
+                 className={s.input}
+                 id="amount"
+                 name="amount"
+                 value={amount}
+                 maxLength={VpWidth === 'mobile' ? 16 : 12}
+                 onValueChange={(values, sourceInfo) =>
+                   setAmount(values.floatValue)
+                 }
+               />
+               {openInput && (
+                 <div className={s.errorNotification}>Please enter amount</div>
+               )}
+             </div>
+             <div className={s.calculateWrap}>
+               <Calculator width="20" height="20" />
+             </div>
+           </div>
+         </div>
+       </div>
+       <div className={s.buttonWrap}>
+         <button type="submit" className={s.buttonInput}>
+           Input
+         </button>
+         <button type="reset" className={s.buttonClear} onClick={formReset}>
+           Clear
+         </button>
+       </div>
+     </form>
+   </div>
+ );
 };
 
 export default FormAddExpense;
