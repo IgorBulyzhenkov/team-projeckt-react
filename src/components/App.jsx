@@ -2,7 +2,7 @@ import { Routes, Route, useSearchParams, Navigate } from 'react-router-dom';
 import { createContext } from 'react';
 import { useEffect, lazy, Suspense, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import RingLoader from "react-spinners/RingLoader"
+import RingLoader from 'react-spinners/RingLoader';
 import {
   useRefreshUserMutation,
   useLazyGetUserDataQuery,
@@ -20,8 +20,7 @@ import { darkThemeStyles } from 'services/theme-styles';
 
 import s from './App.module.css';
 
-export const ThemeContext = createContext(null)
-
+export const ThemeContext = createContext(null);
 
 const Header = lazy(() => import('./Header' /* webpackChunkName: "header" */));
 
@@ -36,7 +35,7 @@ const ReportPage = lazy(() =>
 );
 
 export const App = () => {
-//  const firstRender = useRef(true)
+  //  const firstRender = useRef(true)
   const [searchParams] = useSearchParams();
 
   const dispatch = useDispatch();
@@ -46,16 +45,14 @@ export const App = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const width = useSelector(getWidth);
 
-const [theme, setTheme] = useState('light')  
+  const [theme, setTheme] = useState('light');
 
-const toggleTheme = () => {
-  setTheme(theme === "dark" ? "light" : "dark")
-  localStorage.setItem('theme', JSON.stringify(theme))  
-}
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+    localStorage.setItem('theme', JSON.stringify(theme));
+  };
 
-
-const themeStyle = theme === "dark" ? darkThemeStyles.basic : {}
-
+  const themeStyle = theme === 'dark' ? darkThemeStyles.basic : {};
 
   //====================динамически меняет ширину и позволяет ререндер компонентов=========================================
   const getWindowWidth = () => window.innerWidth;
@@ -82,13 +79,14 @@ const themeStyle = theme === "dark" ? darkThemeStyles.basic : {}
   }, []);
   //============================================================================
 
-  useEffect(()=> {
-    const storedTheme = JSON.parse(localStorage.getItem('theme'))
-    if (storedTheme === "light")
-    {setTheme("dark")} else {setTheme('light')}
-  },[])
-
-  
+  useEffect(() => {
+    const storedTheme = JSON.parse(localStorage.getItem('theme'));
+    if (storedTheme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }, []);
 
   useEffect(() => {
     if (searchParams.get('accessToken')) {
@@ -144,56 +142,61 @@ const themeStyle = theme === "dark" ? darkThemeStyles.basic : {}
 
   return (
     <ThemeContext.Provider value={theme}>
-    <div>
-      <Suspense fallback={<RingLoader color="#ff511d" size={100}/>}>
-        {/* <ActionModal/> */}
-        <Header toggleTheme={toggleTheme}/>
+      <div>
+        <Suspense
+          fallback={
+            <div className={s.loaderContainer}>
+              <RingLoader color="#ff511d" size={100} />
+            </div>
+          }
+        >
+          <Header toggleTheme={toggleTheme} />
 
-        <Routes>
-          <Route
-            path="/authorization"
-            element={
-              <PublicRoute>
-                <AuthorizationPage />
-              </PublicRoute>
-            }
-          ></Route>
-          <Route
-            path="/home"
-            element={
-              <PrivateRoute>
-                <div className={s.back} style={themeStyle}>
-                  <HomePage />
-                </div>
-              </PrivateRoute>
-            }
-          ></Route>
+          <Routes>
+            <Route
+              path="/authorization"
+              element={
+                <PublicRoute>
+                  <AuthorizationPage />
+                </PublicRoute>
+              }
+            ></Route>
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute>
+                  <div className={s.back} style={themeStyle}>
+                    <HomePage />
+                  </div>
+                </PrivateRoute>
+              }
+            ></Route>
 
-          <Route
-            path="/report"
-            element={
-              <PrivateRoute>
-                <div className={s.back} style={themeStyle}>
-                  <ReportPage />
-                </div>
-              </PrivateRoute>
-            }
-          ></Route>
-          <Route path="*" element={<Navigate to="/authorization" />}></Route>
-        </Routes>
-      </Suspense>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-      />
-    </div>
+            <Route
+              path="/report"
+              element={
+                <PrivateRoute>
+                  <div className={s.back} style={themeStyle}>
+                    <ReportPage />
+                  </div>
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route path="*" element={<Navigate to="/authorization" />}></Route>
+          </Routes>
+        </Suspense>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover={false}
+        />
+      </div>
     </ThemeContext.Provider>
   );
 };

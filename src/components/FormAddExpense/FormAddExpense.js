@@ -9,9 +9,7 @@ import {
   useAddIncomeMutation,
 } from '../../redux/kapustaAPI';
 import { ReactComponent as Calculator } from '../../img/Calculator.svg';
-
 import { toast } from 'react-toastify';
-
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
@@ -19,25 +17,36 @@ import NumberFormat from 'react-number-format';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
-// import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+// import CalculatorDisplay from '../Calculator/Calculator';
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
   const [date, setDate] = useState(new Date());
+  const [calculator, setCalculator] = useState(false);
   const [amount, setAmount] = useState('');
   const [select, setSelect] = useState(null);
   const [description, setDescription] = useState('');
   const [openSelect, setOpenSelect] = useState(false);
   const [openInput, setOpenInput] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
-
   const VpWidth = useSelector(getWidth);
+
+  const toggleModal = () => {
+    setCalculator(!calculator);
+  };
+
+  const closeModal = () => {
+    if (calculator) {
+      setCalculator(false);
+    }
+  };
 
   const formReset = () => {
     setAmount('');
     setSelect(null);
     setDescription('');
+    setDate(new Date());
   };
 
   const handleSubmit = ev => {
@@ -135,12 +144,28 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const themeColor = useContext(ThemeContext);
 
   const backColor =
-    themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#C7CCDC';
+    themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#FFFFFF';
+
+  const caledarEl = document.querySelectorAll(
+    '.react-date-picker__inputGroup__input'
+  );
+  const calendarZero = document.querySelector(
+    '.react-date-picker__inputGroup__leadingZero'
+  );
+
+  if (themeColor === 'dark') {
+    caledarEl?.forEach(el => el.classList.add('whiteColor'));
+    calendarZero?.classList.add('whiteColor');
+  } else {
+    caledarEl?.forEach(el => el.classList.remove('whiteColor'));
+    calendarZero?.classList.remove('whiteColor');
+  }
 
   const styles = {
     option: (provided, state) => ({
       ...provided,
       color: state.isSelected ? '#52555F' : '#C7CCDC',
+      fontSize: '12px',
       backgroundColor: state.isSelected ? '#C7CCDC' : `${backColor}`,
     }),
 
@@ -162,14 +187,13 @@ const FormAddExpense = ({ expense, handleClick }) => {
     }),
   };
 
-  const themeStyle =
-    themeColor === 'dark'
-      ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
-      : {};
- 
-  // const handleChange = e => {
-  //   setCategories(e.target.value);
-  // };
+  // const themeStyle =
+  //   themeColor === 'dark'
+  //     ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
+  //     : {};
+  const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : null;
+  const calendarColor =
+    themeColor === 'dark' ? { color: 'white' } : { color: '#52555f' };
 
   return (
     <div className={s.formWrap}>
@@ -183,25 +207,20 @@ const FormAddExpense = ({ expense, handleClick }) => {
           <KeyboardBackspaceIcon />
         </IconButton>
       </div>
-
       <form className={s.form} onSubmit={handleSubmit}>
-        <div style={themeStyle}>
+        <div className={s.inputWrap}>
           <DatePicker
             value={date}
-            calendarIcon={<CalendarMonthIcon />}
+            calendarIcon={<CalendarMonthIcon style={calendarColor} />}
             clearIcon={null}
             prevLabel={null}
             prev2Label={null}
             nextLabel={null}
             next2Label={null}
-            className={s.calendar}
-            calendarClassName={s.calendar}
             name="date"
             onChange={setDate}
             format={'dd.MM.y'}
           />
-        </div>
-        <div className={s.inputWrap}>
           <div className={s.notificationWraps}>
             <input
               type="text"
@@ -218,6 +237,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           </div>
           <div className={s.notificationWraps}>
             <Select
+              style={themeStyle2}
               type="text"
               id="category"
               name="category"
@@ -229,10 +249,9 @@ const FormAddExpense = ({ expense, handleClick }) => {
               onChange={data => setSelect(data)}
             />
             {openSelect && (
-              <div className={s.errorNotification}>"Please enter amount"</div>
+              <div className={s.errorNotification}>Please choose category</div>
             )}
           </div>
-
           <div className={s.currencyWrapp}>
             <div className={s.notificationWraps}>
               <NumberFormat
@@ -253,10 +272,9 @@ const FormAddExpense = ({ expense, handleClick }) => {
                 }
               />
               {openInput && (
-                <div className={s.errorNotification}>"Please enter amount"</div>
+                <div className={s.errorNotification}>Please enter amount</div>
               )}
             </div>
-
             <div className={s.calculateWrap}>
               <Calculator width="20" height="20" />
             </div>

@@ -1,5 +1,8 @@
 .modalWrap {
   display: flex;
+  z-index: 100;
+  position: absolute;
+  top: 70px;
 }
 
 .modal {

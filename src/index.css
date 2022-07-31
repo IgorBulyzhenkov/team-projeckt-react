@@ -6,6 +6,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
+
+  height: 100vh;
+
 }
 
 code {
@@ -45,7 +48,6 @@ button {
 button:hover,
 button:focus {
   background-color: #ff751d;
-  color: #fff;
 }
 
 p,
@@ -103,16 +105,36 @@ canvas {
   line-height: 14px !important;
   letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
+
+  color: #52555f;
+  border:none !important;
+  
+}
+
+.whiteColor{
+  color: white !important;
+}
+
+
+.react-date-picker__inputGroup__year{
+width: 40px !important;
+
+};
+:focus-visible{
   color: #52555f !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.react-date-picker__inputGroup {
+  width: 100px !important;
 }
 
 .react-date-picker__button svg {
   size: 20px !important;
 }
 
-.react-date-picker__calendar .react-calendar {
-  border: none !important;
-}
+
 
 .css-ewfg62-control {
   border-color: #f5f6fb !important;

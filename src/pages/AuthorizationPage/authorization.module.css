@@ -3,7 +3,7 @@
 }
 
 .section {
-  height: 800px;
+  /* height: 100vh; */
 
   background-image: url('../../img/AuthorizationPage/cabbage.png'),
     url('../../img/AuthorizationPage/cabbage.png'),
@@ -15,9 +15,9 @@
 }
 
 @media (min-device-pixel-ratio: 2),
-  (-webkit-min-device-pixel-ratio: 2),
-  (min-resolution: 192dpi),
-  (min-resolution: 2dppx) {
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi),
+(min-resolution: 2dppx) {
   .section {
     background-image: url('../../img/AuthorizationPage/2x/cabbage2x.png'),
       url('../../img/AuthorizationPage/2x/cabbage2x.png'),
@@ -26,8 +26,9 @@
 }
 
 .container {
-  padding-left: 20px;
-  padding-right: 20px;
+  /* padding-left: 20px;
+  padding-right: 20px; */
+  width: 280px;
   padding-top: 86px;
   padding-bottom: 102px;
   margin: 0 auto;
@@ -55,17 +56,12 @@
 @media screen and (max-width: 320px) {
   .section {
     margin: 0 auto;
-    height: 968px;
-  }
-
-  .container {
-    width: 320px;
   }
 }
 
 @media screen and (min-width: 480px) {
   .container {
-    width: 480px;
+    width: 426px;
   }
 }
 
@@ -78,7 +74,6 @@
 
 @media screen and (min-width: 768px) {
   .section {
-    height: 968px;
     margin: 0 auto;
     background-image: url('../../img/AuthorizationPage/cabbages-group.png'),
       url('../../img/AuthorizationPage/cabbage-2dt.png'),
@@ -90,9 +85,9 @@
   }
 
   @media (min-device-pixel-ratio: 2),
-    (-webkit-min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
     .section {
       background-image: url('../../img/AuthorizationPage/2x/cabbages2x-group.png'),
         url('../../img/AuthorizationPage/2x/cabbage2x-dt.png'),
@@ -101,9 +96,9 @@
   }
 
   .container {
-    width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
+    width: 426px;
+    /* padding-left: 32px;
+    padding-right: 32px; */
     padding-bottom: 80px;
   }
 
@@ -113,7 +108,7 @@
   }
 
   .authBox {
-    margin-left: 139px;
+    width: fit-content;
   }
 
   .text {
@@ -126,8 +121,8 @@
 
 @media screen and (min-width: 1280px) {
   .section {
-    height: 794px;
     width: auto;
+    height: 100vh;
     background-image: url('../../img/AuthorizationPage/cabbages-group.png'),
       url('../../img/AuthorizationPage/cabbage-2dt.png'),
       url('../../img/AuthorizationPage/rectangle-desktop.png');
@@ -138,9 +133,9 @@
   }
 
   @media (min-device-pixel-ratio: 2),
-    (-webkit-min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
     .section {
       background-image: url('../../img/AuthorizationPage/2x/cabbages2x-group.png'),
         url('../../img/AuthorizationPage/2x/cabbage2x-dt.png'),
@@ -150,8 +145,8 @@
 
   .container {
     width: 1280px;
-    padding-left: 16px;
-    padding-right: 16px;
+    /* padding-left: 16px;
+    padding-right: 16px; */
     padding-top: 117px;
   }
 

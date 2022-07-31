@@ -21,6 +21,7 @@ const Balance = () => {
 
   const themeColor = useContext(ThemeContext);
   const themeStyle = themeColor === 'dark' ? darkThemeStyles.basic : null;
+  const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : {};
 
   const handleChange = ev => {
     const query = ev.floatValue;
@@ -64,6 +65,7 @@ const Balance = () => {
       </span>
       <form onSubmit={handleSubmit} className={s.form}>
         <NumberFormat
+          allowNegative={false}
           suffix={' UAH'}
           decimalScale={2}
           // inputMode="numeric"
@@ -78,12 +80,14 @@ const Balance = () => {
           onClick={resetInput}
           isNumericString={true}
           disabled={!(!hasBalance && !hasTransactions)}
+          style={themeStyle2}
         />
         {!!(!hasBalance && !hasTransactions) ? (
           <button
             type="submit"
             className={`${s.button} ballance-btn`}
             disabled={false}
+            style={themeStyle2}
           >
             CONFIRM
           </button>

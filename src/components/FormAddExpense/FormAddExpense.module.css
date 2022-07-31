@@ -1,11 +1,10 @@
 .form {
   display: flex;
   flex-direction: column;
+ 
 }
 
-.calendar {
-  width: 30px;
-}
+
 
 .description {
   border: 2px solid #ffffff;
@@ -14,8 +13,8 @@
   height: 44px;
   width: 280px;
   outline: none;
-  color: #52555F;
-  
+  color: #52555f;
+
   padding-left: 10px;
   font-weight: 400;
   font-size: 12px;
@@ -24,13 +23,17 @@
 }
 
 .description:-webkit-autofill {
-  -webkit-box-shadow: inset 0 0 0 50px #f5f6fb !important; /* Цвет фона */
-  -webkit-text-fill-color: #c7ccdc !important; /* цвет текста */
-  color: #c7ccdc !important; /* цвет текста */
+  -webkit-box-shadow: inset 0 0 0 50px #f5f6fb !important;
+  /* Цвет фона */
+  -webkit-text-fill-color: #c7ccdc !important;
+  /* цвет текста */
+  color: #c7ccdc !important;
+  /* цвет текста */
 }
 
 .input:-webkit-autofill {
-  -webkit-box-shadow: inset 0 0 0 50px #f5f6fb !important; /* Цвет фона */
+  -webkit-box-shadow: inset 0 0 0 50px #f5f6fb !important;
+  /* Цвет фона */
 }
 
 .description::placeholder {
@@ -49,10 +52,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: 80px;
+  /* margin-bottom: 80px; */
   justify-content: center;
   align-items: center;
-  margin-right: 32px;
+  /* margin-right: 32px; */
+  background-color: #11ffee00;
 }
 
 .input {
@@ -73,12 +77,11 @@
 .input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: black;
-  opacity: 1; /* Firefox */
+  opacity: 1;
+  /* Firefox */
   font-weight: bold;
   font-size: 12px;
 }
-
-
 
 .buttonWrap {
   display: flex;
@@ -91,18 +94,17 @@
   height: 44px;
   border-radius: 16px;
   /* box-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35); */
- 
-  color: #ff751d;;
+  border: none;
+  color: #ff751d;
   margin-right: 20px;
-  border: 2px solid #f5f6fb;
-  
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-      background: linear-gradient(0deg, #ddd, #fff);
-      transition: .5s;
-        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-            border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-            color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(0deg, #ddd, #fff);
+  transition: 0.5s;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .buttonInput:hover {
   background-color: #ff751d;
   border-color: #ff751d;
@@ -116,21 +118,22 @@
   height: 44px;
   border-radius: 16px;
   background-color: #f5f6fb;
-    border: 2px solid #f5f6fb;
-/* box-shadow: 1px 2px 5px rgba(170, 178, 197, 0.4); */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-      background: linear-gradient(0deg, #ddd, #fff);
-      transition: .5s;
-        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-            border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-            color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  /* box-shadow: 1px 2px 5px rgba(170, 178, 197, 0.4); */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(0deg, #ddd, #fff);
+  transition: 0.5s;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.buttonClear:hover{
-    background-color: #ff751d;
-      border-color: #ff751d;
-      color: #ff751d;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      text-decoration: none;
+
+.buttonClear:hover {
+  background-color: #ff751d;
+  border-color: #ff751d;
+  color: #ff751d;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
 }
 
 .calculateWrap {
@@ -150,13 +153,10 @@
   flex-direction: row;
 }
 
-
 @media screen and (min-width: 768px) {
-
-    .exitBtn {
-        display: none;
-      }
-
+  .exitBtn {
+    display: none;
+  }
 
   .calculateWrap {
     position: absolute;
@@ -181,7 +181,6 @@
     border-radius: 20px 0 0 0;
     width: 184px;
     padding-left: 20px;
-   
   }
 
   .description::placeholder {
@@ -205,7 +204,7 @@
     border: 2px solid #f6f7fc;
     border-radius: 0px 16px 16px 0px;
     background-color: #ffffff;
-    color: #52555F;
+    color: #52555f;
 
     padding-right: 30px;
   }
@@ -230,7 +229,8 @@
   }
 
   .description:-webkit-autofill {
-    -webkit-box-shadow: inset 0 0 0 50px #fff !important; /* Цвет фона */
+    -webkit-box-shadow: inset 0 0 0 50px #fff !important;
+    /* Цвет фона */
   }
 }
 
@@ -242,6 +242,7 @@
 
   .buttonWrap {
     align-items: flex-start;
+    margin-left: 32px;
   }
 
   .description {
@@ -254,15 +255,14 @@
   .description {
     width: 280px;
     margin-top: 20px;
-    margin-left: 30px;
+    /* margin-left: 30px; */
   }
-    .currencyWrapp {
-      margin-top: 32px;
-    }
 
-  .select {
-    width: 250px;
+  .currencyWrapp {
+    margin-top: 32px;
+    margin-bottom: 60px;
   }
+
   .calculateWrap {
     position: static;
 
@@ -274,15 +274,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f6f7fb;
+    border: 2px solid #ffffff;
+    border-width: 2px 2px 2px 0;
   }
 }
+
 /* =============Form================= */
-.notificationWraps{
+.notificationWraps {
   position: relative;
 }
-.errorNotification{
+
+.errorNotification {
   position: absolute;
-  left:50%;
+  left: 50%;
   bottom: -10px;
   transform: translateX(-50%);
   font-size: 12px;

@@ -1,17 +1,17 @@
 import ReportSvgSelector from './ReportSvgSelector';
 import ReportGraph from 'components/Report/ReportGraph/ReportGraph';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCategory } from 'redux/selectors';
+import { getCategory, getWidth } from 'redux/selectors';
 import { setCategory } from 'redux/reducer';
 import { useState, useEffect } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
-import { darkThemeStyles } from 'services/theme-styles';
 import s from './ReportList.module.css';
 
 function ReportList({ incomes, expenses }) {
+  const screen = useSelector(getWidth);
   const [showIcon, setShowIcon] = useState(false);
   const [expenseEl, setExpenseEl] = useState([]);
   const [total, setTotal] = useState({});
@@ -21,8 +21,7 @@ function ReportList({ incomes, expenses }) {
   const data = showIcon ? expenses.expensesData : incomes.incomesData;
   const dataLenght = Object.entries(total);
 
-  const themeColor = useContext(ThemeContext)
-  const themeStyle = themeColor === "dark" ? darkThemeStyles.elements: {}
+  const themeColor = useContext(ThemeContext);
 
   useEffect(() => {
     if (!data) {
@@ -44,9 +43,26 @@ function ReportList({ incomes, expenses }) {
     category && dispatch(setCategory(''));
   };
 
+  const MobileTheme =
+    themeColor === 'dark' && screen === 'tablet'
+      ? { backgroundColor: 'rgb(63, 78, 79)', color: 'rgb(255, 255, 255)', heigth: '100vh' }
+      : {};
+
+  const mobileTextTheme =
+    screen === 'tablet'
+      ? { backgroundColor: 'rgb(63, 78, 79)', color: 'rgb(255, 255, 255)' }
+      : { background: 'rgb(44, 54, 57)', color: 'rgb(255, 255, 255)' };
+
+  const themeColorProvider = themeColor === 'dark' ? mobileTextTheme : {};
+
+  const mobileStyleIconColor = themeColor === 'dark' ? { fill: '#FF751D' } : {};
+
+  const mobileBackgroundColorIconColor =
+    themeColor === 'dark' ? { backgroundColor: '#ff741d19' } : {};
+
   return (
     <>
-      <div className={s.wrap} style={themeStyle}>
+      <div className={s.wrap} style={MobileTheme}>
         <div className={s.wrapBtn}>
           <button
             type="button"
@@ -56,9 +72,13 @@ function ReportList({ incomes, expenses }) {
             <FiChevronLeft size="20" className={s.arrowBtn} />
           </button>
           {showIcon ? (
-            <p className={s.textBtn}>Expenses</p>
+            <p style={themeColorProvider} className={s.textBtn}>
+              Expenses
+            </p>
           ) : (
-            <p className={s.textBtn}>Incomes</p>
+            <p style={themeColorProvider} className={s.textBtn}>
+              Incomes
+            </p>
           )}
           <button
             type="button"
@@ -69,7 +89,9 @@ function ReportList({ incomes, expenses }) {
           </button>
         </div>
         {!data || dataLenght.length === 0 ? (
-          <p className={s.textBtn}> data not found for the current month</p>
+          <p className={s.textBtn} style={themeColorProvider}>
+            data not found for the current month
+          </p>
         ) : (
           <ul className={s.list}>
             {ReportSvgSelector.filter(({ name }) => expenseEl.includes(name))
@@ -80,15 +102,22 @@ function ReportList({ incomes, expenses }) {
               })
               .map(({ id, nameEng, image, value, name }) => (
                 <li key={id} className={s.item}>
-                  <p className={s.text} style={themeStyle}>{value}.00</p>
+                  <p className={s.text} style={themeColorProvider}>
+                    {value}.00
+                  </p>
                   <div
                     id={name}
                     className={s.itemSpan}
+                    style={mobileBackgroundColorIconColor}
                     onClick={e => dispatch(setCategory(e.currentTarget.id))}
                   >
-                    <span className={s.span}>{image}</span>
+                    <span className={s.span} style={mobileStyleIconColor}>
+                      {image}
+                    </span>
                   </div>
-                  <p className={s.text} style={themeStyle}>{nameEng}</p>
+                  <p className={s.text} style={themeColorProvider}>
+                    {nameEng}
+                  </p>
                 </li>
               ))}
           </ul>
