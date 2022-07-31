@@ -185,6 +185,23 @@ const FormAddExpense = ({ expense, handleClick }) => {
       </div>
 
       <form className={s.form} onSubmit={handleSubmit}>
+        <div style={themeStyle}>
+          <DatePicker
+            value={date}
+            calendarIcon={<CalendarMonthIcon />}
+            clearIcon={null}
+            prevLabel={null}
+            prev2Label={null}
+            nextLabel={null}
+            next2Label={null}
+            className={s.calendar}
+            calendarClassName={s.calendar}
+            name="date"
+            onChange={setDate}
+            format={'dd.MM.y'}
+            style={themeStyle2}
+          />
+        </div>
         <div className={s.inputWrap}>
           <div className={s.notificationWraps}>
             <input
@@ -196,33 +213,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
               value={description}
               onChange={ev => setDescription(ev.target.value)}
               style={themeStyle}
-            />
-            <DatePicker
-              value={date}
-              calendarIcon={<CalendarMonthIcon />}
-              clearIcon={null}
-              prevLabel={null}
-              prev2Label={null}
-              nextLabel={null}
-              next2Label={null}
-              className={s.calendar}
-              calendarClassName={s.calendar}
-              name="date"
-              onChange={setDate}
-              format={'dd.MM.y'}
-            />
-          </div>
-
-          <div className={s.notificationWraps}>
-            <input
-              style={themeStyle2}
-              type="text"
-              id="description"
-              name="description"
-              className={s.description}
-              placeholder="Product description"
-              value={description}
-              onChange={ev => setDescription(ev.target.value)}
             />
             {openDescription && (
               <div className={s.errorNotification}>"Please enter amount"</div>
