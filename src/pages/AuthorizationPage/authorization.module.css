@@ -28,6 +28,7 @@
 .container {
   /* padding-left: 20px;
   padding-right: 20px; */
+  width: 280px;
   padding-top: 86px;
   padding-bottom: 102px;
   margin: 0 auto;
@@ -56,15 +57,11 @@
   .section {
     margin: 0 auto;
   }
-
-  .container {
-    width: 320px;
-  }
 }
 
 @media screen and (min-width: 480px) {
   .container {
-    width: 480px;
+    width: 426px;
   }
 }
 

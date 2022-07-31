@@ -3,7 +3,7 @@
 }
 
 .back {
-  height: 100vh;
+  height: 100%;
 
   background-image: url('../img/AuthorizationPage/rectangle-mob.png');
   background-position: top 0px left 0px;
