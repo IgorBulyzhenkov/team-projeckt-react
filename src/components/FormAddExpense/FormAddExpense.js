@@ -199,6 +199,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
             name="date"
             onChange={setDate}
             format={'dd.MM.y'}
+            style={themeStyle2}
           />
         </div>
         <div className={s.inputWrap}>
@@ -211,6 +212,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
               placeholder="Product description"
               value={description}
               onChange={ev => setDescription(ev.target.value)}
+              style={themeStyle}
             />
             {openDescription && (
               <div className={s.errorNotification}>"Please enter amount"</div>
@@ -218,6 +220,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           </div>
           <div className={s.notificationWraps}>
             <Select
+              style={themeStyle2}
               type="text"
               id="category"
               name="category"
@@ -236,6 +239,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           <div className={s.currencyWrapp}>
             <div className={s.notificationWraps}>
               <NumberFormat
+                style={themeStyle2}
                 allowNegative={false}
                 suffix={VpWidth === 'mobile' ? ' UAH' : ''}
                 decimalScale={2}
