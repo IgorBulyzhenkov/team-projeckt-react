@@ -4,6 +4,7 @@
     padding-left: 12px;
     padding-right: 12px;
     margin: 0 auto;
+    height: fit-content;
   }
 }
 
@@ -13,6 +14,7 @@
     padding-left: 32px;
     padding-right: 32px;
     margin: 0 auto;
+    height: fit-content;
   }
 }
 
@@ -22,5 +24,6 @@
     padding-left: 91px;
     padding-right: 91px;
     margin: 0 auto;
+    height: fit-content;
   }
 }

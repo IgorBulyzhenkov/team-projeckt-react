@@ -15,7 +15,6 @@ export default function TransactionList({
     [...data].sort((a, b) => b['_id'].localeCompare(a['_id']))
   );
 
-
   useEffect(() => {
     setTransactions([...data].sort((a, b) => b['_id'].localeCompare(a['_id'])));
   }, [data]);
@@ -105,26 +104,32 @@ export default function TransactionList({
         </thead>
       </table>
       <div className={s.tableBody}>
-        <table>
-          <tbody>
-            {transactions.map(
-              ({ description, category, amount, date, _id }) => (
-                <TransactionItem
-                  themeStyle={themeStyle2}
-                  tableBorderColor={tableBorderColor}
-                  key={_id}
-                  description={description}
-                  category={category}
-                  amount={amount}
-                  date={date}
-                  id={_id}
-                  expenses={expenses}
-                  handleClick={handleClick}
-                />
-              )
-            )}
-          </tbody>
-        </table>
+        {transactions?.length === 0 ? (
+          <p style={themeStyle2} className={s.plugText}>
+            No transaction history! Please fill out the form above...
+          </p>
+        ) : (
+          <table>
+            <tbody>
+              {transactions.map(
+                ({ description, category, amount, date, _id }) => (
+                  <TransactionItem
+                    themeStyle={themeStyle2}
+                    tableBorderColor={tableBorderColor}
+                    key={_id}
+                    description={description}
+                    category={category}
+                    amount={amount}
+                    date={date}
+                    id={_id}
+                    expenses={expenses}
+                    handleClick={handleClick}
+                  />
+                )
+              )}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

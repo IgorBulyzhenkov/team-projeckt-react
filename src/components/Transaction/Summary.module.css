@@ -1,20 +1,18 @@
 .table {
   width: 230px;
   border-spacing: 0 0;
-  height: 100%;
 }
 
 .table tr th {
   font-weight: 700;
   font-size: 12px;
   line-height: 1.14;
-
+  white-space: nowrap;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   height: 38px;
   border-radius: 20px 20px 0 0;
   background: #f5f6fb;
-
   border-bottom: 2px solid #ffffff;
 }
 
@@ -35,4 +33,21 @@
 
 .table tr td:nth-child(2) {
   text-align: center;
+}
+
+.tbodyWrap {
+  margin-top: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .table {
+    box-shadow: 5px 10px 20px rgb(170 178 197 / 40%);
+    border-radius: 20px 20px 0 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .table {
+    box-shadow: none;
+  }
 }

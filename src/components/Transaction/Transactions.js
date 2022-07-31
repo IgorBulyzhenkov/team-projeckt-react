@@ -27,7 +27,6 @@ export default function Transactions() {
   const [isExpense, setIsExpense] = useState(true);
   const [transactions, setTransactions] = useState([]);
   const [monthStats, setMonthStats] = useState({});
-
   const { data: expense } = useGetExpenseQuery();
   const { data: income } = useGetIncomeQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
@@ -79,6 +78,17 @@ export default function Transactions() {
     }
   };
 
+  const mobileTextTheme =
+    VpWidth === 'tablet'
+      ? {
+          backgroundColor: 'rgb(63, 78, 79)',
+          color: 'rgb(255, 255, 255)',
+          boxShadow: '5px 10px 20px rgb(170 178 197 / 40%)',
+        }
+      : {};
+
+  const themeColorProvider = themeColor === 'dark' ? mobileTextTheme : {};
+
   return (
     <div className={s.transactionContainer}>
       <div className={s.btnWrap}>
@@ -106,7 +116,7 @@ export default function Transactions() {
         <MobileTransaction handleClick={handleClick} />
       </div>
 
-      <div className={s.deskWrap} style={themeStyle}>
+      <div className={s.deskWrap} style={themeColorProvider}>
         <FormAddExpense expense={isExpense} />
         <TransactionHistory
           handleClick={handleClick}
@@ -116,7 +126,9 @@ export default function Transactions() {
         />
       </div>
       <div className={s.summaryTab}>
-        {monthStats && <Summary monthStats={monthStats} />}
+        {monthStats && (
+          <Summary monthStats={monthStats} style={themeColorProvider} />
+        )}
       </div>
       {!isMobileModalOpen && (
         <ModalAddExpense
