@@ -56,7 +56,7 @@ export default function MobileTransaction({ handleClick }) {
                   <td rowSpan="2">
                     <IconButton
                       style={themeStyle}
-                      sx={{ ml: 3 }}
+                      // sx={{ ml: 2 }}
                       onClick={e => handleClick(e)}
                       aria-label="button delete"
                       component="label"

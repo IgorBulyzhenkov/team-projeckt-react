@@ -55,13 +55,18 @@ export default function Transactions() {
   };
 
   const delTransaction = id => {
-    const cabbage = document.querySelector(`#delete${id}`);
-    cabbage.classList.add('deleteTransaction');
-    setTimeout(() => {
+    if (VpWidth === 'mobile') {
       deleteTransaction(id);
-    }, 700);
+      setModal(!isModalOpen);
+    } else {
+      const cabbage = document.querySelector(`#delete${id}`);
+      cabbage.classList.add('deleteTransaction');
+      setTimeout(() => {
+        deleteTransaction(id);
+      }, 700);
 
-    setModal(!isModalOpen);
+      setModal(!isModalOpen);
+    }
   };
 
   const handleExpBtnClick = () => {
