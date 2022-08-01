@@ -124,6 +124,7 @@ export default function TransactionList({
                     id={_id}
                     expenses={expenses}
                     handleClick={handleClick}
+                    
                   />
                 )
               )}

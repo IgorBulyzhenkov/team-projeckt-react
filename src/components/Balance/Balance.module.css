@@ -5,6 +5,8 @@
   flex-direction: column;
   position: relative;
   margin-bottom: 20px;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .span {
