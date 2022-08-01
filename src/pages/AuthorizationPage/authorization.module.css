@@ -3,7 +3,7 @@
 }
 
 .section {
-  /* min-height: 856px; */
+  min-height: 1000px;
 
   background-image: url('../../img/AuthorizationPage/cabbage.png'),
     url('../../img/AuthorizationPage/cabbage.png'),
