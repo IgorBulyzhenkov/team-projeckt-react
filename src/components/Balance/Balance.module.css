@@ -62,17 +62,13 @@
   border: 2px solid #ffffff;
   border-width: 2px 2px 2px 0;
   pointer-events: none;
-
 }
-
 
 .button:disabled:hover {
   color: #52555f;
   background: #f5f6fb;
   border: 2px solid #ffffff;
   border-width: 2px 2px 2px 0;
-
-
 }
 
 .button:hover {
