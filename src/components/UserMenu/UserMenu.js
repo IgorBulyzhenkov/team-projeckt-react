@@ -12,20 +12,21 @@ import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
 
-
 export default function UserMenu() {
   const dispatch = useDispatch();
   const [logOutUser] = useLogOutUserMutation();
   const [isModalOpen, setModal] = useState('false');
 
-  const themeColor = useContext(ThemeContext)
-  const themeStyle = themeColor === "dark" ? darkThemeStyles.basic : null;
-  const fontColor = themeColor === "dark" ? {color: darkThemeStyles.textColor} : null;
- 
-  
+  const themeColor = useContext(ThemeContext);
+  const themeStyle = themeColor === 'dark' ? darkThemeStyles.basic : null;
+  const fontColor =
+    themeColor === 'dark' ? { color: darkThemeStyles.textColor } : null;
 
   const toggleModal = () => {
     setModal(!isModalOpen);
+    isModalOpen
+      ? document.querySelector('body').classList.add('modal-open')
+      : document.querySelector('body').classList.remove('modal-open');
   };
 
   const onLogOutUser = () => {
@@ -35,6 +36,7 @@ export default function UserMenu() {
         dispatch(resetUser());
         dispatch(kapustaApi.util.resetApiState());
       });
+    document.querySelector('body').classList.remove('modal-open');
   };
 
   const email = useSelector(getEmail);
@@ -53,7 +55,9 @@ export default function UserMenu() {
       </div>
       {!isModalOpen && (
         <ActionModal toggleModal={toggleModal} logOut={onLogOutUser}>
-          <p className={s.text} style={fontColor}>Do you really want to leave?</p>
+          <p className={s.text} style={fontColor}>
+            Do you really want to leave?
+          </p>
         </ActionModal>
       )}
     </>
