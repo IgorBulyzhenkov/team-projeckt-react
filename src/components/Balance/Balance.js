@@ -14,7 +14,6 @@ import NumberFormat from 'react-number-format';
 const Balance = () => {
   const [setBalanceValue] = useChangeBalanceMutation();
   const { data, isFetching } = useGetUserDataQuery();
-  console.log(isFetching);
 
   const hasBalance = !!data?.balance;
   const hasTransactions = data?.transactions.length > 0;
