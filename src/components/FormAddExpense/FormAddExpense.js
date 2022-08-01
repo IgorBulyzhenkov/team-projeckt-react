@@ -1,7 +1,7 @@
 import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
@@ -32,6 +32,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const [openSelect, setOpenSelect] = useState(false);
   const [openInput, setOpenInput] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
+  const [calendarElems, setCalendarElems] = useState('');
   const VpWidth = useSelector(getWidth);
 
   const openCalculator = () => {
@@ -159,16 +160,16 @@ const FormAddExpense = ({ expense, handleClick }) => {
     calendarEl?.forEach(el => el.classList.remove('whiteColor'));
   }
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (themeColor === 'dark') {
-  //       calendarEl?.forEach(el => el.classList.add('whiteColor'));
-  //     } else {
-  //       calendarEl?.forEach(el => el.classList.remove('whiteColor'));
-  //     }
-  //   }, 500);
-  //   console.log(calendarEl);
-  // });
+  useEffect(() => {
+    calendarEl && setCalendarElems(calendarEl);
+    if (themeColor === 'dark') {
+      calendarEl?.forEach(el => el.classList.add('whiteColor'));
+    } else {
+      calendarEl?.forEach(el => el.classList.remove('whiteColor'));
+    }
+
+    console.log(calendarEl);
+  }, [themeColor, calendarEl]);
 
   const styles = {
     option: (provided, state) => ({
