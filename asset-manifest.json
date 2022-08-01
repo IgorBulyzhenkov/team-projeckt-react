@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/team-project-react/static/css/main.2f4735f4.css",
+    "main.css": "/team-project-react/static/css/main.be46e80f.css",
     "main.js": "/team-project-react/static/js/main.fd5856c8.js",
     "header.css": "/team-project-react/static/css/header.6b88733f.chunk.css",
     "header.js": "/team-project-react/static/js/header.03e43542.chunk.js",
@@ -19,7 +19,7 @@
     "static/media/google-symbol.svg": "/team-project-react/static/media/google-symbol.45390fe8c864f6ba12f2fcaab8463918.svg",
     "static/media/Calculator.svg": "/team-project-react/static/media/Calculator.8eda3f2a2b16aa2851c99eb017ba66d2.svg",
     "index.html": "/team-project-react/index.html",
-    "main.2f4735f4.css.map": "/team-project-react/static/css/main.2f4735f4.css.map",
+    "main.be46e80f.css.map": "/team-project-react/static/css/main.be46e80f.css.map",
     "main.fd5856c8.js.map": "/team-project-react/static/js/main.fd5856c8.js.map",
     "header.6b88733f.chunk.css.map": "/team-project-react/static/css/header.6b88733f.chunk.css.map",
     "header.03e43542.chunk.js.map": "/team-project-react/static/js/header.03e43542.chunk.js.map",
@@ -34,7 +34,7 @@
     "619.0cdc58aa.chunk.js.map": "/team-project-react/static/js/619.0cdc58aa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2f4735f4.css",
+    "static/css/main.be46e80f.css",
     "static/js/main.fd5856c8.js"
   ]
 }
