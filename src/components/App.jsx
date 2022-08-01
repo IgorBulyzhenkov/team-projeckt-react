@@ -57,11 +57,12 @@ export const App = () => {
   //====================динамически меняет ширину и позволяет ререндер компонентов=========================================
   const getWindowWidth = () => window.innerWidth;
 
-  const [widthPx, setWidthPx] = useState('mobile');
+  const [widthPx, setWidthPx] = useState(getWindowWidth());
   const changeWidthState = (width, currentWidth) => {
     if (currentWidth <= 767.99 && width !== 'mobile') {
       dispatch(setWidth({ width: 'mobile' }));
-    } else if (currentWidth > 768 && width !== 'tablet') {
+    }
+    if (currentWidth > 768 && width !== 'tablet') {
       dispatch(setWidth({ width: 'tablet' }));
     }
   };

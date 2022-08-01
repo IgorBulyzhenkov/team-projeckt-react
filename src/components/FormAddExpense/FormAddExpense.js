@@ -1,7 +1,7 @@
 import s from './FormAddExpense.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DatePicker from 'react-date-picker';
-import { useState} from 'react';
+import { useState } from 'react';
 import { IconButton } from '@mui/material';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
@@ -229,7 +229,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
             name="date"
             onChange={setDate}
             format={'dd.MM.y'}
-            style={calendarColor}
+            // style={calendarColor}
           />
           <div className={s.notificationWraps}>
             <input
