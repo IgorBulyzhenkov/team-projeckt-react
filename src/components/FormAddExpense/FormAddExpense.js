@@ -35,8 +35,11 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const [calendarElems, setCalendarElems] = useState('');
   const VpWidth = useSelector(getWidth);
 
+  if (false) {
+    console.log(calendarElems);
+  }
+
   const openCalculator = () => {
-    console.log(calculator);
     setCalculator(true);
   };
 
@@ -165,13 +168,12 @@ const FormAddExpense = ({ expense, handleClick }) => {
   useEffect(() => {
     calendarEl && setCalendarElems(calendarEl);
     if (themeColor === 'dark') {
-      calendarEl?.forEach(el => el.classList.add('whiteColor'));
+      [...calendarEl]?.forEach(el => el.classList.add('whiteColor'));
     } else {
-      calendarEl?.forEach(el => el.classList.remove('whiteColor'));
+      [...calendarEl]?.forEach(el => el.classList.remove('whiteColor'));
     }
-
-    console.log(calendarEl);
-  }, [themeColor, calendarEl]);
+    // eslint-disable-next-line
+  }, []);
 
   const styles = {
     option: (provided, state) => ({
