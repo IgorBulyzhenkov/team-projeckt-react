@@ -52,6 +52,7 @@ export default function Transactions() {
     e.preventDefault();
     setTransactionsId(e.currentTarget.id);
     setModal(!isModalOpen);
+    document.querySelector('body').classList.add('modal-open');
   };
 
   const delTransaction = id => {
@@ -71,15 +72,19 @@ export default function Transactions() {
 
   const handleExpBtnClick = () => {
     setIsExpense(true);
+
     if (VpWidth === 'mobile') {
       setMobileModal(!isMobileModalOpen);
+      document.querySelector('body').classList.add('modal-open');
     }
   };
 
   const handleIncBtnClick = () => {
     setIsExpense(false);
+
     if (VpWidth === 'mobile') {
       setMobileModal(!isMobileModalOpen);
+      document.querySelector('body').classList.add('modal-open');
     }
   };
 
@@ -137,15 +142,24 @@ export default function Transactions() {
       </div>
       {!isMobileModalOpen && (
         <ModalAddExpense
-          handleClick={() => setMobileModal(!isMobileModalOpen)}
+          handleClick={() => {
+            setMobileModal(!isMobileModalOpen);
+            document.querySelector('body').classList.remove('modal-open');
+          }}
           expense={isExpense}
         />
       )}
 
       {!isModalOpen && (
         <ActionModal
-          toggleModal={() => setModal(!isModalOpen)}
-          logOut={() => delTransaction(transactionsId)}
+          toggleModal={() => {
+            setModal(!isModalOpen);
+            document.querySelector('body').classList.remove('modal-open');
+          }}
+          logOut={() => {
+            delTransaction(transactionsId);
+            document.querySelector('body').classList.remove('modal-open');
+          }}
         >
           <p className={s.text} style={fontColor}>
             Are you sure?

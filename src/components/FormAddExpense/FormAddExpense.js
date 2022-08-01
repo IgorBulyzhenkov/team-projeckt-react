@@ -107,6 +107,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
             formReset();
             if (VpWidth === 'mobile') {
               handleClick();
+              document.querySelector('body').classList.remove('modal-open');
             }
           })
           .catch(error => toast.error(error.data.message));
@@ -118,6 +119,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
             formReset();
             if (VpWidth === 'mobile') {
               handleClick();
+              document.querySelector('body').classList.remove('modal-open');
             }
           })
           .catch(error => toast.error(error.data.message));
