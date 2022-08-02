@@ -17,7 +17,7 @@ export default function TransactionList({
 }) {
   const dispatch = useDispatch();
   const selectedCategory = useSelector(getFilterCategory);
-  // const [selectedCategory, setSelectedCategory] = useState('');
+  const [descriptionSort, setDescriptionSort] = useState(true);
   const [sumSort, setSumSort] = useState(true);
   const [dateSort, setDateSort] = useState(true);
   const [filterCategoryList, setFilterCategoryList] = useState(
@@ -77,11 +77,20 @@ export default function TransactionList({
     setTransactions(filterdTransactions);
   };
   const sortByDescription = () => {
-    const filterdTransactions = [...transactions].sort((a, b) =>
-      a.description.localeCompare(b.description)
-    );
+    let filterdTransactions = [];
+    if (descriptionSort) {
+      filterdTransactions = [...transactions].sort((a, b) =>
+        a.description.localeCompare(b.description)
+      );
+      setDescriptionSort(!descriptionSort);
+    } else {
+      filterdTransactions = [...transactions].sort((a, b) =>
+        b.description.localeCompare(a.description)
+      );
+      setDescriptionSort(!descriptionSort);
+    }
 
-    setTransactions(arr => filterdTransactions);
+    setTransactions(filterdTransactions);
   };
 
   const sortBySum = () => {
@@ -98,7 +107,7 @@ export default function TransactionList({
       setSumSort(!sumSort);
     }
 
-    setTransactions(arr => filterdTransactions);
+    setTransactions(filterdTransactions);
   };
 
   return (

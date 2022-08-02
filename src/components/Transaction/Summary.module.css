@@ -1,6 +1,8 @@
 .table {
   width: 230px;
   border-spacing: 0 0;
+  background: #f5f6fb;
+  border-radius: 0 0 20px 0;
 }
 
 .table tr th {
@@ -30,6 +32,9 @@
   text-transform: uppercase;
   color: #52555f;
 }
+.table tr td:last-child{
+  border-radius:0 0 20px 0;
+}
 
 .table tr td:nth-child(2) {
   text-align: center;
@@ -42,7 +47,7 @@
 @media screen and (min-width: 768px) {
   .table {
     box-shadow: 5px 10px 20px rgb(170 178 197 / 40%);
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px 20px 20px 0;
   }
 }
 
