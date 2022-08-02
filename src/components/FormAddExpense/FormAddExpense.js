@@ -1,7 +1,10 @@
 import s from './FormAddExpense.module.css';
+import { useState, useContext, useRef } from 'react';
+import { useClickAway } from 'react-use';
+import { DayPicker } from 'react-day-picker';
+import Moment from 'moment';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import DatePicker from 'react-date-picker';
-import { useState, useEffect } from 'react';
+import { ThemeContext } from 'components/App';
 import { IconButton } from '@mui/material';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
@@ -14,30 +17,30 @@ import Select from 'react-select';
 import { useSelector } from 'react-redux';
 import { getWidth } from '../../redux/selectors';
 import NumberFormat from 'react-number-format';
-import { useContext } from 'react';
-import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
 import Draggable from 'react-draggable'; // The default
 import { Calculator as CalculatorNew } from 'react-mac-calculator';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import 'react-day-picker/dist/style.css';
 
 const FormAddExpense = ({ expense, handleClick }) => {
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
-  const [date, setDate] = useState(new Date());
+
   const [calculator, setCalculator] = useState(false);
   const [amount, setAmount] = useState('');
   const [select, setSelect] = useState(null);
   const [description, setDescription] = useState('');
   const [openSelect, setOpenSelect] = useState(false);
   const [openInput, setOpenInput] = useState(false);
+  const [isDatePikerShown, setIsDatePikerShown] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
-  const [calendarElems, setCalendarElems] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [openDateNotification, setOpenDateNotification] = useState(false);
+  const ref = useRef();
   const VpWidth = useSelector(getWidth);
 
-  if (false) {
-    console.log(calendarElems);
-  }
+  const [iconCheck, setIconCheck] = useState(true);
 
   const openCalculator = () => {
     setCalculator(true);
@@ -48,6 +51,23 @@ const FormAddExpense = ({ expense, handleClick }) => {
       setCalculator(false);
     }
   };
+
+  const openCalendar = e => {
+    iconCheck && setIsDatePikerShown(true);
+    setIconCheck(true);
+  };
+
+  const handleDateChange = date => {
+    setDate(date);
+    setIsDatePikerShown(false);
+  };
+
+  useClickAway(ref, e => {
+    e.path[1].id === 'icon' || e.path[0].id === 'icon'
+      ? setIconCheck(false)
+      : setIconCheck(true);
+    setIsDatePikerShown(false);
+  });
 
   const formReset = () => {
     setAmount('');
@@ -91,9 +111,22 @@ const FormAddExpense = ({ expense, handleClick }) => {
       }
       return 0;
     };
-
+    const isdDateCorrect = () => {
+      if (!date) {
+        setOpenDateNotification(true);
+        setTimeout(() => {
+          setOpenDateNotification(false);
+        }, 4000);
+        return 1;
+      }
+      return 0;
+    };
     const isFormValid =
-      isSelectorCorrect() + isDescriptionCorrect() + isAmountCorrect() === 0;
+      isSelectorCorrect() +
+        isDescriptionCorrect() +
+        isAmountCorrect() +
+        isdDateCorrect() ===
+      0;
 
     if (isFormValid) {
       const transaction = {
@@ -106,7 +139,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
       if (expense) {
         addExpense(transaction)
           .unwrap()
-          .then(data => {
+          .then(() => {
             toast.success('Transaction added');
             formReset();
             if (VpWidth === 'mobile') {
@@ -118,7 +151,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
       } else {
         addIncome(transaction)
           .unwrap()
-          .then(data => {
+          .then(() => {
             toast.success('Transaction added');
             formReset();
             if (VpWidth === 'mobile') {
@@ -155,26 +188,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
   const backColor =
     themeColor === 'dark' ? `${darkThemeStyles.backgroundColor}` : '#FFFFFF';
 
-  const calendarEl = document.querySelectorAll(
-    '.react-date-picker__inputGroup__input'
-  );
-
-  if (themeColor === 'dark') {
-    calendarEl?.forEach(el => el.classList.add('whiteColor'));
-  } else {
-    calendarEl?.forEach(el => el.classList.remove('whiteColor'));
-  }
-
-  useEffect(() => {
-    calendarEl && setCalendarElems(calendarEl);
-    if (themeColor === 'dark') {
-      [...calendarEl]?.forEach(el => el.classList.add('whiteColor'));
-    } else {
-      [...calendarEl]?.forEach(el => el.classList.remove('whiteColor'));
-    }
-    // eslint-disable-next-line
-  }, []);
-
   const styles = {
     option: (provided, state) => ({
       ...provided,
@@ -201,13 +214,13 @@ const FormAddExpense = ({ expense, handleClick }) => {
     }),
   };
 
-  // const themeStyle =
-  //   themeColor === 'dark'
-  //     ? { background: 'white', marginRight: '5px', borderRadius: '16px' }
-  //     : {};
   const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : null;
   const calendarColor =
-    themeColor === 'dark' ? { color: 'white' } : { color: '#52555f' };
+    themeColor === 'dark'
+      ? {
+          color: 'white',
+        }
+      : { color: '#52555f' };
 
   return (
     <div className={s.formWrap}>
@@ -223,19 +236,42 @@ const FormAddExpense = ({ expense, handleClick }) => {
       </div>
       <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrap}>
-          <DatePicker
-            value={date}
-            calendarIcon={<CalendarMonthIcon style={calendarColor} />}
-            clearIcon={null}
-            prevLabel={null}
-            prev2Label={null}
-            nextLabel={null}
-            next2Label={null}
-            name="date"
-            onChange={setDate}
-            format={'dd.MM.y'}
-            // style={calendarColor}
-          />
+          <div className={s.notificationWraps}>
+            <div className={s.dateInputWrap}>
+              <CalendarMonthIcon
+                style={calendarColor}
+                onClick={openCalendar}
+                id="icon"
+              />
+              <input
+                id="date"
+                name="date"
+                type="date"
+                value={Moment(date).format('YYYY-MM-DD')}
+                onChange={ev => setDate(ev.target.value)}
+                className={s.dateInput}
+                style={calendarColor}
+              />
+              {isDatePikerShown && (
+                <div className={s.datePikerWrap} ref={ref}>
+                  <DayPicker
+                    mode="single"
+                    selected={date}
+                    onSelect={handleDateChange}
+                    styles={{
+                      color: '#52555f',
+                      day: { color: '#52555F' },
+                      caption: { color: '#52555F' },
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+
+            {openDateNotification && (
+              <div className={s.errorNotification}>"Please enter date"</div>
+            )}
+          </div>
           <div className={s.notificationWraps}>
             <input
               type="text"

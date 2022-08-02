@@ -301,7 +301,7 @@ width: 200px;
   }
 }
 
-/* =============Form================= */
+/* =============Form Notifications================= */
 .notificationWraps {
   position: relative;
 }
@@ -320,4 +320,48 @@ width: 200px;
   box-shadow: 5px 10px 20px rgba(170, 178, 197, 0.4);
   white-space: nowrap;
   z-index: 1;
+}
+/* =============Date Input================= */
+
+.dateInput {
+  background-color: transparent;
+  border: none;
+  color: #52555f;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dateInputWrap {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+}
+
+.datePikerWrap {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  z-index: 10;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #f5f6fb;
+  box-shadow: 5px 10px 20px rgba(170, 178, 197, 0.4);
+  width: 300px;
+
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.today{
+  color:red;
+  background-color: green;
+
+}
+.rdp{
+  background-color: #52555f!important;
 }
