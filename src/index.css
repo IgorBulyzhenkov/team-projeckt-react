@@ -1,5 +1,13 @@
 @import-normalize;
 /* bring in normalize.css styles */
+:root {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #ff751d !important;
+  --rdp-outline: 2px solid var(--rdp-accent-color) !important ;
+  --rdp-background-color: #f7bf9db1!important;
+ 
+}
+
 
 .body {
   font-family: 'Roboto', sans-serif;
@@ -285,4 +293,13 @@ button.react-calendar__navigation__next-button:focus {
 .calculator .digit-keys .key-0 {
   padding-left: 0 !important;
   text-align: center !important;
+}
+
+
+
+.rdp-head {
+  color: #52555f;
+}
+.rdp-day_selected{
+background-color:#ff751d;
 }

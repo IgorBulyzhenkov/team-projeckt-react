@@ -12,6 +12,7 @@ import { setUser, setWidth } from 'redux/reducer';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './Routs/PrivateRoute';
 import PublicRoute from './Routs/PublicRoute';
+import { createBreakpoint } from 'react-use';
 
 // import { useRef } from 'react';
 
@@ -55,27 +56,38 @@ export const App = () => {
   const themeStyle = theme === 'dark' ? darkThemeStyles.basic : {};
 
   //====================динамически меняет ширину и позволяет ререндер компонентов=========================================
-  const getWindowWidth = () => window.innerWidth;
+  // const getWindowWidth = () => window.innerWidth;
 
-  const [widthPx, setWidthPx] = useState(getWindowWidth());
-  const changeWidthState = (width, currentWidth) => {
-    if (currentWidth <= 767.99 && width !== 'mobile') {
-      dispatch(setWidth({ width: 'mobile' }));
-    }
-    if (currentWidth > 768 && width !== 'tablet') {
-      dispatch(setWidth({ width: 'tablet' }));
-    }
-  };
-  changeWidthState(width, widthPx);
-  useEffect(() => {
-    function handleResize() {
-      const windowWidth = getWindowWidth();
-      windowWidth && setWidthPx(windowWidth);
-    }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // const [widthPx, setWidthPx] = useState(getWindowWidth());
+  // const changeWidthState = (width, currentWidth) => {
+  //   if (currentWidth <= 767.99 && width !== 'mobile') {
+  //     dispatch(setWidth({ width: 'mobile' }));
+  //   }
+  //   if (currentWidth > 768 && width !== 'tablet') {
+  //     dispatch(setWidth({ width: 'tablet' }));
+  //   }
+  // };
+  // changeWidthState(width, widthPx);
+  // useEffect(() => {
+  //   function handleResize() {
+  //     const windowWidth = getWindowWidth();
+  //     windowWidth && setWidthPx(windowWidth);
+  //   }
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
   //============================================================================
+
+  const useBreakpoint = createBreakpoint({
+    tablet: 768,
+    mobile: 320,
+  });
+  const breakpoint = useBreakpoint();
+  if (breakpoint === 'tablet' && width !== 'tablet') {
+    dispatch(setWidth({ width: 'tablet' }));
+  } else if (breakpoint === 'mobile' && width !== 'mobile') {
+    dispatch(setWidth({ width: 'mobile' }));
+  }
 
   useEffect(() => {
     const storedTheme = JSON.parse(localStorage.getItem('theme'));
