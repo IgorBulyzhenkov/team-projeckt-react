@@ -90,6 +90,7 @@ function ReportGraph({ data }) {
     }
   };
 
+  
   const gridLineY = () => {
     switch (screen) {
       case 'tablet':
