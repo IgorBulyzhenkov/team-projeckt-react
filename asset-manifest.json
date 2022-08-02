@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/team-project-react/static/css/main.02b842f5.css",
-    "main.js": "/team-project-react/static/js/main.6cdba53c.js",
+    "main.js": "/team-project-react/static/js/main.b2ad0376.js",
     "header.css": "/team-project-react/static/css/header.9571e725.chunk.css",
     "header.js": "/team-project-react/static/js/header.ab44c69e.chunk.js",
     "authorization.css": "/team-project-react/static/css/authorization.d6c2a9d5.chunk.css",
     "authorization.js": "/team-project-react/static/js/authorization.9189c4c7.chunk.js",
     "home.css": "/team-project-react/static/css/home.dd4e5135.chunk.css",
-    "home.js": "/team-project-react/static/js/home.c69362a8.chunk.js",
+    "home.js": "/team-project-react/static/js/home.41c3c66b.chunk.js",
     "report.css": "/team-project-react/static/css/report.9deabf05.chunk.css",
     "report.js": "/team-project-react/static/js/report.ca017222.chunk.js",
     "static/js/482.c687e4c9.chunk.js": "/team-project-react/static/js/482.c687e4c9.chunk.js",
@@ -20,13 +20,13 @@
     "static/media/Calculator.svg": "/team-project-react/static/media/Calculator.8eda3f2a2b16aa2851c99eb017ba66d2.svg",
     "index.html": "/team-project-react/index.html",
     "main.02b842f5.css.map": "/team-project-react/static/css/main.02b842f5.css.map",
-    "main.6cdba53c.js.map": "/team-project-react/static/js/main.6cdba53c.js.map",
+    "main.b2ad0376.js.map": "/team-project-react/static/js/main.b2ad0376.js.map",
     "header.9571e725.chunk.css.map": "/team-project-react/static/css/header.9571e725.chunk.css.map",
     "header.ab44c69e.chunk.js.map": "/team-project-react/static/js/header.ab44c69e.chunk.js.map",
     "authorization.d6c2a9d5.chunk.css.map": "/team-project-react/static/css/authorization.d6c2a9d5.chunk.css.map",
     "authorization.9189c4c7.chunk.js.map": "/team-project-react/static/js/authorization.9189c4c7.chunk.js.map",
     "home.dd4e5135.chunk.css.map": "/team-project-react/static/css/home.dd4e5135.chunk.css.map",
-    "home.c69362a8.chunk.js.map": "/team-project-react/static/js/home.c69362a8.chunk.js.map",
+    "home.41c3c66b.chunk.js.map": "/team-project-react/static/js/home.41c3c66b.chunk.js.map",
     "report.9deabf05.chunk.css.map": "/team-project-react/static/css/report.9deabf05.chunk.css.map",
     "report.ca017222.chunk.js.map": "/team-project-react/static/js/report.ca017222.chunk.js.map",
     "482.c687e4c9.chunk.js.map": "/team-project-react/static/js/482.c687e4c9.chunk.js.map",
@@ -35,6 +35,6 @@
   },
   "entrypoints": [
     "static/css/main.02b842f5.css",
-    "static/js/main.6cdba53c.js"
+    "static/js/main.b2ad0376.js"
   ]
 }
