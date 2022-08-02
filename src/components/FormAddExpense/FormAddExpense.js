@@ -334,11 +334,12 @@ const FormAddExpense = ({ expense, handleClick }) => {
             <div className={s.calculateWrap}>
               <Calculator width="20" height="20" onClick={openCalculator} />
               {calculator && (
-                <Draggable>
+                <Draggable cancel=".calculator-key, .closeIcon">
                   <div className={s.calculatorWrap}>
                     <AiOutlineCloseCircle
                       onClick={closeCalculator}
-                      className={s.closeCalcIcon}
+                      onTouchStart={closeCalculator}
+                      className={`${s.closeCalcIcon} .closeIcon`}
                     />
                     <CalculatorNew className={s.calculator} />
                   </div>
