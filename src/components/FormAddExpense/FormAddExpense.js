@@ -333,19 +333,19 @@ const FormAddExpense = ({ expense, handleClick }) => {
             </div>
             <div className={s.calculateWrap}>
               <Calculator width="20" height="20" onClick={openCalculator} />
+              {calculator && (
+                <Draggable>
+                  <div className={s.calculatorWrap}>
+                    <AiOutlineCloseCircle
+                      onClick={closeCalculator}
+                      className={s.closeCalcIcon}
+                    />
+                    <CalculatorNew className={s.calculator} />
+                  </div>
+                </Draggable>
+              )}
             </div>
           </div>
-          {calculator && (
-            <Draggable>
-              <div className={s.calculatorWrap}>
-                <AiOutlineCloseCircle
-                  onClick={closeCalculator}
-                  className={s.closeCalcIcon}
-                />
-                <CalculatorNew className={s.calculator} />
-              </div>
-            </Draggable>
-          )}
         </div>
 
         <div className={s.buttonWrap}>

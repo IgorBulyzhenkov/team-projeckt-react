@@ -27,7 +27,16 @@ width: 200px;
 .closeCalcIcon:hover{
   color:#ff751d;
 }
+.calculateWrap {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+}
 
+.calculate {
+  width: 20px;
+  height: 20px;
+}
 
 .description {
   border: 2px solid #ffffff;
@@ -159,16 +168,7 @@ width: 200px;
   text-decoration: none;
 }
 
-.calculateWrap {
-  position: absolute;
-  top: 12px;
-  right: 10px;
-}
 
-.calculate {
-  width: 20px;
-  height: 20px;
-}
 
 .currencyWrapp {
   position: relative;
