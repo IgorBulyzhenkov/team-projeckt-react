@@ -1,23 +1,46 @@
 import PropTypes from 'prop-types';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import TransactionItem from './TransactionItem';
 import s from './TransactionList.module.css';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
-import { useState, useEffect } from 'react';
+import { setFilterCategory } from 'redux/reducer';
+import { getFilterCategory } from 'redux/selectors';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function TransactionList({
   transactions: data,
   expenses,
   handleClick,
 }) {
+  const dispatch = useDispatch();
+  const selectedCategory = useSelector(getFilterCategory);
+  // const [selectedCategory, setSelectedCategory] = useState('');
+  const [sumSort, setSumSort] = useState(true);
+  const [dateSort, setDateSort] = useState(true);
+  const [filterCategoryList, setFilterCategoryList] = useState(
+    [...data]
+      .map(({ category }) => category)
+      .filter((el, index, array) => array.indexOf(el) === index)
+  );
+
+  const [isMenuCategory, setIsMenuCategory] = useState(false);
   const [transactions, setTransactions] = useState(
     [...data].sort((a, b) => b['_id'].localeCompare(a['_id']))
   );
+  const anchorCategory = document.querySelector('#filtrCategory');
 
   useEffect(() => {
+    setFilterCategoryList(
+      [...data]
+        .map(({ category }) => category)
+        .filter((el, index, array) => array.indexOf(el) === index)
+    );
     setTransactions([...data].sort((a, b) => b['_id'].localeCompare(a['_id'])));
   }, [data]);
+
   const themeColor = useContext(ThemeContext);
   const themeStyle =
     themeColor === 'dark'
@@ -34,11 +57,22 @@ export default function TransactionList({
       : null;
 
   const sortByDate = () => {
-    const filterdTransactions = [...transactions].sort((a, b) => {
-      const newDateA = new Date(a.date);
-      const newDateB = new Date(b.date);
-      return newDateB - newDateA;
-    });
+    let filterdTransactions = [];
+    if (dateSort) {
+      filterdTransactions = [...transactions].sort((a, b) => {
+        const newDateA = new Date(a.date);
+        const newDateB = new Date(b.date);
+        return newDateB - newDateA;
+      });
+      setDateSort(!dateSort);
+    } else {
+      filterdTransactions = [...transactions].sort((a, b) => {
+        const newDateA = new Date(a.date);
+        const newDateB = new Date(b.date);
+        return newDateA - newDateB;
+      });
+      setDateSort(!dateSort);
+    }
 
     setTransactions(filterdTransactions);
   };
@@ -50,18 +84,19 @@ export default function TransactionList({
     setTransactions(arr => filterdTransactions);
   };
 
-  const sortByCategory = () => {
-    const filterdTransactions = [...transactions].sort((a, b) =>
-      a.category.localeCompare(b.category)
-    );
-
-    setTransactions(arr => filterdTransactions);
-  };
-
   const sortBySum = () => {
-    const filterdTransactions = [...transactions].sort(
-      (a, b) => b.amount - a.amount
-    );
+    let filterdTransactions = [];
+    if (sumSort) {
+      filterdTransactions = [...transactions].sort(
+        (a, b) => b.amount - a.amount
+      );
+      setSumSort(!sumSort);
+    } else {
+      filterdTransactions = [...transactions].sort(
+        (a, b) => a.amount - b.amount
+      );
+      setSumSort(!sumSort);
+    }
 
     setTransactions(arr => filterdTransactions);
   };
@@ -87,8 +122,11 @@ export default function TransactionList({
             </th>
             <th
               style={themeStyle2}
-              onClick={() => sortByCategory()}
+              onClick={() => {
+                setIsMenuCategory(true);
+              }}
               className={s.listHeader}
+              id="filtrCategory"
             >
               category
             </th>
@@ -111,8 +149,11 @@ export default function TransactionList({
         ) : (
           <table>
             <tbody>
-              {transactions.map(
-                ({ description, category, amount, date, _id }) => (
+              {transactions
+                .filter(({ category }) =>
+                  selectedCategory ? category === selectedCategory : true
+                )
+                .map(({ description, category, amount, date, _id }) => (
                   <TransactionItem
                     themeStyle={themeStyle2}
                     tableBorderColor={tableBorderColor}
@@ -124,14 +165,43 @@ export default function TransactionList({
                     id={_id}
                     expenses={expenses}
                     handleClick={handleClick}
-                    
                   />
-                )
-              )}
+                ))}
             </tbody>
           </table>
         )}
       </div>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorCategory}
+        open={isMenuCategory}
+        onClose={() => setIsMenuCategory(false)}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        {filterCategoryList.map(el => (
+          <MenuItem
+            onClick={e => {
+              dispatch(setFilterCategory(e.target.id));
+              setIsMenuCategory(false);
+            }}
+            key={el}
+            id={el}
+          >
+            {el}
+          </MenuItem>
+        ))}
+        <MenuItem
+          onClick={() => {
+            dispatch(setFilterCategory(''));
+            setIsMenuCategory(false);
+          }}
+          key="reset"
+        >
+          Все
+        </MenuItem>
+      </Menu>
     </div>
   );
 }

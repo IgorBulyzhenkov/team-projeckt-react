@@ -46,7 +46,7 @@ const AuthForm = () => {
 
   const [registerUser] = useRegisterUserMutation();
   const [authorizeUser] = useAuthorizeUserMutation();
-  const [loginGoogle] = useLazyAuthGoogleUserQuery();
+  // const [loginGoogle] = useLazyAuthGoogleUserQuery();
 
   const onInput = e => {
     setUserForm(prevState => {
@@ -192,7 +192,8 @@ const AuthForm = () => {
       .catch(error => toast.error(error.data.message));
   };
   const googleAuth = () => {
-    loginGoogle().then(console.log);
+    // loginGoogle().then(console.log);
+    toast.warn('Sorry service is temporarily unavailable');
   };
 
   return (
@@ -200,17 +201,18 @@ const AuthForm = () => {
       <p className={s.text} style={themeStyle}>
         You can log in with your Google Account:
       </p>
-      <div className={s.googleBox}>
+      <div className={s.googleBox} onClick={googleAuth}>
         <div className={s.google} style={inputStyle}>
           <img className={s.icon} src={googleIcon} alt="" />
           <span className={s.iconText}>Google</span>
-          <a
+
+          {/* <a
             className={s.link}
             onClick={googleAuth}
             href="https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&client_id=665888736356-aq6fvfmau6mupt4nfbms5tfch0u2698i.apps.googleusercontent.com&prompt=consent&redirect_uri=https%3A%2F%2Fkapusta-backend.goit.global%2Fauth%2Fgoogle-redirect&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile"
           >
             {''}
-          </a>
+          </a> */}
         </div>
       </div>
 
