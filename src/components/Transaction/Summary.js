@@ -13,10 +13,15 @@ export default function Summary({ monthStats }) {
 
   const themeColor = useContext(ThemeContext);
 
-  const themeStyle = themeColor === 'dark' ? darkThemeStyles.basic : null;
+  const themeStyle =
+    themeColor === 'dark'
+      ? darkThemeStyles.basic
+      : {
+          background: '#f5f6fb',
+        };
 
   return (
-    <table className={s.table}>
+    <table className={s.table} style={themeStyle}>
       <tbody>
         <tr>
           <th colSpan="2" style={themeStyle}>

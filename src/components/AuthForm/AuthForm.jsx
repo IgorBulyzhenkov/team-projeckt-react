@@ -4,7 +4,7 @@ import { ThemeContext } from 'components/App';
 import {
   useRegisterUserMutation,
   useAuthorizeUserMutation,
-  useLazyAuthGoogleUserQuery,
+  // useLazyAuthGoogleUserQuery,
 } from 'redux/kapustaAPI';
 import { setUser } from 'redux/reducer';
 import s from './authForm.module.css';
