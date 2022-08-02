@@ -1,12 +1,7 @@
 @import-normalize;
 /* bring in normalize.css styles */
-:root {
-  --rdp-cell-size: 40px;
-  --rdp-accent-color: #ff751d !important;
-  --rdp-outline: 2px solid var(--rdp-accent-color) !important ;
-  --rdp-background-color: #f7bf9db1!important;
- 
-}
+
+
 
 
 .body {
@@ -213,40 +208,6 @@ canvas {
   transform: translate(0) !important;
 }
 
-/* .react-calendar__navigation__label {
-  pointer-events: none;
-  font-family: 'Roboto';
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1.14;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  text-align: center;
-  color: #000000;
-  font-style: normal;
-}  */
-
-/* .react-calendar__navigation__next-button {
-  font-size: 18px;
-  color: #f76002;
-} */
-
-/* .react-calendar__navigation__prev-button {
-  font-size: 18px;
-  color: #f76002;
-}
-
-button.react-calendar__navigation__prev-button:hover,
-button.react-calendar__navigation__prev-button:focus {
-  background-color: transparent;
-  color: #f76002;
-}
-
-button.react-calendar__navigation__next-button:hover,
-button.react-calendar__navigation__next-button:focus {
-  background-color: transparent;
-  color: #f76002;
-} */
 
 /* ==========калькулятор=============== */
 .calculator {
@@ -264,6 +225,22 @@ button.react-calendar__navigation__next-button:focus {
   font-size: 3em !important;
   line-height: 65px !important;
   border-radius: 4px 4px 0 0;
+  
+}
+.calculator-display,.digit-keys  {
+  cursor: move;
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+/* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.calculator-display:active,
+.digit-keys:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }
 
 .calculator-keypad {
@@ -295,11 +272,19 @@ button.react-calendar__navigation__next-button:focus {
   text-align: center !important;
 }
 
-
+/* =========Caalendar style======================= */
 
 .rdp-head {
   color: #52555f;
 }
 .rdp-day_selected{
 background-color:#ff751d;
+}
+
+:root {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #ff751d !important;
+  --rdp-outline: 2px solid var(--rdp-accent-color) !important;
+  --rdp-background-color: #f7bf9db1 !important;
+
 }

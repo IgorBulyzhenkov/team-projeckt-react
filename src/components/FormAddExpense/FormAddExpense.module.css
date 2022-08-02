@@ -13,6 +13,8 @@
 width: 200px;
   height: auto;
 }
+
+
 .closeCalcIcon{
   width: 30px;
   height: 30px;
@@ -184,6 +186,7 @@ width: 200px;
     top: 12px;
     right: 10px;
   }
+  
 
   .form {
     margin-bottom: 60px;
@@ -270,6 +273,9 @@ width: 200px;
     margin-left: 0;
     width: 290px;
   }
+}
+.description:autofill{
+color: #52555f !important;
 }
 
 @media screen and (max-width: 767px) {
@@ -365,3 +371,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .rdp{
   background-color: #52555f!important;
 }
+

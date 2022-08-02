@@ -9,6 +9,7 @@ const initialState = {
   balance: '',
   width: null,
   category: '',
+  filterCategory: '',
 };
 
 const userSlice = createSlice({
@@ -30,9 +31,18 @@ const userSlice = createSlice({
     setCategory: (state, { payload }) => {
       return { ...state, ...{ category: payload } };
     },
+    setFilterCategory: (state, { payload }) => {
+      return { ...state, ...{ filterCategory: payload } };
+    },
   },
 });
 
-export const { setUser, resetUser, setBalance, setWidth, setCategory } =
-  userSlice.actions;
+export const {
+  setUser,
+  resetUser,
+  setBalance,
+  setWidth,
+  setCategory,
+  setFilterCategory,
+} = userSlice.actions;
 export default userSlice;

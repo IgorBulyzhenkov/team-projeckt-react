@@ -6,3 +6,4 @@ export const getEmail = state => state.currentUser.email;
 export const getWidth = state => state.currentUser.width;
 export const getBalance = state => state.currentUser.balance;
 export const getCategory = state => state.currentUser.category;
+export const getFilterCategory = state => state.currentUser.filterCategory;

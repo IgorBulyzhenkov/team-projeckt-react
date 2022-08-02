@@ -1,5 +1,7 @@
 import s from './FormAddExpense.module.css';
 import { useState, useContext, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { setFilterCategory } from 'redux/reducer';
 import { useClickAway } from 'react-use';
 import { DayPicker } from 'react-day-picker';
 import Moment from 'moment';
@@ -24,6 +26,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import 'react-day-picker/dist/style.css';
 
 const FormAddExpense = ({ expense, handleClick }) => {
+  const dispatch = useDispatch();
   const [addExpense] = useAddExpenseMutation();
   const [addIncome] = useAddIncomeMutation();
 
@@ -141,6 +144,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           .unwrap()
           .then(() => {
             toast.success('Transaction added');
+            dispatch(setFilterCategory(''));
             formReset();
             if (VpWidth === 'mobile') {
               handleClick();
@@ -153,6 +157,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           .unwrap()
           .then(() => {
             toast.success('Transaction added');
+            dispatch(setFilterCategory(''));
             formReset();
             if (VpWidth === 'mobile') {
               handleClick();
