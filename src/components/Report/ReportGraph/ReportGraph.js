@@ -8,7 +8,7 @@ import {
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState, useEffect } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
 import { getWidth, getCategory } from '../../../redux/selectors';
@@ -164,13 +164,15 @@ function ReportGraph({ data }) {
   const minX = screen === 'tablet' ? 0 : null;
   const maxX = screen === 'tablet' ? 6 : null;
 
+  const [screenWidth, setScreenWidth] = useState(screen);
+
   const myChart = {
     id: 'myChart',
 
     afterEvent(chart, args) {
       const {
         canvas,
-        chartArea: { left, right, height, top},
+        chartArea: { left, right, height, top },
       } = chart;
 
       canvas.addEventListener('mousemove', event => {
@@ -200,11 +202,12 @@ function ReportGraph({ data }) {
     afterDraw(chart) {
       const {
         ctx,
-        chartArea: { left, right, height, top},
+        chartArea: { left, right, height, top },
       } = chart;
 
       const angle = Math.PI / 180;
 
+      if (screenWidth !== 'tablet') return;
       class circleChevron {
         draw(ctx, x1, pixel) {
           ctx.beginPath();
@@ -278,7 +281,14 @@ function ReportGraph({ data }) {
     chart.update();
   }
 
-  const pluginsChart = screen === 'tablet' ? myChart : [];
+  // const myChartRef = useRef(myChart);
+  // const [chartMobile, setChartMobile] = useState(myChartRef.current);
+
+  useEffect(() => {
+    setScreenWidth(screen);
+  }, [screen]);
+
+  // console.log(chartMobile);
 
   return (
     <div className={s.wrap} style={MobileTheme}>
@@ -335,7 +345,7 @@ function ReportGraph({ data }) {
               },
             },
           }}
-          plugins={[pluginsChart]}
+          plugins={[myChart]}
           className={s.bar}
         />
       </div>
