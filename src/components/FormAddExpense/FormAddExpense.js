@@ -279,7 +279,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           </div>
           <div className={s.notificationWraps}>
             <input
-              autocomplete="off"
+              autoComplete="off"
               type="text"
               id="description"
               name="description"
@@ -312,7 +312,7 @@ const FormAddExpense = ({ expense, handleClick }) => {
           <div className={s.currencyWrapp}>
             <div className={s.notificationWraps}>
               <NumberFormat
-                autocomplete="off"
+                autoComplete="off"
                 allowNegative={false}
                 suffix={VpWidth === 'mobile' ? ' UAH' : ''}
                 decimalScale={2}

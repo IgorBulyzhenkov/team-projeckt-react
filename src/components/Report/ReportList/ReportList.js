@@ -1,5 +1,6 @@
 import ReportSvgSelector from './ReportSvgSelector';
 import ReportGraph from 'components/Report/ReportGraph/ReportGraph';
+import ReportGraphMobile from '../ReportGraphMobile/ReportGraphMobile';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCategory, getWidth } from 'redux/selectors';
 import { setCategory } from 'redux/reducer';
@@ -123,7 +124,15 @@ function ReportList({ incomes, expenses }) {
           </ul>
         )}
       </div>
-      {category && <ReportGraph data={data} category={category} />}
+      {category && (
+        <>
+          {screen === 'tablet' ? (
+            <ReportGraph data={data} />
+          ) : (
+            <ReportGraphMobile data={data} />
+          )}
+        </>
+      )}
     </>
   );
 }
