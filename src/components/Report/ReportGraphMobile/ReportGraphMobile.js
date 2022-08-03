@@ -157,7 +157,7 @@ function ReportGraphMobile({ data }) {
     }
   };
 
-  const colorFill = themeColor === 'dark' ? 'rgb(63, 78, 79)' : '#ffffff';
+  // const colorFill = themeColor === 'dark' ? 'rgb(63, 78, 79)' : '#ffffff';
 
   // const colorBorder = themeColor === 'dark' ? 'transparent' : 'rgb(63, 78, 79)';
 
