@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { RiArrowDownSLine } from 'react-icons/ri';
 import TransactionItem from './TransactionItem';
 import s from './TransactionList.module.css';
 import { useContext, useState, useEffect } from 'react';
@@ -8,6 +9,7 @@ import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
 import { setFilterCategory } from 'redux/reducer';
 import { getFilterCategory } from 'redux/selectors';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function TransactionList({
@@ -137,7 +139,10 @@ export default function TransactionList({
               className={s.listHeader}
               id="filtrCategory"
             >
-              category
+              <div className={s.categoryCell}>
+                category
+                <RiArrowDownSLine className={s.arrowDown} />
+              </div>
             </th>
             <th
               style={themeStyle2}
@@ -183,6 +188,7 @@ export default function TransactionList({
       <Menu
         id="basic-menu"
         anchorEl={anchorCategory}
+        autoFocus={false}
         open={isMenuCategory}
         onClose={() => setIsMenuCategory(false)}
         MenuListProps={{
@@ -197,6 +203,7 @@ export default function TransactionList({
             }}
             key={el}
             id={el}
+            sx={{ fontSize: '12px' }}
           >
             {el}
           </MenuItem>
@@ -207,6 +214,7 @@ export default function TransactionList({
             setIsMenuCategory(false);
           }}
           key="reset"
+          sx={{ fontSize: '12px' }}
         >
           Все
         </MenuItem>
