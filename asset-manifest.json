@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/team-project-react/static/css/main.02b842f5.css",
-    "main.js": "/team-project-react/static/js/main.9f79f614.js",
-    "header.css": "/team-project-react/static/css/header.9571e725.chunk.css",
+    "main.js": "/team-project-react/static/js/main.f11d1ea0.js",
+    "header.css": "/team-project-react/static/css/header.be562307.chunk.css",
     "header.js": "/team-project-react/static/js/header.ab44c69e.chunk.js",
-    "authorization.css": "/team-project-react/static/css/authorization.d6c2a9d5.chunk.css",
+    "authorization.css": "/team-project-react/static/css/authorization.ed4174e7.chunk.css",
     "authorization.js": "/team-project-react/static/js/authorization.9189c4c7.chunk.js",
-    "home.css": "/team-project-react/static/css/home.e4446d06.chunk.css",
-    "home.js": "/team-project-react/static/js/home.3d1b6194.chunk.js",
-    "report.css": "/team-project-react/static/css/report.9deabf05.chunk.css",
-    "report.js": "/team-project-react/static/js/report.8680efa6.chunk.js",
+    "home.css": "/team-project-react/static/css/home.3a47a357.chunk.css",
+    "home.js": "/team-project-react/static/js/home.63575ce0.chunk.js",
+    "report.css": "/team-project-react/static/css/report.8f946ada.chunk.css",
+    "report.js": "/team-project-react/static/js/report.d6895581.chunk.js",
     "static/js/482.c687e4c9.chunk.js": "/team-project-react/static/js/482.c687e4c9.chunk.js",
     "static/js/972.a23cb61e.chunk.js": "/team-project-react/static/js/972.a23cb61e.chunk.js",
     "static/js/619.bdea8272.chunk.js": "/team-project-react/static/js/619.bdea8272.chunk.js",
@@ -20,21 +20,21 @@
     "static/media/Calculator.svg": "/team-project-react/static/media/Calculator.8eda3f2a2b16aa2851c99eb017ba66d2.svg",
     "index.html": "/team-project-react/index.html",
     "main.02b842f5.css.map": "/team-project-react/static/css/main.02b842f5.css.map",
-    "main.9f79f614.js.map": "/team-project-react/static/js/main.9f79f614.js.map",
-    "header.9571e725.chunk.css.map": "/team-project-react/static/css/header.9571e725.chunk.css.map",
+    "main.f11d1ea0.js.map": "/team-project-react/static/js/main.f11d1ea0.js.map",
+    "header.be562307.chunk.css.map": "/team-project-react/static/css/header.be562307.chunk.css.map",
     "header.ab44c69e.chunk.js.map": "/team-project-react/static/js/header.ab44c69e.chunk.js.map",
-    "authorization.d6c2a9d5.chunk.css.map": "/team-project-react/static/css/authorization.d6c2a9d5.chunk.css.map",
+    "authorization.ed4174e7.chunk.css.map": "/team-project-react/static/css/authorization.ed4174e7.chunk.css.map",
     "authorization.9189c4c7.chunk.js.map": "/team-project-react/static/js/authorization.9189c4c7.chunk.js.map",
-    "home.e4446d06.chunk.css.map": "/team-project-react/static/css/home.e4446d06.chunk.css.map",
-    "home.3d1b6194.chunk.js.map": "/team-project-react/static/js/home.3d1b6194.chunk.js.map",
-    "report.9deabf05.chunk.css.map": "/team-project-react/static/css/report.9deabf05.chunk.css.map",
-    "report.8680efa6.chunk.js.map": "/team-project-react/static/js/report.8680efa6.chunk.js.map",
+    "home.3a47a357.chunk.css.map": "/team-project-react/static/css/home.3a47a357.chunk.css.map",
+    "home.63575ce0.chunk.js.map": "/team-project-react/static/js/home.63575ce0.chunk.js.map",
+    "report.8f946ada.chunk.css.map": "/team-project-react/static/css/report.8f946ada.chunk.css.map",
+    "report.d6895581.chunk.js.map": "/team-project-react/static/js/report.d6895581.chunk.js.map",
     "482.c687e4c9.chunk.js.map": "/team-project-react/static/js/482.c687e4c9.chunk.js.map",
     "972.a23cb61e.chunk.js.map": "/team-project-react/static/js/972.a23cb61e.chunk.js.map",
     "619.bdea8272.chunk.js.map": "/team-project-react/static/js/619.bdea8272.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.02b842f5.css",
-    "static/js/main.9f79f614.js"
+    "static/js/main.f11d1ea0.js"
   ]
 }
