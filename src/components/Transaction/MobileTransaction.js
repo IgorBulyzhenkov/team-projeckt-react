@@ -4,31 +4,48 @@ import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
-
 import { useGetUserDataQuery } from '../../redux/kapustaAPI';
+import {
+  optionsExpenses,
+  optionsIncome,
+} from '../FormAddExpense/FormAddExpense';
 
 import s from './MobileTransaction.module.css';
 
 export default function MobileTransaction({ handleClick }) {
   const [transactions, setTransactions] = useState();
-
   const { data } = useGetUserDataQuery();
 
   const themeColor = useContext(ThemeContext);
   const themeStyle = themeColor === 'dark' ? darkThemeStyles.basic : null;
 
+  const getTranslateCategory = (category, options) => {
+    for (const option of options) {
+      if (option.value === category) {
+        return option.label;
+      }
+    }
+  };
+
   useEffect(() => {
-    data && setTransactions(data.transactions);
+    const options = [...optionsExpenses, ...optionsIncome];
+    data &&
+      setTransactions(
+        data.transactions.map(transaction => ({
+          ...transaction,
+          category: getTranslateCategory(transaction.category, options),
+        }))
+      );
   }, [data]);
 
   const categoryIncomeCheck = category => {
-    if (category === 'З/П' || category === 'Доп. доход') {
+    if (category === 'Salary' || category === 'Extra income') {
       return true;
     }
   };
 
   return (
-    <>
+    <div className={s.mobTransactions}>
       {transactions?.length === 0 ? (
         <p style={themeStyle} className={s.plugText}>
           No transaction history!
@@ -53,10 +70,10 @@ export default function MobileTransaction({ handleClick }) {
                   >
                     {amount}.00 грн
                   </td>
-                  <td rowSpan="2">
+                  <td rowSpan="2" className={s.iconDelete}>
                     <IconButton
+                      sx={{ p: 0 }}
                       style={themeStyle}
-                      // sx={{ ml: 2 }}
                       onClick={e => handleClick(e)}
                       aria-label="button delete"
                       component="label"
@@ -77,6 +94,6 @@ export default function MobileTransaction({ handleClick }) {
           })}
         </table>
       )}
-    </>
+    </div>
   );
 }

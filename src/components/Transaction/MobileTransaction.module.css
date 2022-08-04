@@ -7,9 +7,16 @@
 }
 
 .mobTable {
-  max-width: 320px;
-  margin-bottom: 12px;
-  margin-top: 30px;
+  width: 100%;
+}
+
+.mobTransactions {
+  width: 282px;
+  margin: 30px auto 12px auto;
+}
+
+.iconDelete {
+  width: 44px;
 }
 
 @media screen and (min-width: 768px) {
@@ -22,7 +29,7 @@
 }
 
 .mobTable td {
-  font-size: 8px;
+  font-size: 9px;
   line-height: 1.12;
   letter-spacing: 0.04em;
   text-align: center;
@@ -35,7 +42,6 @@
 }
 
 .plugText {
-  
   font-size: 16px;
   line-height: 2.14;
   letter-spacing: 0.06em;
@@ -57,6 +63,7 @@
   line-height: 1.16;
   letter-spacing: 0.04em;
   padding: 0;
+  width: 95px;
 }
 
 .mobTable .descriptionItem {

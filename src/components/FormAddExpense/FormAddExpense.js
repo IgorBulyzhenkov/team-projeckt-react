@@ -25,6 +25,25 @@ import { Calculator as CalculatorNew } from 'react-mac-calculator';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import 'react-day-picker/dist/style.css';
 
+export const optionsExpenses = [
+  { value: 'Транспорт', label: 'Transport' },
+  { value: 'Продукты', label: 'Products' },
+  { value: 'Здоровье', label: 'Health' },
+  { value: 'Алкоголь', label: 'Alcohol' },
+  { value: 'Развлечения', label: 'Entertainment' },
+  { value: 'Всё для дома', label: 'Housing' },
+  { value: 'Техника', label: 'Technique' },
+  { value: 'Коммуналка и связь', label: 'Communal, communication' },
+  { value: 'Спорт и хобби', label: 'Sports, hobbies' },
+  { value: 'Образование', label: 'Education' },
+  { value: 'Прочее', label: 'Other' },
+];
+
+export const optionsIncome = [
+  { value: 'З/П', label: 'Salary' },
+  { value: 'Доп. доход', label: 'Extra income' },
+];
+
 const FormAddExpense = ({ expense, handleClick }) => {
   const dispatch = useDispatch();
   const [addExpense] = useAddExpenseMutation();
@@ -168,25 +187,6 @@ const FormAddExpense = ({ expense, handleClick }) => {
       }
     }
   };
-
-  const optionsExpenses = [
-    { value: 'Транспорт', label: 'Transport' },
-    { value: 'Продукты', label: 'Products' },
-    { value: 'Здоровье', label: 'Health' },
-    { value: 'Алкоголь', label: 'Alcohol' },
-    { value: 'Развлечения', label: 'Entertainment' },
-    { value: 'Всё для дома', label: 'Housing' },
-    { value: 'Техника', label: 'Technique' },
-    { value: 'Коммуналка и связь', label: 'Communal, communication' },
-    { value: 'Спорт и хобби', label: 'Sports, hobbies' },
-    { value: 'Образование', label: 'Education' },
-    { value: 'Прочее', label: 'Other' },
-  ];
-
-  const optionsIncome = [
-    { value: 'З/П', label: 'Salary' },
-    { value: 'Доп. доход', label: 'Extra income' },
-  ];
 
   const themeColor = useContext(ThemeContext);
 

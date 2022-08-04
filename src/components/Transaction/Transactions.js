@@ -6,6 +6,11 @@ import MobileTransaction from './MobileTransaction';
 import ActionModal from '../ActionModal/ActionModal';
 import FormAddExpense from 'components/FormAddExpense';
 
+import {
+  optionsExpenses,
+  optionsIncome,
+} from '../FormAddExpense/FormAddExpense';
+
 import s from './Transactions.module.css';
 
 import {
@@ -38,12 +43,30 @@ export default function Transactions() {
 
   const VpWidth = useSelector(getWidth);
 
+  const getTranslateCategory = (category, options) => {
+    for (const option of options) {
+      if (option.value === category) {
+        return option.label;
+      }
+    }
+  };
+
   useEffect(() => {
     if (isExpense) {
-      setTransactions(expense?.expenses);
+      setTransactions(
+        expense?.expenses.map(expense => ({
+          ...expense,
+          category: getTranslateCategory(expense.category, optionsExpenses),
+        }))
+      );
       setMonthStats(expense?.monthsStats);
     } else {
-      setTransactions(income?.incomes);
+      setTransactions(
+        income?.incomes.map(income => ({
+          ...income,
+          category: getTranslateCategory(income.category, optionsIncome),
+        }))
+      );
       setMonthStats(income?.monthsStats);
     }
   }, [expense, isExpense, income]);
