@@ -81,19 +81,20 @@
      .list {
          gap: 25px;
          max-width: 623px;
-
+         width: 623px
      }
  }
 
  .item {
      display: flex;
-     justify-content: center;
+     /* justify-content: center; */
      align-items: center;
      flex-direction: column;
      flex-basis: calc(100% / 3);
      border-bottom: 1px solid #E0E5EB;
      padding-bottom: 20px;
      margin-bottom: 20px;
+     min-height: 132px;
  }
 
 
@@ -105,7 +106,7 @@
          border-bottom: #F5F6FB;
          margin-bottom: 0;
          padding-bottom: 0;
-
+         min-height: 122px;
      }
  }
 

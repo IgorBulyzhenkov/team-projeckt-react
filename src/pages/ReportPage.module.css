@@ -10,6 +10,7 @@
   .wrap_link {
     display: flex;
     align-items: center;
+    margin-left: 20px;
   }
 
   .link {
@@ -236,6 +237,7 @@
 .wrap_link {
   display: flex;
   align-items: center;
+  margin-left: 20px;
 }
 
 .link {
@@ -464,6 +466,7 @@
   .wrap_link {
     display: flex;
     align-items: center;
+    margin-left: 0;
   }
 
   .link_text {

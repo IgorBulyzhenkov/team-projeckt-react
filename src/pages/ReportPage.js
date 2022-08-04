@@ -2,6 +2,7 @@ import { MdKeyboardBackspace } from 'react-icons/md';
 import s from './ReportPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import RingLoader from 'react-spinners/RingLoader';
 import { useLazyGetPeriodDataQuery } from '../redux/kapustaAPI';
 import ReportList from 'components/Report/ReportList/ReportList';
@@ -10,6 +11,7 @@ import DateSwiper from 'components/DateSwiper';
 import { useContext } from 'react';
 import { ThemeContext } from 'components/App';
 import { darkThemeStyles } from 'services/theme-styles';
+import { getWidth } from 'redux/selectors';
 
 function ReportPage() {
   const [value, setValue] = useState('');
@@ -18,6 +20,7 @@ function ReportPage() {
   const [getPeriodData] = useLazyGetPeriodDataQuery();
   const total = incomes.incomeTotal - expenses.expenseTotal;
   const [isLoader, setIsLoader] = useState(true);
+  const screen = useSelector(getWidth);
   const themeColor = useContext(ThemeContext);
   const themeStyle = themeColor === 'dark' ? darkThemeStyles.elements : {};
   const themeStyle2 = themeColor === 'dark' ? darkThemeStyles.basic : {};
@@ -43,6 +46,13 @@ function ReportPage() {
           color: 'rgb(255, 255, 255)',
         }
       : {};
+  const mainPage =
+    screen === 'mobile'
+      ? {
+          display: 'none',
+          pointerEvent: 'none',
+        }
+      : themeStyle2;
 
   return (
     <section className={s.test}>
@@ -51,7 +61,7 @@ function ReportPage() {
           <div className={s.wrap_link}>
             <Link to="/home" className={s.link}>
               <MdKeyboardBackspace className={s.svg} style={themeStyle2} />
-              <p style={themeStyle2} className={s.link_text}>
+              <p style={mainPage} className={s.link_text}>
                 Main page
               </p>
             </Link>
