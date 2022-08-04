@@ -1,4 +1,4 @@
-import s from './ReportGraph.module.css';
+import s from './ReportGraphMobile.module.css';
 import {
   Chart as ChartJS,
   BarElement,
@@ -15,7 +15,7 @@ import { getWidth, getCategory } from '../../../redux/selectors';
 
 ChartJS.register(BarElement, LinearScale, CategoryScale, ChartDataLabels);
 
-function ReportGraph({ data }) {
+function ReportGraphMobile({ data }) {
   const chartRef = useRef();
   const screen = useSelector(getWidth);
   const category = useSelector(getCategory);
@@ -157,82 +157,82 @@ function ReportGraph({ data }) {
     }
   };
 
-  const colorFill = themeColor === 'dark' ? 'rgb(63, 78, 79)' : '#ffffff';
+  // const colorFill = themeColor === 'dark' ? 'rgb(63, 78, 79)' : '#ffffff';
 
   // const colorBorder = themeColor === 'dark' ? 'transparent' : 'rgb(63, 78, 79)';
 
   const minX = screen === 'tablet' ? 0 : null;
   const maxX = screen === 'tablet' ? 6 : null;
 
-  const myChart = {
-    id: 'myChart',
+  // const myChart = {
+  //   id: 'myChart',
 
-    afterEvent(chart, args) {
-      const {
-        canvas,
-        chartArea: { left, right, height, top },
-      } = chart;
+  //   afterEvent(chart, args) {
+  //     const {
+  //       canvas,
+  //       chartArea: { left, right, height, top },
+  //     } = chart;
 
-      canvas.addEventListener('mousemove', event => {
-        const x = args.event.x;
-        const y = args.event.y;
+  //     canvas.addEventListener('mousemove', event => {
+  //       const x = args.event.x;
+  //       const y = args.event.y;
 
-        if (
-          x >= left - 12 &&
-          x <= left + 12 &&
-          y >= height / 2 + top - 15 &&
-          y <= height / 2 + top + 32
-        ) {
-          return (canvas.style.cursor = 'pointer');
-        } else if (
-          x >= right - 12 &&
-          x <= right + 12 &&
-          y >= height / 2 + top - 15 &&
-          y <= height / 2 + top + 32
-        ) {
-          return (canvas.style.cursor = 'pointer');
-        } else {
-          return (canvas.style.cursor = 'default');
-        }
-      });
-    },
+  //       if (
+  //         x >= left - 12 &&
+  //         x <= left + 12 &&
+  //         y >= height / 2 + top - 15 &&
+  //         y <= height / 2 + top + 32
+  //       ) {
+  //         return (canvas.style.cursor = 'pointer');
+  //       } else if (
+  //         x >= right - 12 &&
+  //         x <= right + 12 &&
+  //         y >= height / 2 + top - 15 &&
+  //         y <= height / 2 + top + 32
+  //       ) {
+  //         return (canvas.style.cursor = 'pointer');
+  //       } else {
+  //         return (canvas.style.cursor = 'default');
+  //       }
+  //     });
+  //   },
 
-    afterDraw(chart) {
-      const {
-        ctx,
-        chartArea: { left, right, height, top },
-      } = chart;
+  //   afterDraw(chart) {
+  //     const {
+  //       ctx,
+  //       chartArea: { left, right, height, top },
+  //     } = chart;
 
-      const angle = Math.PI / 180;
+  //     const angle = Math.PI / 180;
 
-      class circleChevron {
-        draw(ctx, x1, pixel) {
-          ctx.beginPath();
-          ctx.lineWidth = 2;
-          ctx.strokeStyle = 'transparent';
-          ctx.arc(x1, height / 2 + top, 15, angle * 0, angle * 360, false);
-          ctx.stroke();
-          ctx.fill();
-          ctx.fillStyle = colorFill;
-          ctx.closePath();
-          ctx.beginPath();
-          ctx.lineWidth = 2;
-          ctx.strokeStyle = 'rgb(255, 117, 29)';
-          ctx.moveTo(x1 + pixel, height / 2 + top - 7.5);
-          ctx.lineTo(x1 - pixel, height / 2 + top);
-          ctx.lineTo(x1 + pixel, height / 2 + top + 7.5);
-          ctx.stroke();
-          ctx.closePath();
-        }
-      }
+  //     class circleChevron {
+  //       draw(ctx, x1, pixel) {
+  //         ctx.beginPath();
+  //         ctx.lineWidth = 2;
+  //         ctx.strokeStyle = 'transparent';
+  //         ctx.arc(x1, height / 2 + top, 15, angle * 0, angle * 360, false);
+  //         ctx.stroke();
+  //         ctx.fill();
+  //         ctx.fillStyle = colorFill;
+  //         ctx.closePath();
+  //         ctx.beginPath();
+  //         ctx.lineWidth = 2;
+  //         ctx.strokeStyle = 'rgb(255, 117, 29)';
+  //         ctx.moveTo(x1 + pixel, height / 2 + top - 7.5);
+  //         ctx.lineTo(x1 - pixel, height / 2 + top);
+  //         ctx.lineTo(x1 + pixel, height / 2 + top + 7.5);
+  //         ctx.stroke();
+  //         ctx.closePath();
+  //       }
+  //     }
 
-      let drawCircleLeft = new circleChevron();
-      drawCircleLeft.draw(ctx, left, 5);
+  //     let drawCircleLeft = new circleChevron();
+  //     drawCircleLeft.draw(ctx, left, 5);
 
-      let drawCircleRight = new circleChevron();
-      drawCircleRight.draw(ctx, right, -5);
-    },
-  };
+  //     let drawCircleRight = new circleChevron();
+  //     drawCircleRight.draw(ctx, right, -5);
+  //   },
+  // };
 
   function moveScroll(event) {
     const { current: chart } = chartRef;
@@ -336,7 +336,7 @@ function ReportGraph({ data }) {
               },
             },
           }}
-          plugins={[myChart]}
+          // plugins=[]
           className={s.bar}
         />
       </div>
@@ -344,4 +344,4 @@ function ReportGraph({ data }) {
   );
 }
 
-export default ReportGraph;
+export default ReportGraphMobile;
