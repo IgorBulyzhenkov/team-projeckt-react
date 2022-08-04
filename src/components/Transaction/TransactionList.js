@@ -216,7 +216,7 @@ export default function TransactionList({
           key="reset"
           sx={{ fontSize: '12px' }}
         >
-          Все
+          All
         </MenuItem>
       </Menu>
     </div>
