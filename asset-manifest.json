@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/team-project-react/static/css/main.02b842f5.css",
-    "main.js": "/team-project-react/static/js/main.ef78fc53.js",
+    "main.js": "/team-project-react/static/js/main.db3354e8.js",
     "header.css": "/team-project-react/static/css/header.be562307.chunk.css",
     "header.js": "/team-project-react/static/js/header.ab44c69e.chunk.js",
     "authorization.css": "/team-project-react/static/css/authorization.ed4174e7.chunk.css",
@@ -20,7 +20,7 @@
     "static/media/Calculator.svg": "/team-project-react/static/media/Calculator.8eda3f2a2b16aa2851c99eb017ba66d2.svg",
     "index.html": "/team-project-react/index.html",
     "main.02b842f5.css.map": "/team-project-react/static/css/main.02b842f5.css.map",
-    "main.ef78fc53.js.map": "/team-project-react/static/js/main.ef78fc53.js.map",
+    "main.db3354e8.js.map": "/team-project-react/static/js/main.db3354e8.js.map",
     "header.be562307.chunk.css.map": "/team-project-react/static/css/header.be562307.chunk.css.map",
     "header.ab44c69e.chunk.js.map": "/team-project-react/static/js/header.ab44c69e.chunk.js.map",
     "authorization.ed4174e7.chunk.css.map": "/team-project-react/static/css/authorization.ed4174e7.chunk.css.map",
@@ -35,6 +35,6 @@
   },
   "entrypoints": [
     "static/css/main.02b842f5.css",
-    "static/js/main.ef78fc53.js"
+    "static/js/main.db3354e8.js"
   ]
 }
